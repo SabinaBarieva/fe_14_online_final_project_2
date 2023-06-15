@@ -1,4 +1,4 @@
 const BasketContent = () => {
-  return <>Basket Content</>;
+  return (<> Basket Content </>);
 };
 export default BasketContent;
