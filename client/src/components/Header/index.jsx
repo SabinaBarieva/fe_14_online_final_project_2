@@ -1,9 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../Footer";
 function Header() {
   return (
     <>
-      <header>header</header>
+      <header>
+        <NavLink to="/home">LOGO</NavLink>
+        <input type="text" />
+        <NavLink to="/basket">basket content</NavLink>
+      </header>
       <Outlet />
       <Footer />
     </>
