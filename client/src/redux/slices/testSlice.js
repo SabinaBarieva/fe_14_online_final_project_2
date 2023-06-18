@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isActive: false,
-  text: "",
+  text: '',
 };
 
 const testSlice = createSlice({
-  name: "test",
+  name: 'test',
   initialState,
   reducers: {
-    testReducer(state, action) {
+    testReducer(state) {
       state.isActive = !state.isActive;
-      state.text = "hlo";
+      state.text = 'hlo';
     },
   },
 });
