@@ -22,3 +22,8 @@ documentation
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# security
+.env
+keys_dev.js
