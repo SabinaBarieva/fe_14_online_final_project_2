@@ -4,10 +4,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@babel/eslint-parser": "^7.22.5",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb": "^19.0.4",
     "mongodb": "^5.6.0",
     "npm-run-all": "^4.1.1",
     "npm-watch": "^0.3.0",
@@ -35,7 +38,8 @@
     "stylelint-dev": "stylelint 'src/**/*.scss' --cache --cache-location './.stylelintcache'; exit 0",
     "stylelint-build": "stylelint 'src/**/*.scss'",
     "watch-styles-sass": "npm-watch",
-    "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'"
+    "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'",
+    "eslint": "eslint src/**/*.js"
   },
   "watch": {
     "stylelint-dev": {
@@ -43,6 +47,13 @@
         "/src/**/*.scss"
       ],
       "extensions": "scss"
+    },
+    "eslint": {
+      "patterns": [
+        "/src/**/*.js",
+        "/src/**/*.jsx"
+      ],
+      "extensions": "js"
     }
   },
   "eslintConfig": {
