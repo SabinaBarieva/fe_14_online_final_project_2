@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb": "^19.0.4",
     "mongodb": "^5.6.0",
     "npm-run-all": "^4.1.1",
     "npm-watch": "^0.3.0",
@@ -30,13 +32,14 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-styles-sass start-js",
-    "build": "npm run stylelint-build && react-scripts build",
+    "build": "npm run eslint && stylelint-build && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "stylelint-dev": "stylelint 'src/**/*.scss' --cache --cache-location './.stylelintcache'; exit 0",
     "stylelint-build": "stylelint 'src/**/*.scss'",
     "watch-styles-sass": "npm-watch",
-    "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'"
+    "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'",
+    "eslint": "eslint src/**/*.js"
   },
   "watch": {
     "stylelint-dev": {
@@ -44,6 +47,13 @@
         "/src/**/*.scss"
       ],
       "extensions": "scss"
+    },
+    "eslint": {
+      "patterns": [
+        "/src/**/*.js",
+        "/src/**/*.jsx"
+      ],
+      "extensions": "js"
     }
   },
   "eslintConfig": {
