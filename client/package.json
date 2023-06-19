@@ -2,7 +2,6 @@
   "name": "clients",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@babel/eslint-parser": "^7.22.5",
     "@emotion/react": "^11.11.1",
@@ -15,7 +14,6 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-eslint": "^10.1.0",
     "eslint-config-airbnb": "^19.0.4",
-    "formik": "^2.4.2",
     "mongodb": "^5.6.0",
     "npm-run-all": "^4.1.1",
     "npm-watch": "^0.3.0",

@@ -1,28 +1,28 @@
-    {
-    "useTabs": false,
-    "bracketSameLine": true,
-    "singleQuote": true,
+{
+  "useTabs": false,
+  "bracketSameLine": true,
+  "singleQuote": true,
 
-    "printWidth": 80,
-    "spaceBeforeFunctionParen": true,
-    "endOfLine": "lf",
-    "bracketSpacing": true,
-    "overrides": [
-        {
-        "files": ["*.jsx", "*.js"],
-        "options": {
-            "tabWidth": 2,
-            "endOfLine": "lf",
-            "trailingComma": "es5",
-            "parser": "babel-flow",
-            "jsxSingleQuote": false
-        }
-        },
-        {
-        "files": ["*.html", "*.htm"],
-        "options": {
-            "tabWidth": 2
-        }
-        }
-    ]
+  "printWidth": 80,
+  "spaceBeforeFunctionParen": true,
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": ["*.jsx", "*.js"],
+      "options": {
+        "tabWidth": 2,
+        "endOfLine": "lf",
+        "trailingComma": "es5",
+        "parser": "babel-flow",
+        "jsxSingleQuote": false
+      }
+    },
+    {
+      "files": ["*.html", "*.htm"],
+      "options": {
+        "tabWidth": 2
+      }
     }
+  ]
+}
