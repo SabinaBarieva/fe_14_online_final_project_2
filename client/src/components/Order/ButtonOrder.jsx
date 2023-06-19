@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Container, ThemeProvider } from '@mui/material';
-import theme from '../../themes/theme';
+import theme from '../../themes/themeOrder';
 import OrderForm from './orderForm';
 import ModalOrdered from './modal';
 import { openForm } from '../../redux/slices/reducersForm';
@@ -28,10 +28,10 @@ export default function ButtonOrder() {
             <Button
               variant="contained"
               color="primary"
-              disableElevation
+              style={{ borderRadius: 0, textTransform: 'none' }}
               onClick={showForm}
             >
-              Order
+              Check Out
             </Button>
           </Container>
         )}

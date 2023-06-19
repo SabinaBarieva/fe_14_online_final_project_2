@@ -3,22 +3,16 @@ import { createTheme } from '@mui/material';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#393D45',
+      main: '#211F1C',
     },
     secondary: {
       main: '#C4C4C4',
-    },
-  },
-  breakpoints: {
-    values: {
-      xs: 320,
     },
   },
   components: {
     MuiFormControl: {
       styleOverrides: {
         root: {
-          margin: 5,
           gap: 5,
         },
       },
@@ -39,7 +33,7 @@ const theme = createTheme({
           border: 'none',
         },
         input: {
-          padding: 10,
+          padding: '5!important',
           '&::placeholder': {
             opacity: 0.5,
           },
@@ -49,9 +43,17 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          width: 115,
+          fontFamily: 'Lato',
+          fontSize: '1.2rem',
+          fontWeight: 400,
+          lineHeight: '1.5rem',
+          width: 130,
           height: 50,
           margin: '10px auto',
+          padding: '13px 18px',
+        },
+        contained: {
+          borderRadius: 50,
         },
       },
     },
@@ -59,11 +61,12 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           zIndex: 'auto',
-          margin: '20%',
-          position: 'relative',
+          margin: 'auto',
+          position: 'relative!important',
           height: '35%',
-          minWidth: '300px',
-          width: '40%',
+          minWidth: 280,
+          width: '50%',
+          maxWidth: 500,
           padding: 10,
           lineHeight: 1.5,
           borderRadius: 20,
@@ -79,19 +82,26 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          margin: 15,
-          display: '-webkit-box',
-          WebkitLineClamp: 4,
-          WebkitBoxOrient: 'vertical',
           textAlign: 'center',
-          overflow: 'hidden',
-          whiteSpace: 'wrap',
-          textOverflow: 'ellipsis',
         },
         paragraph: {
           margin: 0,
           fontSize: '0.6rem',
           color: 'red',
+          height: 12,
+        },
+        h6: {
+          margin: '10px auto',
+        },
+        h5: {
+          margin: '10px auto',
+          color: '#334756',
+          fontFamily: 'Lato',
+          fontSize: '2rem',
+          fontWeight: 700,
+          lineHeight: '132%',
+          letterSpacing: '0.015em',
+          textTransform: 'uppercase',
         },
       },
     },
@@ -117,9 +127,9 @@ const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          height: '30px',
-          width: '30px',
-          margin: '5px',
+          height: 30,
+          width: 30,
+          margin: 5,
           borderRadius: '20%',
         },
       },
@@ -129,7 +139,7 @@ const theme = createTheme({
         root: {
           margin: 0,
           maxWidth: 250,
-          padding: 10,
+          paddingLeft: 10,
           borderRadius: 20,
           minWidth: 50,
         },
@@ -144,5 +154,5 @@ const theme = createTheme({
     },
   },
 });
-
+console.log(theme);
 export default theme;

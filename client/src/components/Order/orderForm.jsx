@@ -63,7 +63,7 @@ export default function OrderForm() {
         ref={formRef}
         onSubmit={formik.handleSubmit}
         style={{
-          margin: 50,
+          margin: 'auto',
           position: 'relative',
           borderRadius: 20,
           maxWidth: 600,
@@ -113,7 +113,7 @@ export default function OrderForm() {
                   <Typography variant="paragraph" component="p">
                     {formik.errors.firstName}
                   </Typography>
-                ) : null}
+                ) : <Typography variant="paragraph" component="p"> </Typography>}
               </Container>
               <Container component="div">
                 <TextField
@@ -130,7 +130,7 @@ export default function OrderForm() {
                   <Typography variant="paragraph" component="p">
                     {formik.errors.lastName}
                   </Typography>
-                ) : null}
+                ) : <Typography variant="paragraph" component="p"> </Typography>}
               </Container>
               <Container component="div" style={{ padding: '10px 30px' }}>
                 <PatternFormat
@@ -154,7 +154,7 @@ export default function OrderForm() {
                   <Typography variant="paragraph" component="p">
                     {formik.errors.phone}
                   </Typography>
-                ) : null}
+                ) : <Typography variant="paragraph" component="p"> </Typography>}
               </Container>
             </Container>
 
@@ -165,7 +165,7 @@ export default function OrderForm() {
                 backgroundColor: (theme) => theme.palette.secondary.main,
               }}
             >
-              <Typography variant="h6" style={{ margin: 'auto' }}>
+              <Typography variant="h6">
                 Card for payment
               </Typography>
               <Grid item xs={12}>
@@ -192,7 +192,7 @@ export default function OrderForm() {
                   <Typography variant="paragraph" component="p">
                     {formik.errors.cardNumber}
                   </Typography>
-                ) : null}
+                ) : <Typography variant="paragraph" component="p"> </Typography>}
               </Grid>
               <Grid container spacing={3}>
                 <Grid item xs={2} style={{ paddingLeft: '0' }}>
@@ -216,10 +216,10 @@ export default function OrderForm() {
                     onChange={formik.handleChange}
                   />
                   {formik.touched.expirationMonth && formik.errors.expirationMonth ? (
-                    <Typography variant="paragraph" component="p">
+                    <Typography variant="paragraph" component="p" style={{ height: 40 }}>
                       {formik.errors.expirationMonth}
                     </Typography>
-                  ) : null}
+                  ) : <Typography variant="paragraph" component="p" style={{ height: 40 }}> </Typography>}
                 </Grid>
                 <Grid item xs={2} style={{ paddingLeft: '0' }}>
                   <PatternFormat
@@ -242,10 +242,10 @@ export default function OrderForm() {
                     onChange={formik.handleChange}
                   />
                   {formik.touched.expirationYear && formik.errors.expirationYear ? (
-                    <Typography variant="paragraph" component="p">
+                    <Typography variant="paragraph" component="p" style={{ height: 40 }}>
                       {formik.errors.expirationYear}
                     </Typography>
-                  ) : null}
+                  ) : <Typography variant="paragraph" component="p" style={{ height: 40 }}> </Typography>}
                 </Grid>
                 <Grid item xs={6} style={{ paddingLeft: '0' }}>
                   <PatternFormat
@@ -268,10 +268,10 @@ export default function OrderForm() {
                     onChange={formik.handleChange}
                   />
                   {formik.touched.cvv && formik.errors.cvv ? (
-                    <Typography variant="paragraph" component="p">
+                    <Typography variant="paragraph" component="p" style={{ height: 40 }}>
                       {formik.errors.cvv}
                     </Typography>
-                  ) : null}
+                  ) : <Typography variant="paragraph" component="p" style={{ height: 40 }}> </Typography>}
                 </Grid>
               </Grid>
             </Grid>
@@ -291,7 +291,7 @@ export default function OrderForm() {
                 <Typography variant="paragraph" component="p">
                   {formik.errors.email}
                 </Typography>
-              ) : null}
+              ) : <Typography variant="paragraph" component="p"> </Typography>}
             </Container>
             <Container component="div">
               <TextField
@@ -309,7 +309,7 @@ export default function OrderForm() {
                 <Typography variant="paragraph" component="p">
                   {formik.errors.address}
                 </Typography>
-              ) : null}
+              ) : <Typography variant="paragraph" component="p"> </Typography>}
             </Container>
           </Container>
           <Button
@@ -318,7 +318,7 @@ export default function OrderForm() {
             disableElevation
             type="submit"
           >
-            Checkout
+            Order
           </Button>
         </FormControl>
       </form>
