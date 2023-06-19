@@ -17,8 +17,6 @@ function App() {
               <Route path="home" element={<Navigate to="/" replace />}></Route>
               <Route index element={<MainContent />}></Route>
               <Route path="basket" element={<BasketContent />}></Route>
-              <Route path="categories" element={<CatsAndFilters />}></Route>
-              <Route path="product" element={<ProductContent />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
