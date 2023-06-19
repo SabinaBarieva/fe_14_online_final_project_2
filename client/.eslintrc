@@ -1,9 +1,21 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["standard", "react-app"],
+  "extends": ["airbnb"],
   "rules": {
-    "no-trailing-spaces": ["error", { "skipBlankLines": true } ],
-    "no-return-assign": 0,
-    "eol-last": 0
+    "object-curly-newline": [
+      "warn",
+      {
+        "ObjectExpression": "always",
+        "ObjectPattern": { "multiline": true },
+        "ImportDeclaration": "never",
+        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
   }
 }
