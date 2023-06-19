@@ -3,8 +3,8 @@ import testSlice from './slices/testSlice';
 import productsSlice from './slices/productsSlice';
 import categoriesSlice from './slices/categoriesSlice';
 import errorsSlice from './slices/errorsSlice';
-import sliceModal from './slices/reducersModal.js';
-import sliceForm from './slices/reducersForm.js';
+import sliceModal from './slices/reducersModal';
+import sliceForm from './slices/reducersForm';
 
 const store = configureStore({
   reducer: {
