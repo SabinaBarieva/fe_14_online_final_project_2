@@ -1,18 +1,14 @@
 {
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-vars": "warn",
-    "object-curly-newline": [
-      "warn",
-      {
-        "ObjectExpression": "always",
-        "ObjectPattern": { "multiline": true },
-        "ImportDeclaration": "never",
-        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
-      }
-    ],
+    "func-names": ["warn", "as-needed"],
     "comma-dangle": [
       "warn",
       {
