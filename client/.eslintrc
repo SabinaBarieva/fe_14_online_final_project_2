@@ -1,6 +1,9 @@
 {
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
     "object-curly-newline": [
       "warn",
       {
@@ -10,12 +13,25 @@
         "ExportDeclaration": { "multiline": true, "minProperties": 3 }
       }
     ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always",
+        "objects": "only-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
     "no-param-reassign": [
       "error",
       {
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
       }
-    ]
+    ],
+    "import/extensions": ["warn", "never"],
+    "operator-linebreak": ["warn", "after"],
+    "arrow-body-style": ["warn", "as-needed"]
   }
 }
