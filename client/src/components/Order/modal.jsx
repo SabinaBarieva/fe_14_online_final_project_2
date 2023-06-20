@@ -8,8 +8,8 @@ import {
   IconButton,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { closeModal } from '../../redux/slices/reducersModal';
-import { openApp } from '../../redux/slices/reducersForm';
+import { closeModal } from '../../redux/slices/modalSlice';
+import { openApp } from '../../redux/slices/formSlice';
 
 export default function ModalOrdered() {
   const dispatch = useDispatch();

@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
-import { orderBasket } from '../../redux/slices/reducersModal';
-import { closeForm, openApp } from '../../redux/slices/reducersForm';
+import { orderBasket } from '../../redux/slices/modalSlice';
+import { closeForm, openApp } from '../../redux/slices/formSlice';
 
 export default function OrderForm() {
   const dispatch = useDispatch();

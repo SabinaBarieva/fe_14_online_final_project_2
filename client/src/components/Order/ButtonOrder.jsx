@@ -4,7 +4,7 @@ import { Button, Container, ThemeProvider } from '@mui/material';
 import theme from '../../themes/themeOrder';
 import OrderForm from './orderForm';
 import ModalOrdered from './modal';
-import { openForm } from '../../redux/slices/reducersForm';
+import { openForm } from '../../redux/slices/formSlice';
 
 export default function ButtonOrder() {
   const dispatch = useDispatch();
