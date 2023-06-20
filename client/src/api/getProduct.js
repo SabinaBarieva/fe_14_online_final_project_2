@@ -1,12 +1,5 @@
 import { currentProductEP } from './constants';
+import fetchApi from './fetchApi';
 
-const getProduct = async (itemNo) => {
-  try {
-    const response = await fetch(currentProductEP(itemNo));
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    throw new Error('Fetch Error');
-  }
-};
+const getProduct = async (itemNo) => fetchApi(currentProductEP(itemNo));
 export default getProduct;

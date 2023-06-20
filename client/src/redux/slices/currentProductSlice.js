@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProducts } from './productsSlice';
 import getCurrentProduct from '../../api/getProduct';
+import { setErrorMessage } from './errorsSlice';
 
 const initialState = {
   product: {},
@@ -36,10 +36,19 @@ export default currentProductSlice.reducer;
 
 export const fetchProduct = (itemNo) => async (dispatch) => {
   dispatch(startFetchingCurrentProduct());
-  const product = await getCurrentProduct(itemNo);
-  dispatch(
-    finishFetchingCurrentProduct({
-      product,
-    })
-  );
+  try {
+    const product = await getCurrentProduct(itemNo);
+    dispatch(
+      finishFetchingCurrentProduct({
+        product,
+      })
+    );
+  } catch (error) {
+    dispatch(errorFetchingProduct());
+    dispatch(
+      setErrorMessage({
+        error: error.message,
+      })
+    );
+  }
 };
