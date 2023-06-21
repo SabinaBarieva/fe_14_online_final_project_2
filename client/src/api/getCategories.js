@@ -1,13 +1,5 @@
 import { categoriesEP } from './constants';
+import fetchApi from './fetchApi';
 
-const getCategories = async (id = undefined) => {
-  try {
-    const categorieIdQuery = id ? `${id}` : '';
-    const response = await fetch(`${categoriesEP}${categorieIdQuery}`);
-    const result = response.json();
-    return result;
-  } catch (error) {
-    throw new Error('Fetch Error');
-  }
-};
+const getCategories = async () => fetchApi(categoriesEP());
 export default getCategories;

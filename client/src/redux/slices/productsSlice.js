@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getProducts from '../../api/getProducts';
+import { setErrorMessage } from './errorsSlice';
 
 const initialState = {
   products: [],
   total: undefined,
   isFetching: false,
   isFetched: false,
-  errors: null,
 };
-
+// const getProducts = createAsyncThunk();
 const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -20,13 +20,14 @@ const productsSlice = createSlice({
       state.isFetching = false;
       state.isFetched = true;
       state.products = action.payload.products;
+      state.total = action.payload.total;
     },
     errorFetchingProducts: (state, action) => {
-      state.errors = action.payload.error;
       state.isFetching = false;
     },
   },
 });
+console.log(productsSlice);
 export const {
   startFetchingProducts,
   finishFetchingProducts,
@@ -34,11 +35,15 @@ export const {
 } = productsSlice.actions;
 export default productsSlice.reducer;
 export const fetchProducts =
-  (categories = []) =>
+  ({ categories = [], perPage = 10, startPage = 1 }) =>
   async (dispatch) => {
     dispatch(startFetchingProducts());
     try {
-      const result = await getProducts(categories);
+      const result = await getProducts({
+        categories,
+        startPage,
+        perPage,
+      });
       dispatch(
         finishFetchingProducts({
           products: result.products,
@@ -48,6 +53,11 @@ export const fetchProducts =
     } catch (e) {
       dispatch(
         errorFetchingProducts({
+          error: e.message,
+        })
+      );
+      dispatch(
+        setErrorMessage({
           error: e.message,
         })
       );

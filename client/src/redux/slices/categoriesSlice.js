@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getCategories from '../../api/getCategories';
+import { setErrorMessage } from './errorsSlice';
 
 const initialState = {
   isFetching: false,
@@ -26,16 +27,28 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { startFetchingCategories, finishFetchingCategories } =
-  categoriesSlice.actions;
+export const {
+  startFetchingCategories,
+  finishFetchingCategories,
+  errorFetchingCategories,
+} = categoriesSlice.actions;
 export default categoriesSlice.reducer;
 
 export const fetchCategories = () => async (dispatch) => {
   dispatch(startFetchingCategories());
-  const categories = await getCategories();
-  dispatch(
-    finishFetchingCategories({
-      categories,
-    })
-  );
+  try {
+    const categories = await getCategories();
+    dispatch(
+      finishFetchingCategories({
+        categories,
+      })
+    );
+  } catch (error) {
+    dispatch(errorFetchingCategories());
+    dispatch(
+      setErrorMessage({
+        error: error.message,
+      })
+    );
+  }
 };
