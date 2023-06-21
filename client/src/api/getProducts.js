@@ -1,16 +1,15 @@
 import { productsFilterEP } from './constants';
+import fetchApi from './fetchApi';
 
-const getProducts = async (categories = []) => {
-  const categoryQuery = categories.length > 0 ? `&categories=${categories.join(',')}` : '';
-  try {
-    const response = await fetch(
-      `${productsFilterEP}?${categoryQuery}&enabled=true`,
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error('Error Fetching');
-  }
+const getProducts = async ({
+  categories = [],
+  startPage = 1,
+  perPage = 10,
+}) => {
+  const categoryQuery =
+    categories.length > 0 ? `&categories=${categories.join(',')}` : '';
+  const query = `${productsFilterEP}?${categoryQuery}&startPage=${startPage}&perPage=${perPage}&enabled=true`;
+  return fetchApi(query);
 };
 
 export default getProducts;
