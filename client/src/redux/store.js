@@ -5,6 +5,7 @@ import categoriesSlice from './slices/categoriesSlice';
 import errorsSlice from './slices/errorsSlice';
 import sliceModal from './slices/modalSlice';
 import sliceForm from './slices/formSlice';
+import currentProductSlice from './slices/currentProductSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     errors: errorsSlice,
     toolkitModal: sliceModal,
     toolkitForm: sliceForm,
+    currentProduct: currentProductSlice,
   },
 });
 
