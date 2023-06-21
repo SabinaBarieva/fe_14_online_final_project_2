@@ -17,7 +17,7 @@ const productsSlice = createSlice({
 });
 
 export const {
-  updateProducts
+  setProducts
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
@@ -25,9 +25,10 @@ export default productsSlice.reducer;
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { dispatch, rejectWithValue }) => {
-    const resnonse = await fetch("./collection.json");
-    const data = await resnonse.json();
-    dispatch(updateProducts(data));
+    // const resnonse = await fetch("./collection.json");
+    // const data = await resnonse.json();
+    // dispatch(updateProducts(data));
+    dispatch(setProducts(["qwe"]))
   }
 );
 
