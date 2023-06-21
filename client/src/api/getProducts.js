@@ -1,11 +1,10 @@
 import { productsFilterEP } from './constants';
 
 const getProducts = async (categories = []) => {
-  const categoryQuery =
-    categories.length > 0 ? `&categories=${categories.join(',')}` : '';
+  const categoryQuery = categories.length > 0 ? `&categories=${categories.join(',')}` : '';
   try {
     const response = await fetch(
-      `${productsFilterEP}?${categoryQuery}&enabled=true`
+      `${productsFilterEP}?${categoryQuery}&enabled=true`,
     );
     const data = await response.json();
     return data;
