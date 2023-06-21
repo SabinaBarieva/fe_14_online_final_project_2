@@ -12,6 +12,7 @@ const productsSlice = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.products = action.payload;
+
     },
   },
 });
@@ -25,7 +26,7 @@ export default productsSlice.reducer;
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { dispatch, rejectWithValue }) => {
-    const resnonse = await fetch("http://localhost:4000/api/products");
+    const resnonse = await fetch("/api/products");
     const data = await resnonse.json();
     dispatch(setProducts(data))
   }

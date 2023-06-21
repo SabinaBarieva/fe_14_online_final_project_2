@@ -1,5 +1,7 @@
 {
+
   "name": "clients",
+  "proxy": "http://localhost:4000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-eslint": "^10.1.0",
     "eslint-config-airbnb": "^19.0.4",
+    "http-proxy-middleware": "^2.0.6",
     "mongodb": "^5.6.0",
     "npm-run-all": "^4.1.1",
     "npm-watch": "^0.3.0",
@@ -39,6 +42,9 @@
     "watch-styles-sass": "npm-watch",
     "stylelint-fix-sass": "stylelint --fix 'src/**/*.scss'",
     "eslint": "eslint src/**/*.js"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
   },
   "watch": {
     "stylelint-dev": {
@@ -72,8 +78,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "standard": "^10.0.3"
   }
 }
