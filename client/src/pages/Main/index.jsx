@@ -1,19 +1,18 @@
-import { useDispatch } from "react-redux";
-import { getProduct } from "../../redux/slices/currentProductSlice";
+import { useDispatch, useSelector } from 'react-redux'
+import ProductDescription from '../../components/ProductDescription'
 
 const MainContent = () => {
   const dispatch = useDispatch();
+
+  const testSelector = useSelector(state => state.product.product)
+  console.log(testSelector);
+
   return (
     <>
       <div>Main Content</div>
       <br />
-      <button
-        onClick={() => {
-          dispatch(getProduct());
-        }}
-      >
-        reducerTest
-      </button>
+
+    <ProductDescription/>
     </>
   );
 };

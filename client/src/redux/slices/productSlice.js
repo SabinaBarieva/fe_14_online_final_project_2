@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getProduct = createAsyncThunk(
-  'products/getProduct',
+  'product/getProduct',
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const resnonse = await fetch('/api/products/80465')
@@ -17,15 +17,13 @@ export const getProduct = createAsyncThunk(
   }
 );
 
-const initialState = {
-  product: [],
-  status: null,
-  error: null
-};
-
-const productSlice = createSlice({
-  name: 'products',
-  initialState,
+export const productSlice = createSlice({
+  name: "product",
+  initialState: {
+    product: [],
+    status: null,
+    error: null
+  },
   reducers: {
     setProduct: (state, action) => {
       state.product = action.payload;
