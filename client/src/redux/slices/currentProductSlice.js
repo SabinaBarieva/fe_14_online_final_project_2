@@ -1,54 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit';
-import getCurrentProduct from '../../api/getProduct';
-import { setErrorMessage } from './errorsSlice';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+export const getProduct = createAsyncThunk(
+  'products/getProduct',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const resnonse = await fetch('/api/products/80465')
+
+      if (!resnonse.ok) {
+        throw new Error('!ServerError!')
+      }
+      const data = await resnonse.json()
+      return data
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+);
 
 const initialState = {
-  product: {},
-  isFetching: false,
-  isFetched: false,
+  product: [],
+  status: null,
+  error: null
 };
 
-const currentProductSlice = createSlice({
-  name: 'currentProduct',
+const productSlice = createSlice({
+  name: 'products',
   initialState,
   reducers: {
-    startFetchingCurrentProduct: (state) => {
-      state.isFetching = true;
-    },
-    finishFetchingCurrentProduct: (state, action) => {
-      state.isFetching = false;
-      state.isFetched = true;
-      console.log(action);
-      state.product = action.payload.product;
-    },
-    errorFetchingProduct: (state) => {
-      state.isFetching = false;
-      state.isFetched = true;
+    setProduct: (state, action) => {
+      state.product = action.payload;
     },
   },
-});
-const {
-  startFetchingCurrentProduct,
-  finishFetchingCurrentProduct,
-  errorFetchingProduct,
-} = currentProductSlice.actions;
-export default currentProductSlice.reducer;
-
-export const fetchProduct = (itemNo) => async (dispatch) => {
-  dispatch(startFetchingCurrentProduct());
-  try {
-    const product = await getCurrentProduct(itemNo);
-    dispatch(
-      finishFetchingCurrentProduct({
-        product,
-      })
-    );
-  } catch (error) {
-    dispatch(errorFetchingProduct());
-    dispatch(
-      setErrorMessage({
-        error: error.message,
-      })
-    );
+  extraReducers:{
+    [getProduct.pending]: (state) => {
+      state.status = 'loading'
+      state.error = null
+    },
+    [getProduct.fulfilled]: (state, action) => {
+      state.status = 'ready'
+      state.product = [action.payload]
+    },
+    [getProduct.rejected]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    },
   }
-};
+});
+
+export const {
+  setProduct
+} = productSlice.actions
+
+export default productSlice.reducer

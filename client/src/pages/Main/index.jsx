@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { getProducts } from "../../redux/slices/productsSlice";
+import { getProduct } from "../../redux/slices/currentProductSlice";
 
 const MainContent = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const MainContent = () => {
       <br />
       <button
         onClick={() => {
-          dispatch(getProducts());
+          dispatch(getProduct());
         }}
       >
         reducerTest

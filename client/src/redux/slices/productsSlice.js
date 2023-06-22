@@ -34,6 +34,7 @@ export const {
   errorFetchingProducts,
 } = productsSlice.actions;
 export default productsSlice.reducer;
+
 export const fetchProducts =
   ({ categories = [], perPage = 10, startPage = 1 }) =>
   async (dispatch) => {
