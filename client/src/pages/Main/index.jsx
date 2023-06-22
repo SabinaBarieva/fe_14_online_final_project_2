@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import ProductDescription from '../../components/ProductDescription'
+import { product } from '../../redux/selectors';
+import { getProduct } from '../../redux/slices/productSlice';
 
 const MainContent = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const currentProduct = useSelector(product)
 
-  const testSelector = useSelector(state => state.product.product)
-  console.log(testSelector);
+  useEffect(()=>{
+  dispatch(getProduct())
+  }, [dispatch])
 
   return (
     <>
