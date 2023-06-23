@@ -13,15 +13,16 @@ function PageNotFound() {
     <Grid container sx={{ width: '85%', margin: '0 auto' }}>
       <Grid item md={12}>
         <Text>
-          Oops, the third party is not clear
+          Oops, the third party is not clear...
           <br />
-          You have entered a wrong address, or else such a side on the site is
-          no longer available.
+          You have entered a wrong address, or this page on the site is no
+          longer available.
         </Text>
       </Grid>
       <Grid
         item
         md={12}
+        xs={12}
         sx={{
           display: 'flex',
           justifyContent: 'center',
