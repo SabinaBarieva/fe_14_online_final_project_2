@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Basket from './pages/Basket';
 import MainContent from './pages/Main';
 import Header from './components/Header';
+import PageNotFound from './components/NFP';
 import store from './redux/store';
 
 function App() {
@@ -12,9 +13,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route path="home" element={<Navigate to="/" replace />} />
             <Route index element={<MainContent />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="basket" element={<Basket />} />
+            <Route path="product" element={<Basket />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
