@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function MainContent() {
   return (
     <>
-      <NavLink to="/basket">basket content</NavLink>
+      <Link to="/products">current product</Link>
       <div>Main Content</div>
     </>
   );

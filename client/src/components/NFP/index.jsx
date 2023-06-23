@@ -1,7 +1,7 @@
 import React from 'react';
 
 function PageNotFound() {
-  return <div>PNF</div>;
+  return <div>PAGE NOT FOUNDED</div>;
 }
 
 export default PageNotFound;
