@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
-import { Button, ImageListItem } from '@mui/material';
+import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { useEffect } from 'react';
@@ -67,9 +67,9 @@ function ProductDescription() {
   } = useSelector(productCurrent);
   useEffect(() => {
     try {
-      dispatch(getProduct());
+      dispatch(getProduct(76973));
     } catch (error) {}
-    console.log();
+    console.log('ERRRRRORRRR');
   }, [dispatch]);
 
   return (
