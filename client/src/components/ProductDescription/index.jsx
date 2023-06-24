@@ -48,10 +48,6 @@ const Guarantee = styled('div')({
   color: '#9A9292',
   margin: '10px 0',
 });
-// const Img = styled('img')({
-//   width: '539px',
-//   height: '660px',
-// });
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -81,7 +77,6 @@ function ProductDescription() {
       <Grid
         item
         xs={12}
-        sm={12}
         md={5}
         sx={{
           display: 'flex',
@@ -98,7 +93,6 @@ function ProductDescription() {
       <Grid
         item
         xs={12}
-        sm={12}
         md={7}
         sx={{
           display: 'flex',
