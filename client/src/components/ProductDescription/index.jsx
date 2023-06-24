@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
-import { Button } from '@mui/material';
+import { Button, ImageListItem } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { useEffect } from 'react';
@@ -48,6 +48,10 @@ const Guarantee = styled('div')({
   color: '#9A9292',
   margin: '10px 0',
 });
+const Img = styled('img')({
+  width: '539px',
+  height: '660px',
+});
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -73,20 +77,37 @@ function ProductDescription() {
   }, [dispatch]);
 
   return (
-    <Grid container sx={{ width: '85%', margin: '15px auto' }}>
+    <Grid container sx={{ width: '90%', margin: '15px auto' }}>
       <Grid
         item
         xs={12}
         sm={12}
         md={5}
+        // sx={{
+        //   width: { xs: '323px', sm: '596px', md: '539px' },
+        //   height: { xs: '222px', sm: '355px', md: '660px' },
+        // }}
+      >
+        <Img
+          src={imageUrls}
+          alt={name}
+          // sx={{
+          //   width: { xs: '323px', sm: '596px', md: '539px' },
+          //   height: { xs: '222px', sm: '355px', md: '660px' },
+          // }}
+        />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={7}
         sx={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'space-around',
+          alignItems: 'left',
         }}>
-        <img src={imageUrls} alt={name} />
-      </Grid>
-      <Grid item xs={12} sm={12} md={7}>
         <Code>{itemNo} :CODE</Code>
         <Title>
           {brand} {name} {storage} {color}

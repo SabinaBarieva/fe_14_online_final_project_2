@@ -4,7 +4,7 @@ export const getProduct = createAsyncThunk(
   'product/getProduct',
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const resnonse = await fetch('/api/products/80465');
+      const resnonse = await fetch('/api/products/76973');
       if (!resnonse.ok) {
         throw new Error('!ServerError!');
       }
