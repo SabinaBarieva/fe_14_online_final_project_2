@@ -9,6 +9,8 @@ import PageNotFound from './components/NFP';
 import store from './redux/store';
 
 function App() {
+  // const id = useSelector() id товара
+  const id = 123;
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -18,7 +20,7 @@ function App() {
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="basket" element={<Basket />} />
             <Route
-              path={`home/product/${123}`}
+              path={`home/product/:${id}`}
               element={<ProductDescription />}
             />
             <Route path="*" element={<PageNotFound />} />

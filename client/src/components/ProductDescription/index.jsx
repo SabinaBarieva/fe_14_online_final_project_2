@@ -1,7 +1,8 @@
-import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { getProduct } from '../../redux/slices/productSlice';
 
 const Code = styled('div')({
   textAlign: 'right',
@@ -39,8 +40,10 @@ const CountBoxes = styled('div')({
 });
 
 function ProductDescription() {
+  const dispatch = useDispatch();
+
   return (
-    <Grid container sx={{ width: '85%', margin: '0 auto' }}>
+    <Grid container sx={{ width: '85%', margin: '15px auto' }}>
       <Grid
         item
         xs={12}
@@ -102,7 +105,7 @@ function ProductDescription() {
               }}
               variant="contained"
               onClick={() => {
-                alert('треба додати 1 одиницю товару до корзини');
+                dispatch(getProduct());
               }}>
               Add to basket
             </Button>

@@ -11,9 +11,9 @@ const store = configureStore({
     products: productsSlice,
     categories: categoriesSlice,
     errors: errorsSlice,
-    toolkitModal: sliceModal,
-    toolkitForm: sliceForm,
-    product: productSlice
+    // toolkitModal: sliceModal,
+    // toolkitForm: sliceForm,
+    product: productSlice,
   },
 });
 

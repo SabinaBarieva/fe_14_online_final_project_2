@@ -5,7 +5,6 @@ export const getProduct = createAsyncThunk(
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const resnonse = await fetch('/api/products/80465');
-
       if (!resnonse.ok) {
         throw new Error('!ServerError!');
       }
@@ -20,7 +19,7 @@ export const getProduct = createAsyncThunk(
 export const productSlice = createSlice({
   name: 'product',
   initialState: {
-    product: [],
+    product: {},
     status: null,
     error: null,
   },
@@ -36,7 +35,7 @@ export const productSlice = createSlice({
     },
     [getProduct.fulfilled]: (state, action) => {
       state.status = 'ready';
-      state.product = [action.payload];
+      state.product = action.payload;
     },
     [getProduct.rejected]: (state, action) => {
       state.status = 'rejected';
