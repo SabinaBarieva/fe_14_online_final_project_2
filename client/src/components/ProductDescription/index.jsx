@@ -72,7 +72,7 @@ function ProductDescription() {
   } = useSelector(productCurrent);
 
   if (imageUrls) {
-    console.log(`${imageUrls[0]}`);
+    console.log(`"${imageUrls[0]}"`);
     return (
       <Grid container sx={{ width: '90%', margin: '15px auto' }}>
         <Grid
