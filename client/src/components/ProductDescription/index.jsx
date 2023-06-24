@@ -53,12 +53,12 @@ function ProductDescription() {
   const dispatch = useDispatch();
 
   const {
-    enabled,
+    // enabled,
+    // quantity,
+    // categories,
     name,
     currentPrice,
-    categories,
     imageUrls,
-    quantity,
     color,
     brand,
     storage,
@@ -68,10 +68,7 @@ function ProductDescription() {
   } = useSelector(productCurrent);
 
   useEffect(() => {
-    try {
-      dispatch(getProduct(77552));
-    } catch (error) {}
-    console.log('ERRRRRORRRR');
+    dispatch(getProduct(77552));
   }, [dispatch]);
 
   return (
