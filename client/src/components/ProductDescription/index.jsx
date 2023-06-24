@@ -78,7 +78,16 @@ function ProductDescription() {
 
   return (
     <Grid container sx={{ width: '90%', margin: '15px auto' }}>
-      <Grid item xs={12} sm={12} md={5}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={5}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <img
           src={imageUrls}
           alt={name}
