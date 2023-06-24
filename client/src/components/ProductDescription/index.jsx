@@ -51,6 +51,7 @@ const Guarantee = styled('div')({
 
 function ProductDescription() {
   const dispatch = useDispatch();
+
   const {
     enabled,
     name,
@@ -65,9 +66,10 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(productCurrent);
+
   useEffect(() => {
     try {
-      dispatch(getProduct(76973));
+      dispatch(getProduct(77552));
     } catch (error) {}
     console.log('ERRRRRORRRR');
   }, [dispatch]);
