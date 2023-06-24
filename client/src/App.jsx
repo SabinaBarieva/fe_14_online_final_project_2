@@ -17,7 +17,10 @@ function App() {
             <Route index element={<MainContent />} />
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="basket" element={<Basket />} />
-            <Route path={`products/${123}`} element={<ProductDescription />} />
+            <Route
+              path={`home/product/${123}`}
+              element={<ProductDescription />}
+            />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>

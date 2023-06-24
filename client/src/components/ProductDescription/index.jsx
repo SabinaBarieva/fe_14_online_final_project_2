@@ -59,32 +59,28 @@ function ProductDescription() {
       <Grid item xs={12} sm={12} md={7}>
         <Code>12345</Code>
         <Title>iPhone 11 64gb Black</Title>
-        <Description>
-          The iPhone 11 cannot be replaced by a new smartphone, it is a direct
-          fit for the iPhone XR. The smartphone has halved, the dimensions with
-          the front edge are smoothed. The main innovations are innovations in
-          color solutions, even the same and earlier than the best iPhone. I
-          clicked one snake and another modulation of the camera was detected,
-          now the ultra-wide-angle lens has reached the wide-angle one. This
-          allows you to create group portraits and beautiful panoramas. Like the
-          process that will now win, the faster and more energy efficient Apple
-          13 Bionic. What is worth an hour of autonomous robots, here the
-          company has built a crock forward and the smartphone is obliged to
-          work for at least a year in the new XR model.
-        </Description>
+        <Description>Text</Description>
         <Price>Price: 100$</Price>
         <Grid container>
           <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
             <CountBoxes
-              onClick={() => {
-                alert('треба відняти 1 одиницю товару до корзини');
+              sx={{
+                width: { xs: '35px', sm: '57px', md: '46px' },
+                height: { xs: '35px', sm: '57px', md: '46px' },
               }}>
               -
             </CountBoxes>
-            <CountBoxes>1</CountBoxes>
             <CountBoxes
-              onClick={() => {
-                alert('треба додати 1 одиницю товару до корзини');
+              sx={{
+                width: { xs: '35px', sm: '57px', md: '46px' },
+                height: { xs: '35px', sm: '57px', md: '46px' },
+              }}>
+              1
+            </CountBoxes>
+            <CountBoxes
+              sx={{
+                width: { xs: '35px', sm: '57px', md: '46px' },
+                height: { xs: '35px', sm: '57px', md: '46px' },
               }}>
               +
             </CountBoxes>
@@ -94,14 +90,14 @@ function ProductDescription() {
               sx={{
                 marginTop: { xs: '10px', md: '0' },
                 padding: '9px 18px',
-                backgroundColor: '#211F1C',
-                color: '#FFF',
+                backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                color: { xs: '#616467', md: '#fff' },
                 borderRadius: 0,
                 border: '1px solid #211F1C',
                 '&:hover': {
-                  backgroundColor: '#FFF',
-                  color: '#211F1C',
-                  border: '1px solid #211F1C',
+                  backgroundColor: { xs: '#211F1C', md: '#fff' },
+                  color: { xs: '#F5F7FB', md: '#211F1C' },
+                  border: { xs: '1px solid #211F1C', md: '1px solid #211F1C' },
                 },
               }}
               variant="contained"

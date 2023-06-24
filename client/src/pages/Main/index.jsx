@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function MainContent() {
   return (
     <>
-      <Link to={`/products/${123}`}>current product</Link>
+      <Link to={`/product/${123}`}>current product</Link>
       <div>Main Content</div>
     </>
   );
