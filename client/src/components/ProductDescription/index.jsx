@@ -1,8 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
+import { useEffect } from 'react';
+import { productCurrent } from '../../redux/selectors';
 
 const Code = styled('div')({
   textAlign: 'right',
@@ -41,6 +43,24 @@ const CountBoxes = styled('div')({
 
 function ProductDescription() {
   const dispatch = useDispatch();
+  const {
+    enabled,
+    name,
+    currentPrice,
+    categories,
+    imageUrls,
+    quantity,
+    color,
+    brand,
+    storage,
+    itemNo,
+    description,
+    guarantee,
+  } = useSelector(productCurrent);
+  useEffect(() => {
+    dispatch(getProduct());
+    console.log();
+  }, [dispatch]);
 
   return (
     <Grid container sx={{ width: '85%', margin: '15px auto' }}>
@@ -54,16 +74,15 @@ function ProductDescription() {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <img
-          src="https://maclove.ua/wpics/full/pic77552_1.jpg"
-          alt="iPhone-11"
-        />
+        <img src={imageUrls} alt={name} />
       </Grid>
       <Grid item xs={12} sm={12} md={7}>
-        <Code>12345</Code>
-        <Title>iPhone 11 64gb Black</Title>
-        <Description>Text</Description>
-        <Price>Price: 100$</Price>
+        <Code>{itemNo}</Code>
+        <Title>
+          {name} {storage} {color}
+        </Title>
+        <Description>{description}</Description>
+        <Price>Price: {currentPrice}$</Price>
         <Grid container>
           <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
             <CountBoxes
@@ -103,10 +122,7 @@ function ProductDescription() {
                   border: { xs: '1px solid #211F1C', md: '1px solid #211F1C' },
                 },
               }}
-              variant="contained"
-              onClick={() => {
-                dispatch(getProduct());
-              }}>
+              variant="contained">
               Add to basket
             </Button>
           </Grid>
