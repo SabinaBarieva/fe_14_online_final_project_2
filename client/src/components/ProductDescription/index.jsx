@@ -40,6 +40,14 @@ const CountBoxes = styled('div')({
   height: '46px',
   background: '#F5F7FB',
 });
+const Guarantee = styled('div')({
+  textAlign: 'right',
+  fontWeight: '400',
+  fontSize: '18px',
+  letterSpacing: '0.015em',
+  color: '#9A9292',
+  margin: '10px 0',
+});
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -58,7 +66,9 @@ function ProductDescription() {
     guarantee,
   } = useSelector(productCurrent);
   useEffect(() => {
-    dispatch(getProduct());
+    try {
+      dispatch(getProduct());
+    } catch (error) {}
     console.log();
   }, [dispatch]);
 
@@ -77,12 +87,13 @@ function ProductDescription() {
         <img src={imageUrls} alt={name} />
       </Grid>
       <Grid item xs={12} sm={12} md={7}>
-        <Code>{itemNo}</Code>
+        <Code>{itemNo} :CODE</Code>
         <Title>
-          {name} {storage} {color}
+          {brand} {name} {storage} {color}
         </Title>
         <Description>{description}</Description>
         <Price>Price: {currentPrice}$</Price>
+        <Guarantee>Apple guarantee {guarantee}</Guarantee>
         <Grid container>
           <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
             <CountBoxes
