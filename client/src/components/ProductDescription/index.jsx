@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { productCurrent } from '../../redux/selectors';
+import {} from '../../redux/productsApi';
 
 const Code = styled('div')({
   textAlign: 'right',
