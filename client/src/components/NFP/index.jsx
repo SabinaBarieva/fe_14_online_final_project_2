@@ -30,8 +30,12 @@ function PageNotFound() {
         }}>
         <Link to="/home">
           <Button
+            variant="contained"
             sx={{
-              marginTop: { xs: '10px', md: '0' },
+              marginTop: {
+                xs: '10px',
+                md: '0',
+              },
               padding: '9px 18px',
               backgroundColor: '#211F1C',
               color: '#FFF',
@@ -42,8 +46,7 @@ function PageNotFound() {
                 color: '#211F1C',
                 border: '1px solid #211F1C',
               },
-            }}
-            variant="contained">
+            }}>
             back to the home page
           </Button>
         </Link>

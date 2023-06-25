@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
-import { useEffect } from 'react';
 import { productCurrent } from '../../redux/selectors';
 
 const Code = styled('div')({
@@ -56,7 +56,7 @@ function ProductDescription() {
     dispatch(getProduct(77552));
   }, [dispatch]);
 
-  let {
+  const {
     // enabled,
     // quantity,
     // categories,
@@ -73,6 +73,7 @@ function ProductDescription() {
 
   if (imageUrls) {
     console.log(`"${imageUrls[0]}"`);
+    console.log(imageUrls[0]);
     return (
       <Grid container sx={{ width: '90%', margin: '15px auto' }}>
         <Grid
@@ -85,7 +86,7 @@ function ProductDescription() {
             alignItems: 'center',
           }}>
           <img
-            src={`${imageUrls[0]}`}
+            src="../../../public/img/products/iPhone/11/1.jpeg"
             alt={name}
             width={{ xs: '323px', sm: '596px', md: '539px' }}
             height={{ xs: '222px', sm: '355px', md: '660px' }}
