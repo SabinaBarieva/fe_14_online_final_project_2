@@ -13,7 +13,7 @@ const store = configureStore({
     errors: errorsSlice,
     toolkitModal: sliceModal,
     toolkitForm: sliceForm,
-    product: productSlice
+    product: productSlice,
   },
 });
 
