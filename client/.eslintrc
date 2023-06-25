@@ -6,7 +6,7 @@
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "no-unused-vars": "warn",
     "func-names": ["warn", "as-needed"],
     "comma-dangle": [
@@ -28,6 +28,7 @@
     ],
     "import/extensions": ["warn", "never"],
     "operator-linebreak": ["warn", "after"],
-    "arrow-body-style": ["warn", "as-needed"]
+    "arrow-body-style": ["warn", "as-needed"],
+    "linebreak-style": ["warn", "windows"]
   }
 }
