@@ -127,6 +127,7 @@ function ProductDescription() {
             }}>
             {imageUrls.map((photo) => (
               <Grid
+                key={photo}
                 item
                 sx={{
                   display: 'flex',
