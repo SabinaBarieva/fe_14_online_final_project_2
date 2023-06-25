@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { productCurrent } from '../../redux/selectors';
+import Img from '../Image';
 
 const Code = styled('div')({
   textAlign: 'right',
@@ -72,8 +73,6 @@ function ProductDescription() {
   } = useSelector(productCurrent);
 
   if (imageUrls) {
-    console.log(`"${imageUrls[0]}"`);
-    console.log(imageUrls[0]);
     return (
       <Grid container sx={{ width: '90%', margin: '15px auto' }}>
         <Grid
@@ -85,8 +84,8 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <img
-            src="../../../public/img/products/iPhone/11/1.jpeg"
+          <Img
+            src={imageUrls[0]}
             alt={name}
             width={{ xs: '323px', sm: '596px', md: '539px' }}
             height={{ xs: '222px', sm: '355px', md: '660px' }}
