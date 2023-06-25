@@ -12,9 +12,9 @@
     "comma-dangle": [
       "warn",
       {
-        "arrays": "always",
+        "arrays": "only-multiline",
         "objects": "only-multiline",
-        "imports": "never",
+        "imports": "only-multiline",
         "exports": "never",
         "functions": "never"
       }
@@ -29,6 +29,8 @@
     "import/extensions": ["warn", "never"],
     "operator-linebreak": ["warn", "after"],
     "arrow-body-style": ["warn", "as-needed"],
-    "linebreak-style": ["warn", "windows"]
+    "linebreak-style": ["warn", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": "warn"
   }
 }
