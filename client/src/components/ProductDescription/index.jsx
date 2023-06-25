@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { productCurrent } from '../../redux/selectors';
-import Img from '../Image';
+import Stack from '@mui/material/Stack';
 
 const Code = styled('div')({
   textAlign: 'right',
@@ -84,11 +84,21 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Img
+          {/* <Img
             src={imageUrls[0]}
             alt={name}
-            width={{ xs: '323px', sm: '596px', md: '539px' }}
-            height={{ xs: '222px', sm: '355px', md: '660px' }}
+            // sx={{
+            //   width: { xs: '323px', sm: '596px', md: '539px' },
+            //   height: { xs: '222px', sm: '355px', md: '660px' },
+            // }}
+          /> */}
+          <img
+            src={imageUrls[0]}
+            alt={name}
+            sx={{
+              width: { xs: '10px', sm: '596px', md: '539px' },
+              height: { xs: '10px', sm: '355px', md: '660px' },
+            }}
           />
         </Grid>
         <Grid
@@ -107,6 +117,25 @@ function ProductDescription() {
           <Description>{description}</Description>
           <Price>Price: {currentPrice}$</Price>
           <Guarantee>Apple guarantee {guarantee}</Guarantee>
+          <Grid
+            container
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              margin: '10px 0',
+            }}>
+            {imageUrls.map((photo) => (
+              <Grid
+                item
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <img src={photo} alt="" width={'85px'} height={'85px'} />
+              </Grid>
+            ))}
+          </Grid>
           <Grid container>
             <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
               <CountBoxes
