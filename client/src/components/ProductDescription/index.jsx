@@ -4,8 +4,7 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
-import { productCurrent } from '../../redux/selectors';
-import {} from '../../redux/productsApi';
+import { currentProduct, cpIsLoading, cpIsLoaded } from '../../redux/selectors';
 
 const Code = styled('div')({
   textAlign: 'right',
@@ -71,9 +70,10 @@ function ProductDescription() {
     itemNo,
     description,
     guarantee,
-  } = useSelector(productCurrent);
+  } = useSelector(currentProduct);
+  const isLoaded = useSelector(cpIsLoaded);
 
-  if (imageUrls) {
+  if (isLoaded) {
     return (
       <Grid container sx={{ width: '90%', margin: '25px auto' }}>
         <Grid
@@ -86,13 +86,13 @@ function ProductDescription() {
             alignItems: 'center',
           }}>
           {/* <Img
-            src={imageUrls[0]}
-            alt={name}
-            // sx={{
-            //   width: { xs: '323px', sm: '596px', md: '539px' },
-            //   height: { xs: '222px', sm: '355px', md: '660px' },
-            // }}
-          /> */}
+              src={imageUrls[0]}
+              alt={name}
+              // sx={{
+              //   width: { xs: '323px', sm: '596px', md: '539px' },
+              //   height: { xs: '222px', sm: '355px', md: '660px' },
+              // }}
+            /> */}
           <img
             src={imageUrls[0]}
             alt={name}
@@ -190,6 +190,8 @@ function ProductDescription() {
       </Grid>
     );
   }
+
   return <div>LOADING</div>;
 }
+
 export default ProductDescription;
