@@ -24,7 +24,7 @@ export const productSlice = createSlice({
     error: null,
   },
   extraReducers: (builder) => {
-    builder.addCase(getProduct.fulfilled, (state, action) => {
+builder.addCase(getProduct.fulfilled, (state, action) => {
       state.isLoaded = true;
       state.product = action.payload;
     });
