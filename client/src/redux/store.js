@@ -5,7 +5,6 @@ import errorsSlice from './slices/errorsSlice';
 import sliceModal from './slices/modalSlice';
 import sliceForm from './slices/formSlice';
 import productSlice from './slices/productSlice';
-import { productsApi } from './productsApi';
 
 const store = configureStore({
   reducer: {
@@ -15,10 +14,7 @@ const store = configureStore({
     toolkitModal: sliceModal,
     toolkitForm: sliceForm,
     product: productSlice,
-    [productsApi.reducerPath]: productsApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productsApi.middleware),
 });
 
 export default store;
