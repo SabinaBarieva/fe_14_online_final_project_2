@@ -74,7 +74,7 @@ function ProductDescription() {
 
   if (imageUrls) {
     return (
-      <Grid container sx={{ width: '90%', margin: '15px auto' }}>
+      <Grid container sx={{ width: '90%', margin: '25px auto' }}>
         <Grid
           item
           xs={12}
@@ -122,7 +122,7 @@ function ProductDescription() {
             sx={{
               display: 'flex',
               justifyContent: 'space-around',
-              margin: '10px 0',
+              margin: '20px 0 30px',
             }}>
             {imageUrls.map((photo) => (
               <Grid
