@@ -22,6 +22,7 @@ const Description = styled('div')({
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',
+  width: '90%',
   margin: '10px 0',
 });
 const Price = styled('div')({
