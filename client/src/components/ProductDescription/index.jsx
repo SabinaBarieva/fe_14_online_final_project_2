@@ -109,6 +109,7 @@ function ProductDescription() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around',
+            margin: '20px 0',
           }}>
           <Code>{itemNo} :CODE</Code>
           <Title>
@@ -122,7 +123,7 @@ function ProductDescription() {
             sx={{
               display: 'flex',
               justifyContent: 'space-around',
-              margin: '20px 0 30px',
+              margin: '30px 0',
             }}>
             {imageUrls.map((photo) => (
               <Grid
@@ -132,7 +133,7 @@ function ProductDescription() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <img src={photo} alt="" width={'85px'} height={'85px'} />
+                <img src={photo} alt="img" width={'85px'} height={'85px'} />
               </Grid>
             ))}
           </Grid>
