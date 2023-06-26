@@ -27,7 +27,7 @@ const productsSlice = createSlice({
     },
   },
 });
-// console.log(productsSlice);
+console.log(productsSlice);
 export const {
   startFetchingProducts,
   finishFetchingProducts,

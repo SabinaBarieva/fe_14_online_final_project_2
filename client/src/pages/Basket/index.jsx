@@ -5,7 +5,6 @@ export function BasketContent() {
   return (
     <>
       <div>Basket Content</div>
-      {' '}
       <ButtonOrder />
     </>
   );
