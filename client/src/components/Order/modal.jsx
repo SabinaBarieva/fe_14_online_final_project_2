@@ -45,8 +45,7 @@ export default function ModalOrdered() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Typography component="h5" variant="h5">
             {textHeader}
           </Typography>
@@ -61,8 +60,7 @@ export default function ModalOrdered() {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={closed}
-        >
+          onClick={closed}>
           Ok
         </Button>
       </Container>

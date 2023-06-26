@@ -1,13 +1,10 @@
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const onError = (err, req, resp, target) => {
-  console.log(`${err.message}`);
-};
-module.exports = function (app) {
+module.exports = function proxy(app) {
   app.use(
-    "/api",
+    '/api',
     createProxyMiddleware({
-      target: "http://localhost:4000",
+      target: 'http://localhost:4000',
       changeOrigin: true,
     })
   );
