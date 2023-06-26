@@ -5,14 +5,14 @@
 
   "printWidth": 80,
   "spaceBeforeFunctionParen": true,
-  "endOfLine": "lf",
+  "endOfLine": "auto",
   "bracketSpacing": true,
   "overrides": [
     {
       "files": ["*.jsx", "*.js"],
       "options": {
         "tabWidth": 2,
-        "endOfLine": "lf",
+        "endOfLine": "auto",
         "trailingComma": "es5",
         "parser": "babel-flow",
         "jsxSingleQuote": false
