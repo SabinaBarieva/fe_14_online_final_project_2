@@ -22,7 +22,7 @@ const Description = styled('div')({
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',
-  margin: '10px 0',
+  margin: '15px 0',
 });
 const Price = styled('div')({
   fontWeight: '500',
@@ -30,7 +30,6 @@ const Price = styled('div')({
   lineHeight: '132%',
   letterSpacing: '0.015em',
   color: '#434343',
-  margin: '10px 0',
 });
 const CountBoxes = styled('div')({
   display: 'flex',
@@ -46,7 +45,7 @@ const Guarantee = styled('div')({
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',
-  margin: '10px 0',
+  margin: '15px 0',
 });
 
 function ProductDescription() {
@@ -106,7 +105,6 @@ function ProductDescription() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around',
-            margin: '20px 0',
             width: '90%',
           }}>
           <Code>{itemNo} :CODE</Code>
@@ -116,33 +114,6 @@ function ProductDescription() {
           <Description>{description}</Description>
           <Price>Price: {currentPrice}$</Price>
           <Guarantee>Apple guarantee {guarantee}</Guarantee>
-          <Grid
-            container
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-around',
-              margin: '30px 0',
-            }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <img
-                  className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width={'85px'}
-                  height={'85px'}
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
-          </Grid>
           <Grid container>
             <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
               <CountBoxes
@@ -189,6 +160,33 @@ function ProductDescription() {
                 Add to basket
               </Button>
             </Grid>
+          </Grid>
+          <Grid
+            container
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-around',
+              marginTop: '15px',
+            }}>
+            {imageUrls.map((photo) => (
+              <Grid
+                key={photo}
+                item
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <img
+                  className="photo-from-gallery"
+                  src={photo}
+                  alt="img"
+                  width={'85px'}
+                  height={'85px'}
+                  onClick={changeMainPhoto}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>
