@@ -22,7 +22,6 @@ const Description = styled('div')({
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',
-  width: '90%',
   margin: '10px 0',
 });
 const Price = styled('div')({
@@ -96,10 +95,7 @@ function ProductDescription() {
             className="main-photo"
             src={imageUrls[0]}
             alt={name}
-            sx={{
-              width: { xs: '10px', sm: '596px', md: '539px' },
-              height: { xs: '10px', sm: '355px', md: '660px' },
-            }}
+            width={'100%'}
           />
         </Grid>
         <Grid
@@ -111,6 +107,7 @@ function ProductDescription() {
             flexDirection: 'column',
             justifyContent: 'space-around',
             margin: '20px 0',
+            width: '90%',
           }}>
           <Code>{itemNo} :CODE</Code>
           <Title>
