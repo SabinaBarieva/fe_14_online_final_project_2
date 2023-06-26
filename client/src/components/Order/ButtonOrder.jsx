@@ -29,8 +29,7 @@ export default function ButtonOrder() {
               variant="contained"
               color="primary"
               style={{ borderRadius: 0, textTransform: 'none' }}
-              onClick={showForm}
-            >
+              onClick={showForm}>
               Check Out
             </Button>
           </Container>
