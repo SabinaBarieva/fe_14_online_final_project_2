@@ -22,7 +22,7 @@ function PageNotFound() {
           justifyContent: 'center',
           textAlign: 'center',
         }}>
-        <img src="../../img/404error.png" alt="error" height={'400px'} />
+        <img src="../../img/404error.png" alt="error" width={'100%'} />
         <Text>
           Oops, something went wrong...
           <br />
