@@ -6,11 +6,6 @@ import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
 import { currentProduct, cpIsLoaded } from '../../redux/selectors';
 
-const Code = styled('div')({
-  textAlign: 'right',
-  letterSpacing: '0.015em',
-  color: '#9A9292',
-});
 const Title = styled('div')({
   fontWeight: '400',
   fontSize: '40px',
@@ -134,7 +129,6 @@ function ProductDescription() {
               </Grid>
             ))}
           </Grid>
-          <Code>{itemNo} :CODE</Code>
           <Title>
             {brand} {name} {storage} {color}
           </Title>
