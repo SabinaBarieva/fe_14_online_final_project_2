@@ -107,6 +107,33 @@ function ProductDescription() {
             justifyContent: 'space-around',
             width: '90%',
           }}>
+          <Grid
+            container
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              justifyContent: 'space-around',
+              margin: '15px 0',
+            }}>
+            {imageUrls.map((photo) => (
+              <Grid
+                key={photo}
+                item
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <img
+                  className="photo-from-gallery"
+                  src={photo}
+                  alt="img"
+                  width={'85px'}
+                  height={'85px'}
+                  onClick={changeMainPhoto}
+                />
+              </Grid>
+            ))}
+          </Grid>
           <Code>{itemNo} :CODE</Code>
           <Title>
             {brand} {name} {storage} {color}
@@ -164,7 +191,7 @@ function ProductDescription() {
           <Grid
             container
             sx={{
-              display: 'flex',
+              display: { xs: 'none', md: 'flex' },
               justifyContent: 'space-around',
               marginTop: '15px',
             }}>
