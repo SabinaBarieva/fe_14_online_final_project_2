@@ -57,6 +57,13 @@ function ProductDescription() {
     dispatch(getProduct(77552));
   }, [dispatch]);
 
+  const changeMainPhoto = (e) => {
+    const mainPhoto = document.querySelector('.main-photo');
+    if (e.target.classList.contains('photo-from-gallery')) {
+      mainPhoto.src = e.target.getAttribute('src');
+    }
+  };
+
   const {
     // enabled,
     // quantity,
@@ -85,15 +92,8 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {/* <Img
-              src={imageUrls[0]}
-              alt={name}
-              // sx={{
-              //   width: { xs: '323px', sm: '596px', md: '539px' },
-              //   height: { xs: '222px', sm: '355px', md: '660px' },
-              // }}
-            /> */}
           <img
+            className="main-photo"
             src={imageUrls[0]}
             alt={name}
             sx={{
@@ -135,7 +135,14 @@ function ProductDescription() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <img src={photo} alt="img" width={'85px'} height={'85px'} />
+                <img
+                  className="photo-from-gallery"
+                  src={photo}
+                  alt="img"
+                  width={'85px'}
+                  height={'85px'}
+                  onClick={changeMainPhoto}
+                />
               </Grid>
             ))}
           </Grid>
