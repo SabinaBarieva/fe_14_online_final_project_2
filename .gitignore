@@ -3,7 +3,9 @@
 package-lock.json
 /.pnp
 .pnp.js
+keys_dev.js
 .env
+.vscode
 
 # testing
 /coverage
