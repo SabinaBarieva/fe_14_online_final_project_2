@@ -28,7 +28,7 @@ export const productSlice = createSlice({
     builder.addCase(getProduct.rejected, (state, action) => {
       state.isLoading = false;
       state.isLoaded = false;
-      state.error = action.payload;
+      state.error = action.error;
     });
   },
 });

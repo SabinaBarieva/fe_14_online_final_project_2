@@ -53,7 +53,7 @@ function ProductDescription() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProduct(77552));
+    dispatch(getProduct(7755));
   }, [dispatch]);
 
   const changeMainPhoto = (e) => {
