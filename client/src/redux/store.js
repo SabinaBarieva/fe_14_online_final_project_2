@@ -4,6 +4,7 @@ import categoriesSlice from './slices/categoriesSlice';
 import errorsSlice from './slices/errorsSlice';
 import sliceModal from './slices/modalSlice';
 import sliceForm from './slices/formSlice';
+// eslint-disable-next-line import/no-named-as-default
 import productSlice from './slices/productSlice';
 
 const store = configureStore({
