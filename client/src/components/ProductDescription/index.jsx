@@ -6,7 +6,11 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { getProduct } from '../../redux/slices/productSlice';
-import { currentProduct, cpIsLoaded } from '../../redux/selectors';
+import {
+  currentProduct,
+  currentProductIsLoading,
+  currentProductIsLoaded,
+} from '../../redux/selectors';
 
 const Title = styled('div')({
   fontWeight: '400',
@@ -73,8 +77,12 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const isLoaded = useSelector(cpIsLoaded);
+  const isLoaded = useSelector(currentProductIsLoaded);
+  const isLoading = useSelector(currentProductIsLoading);
 
+  if (isLoading) {
+    return <div>LOADING</div>;
+  }
   if (isLoaded) {
     return (
       <Grid container sx={{ width: '90%', margin: '25px auto' }}>
@@ -215,8 +223,6 @@ function ProductDescription() {
       </Grid>
     );
   }
-
-  return <div>LOADING</div>;
 }
 
 export default ProductDescription;
