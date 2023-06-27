@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
-  async (_, { rejectWithValue }) => {
+  async (itemNo, { dispatch, rejectWithValue }) => {
     try {
-      const resnonse = await fetch('/api/products/80465');
-
+      const resnonse = await fetch(`/api/products/${itemNo}`);
       if (!resnonse.ok) {
         throw new Error('!ServerError!');
       }
@@ -17,31 +16,22 @@ export const getProduct = createAsyncThunk(
   }
 );
 
-const productSlice = createSlice({
+export const productSlice = createSlice({
   name: 'product',
   initialState: {
-    product: [],
-    status: null,
+    product: {},
+    isLoaded: null,
     error: null,
   },
-  reducers: {
-    setProduct: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.isLoaded = true;
       state.product = action.payload;
-    },
-  },
-  extraReducers: {
-    [getProduct.pending]: (state) => {
-      state.status = 'loading';
-      state.error = null;
-    },
-    [getProduct.fulfilled]: (state, action) => {
-      state.status = 'ready';
-      state.product = [action.payload];
-    },
-    [getProduct.rejected]: (state, action) => {
-      state.status = 'rejected';
+    });
+    builder.addCase(getProduct.rejected, (state, action) => {
+      state.isLoaded = false;
       state.error = action.payload;
-    },
+    });
   },
 });
 

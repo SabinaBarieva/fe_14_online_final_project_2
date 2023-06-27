@@ -22,11 +22,12 @@ const productsSlice = createSlice({
       state.products = action.payload.products;
       state.total = action.payload.total;
     },
-    errorFetchingProducts: (state) => {
+    errorFetchingProducts: (state, action) => {
       state.isFetching = false;
     },
   },
 });
+console.log(productsSlice);
 export const {
   startFetchingProducts,
   finishFetchingProducts,
