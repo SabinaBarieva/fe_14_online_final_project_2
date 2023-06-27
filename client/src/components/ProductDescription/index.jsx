@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
@@ -67,7 +67,7 @@ function ProductDescription() {
     color,
     brand,
     storage,
-    itemNo,
+    // itemNo,
     description,
     guarantee,
   } = useSelector(currentProduct);
@@ -89,7 +89,7 @@ function ProductDescription() {
             className="main-photo"
             src={imageUrls[0]}
             alt={name}
-            width={'100%'}
+            width="100%"
           />
         </Grid>
         <Grid
@@ -122,8 +122,8 @@ function ProductDescription() {
                   className="photo-from-gallery"
                   src={photo}
                   alt="img"
-                  width={'85px'}
-                  height={'85px'}
+                  width="85px"
+                  height="85px"
                   onClick={changeMainPhoto}
                 />
               </Grid>
@@ -202,8 +202,8 @@ function ProductDescription() {
                   className="photo-from-gallery"
                   src={photo}
                   alt="img"
-                  width={'85px'}
-                  height={'85px'}
+                  width="85px"
+                  height="85px"
                   onClick={changeMainPhoto}
                 />
               </Grid>
