@@ -17,7 +17,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route index element={<MainContent />} />
-            <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="basket" element={<Basket />} />
             <Route
               path={`home/product/:${id}`}
