@@ -7,7 +7,7 @@ function Header() {
   return (
     <>
       <header>
-        <NavLink to="/home">LOGO</NavLink>
+        <NavLink to="/">LOGO</NavLink>
         <input type="text" />
         <NavLink to="/basket">basket content</NavLink>
       </header>
