@@ -6,7 +6,7 @@ function MainContent() {
   const id = 123;
   return (
     <>
-      <Link to={`home/product/${id}`}>Look this product</Link>
+      <Link to={`product/${id}`}>Look this product</Link>
       <div>Main Content</div>
     </>
   );

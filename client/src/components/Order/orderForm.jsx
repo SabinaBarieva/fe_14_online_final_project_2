@@ -178,7 +178,7 @@ export default function OrderForm() {
                 <PatternFormat
                   style={{
                     marginBottom: 5,
-                    width: 160,
+                    width: 180,
                     border: 'none',
                     minHeight: 40,
                     padding: '0 20px',
@@ -209,7 +209,7 @@ export default function OrderForm() {
                   <PatternFormat
                     style={{
                       margin: '0 7px 5px 7px',
-                      width: 50,
+                      width: 80,
                       border: 'none',
                       minHeight: 40,
                       padding: '0 20px',
@@ -246,7 +246,7 @@ export default function OrderForm() {
                   <PatternFormat
                     style={{
                       marginBottom: 5,
-                      width: 50,
+                      width: 80,
                       border: 'none',
                       minHeight: 40,
                       padding: '0 20px',
@@ -283,7 +283,7 @@ export default function OrderForm() {
                   <PatternFormat
                     style={{
                       marginBottom: 5,
-                      width: 65,
+                      width: 90,
                       border: 'none',
                       minHeight: 40,
                       padding: '0 20px',
