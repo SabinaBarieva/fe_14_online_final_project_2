@@ -1,15 +1,10 @@
 {
   "extends": "stylelint-config-standard",
-  "plugins": [
-    "stylelint-order"
-  ],
+  "plugins": ["stylelint-order"],
   "rules": {
     "number-leading-zero": "never",
     "no-missing-end-of-source-newline": null,
-    "order/order": [
-      "custom-properties",
-      "declarations"
-    ],
+    "order/order": ["custom-properties", "declarations"],
     "order/properties-order": [
       "display",
       "flex",

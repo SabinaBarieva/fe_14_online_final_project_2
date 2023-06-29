@@ -1,8 +1,6 @@
-const ProductContent = () => {
-  return (
-    <>
-      <div>Product Content</div>{" "}
-    </>
-  );
-};
+import React from 'react';
+
+function ProductContent() {
+  return <div>Product Content</div>;
+}
 export default ProductContent;
