@@ -5,7 +5,7 @@ import Basket from './pages/Basket';
 import MainContent from './pages/Main';
 import Header from './components/Header';
 import ProductDescription from './components/ProductDescription';
-import PageNotFound from './components/NFP';
+import PageNotFound from './components/NotFoundPage';
 import store from './redux/store';
 
 function App() {
