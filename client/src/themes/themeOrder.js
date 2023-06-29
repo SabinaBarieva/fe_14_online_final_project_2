@@ -1,4 +1,75 @@
-import { createTheme } from '@mui/material';
+import {
+  Button,
+  createTheme,
+  FormControl,
+  TextField,
+  IconButton,
+  OutlinedInput,
+} from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledForm = styled(FormControl)({
+  gap: 5,
+});
+
+const StyledButton = styled(Button)({
+  '&.MuiButton-root': {
+    fontFamily: 'Lato',
+    fontSize: '1.2rem',
+    fontWeight: 400,
+    lineHeight: '1.5rem',
+    width: 130,
+    height: 50,
+    margin: '10px auto',
+    padding: '13px 18px',
+  },
+  '&.MuiButton-contained': {
+    borderRadius: 50,
+  },
+});
+
+const StyledIconButton = styled(IconButton)({
+  height: 30,
+  width: 30,
+  margin: 5,
+  borderRadius: '20%',
+});
+
+const StyledInputBase = styled(TextField)({
+  margin: 5,
+  width: '90%',
+  boxSizing: 'border-box',
+  border: 'none',
+  '&.MuiInputBase-input': {
+    padding: '5!important',
+    '&::placeholder': {
+      opacity: 0.5,
+    },
+  },
+  '& .MuiOutlinedInput-input': {
+    outline: 'none',
+    minHeight: 40,
+    borderRadius: 50,
+  },
+});
+
+const StyledOutlinedInput = styled(OutlinedInput)({
+  '& .MuiOutlinedInput-root': {
+    color: 'red',
+    backgroundColor: 'green',
+    outline: 'none',
+    minHeight: 40,
+    borderRadius: 50,
+  },
+});
+
+export {
+  StyledForm,
+  StyledButton,
+  StyledInputBase,
+  StyledIconButton,
+  StyledOutlinedInput,
+};
 
 const theme = createTheme({
   palette: {
@@ -10,53 +81,6 @@ const theme = createTheme({
     },
   },
   components: {
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          gap: 5,
-        },
-      },
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          margin: 5,
-        },
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          margin: 5,
-          width: '90%',
-          boxSizing: 'border-box',
-          border: 'none',
-        },
-        input: {
-          padding: '5!important',
-          '&::placeholder': {
-            opacity: 0.5,
-          },
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          fontFamily: 'Lato',
-          fontSize: '1.2rem',
-          fontWeight: 400,
-          lineHeight: '1.5rem',
-          width: 130,
-          height: 50,
-          margin: '10px auto',
-          padding: '13px 18px',
-        },
-        contained: {
-          borderRadius: 50,
-        },
-      },
-    },
     MuiModal: {
       styleOverrides: {
         root: {
@@ -105,35 +129,17 @@ const theme = createTheme({
         },
       },
     },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          outline: 'none',
-          minHeight: 40,
-          borderRadius: 50,
-        },
-      },
-    },
-    MuiCardHeader: {
-      styleOverrides: {
-        root: {
-          gap: 5,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        },
-      },
-    },
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          height: 30,
-          width: 30,
-          margin: 5,
-          borderRadius: '20%',
-        },
-      },
-    },
+    // MuiOutlinedInput: {
+    //   styleOverrides: {
+    //     root: {
+    //       color: 'red',
+    //       backgroundColor: 'green',
+    //       outline: 'none',
+    //       minHeight: 40,
+    //       borderRadius: 50,
+    //     },
+    //   },
+    // },
     MuiGrid: {
       styleOverrides: {
         root: {
@@ -142,13 +148,6 @@ const theme = createTheme({
           paddingLeft: 10,
           borderRadius: 20,
           minWidth: 50,
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          minWidth: 230,
         },
       },
     },

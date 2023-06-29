@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Container, ThemeProvider } from '@mui/material';
-import theme from '../../themes/themeOrder';
+import { Container, ThemeProvider } from '@mui/material';
 import OrderForm from './orderForm';
 import ModalOrdered from './modal';
 import { openForm } from '../../redux/slices/formSlice';
+import theme, { StyledButton } from '../../themes/themeOrder';
 
 export default function ButtonOrder() {
   const dispatch = useDispatch();
@@ -25,13 +25,13 @@ export default function ButtonOrder() {
       <>
         {buttons && (
           <Container>
-            <Button
+            <StyledButton
               variant="contained"
               color="primary"
               style={{ borderRadius: 0, textTransform: 'none' }}
               onClick={showForm}>
               Check Out
-            </Button>
+            </StyledButton>
           </Container>
         )}
         {form()}

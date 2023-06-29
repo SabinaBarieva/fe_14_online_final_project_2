@@ -3,18 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PatternFormat } from 'react-number-format';
 import { useFormik } from 'formik';
 import {
-  TextField,
-  FormControl,
+  // StyledInputBase,
   Container,
   Typography,
-  Button,
-  IconButton,
+  // IconButton,
   Grid,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
 import { closeForm, openApp } from '../../redux/slices/formSlice';
+import {
+  StyledForm,
+  StyledButton,
+  StyledInputBase,
+  StyledIconButton,
+} from '../../themes/themeOrder';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -80,11 +84,11 @@ export default function OrderForm() {
           <Typography component="h5" variant="h5">
             Order
           </Typography>
-          <IconButton onClick={closed}>
+          <StyledIconButton onClick={closed}>
             <Close />
-          </IconButton>
+          </StyledIconButton>
         </Container>
-        <FormControl>
+        <StyledForm>
           <Container
             component="div"
             style={{
@@ -96,7 +100,7 @@ export default function OrderForm() {
             }}>
             <Container component="div" style={{ maxWidth: 300, padding: 0 }}>
               <Container component="div">
-                <TextField
+                <StyledInputBase
                   variant="outlined"
                   type="text"
                   id="firstName"
@@ -117,7 +121,7 @@ export default function OrderForm() {
                 )}
               </Container>
               <Container component="div">
-                <TextField
+                <StyledInputBase
                   variant="outlined"
                   type="text"
                   id="lastName"
@@ -318,7 +322,7 @@ export default function OrderForm() {
               </Grid>
             </Grid>
             <Container component="div">
-              <TextField
+              <StyledInputBase
                 variant="outlined"
                 type="email"
                 id="email"
@@ -340,7 +344,7 @@ export default function OrderForm() {
               )}
             </Container>
             <Container component="div">
-              <TextField
+              <StyledInputBase
                 variant="outlined"
                 type="text"
                 id="address"
@@ -362,14 +366,14 @@ export default function OrderForm() {
               )}
             </Container>
           </Container>
-          <Button
+          <StyledButton
             variant="contained"
             color="primary"
             disableElevation
             type="submit">
             Order
-          </Button>
-        </FormControl>
+          </StyledButton>
+        </StyledForm>
       </form>
     )
   );
