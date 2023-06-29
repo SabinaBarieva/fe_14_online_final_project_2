@@ -6,8 +6,8 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { Cloudinary } from '@cloudinary/url-gen';
+import { fill } from '@cloudinary/url-gen/actions/resize';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   currentProduct,
@@ -58,6 +58,9 @@ function ProductDescription() {
       cloudName: 'dtvbxgclg',
     },
   });
+  const mainImg = cld
+    .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
+    .resize(fill().width(540));
   const {
     // enabled,
     // quantity,
@@ -74,10 +77,6 @@ function ProductDescription() {
   } = useSelector(currentProduct);
   const isLoaded = useSelector(currentProductIsLoaded);
   const isLoading = useSelector(currentProductIsLoading);
-
-  const mainImg = cld.image('phones/xl7h98p6m84ilxrvqg5y.jpg');
-
-  mainImg.resize(fill().width(540));
 
   const dispatch = useDispatch();
 
@@ -108,7 +107,7 @@ function ProductDescription() {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <AdvancedImage cldImg={mainImg} />
+            <AdvancedImage width="100%" cldImg={mainImg} />
           </Grid>
           <Grid
             item
@@ -208,6 +207,7 @@ function ProductDescription() {
                 justifyContent: 'space-around',
                 marginTop: '15px',
               }}>
+              {/* <AdvancedImage cldImg={photo} /> */}
               {imageUrls.map((photo) => (
                 <Grid
                   key={photo}
@@ -219,7 +219,7 @@ function ProductDescription() {
                   }}>
                   <img
                     className="photo-from-gallery"
-                    src={photo}
+                    // src={`https://res.cloudinary.com/dtvbxgclg/image/upload/c_fit,w_200/${photo}`}
                     alt="img"
                     width="85px"
                     height="85px"
