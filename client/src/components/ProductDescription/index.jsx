@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { Cloudinary } from '@cloudinary/url-gen';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   currentProduct,
@@ -50,6 +53,32 @@ const Guarantee = styled('div')({
 });
 
 function ProductDescription() {
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dtvbxgclg',
+    },
+  });
+  const {
+    // enabled,
+    // quantity,
+    // categories,
+    name,
+    currentPrice,
+    imageUrls,
+    color,
+    brand,
+    storage,
+    itemNo,
+    description,
+    guarantee,
+  } = useSelector(currentProduct);
+  const isLoaded = useSelector(currentProductIsLoaded);
+  const isLoading = useSelector(currentProductIsLoading);
+
+  const mainImg = cld.image('phones/xl7h98p6m84ilxrvqg5y.jpg');
+
+  mainImg.resize(fill().width(540));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,164 +92,145 @@ function ProductDescription() {
     }
   };
 
-  const {
-    // enabled,
-    // quantity,
-    // categories,
-    name,
-    currentPrice,
-    imageUrls,
-    color,
-    brand,
-    storage,
-    // itemNo,
-    description,
-    guarantee,
-  } = useSelector(currentProduct);
-  const isLoaded = useSelector(currentProductIsLoaded);
-  const isLoading = useSelector(currentProductIsLoading);
-
   if (isLoading) {
     return <div>LOADING</div>;
   }
   if (isLoaded) {
     return (
-      <Grid container sx={{ width: '90%', margin: '25px auto' }}>
-        <Grid
-          item
-          xs={12}
-          md={5}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <img
-            className="main-photo"
-            src={imageUrls[0]}
-            alt={name}
-            width="100%"
-          />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={7}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            width: '90%',
-          }}>
+      <>
+        <Grid container sx={{ width: '90%', margin: '25px auto' }}>
           <Grid
-            container
+            item
+            xs={12}
+            md={5}
             sx={{
-              display: { xs: 'flex', md: 'none' },
-              justifyContent: 'space-around',
-              margin: '15px 0',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <img
-                  className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width="85px"
-                  height="85px"
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
+            <AdvancedImage cldImg={mainImg} />
           </Grid>
-          <Title>
-            {brand} {name} {storage} {color}
-          </Title>
-          <Description>{description}</Description>
-          <Price>Price: {currentPrice}$</Price>
-          <Guarantee>Apple guarantee {guarantee}</Guarantee>
-          <Grid container>
-            <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                -
-              </CountBoxes>
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                1
-              </CountBoxes>
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                +
-              </CountBoxes>
+          <Grid
+            item
+            xs={12}
+            md={7}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
+              width: '90%',
+            }}>
+            <Grid
+              container
+              sx={{
+                display: { xs: 'flex', md: 'none' },
+                justifyContent: 'space-around',
+                margin: '15px 0',
+              }}>
+              {imageUrls.map((photo) => (
+                <Grid
+                  key={photo}
+                  item
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <img
+                    className="photo-from-gallery"
+                    src={photo}
+                    alt="img"
+                    width="85px"
+                    height="85px"
+                    onClick={changeMainPhoto}
+                  />
+                </Grid>
+              ))}
             </Grid>
-            <Grid item md={8} xs={12}>
-              <Button
-                sx={{
-                  marginTop: { xs: '10px', md: '0' },
-                  padding: '9px 18px',
-                  backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-                  color: { xs: '#616467', md: '#fff' },
-                  borderRadius: 0,
-                  border: '1px solid #211F1C',
-                  '&:hover': {
-                    backgroundColor: { xs: '#211F1C', md: '#fff' },
-                    color: { xs: '#F5F7FB', md: '#211F1C' },
-                    border: {
-                      xs: '1px solid #211F1C',
-                      md: '1px solid #211F1C',
+            <Guarantee>{itemNo}</Guarantee>
+            <Title>
+              {brand} {name} {storage} {color}
+            </Title>
+            <Description>{description}</Description>
+            <Price>Price: {currentPrice}$</Price>
+            <Guarantee>Apple guarantee {guarantee}</Guarantee>
+            <Grid container>
+              <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
+                <CountBoxes
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}>
+                  -
+                </CountBoxes>
+                <CountBoxes
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}>
+                  1
+                </CountBoxes>
+                <CountBoxes
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}>
+                  +
+                </CountBoxes>
+              </Grid>
+              <Grid item md={8} xs={12}>
+                <Button
+                  sx={{
+                    marginTop: { xs: '10px', md: '0' },
+                    padding: '9px 18px',
+                    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                    color: { xs: '#616467', md: '#fff' },
+                    borderRadius: 0,
+                    border: '1px solid #211F1C',
+                    '&:hover': {
+                      backgroundColor: { xs: '#211F1C', md: '#fff' },
+                      color: { xs: '#F5F7FB', md: '#211F1C' },
+                      border: {
+                        xs: '1px solid #211F1C',
+                        md: '1px solid #211F1C',
+                      },
                     },
-                  },
-                }}
-                variant="contained">
-                Add to basket
-              </Button>
+                  }}
+                  variant="contained">
+                  Add to basket
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                justifyContent: 'space-around',
+                marginTop: '15px',
+              }}>
+              {imageUrls.map((photo) => (
+                <Grid
+                  key={photo}
+                  item
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <img
+                    className="photo-from-gallery"
+                    src={photo}
+                    alt="img"
+                    width="85px"
+                    height="85px"
+                    onClick={changeMainPhoto}
+                  />
+                </Grid>
+              ))}
             </Grid>
           </Grid>
-          <Grid
-            container
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: 'space-around',
-              marginTop: '15px',
-            }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <img
-                  className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width="85px"
-                  height="85px"
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
-          </Grid>
         </Grid>
-      </Grid>
+      </>
     );
   }
 }
