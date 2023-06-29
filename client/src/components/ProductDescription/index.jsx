@@ -96,141 +96,139 @@ function ProductDescription() {
   }
   if (isLoaded) {
     return (
-      <>
-        <Grid container sx={{ width: '90%', margin: '25px auto' }}>
+      <Grid container sx={{ width: '90%', margin: '25px auto' }}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <AdvancedImage width="100%" cldImg={mainImg} />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={7}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            width: '90%',
+          }}>
           <Grid
-            item
-            xs={12}
-            md={5}
+            container
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: { xs: 'flex', md: 'none' },
+              justifyContent: 'space-around',
+              margin: '15px 0',
             }}>
-            <AdvancedImage width="100%" cldImg={mainImg} />
+            {imageUrls.map((photo) => (
+              <Grid
+                key={photo}
+                item
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <img
+                  className="photo-from-gallery"
+                  src={photo}
+                  alt="img"
+                  width="85px"
+                  height="85px"
+                  onClick={changeMainPhoto}
+                />
+              </Grid>
+            ))}
+          </Grid>
+          <Guarantee>{itemNo}</Guarantee>
+          <Title>
+            {brand} {name} {storage} {color}
+          </Title>
+          <Description>{description}</Description>
+          <Price>Price: {currentPrice}$</Price>
+          <Guarantee>Apple guarantee {guarantee}</Guarantee>
+          <Grid container>
+            <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
+              <CountBoxes
+                sx={{
+                  width: { xs: '35px', sm: '57px', md: '46px' },
+                  height: { xs: '35px', sm: '57px', md: '46px' },
+                }}>
+                -
+              </CountBoxes>
+              <CountBoxes
+                sx={{
+                  width: { xs: '35px', sm: '57px', md: '46px' },
+                  height: { xs: '35px', sm: '57px', md: '46px' },
+                }}>
+                1
+              </CountBoxes>
+              <CountBoxes
+                sx={{
+                  width: { xs: '35px', sm: '57px', md: '46px' },
+                  height: { xs: '35px', sm: '57px', md: '46px' },
+                }}>
+                +
+              </CountBoxes>
+            </Grid>
+            <Grid item md={8} xs={12}>
+              <Button
+                sx={{
+                  marginTop: { xs: '10px', md: '0' },
+                  padding: '9px 18px',
+                  backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                  color: { xs: '#616467', md: '#fff' },
+                  borderRadius: 0,
+                  border: '1px solid #211F1C',
+                  '&:hover': {
+                    backgroundColor: { xs: '#211F1C', md: '#fff' },
+                    color: { xs: '#F5F7FB', md: '#211F1C' },
+                    border: {
+                      xs: '1px solid #211F1C',
+                      md: '1px solid #211F1C',
+                    },
+                  },
+                }}
+                variant="contained">
+                Add to basket
+              </Button>
+            </Grid>
           </Grid>
           <Grid
-            item
-            xs={12}
-            md={7}
+            container
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: { xs: 'none', md: 'flex' },
               justifyContent: 'space-around',
-              width: '90%',
+              marginTop: '15px',
             }}>
-            <Grid
-              container
-              sx={{
-                display: { xs: 'flex', md: 'none' },
-                justifyContent: 'space-around',
-                margin: '15px 0',
-              }}>
-              {imageUrls.map((photo) => (
-                <Grid
-                  key={photo}
-                  item
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <img
-                    className="photo-from-gallery"
-                    src={photo}
-                    alt="img"
-                    width="85px"
-                    height="85px"
-                    onClick={changeMainPhoto}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-            <Guarantee>{itemNo}</Guarantee>
-            <Title>
-              {brand} {name} {storage} {color}
-            </Title>
-            <Description>{description}</Description>
-            <Price>Price: {currentPrice}$</Price>
-            <Guarantee>Apple guarantee {guarantee}</Guarantee>
-            <Grid container>
-              <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
-                <CountBoxes
-                  sx={{
-                    width: { xs: '35px', sm: '57px', md: '46px' },
-                    height: { xs: '35px', sm: '57px', md: '46px' },
-                  }}>
-                  -
-                </CountBoxes>
-                <CountBoxes
-                  sx={{
-                    width: { xs: '35px', sm: '57px', md: '46px' },
-                    height: { xs: '35px', sm: '57px', md: '46px' },
-                  }}>
-                  1
-                </CountBoxes>
-                <CountBoxes
-                  sx={{
-                    width: { xs: '35px', sm: '57px', md: '46px' },
-                    height: { xs: '35px', sm: '57px', md: '46px' },
-                  }}>
-                  +
-                </CountBoxes>
+            {/* <AdvancedImage cldImg={photo} /> */}
+            {imageUrls.map((photo) => (
+              <Grid
+                key={photo}
+                item
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <img
+                  className="photo-from-gallery"
+                  // src={`https://res.cloudinary.com/dtvbxgclg/image/upload/c_fit,w_200/${photo}`}
+                  alt="img"
+                  width="85px"
+                  height="85px"
+                  onClick={changeMainPhoto}
+                />
               </Grid>
-              <Grid item md={8} xs={12}>
-                <Button
-                  sx={{
-                    marginTop: { xs: '10px', md: '0' },
-                    padding: '9px 18px',
-                    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-                    color: { xs: '#616467', md: '#fff' },
-                    borderRadius: 0,
-                    border: '1px solid #211F1C',
-                    '&:hover': {
-                      backgroundColor: { xs: '#211F1C', md: '#fff' },
-                      color: { xs: '#F5F7FB', md: '#211F1C' },
-                      border: {
-                        xs: '1px solid #211F1C',
-                        md: '1px solid #211F1C',
-                      },
-                    },
-                  }}
-                  variant="contained">
-                  Add to basket
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                justifyContent: 'space-around',
-                marginTop: '15px',
-              }}>
-              {/* <AdvancedImage cldImg={photo} /> */}
-              {imageUrls.map((photo) => (
-                <Grid
-                  key={photo}
-                  item
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <img
-                    className="photo-from-gallery"
-                    // src={`https://res.cloudinary.com/dtvbxgclg/image/upload/c_fit,w_200/${photo}`}
-                    alt="img"
-                    width="85px"
-                    height="85px"
-                    onClick={changeMainPhoto}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+            ))}
           </Grid>
         </Grid>
-      </>
+      </Grid>
     );
   }
 }
