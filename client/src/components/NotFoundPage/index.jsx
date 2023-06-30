@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AdvancedImage } from '@cloudinary/react';
-import { Cloudinary } from '@cloudinary/url-gen';
-// import { fill } from '@cloudinary/url-gen/actions/resize';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import errorPage from '../../cloudinary';
 
 const Text = styled('div')({
   color: '#9A9292',
@@ -13,13 +12,7 @@ const Text = styled('div')({
 });
 
 function PageNotFound() {
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dtvbxgclg',
-    },
-  });
-  const error = cld.image('404/gcywm38t2j4d9xsybafc.jpg');
-  // .resize(fill().width(540));
+  const error = errorPage.image('404/gcywm38t2j4d9xsybafc.jpg');
 
   return (
     <Grid container sx={{ width: '85%', margin: '20px auto' }}>
@@ -33,7 +26,7 @@ function PageNotFound() {
           justifyContent: 'center',
           textAlign: 'center',
         }}>
-        <AdvancedImage width="100%" cldImg={error} />
+        <AdvancedImage width="100%" cldImg={error} alt="404" />
         <Text>
           Oops, something went wrong...
           <br />

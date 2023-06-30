@@ -6,7 +6,6 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { Cloudinary } from '@cloudinary/url-gen';
 import { fill } from '@cloudinary/url-gen/actions/resize';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
@@ -14,6 +13,7 @@ import {
   currentProductIsLoading,
   currentProductIsLoaded,
 } from '../../redux/selectors';
+import getMainImg from '../../cloudinary';
 
 const Title = styled('div')({
   fontWeight: '400',
@@ -53,12 +53,7 @@ const Guarantee = styled('div')({
 });
 
 function ProductDescription() {
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dtvbxgclg',
-    },
-  });
-  const mainImg = cld
+  const mainImg = getMainImg
     .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
     .resize(fill().width(540));
   const {
@@ -106,7 +101,7 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <AdvancedImage width="100%" cldImg={mainImg} />
+          <AdvancedImage width="100%" cldImg={mainImg} alt="main img" />
         </Grid>
         <Grid
           item
