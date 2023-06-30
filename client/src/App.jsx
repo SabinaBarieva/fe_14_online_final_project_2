@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Basket from './pages/Basket';
 import MainContent from './pages/Main';
 import Header from './components/Header';
 import ProductDescription from './components/ProductDescription';
-import PageNotFound from './components/NFP';
+import PageNotFound from './components/NotFoundPage';
 import store from './redux/store';
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route index element={<MainContent />} />
-            <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="basket" element={<Basket />} />
             <Route path={`product/:${id}`} element={<ProductDescription />} />
             <Route path="*" element={<PageNotFound />} />
@@ -29,3 +28,4 @@ function App() {
 }
 
 export default App;
+
