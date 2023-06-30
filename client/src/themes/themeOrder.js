@@ -124,6 +124,7 @@ const StyledFormBackground = styled(Container)({
   left: 0,
   overflow: 'scroll',
   height: '100%',
+  maxWidth: '100%!Important',
 });
 
 export {
