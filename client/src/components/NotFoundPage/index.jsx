@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { AdvancedImage } from '@cloudinary/react';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import errorPage from '../../cloudinary';
 
 const Text = styled('div')({
   color: '#9A9292',
@@ -10,6 +12,8 @@ const Text = styled('div')({
 });
 
 function PageNotFound() {
+  const error = errorPage.image('404/gcywm38t2j4d9xsybafc.jpg');
+
   return (
     <Grid container sx={{ width: '85%', margin: '20px auto' }}>
       <Grid
@@ -22,7 +26,7 @@ function PageNotFound() {
           justifyContent: 'center',
           textAlign: 'center',
         }}>
-        <img src="../../img/404error.png" alt="error" width="100%" />
+        <AdvancedImage width="100%" cldImg={error} alt="404" />
         <Text>
           Oops, something went wrong...
           <br />
@@ -39,7 +43,7 @@ function PageNotFound() {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Link to="/home">
+        <Link to="/">
           <Button
             variant="contained"
             sx={{

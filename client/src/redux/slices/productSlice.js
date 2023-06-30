@@ -3,7 +3,7 @@ import getProductApi from '../../api/getProduct';
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
-  async (itemNo, { dispatch, rejectWithValue }) => getProductApi(itemNo)
+  async (itemNo) => getProductApi(itemNo)
 );
 
 export const productSlice = createSlice({

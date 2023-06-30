@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { AdvancedImage } from '@cloudinary/react';
+import { fill } from '@cloudinary/url-gen/actions/resize';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   currentProduct,
   currentProductIsLoading,
   currentProductIsLoaded,
 } from '../../redux/selectors';
+import getMainImg from '../../cloudinary';
 
 const Title = styled('div')({
   fontWeight: '400',
@@ -50,6 +53,26 @@ const Guarantee = styled('div')({
 });
 
 function ProductDescription() {
+  const mainImg = getMainImg
+    .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
+    .resize(fill().width(540));
+  const {
+    // enabled,
+    // quantity,
+    // categories,
+    name,
+    currentPrice,
+    imageUrls,
+    color,
+    brand,
+    storage,
+    itemNo,
+    description,
+    guarantee,
+  } = useSelector(currentProduct);
+  const isLoaded = useSelector(currentProductIsLoaded);
+  const isLoading = useSelector(currentProductIsLoading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,23 +85,6 @@ function ProductDescription() {
       mainPhoto.src = e.target.getAttribute('src');
     }
   };
-
-  const {
-    // enabled,
-    // quantity,
-    // categories,
-    name,
-    currentPrice,
-    imageUrls,
-    color,
-    brand,
-    storage,
-    // itemNo,
-    description,
-    guarantee,
-  } = useSelector(currentProduct);
-  const isLoaded = useSelector(currentProductIsLoaded);
-  const isLoading = useSelector(currentProductIsLoading);
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -95,12 +101,7 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <img
-            className="main-photo"
-            src={imageUrls[0]}
-            alt={name}
-            width="100%"
-          />
+          <AdvancedImage width="100%" cldImg={mainImg} alt="main img" />
         </Grid>
         <Grid
           item
@@ -139,6 +140,7 @@ function ProductDescription() {
               </Grid>
             ))}
           </Grid>
+          <Guarantee>{itemNo}</Guarantee>
           <Title>
             {brand} {name} {storage} {color}
           </Title>
@@ -199,6 +201,7 @@ function ProductDescription() {
               justifyContent: 'space-around',
               marginTop: '15px',
             }}>
+            {/* <AdvancedImage cldImg={photo} /> */}
             {imageUrls.map((photo) => (
               <Grid
                 key={photo}
@@ -210,7 +213,7 @@ function ProductDescription() {
                 }}>
                 <img
                   className="photo-from-gallery"
-                  src={photo}
+                  // src={`https://res.cloudinary.com/dtvbxgclg/image/upload/c_fit,w_200/${photo}`}
                   alt="img"
                   width="85px"
                   height="85px"
