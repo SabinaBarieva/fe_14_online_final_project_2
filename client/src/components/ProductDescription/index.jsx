@@ -6,7 +6,6 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   currentProduct,
@@ -99,9 +98,10 @@ function ProductDescription() {
             alignItems: 'center',
           }}>
           <AdvancedImage
+            className="main-photo"
             width="100%"
-            cldImg={getImg.image(imageUrls[0]).resize(fill().width(540))}
-            alt="main img"
+            cldImg={getImg.image(imageUrls[0])}
+            alt="main-img"
           />
         </Grid>
         <Grid
@@ -129,11 +129,13 @@ function ProductDescription() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  width: { sm: '144px', xs: '66px' },
                 }}>
                 <AdvancedImage
+                  className="photo-from-gallery"
                   width="100%"
-                  cldImg={getImg.image(photo).resize(fill().width(144))}
-                  alt="mini img"
+                  cldImg={getImg.image(photo)}
+                  alt="mini-img"
                   onClick={changeMainPhoto}
                 />
               </Grid>
@@ -208,11 +210,13 @@ function ProductDescription() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  width: '85px',
                 }}>
                 <AdvancedImage
+                  className="photo-from-gallery"
                   width="100%"
-                  cldImg={getImg.image(photo).resize(fill().width(85))}
-                  alt="mini img"
+                  cldImg={getImg.image(photo)}
+                  alt="mini-img"
                   onClick={changeMainPhoto}
                 />
               </Grid>
