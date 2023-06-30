@@ -53,10 +53,6 @@ const Guarantee = styled('div')({
 });
 
 function ProductDescription() {
-  const mainImg = getImg
-    .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
-    .resize(fill().width(540));
-
   const {
     // enabled,
     // quantity,
@@ -83,14 +79,6 @@ function ProductDescription() {
     }
   };
 
-  // imageUrls.map(() => {
-  //   const miniImg = getImg
-  //     .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
-  //     .resize(fill().width(85));
-
-  //   <AdvancedImage width="100%" cldImg={mainImg} alt="mini img" />;
-  // });
-
   useEffect(() => {
     dispatch(getProduct(77552));
   }, [dispatch]);
@@ -110,7 +98,11 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <AdvancedImage width="100%" cldImg={mainImg} alt="main img" />
+          <AdvancedImage
+            width="100%"
+            cldImg={getImg.image(imageUrls[0]).resize(fill().width(540))}
+            alt="main img"
+          />
         </Grid>
         <Grid
           item
@@ -140,7 +132,7 @@ function ProductDescription() {
                 }}>
                 <AdvancedImage
                   width="100%"
-                  cldImg={getImg.image(photo).resize(fill().width(85))}
+                  cldImg={getImg.image(photo).resize(fill().width(144))}
                   alt="mini img"
                   onClick={changeMainPhoto}
                 />
