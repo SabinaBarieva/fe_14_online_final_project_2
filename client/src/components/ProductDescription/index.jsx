@@ -13,7 +13,7 @@ import {
   currentProductIsLoading,
   currentProductIsLoaded,
 } from '../../redux/selectors';
-import getMainImg from '../../cloudinary';
+import getImg from '../../cloudinary';
 
 const Title = styled('div')({
   fontWeight: '400',
@@ -53,9 +53,10 @@ const Guarantee = styled('div')({
 });
 
 function ProductDescription() {
-  const mainImg = getMainImg
+  const mainImg = getImg
     .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
     .resize(fill().width(540));
+
   const {
     // enabled,
     // quantity,
@@ -75,16 +76,24 @@ function ProductDescription() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProduct(77552));
-  }, [dispatch]);
-
   const changeMainPhoto = (e) => {
     const mainPhoto = document.querySelector('.main-photo');
     if (e.target.classList.contains('photo-from-gallery')) {
       mainPhoto.src = e.target.getAttribute('src');
     }
   };
+
+  // imageUrls.map(() => {
+  //   const miniImg = getImg
+  //     .image('phones/xl7h98p6m84ilxrvqg5y.jpg')
+  //     .resize(fill().width(85));
+
+  //   <AdvancedImage width="100%" cldImg={mainImg} alt="mini img" />;
+  // });
+
+  useEffect(() => {
+    dispatch(getProduct(77552));
+  }, [dispatch]);
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -129,12 +138,10 @@ function ProductDescription() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <img
-                  className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width="85px"
-                  height="85px"
+                <AdvancedImage
+                  width="100%"
+                  cldImg={getImg.image(photo).resize(fill().width(85))}
+                  alt="mini img"
                   onClick={changeMainPhoto}
                 />
               </Grid>
@@ -201,7 +208,6 @@ function ProductDescription() {
               justifyContent: 'space-around',
               marginTop: '15px',
             }}>
-            {/* <AdvancedImage cldImg={photo} /> */}
             {imageUrls.map((photo) => (
               <Grid
                 key={photo}
@@ -211,12 +217,10 @@ function ProductDescription() {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <img
-                  className="photo-from-gallery"
-                  // src={`https://res.cloudinary.com/dtvbxgclg/image/upload/c_fit,w_200/${photo}`}
-                  alt="img"
-                  width="85px"
-                  height="85px"
+                <AdvancedImage
+                  width="100%"
+                  cldImg={getImg.image(photo).resize(fill().width(85))}
+                  alt="mini img"
                   onClick={changeMainPhoto}
                 />
               </Grid>
