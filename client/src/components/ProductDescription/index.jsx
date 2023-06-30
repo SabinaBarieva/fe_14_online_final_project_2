@@ -49,9 +49,13 @@ const Guarantee = styled('div')({
   letterSpacing: '0.015em',
   color: '#9A9292',
   margin: '15px 0',
+  paddingRight: '20px',
 });
 
 function ProductDescription() {
+  const dispatch = useDispatch();
+  const isLoaded = useSelector(currentProductIsLoaded);
+  const isLoading = useSelector(currentProductIsLoading);
   const {
     // enabled,
     // quantity,
@@ -66,10 +70,6 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const isLoaded = useSelector(currentProductIsLoaded);
-  const isLoading = useSelector(currentProductIsLoading);
-
-  const dispatch = useDispatch();
 
   const changeMainPhoto = (e) => {
     const mainPhoto = document.querySelector('.main-photo');
@@ -85,9 +85,10 @@ function ProductDescription() {
   if (isLoading) {
     return <div>LOADING</div>;
   }
+
   if (isLoaded) {
     return (
-      <Grid container sx={{ width: '90%', margin: '25px auto' }}>
+      <Grid container sx={{ width: '91%', margin: '25px auto' }}>
         <Grid
           item
           xs={12}
