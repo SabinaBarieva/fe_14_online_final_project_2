@@ -71,12 +71,6 @@ function ProductDescription() {
     guarantee,
   } = useSelector(currentProduct);
 
-  const changeMainPhoto = (e) => {
-    const mainPhoto = document.querySelector('.main-photo');
-    if (e.target.classList.contains('photo-from-gallery')) {
-      mainPhoto.src = e.target.getAttribute('src');
-    }
-  };
   useEffect(() => {
     dispatch(getProduct(77552));
   }, [dispatch]);
@@ -88,6 +82,14 @@ function ProductDescription() {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
+
+  const changeMainPhoto = (e) => {
+    const urlString = e.target.getAttribute('src');
+    const url = new URL(urlString);
+    const path = url.pathname;
+    const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
+    setMainImage(cleanedPath);
+  };
 
   if (isLoading) {
     return <div>LOADING</div>;
