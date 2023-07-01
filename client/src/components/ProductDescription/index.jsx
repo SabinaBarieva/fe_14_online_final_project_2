@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
@@ -77,16 +77,23 @@ function ProductDescription() {
       mainPhoto.src = e.target.getAttribute('src');
     }
   };
-
   useEffect(() => {
     dispatch(getProduct(77552));
   }, [dispatch]);
+
+  const [mainImage, setMainImage] = useState('');
+
+  useEffect(() => {
+    if (imageUrls) {
+      setMainImage(imageUrls[0]);
+    }
+  }, [imageUrls]);
 
   if (isLoading) {
     return <div>LOADING</div>;
   }
 
-  if (isLoaded) {
+  if (isLoaded && imageUrls) {
     return (
       <Grid container sx={{ width: '91%', margin: '25px auto' }}>
         <Grid
@@ -101,7 +108,7 @@ function ProductDescription() {
           <AdvancedImage
             className="main-photo"
             width="100%"
-            cldImg={getImg.image(imageUrls[0])}
+            cldImg={getImg.image(mainImage)}
             alt="main-img"
           />
         </Grid>
