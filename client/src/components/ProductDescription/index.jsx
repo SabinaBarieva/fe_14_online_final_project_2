@@ -7,11 +7,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import {
-  currentProduct,
-  currentProductIsLoading,
-  currentProductIsLoaded,
-} from '../../redux/selectors';
+import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 
 const Title = styled('div')({
@@ -54,7 +50,7 @@ const Guarantee = styled('div')({
 
 function ProductDescription() {
   const dispatch = useDispatch();
-  const isLoaded = useSelector(currentProductIsLoaded);
+
   const isLoading = useSelector(currentProductIsLoading);
   const {
     // enabled,
@@ -95,7 +91,7 @@ function ProductDescription() {
     return <div>LOADING</div>;
   }
 
-  if (isLoaded && imageUrls) {
+  if (imageUrls) {
     return (
       <Grid container sx={{ width: '91%', margin: '25px auto' }}>
         <Grid
