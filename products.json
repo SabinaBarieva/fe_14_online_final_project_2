@@ -1,0 +1,1054 @@
+[
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de69395"
+    },
+    "enabled": true,
+    "name": "iPhone 11",
+    "sale": false,
+    "currentPrice": 462,
+    "previousPrice": 512,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/xl7h98p6m84ilxrvqg5y.jpg",
+      "phones/oxlgcb4vg7ygn15mo3ob.jpg",
+      "phones/rvtsebqxxh4wuukknzgb.jpg",
+      "phones/egfscwofa6ocvvcmyzda.jpg"
+    ],
+    "quantity": 8,
+    "color": "Black",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "77552",
+    "description": "The iPhone 11 cannot be replaced by a new smartphone, it is a direct fit for the iPhone XR. The smartphone has halved, the dimensions with the front edge are smoothed. The main innovations are innovations in color solutions, even the same and earlier than the best iPhone. I clicked one snake and another modulation of the camera was detected, now the ultra-wide-angle lens has reached the wide-angle one. This allows you to create group portraits and beautiful panoramas. Like the process that will now win, the faster and more energy efficient Apple 13 Bionic. What is worth an hour of autonomous robots, here the company has built a crock forward and the smartphone is obliged to work for at least a year in the new XR model.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:29.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de69396"
+    },
+    "enabled": true,
+    "name": "iPhone 13",
+    "sale": true,
+    "currentPrice": 717,
+    "previousPrice": 767,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/fwd6fpjujgtt8cclohli.jpg",
+      "phones/leedxcxbnpdownfeaurt.png",
+      "phones/zrcebawfimlzhww2y0vf.jpg",
+      ".phones/xwpacw0ill58i024awmb.jpg"
+    ],
+    "quantity": 10,
+    "color": "Blue",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "80465",
+    "description": "The smartphone of the new generation combines technological trends from the previous models with new solutions. The iPhone 13 processor has become thinner, and the cameras are better. Before that, the retailers added a full 5G chip for complete signal transmission, updated the color palette and software security. New over-wide-angle camera for more detail in dark areas of the image. You get 47% more light for more photos and videos. New optical stabilization for damaged matrices to ensure clear shots in an unstable position.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:30.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de69397"
+    },
+    "enabled": true,
+    "name": "iPhone 14",
+    "sale": false,
+    "currentPrice": 820,
+    "previousPrice": 870,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/sxbhotjntv958ygdcsig.png",
+      "phones/uyt6w5tind2wc2cttyfl.png",
+      "phones/lpec4japi1spqbjmue7e.png"
+    ],
+    "quantity": 12,
+    "color": "Yellow",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "83091",
+    "description": "iPhone 14 is a novelty from Apple, which was presented to us at the autumn presentation of 2022. The smartphone has lost its sizable and hand-held form factor iPhone 13: the same square design with diagonal cameras, a sizable forelock and a screen, diagonal 6.1.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:31.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de69398"
+    },
+    "enabled": true,
+    "name": "iPhone 14 Plus",
+    "sale": true,
+    "currentPrice": 892,
+    "previousPrice": 942,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/lstlfnohtmxbkf5hbxpr.jpg",
+      "phones/cqhrpl4wspax9adtyodn.jpg",
+      "phones/vtufde3hbxv0j6ehd8ls.jpg"
+    ],
+    "quantity": 7,
+    "color": "Starlight",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "81830",
+    "description": "iPhone 14 Plus is a completely new flagship from Apple, which was presented to us at the autumn presentation of 2022. The smartphone replaced the small form factor of the iPhone 13 mini, receiving noticeable changes: a square design with a diagonal arrangement of cameras, a familiar notch and a screen with a diagonal of 6.7 inches, which can be compared with the diagonal of a premium model. In addition, the iPhone 14 Plus has an increased battery that guarantees up to 26 hours of battery life in video viewing mode.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:23.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de69399"
+    },
+    "enabled": true,
+    "name": "iPhone 14 Pro",
+    "sale": false,
+    "currentPrice": 1185,
+    "previousPrice": 1235,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/xtijnjpqnonqfrxv9vzo.jpg",
+      "phones/jg7s5ukjyv38uqyus1z3.jpg",
+      "phones/mwikevxu3miu6i4zjekp.jpg",
+      "phones/xnughzxtu8brcnth8ce4.jpg"
+    ],
+    "quantity": 13,
+    "color": "Gold",
+    "brand": "Apple",
+    "storage": "256gb",
+    "itemNo": "82120",
+    "description": "Apple iPhone 14 Pro (2022) is a smartphone that really does absolutely everything. At the autumn presentation of 2022, Cupertino presented a revolutionary new thing: a new Always-On display with an updated form factor of an old video - Dynamic Island, a modern Apple A16 Bionic processor, a 48-megapixel camera and a support for unearthly standards.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:33.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939a"
+    },
+    "enabled": true,
+    "name": "iPhone 14 Pro Max",
+    "sale": true,
+    "currentPrice": 1441,
+    "previousPrice": 1491,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/y6moj8n8oghrblrcvncz.jpg",
+      "phones/fpuetaiekknpvvcgvqjc.jpg",
+      "phones/zybjqctmd2lfnzzigruz.jph",
+      "phones/dnuac9nohy4ezjyyaspa.jpg"
+    ],
+    "quantity": 17,
+    "color": "Space Black",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "82142",
+    "description": "Apple iPhone 14 Pro Max (2022) is a smartphone that really does absolutely everything. At the autumn presentation of 2022, Cupertino presented a revolutionary new thing: a new Always-On display with an updated form factor of an old video - Dynamic Island, a modern Apple A16 Bionic processor, a 48-megapixel camera and a support for unearthly standards.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:34.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939b"
+    },
+    "enabled": true,
+    "name": "iPhone 13 mini",
+    "sale": false,
+    "currentPrice": 915,
+    "previousPrice": 945,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/oyag5ztvwm4qqvkoaqkw.jpg",
+      "phones/fn6xqu0mxu0nondckpmo.jpg",
+      "phones/sp8wq2cdvacloeosy6sm.jpg",
+      "phones/vfcgbcgem8gd78pzxt3c.jpg"
+    ],
+    "quantity": 3,
+    "color": "Pink",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "80478",
+    "description": "The smartphone of the new generation combines technological trends from the previous models with new solutions. The processor of the iPhone 13 mini has become thinner, and the cameras are better. Before that, the retailers added a full 5G chip for complete signal transmission, updated the color palette and software security.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:35.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939c"
+    },
+    "enabled": true,
+    "name": "iPhone SE 2020",
+    "sale": true,
+    "currentPrice": 425,
+    "previousPrice": 450,
+    "categories": "cellphone",
+    "imageUrls": ["phones/fjc2owcowjux10cdnjnz.jpg"],
+    "quantity": 5,
+    "color": "Balck",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "78409",
+    "description": "iPhone SE 2020 It's worth seeing an inexpensive iPhone with a smart processor and a modern camera. Everything is packed in the already known case similar to the iPhone 8 model. Apparently, the display is oversized and it has a diagonal of 4.7 inches, which will make the iPhone SE 2020 one of the largest compact smartphones on the market. Apple had a smartphone with an Apple A13 Bionic processor, exactly the same as in the iPhone 11 family. K zі shvidkіstyu 60 fps.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:36.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939d"
+    },
+    "enabled": true,
+    "name": "iPhone SE 2022",
+    "sale": false,
+    "currentPrice": 525,
+    "previousPrice": 570,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/cpyvxds0huhu578wsfsm.jpg",
+      "phones/emzgolaa2qckiwc4wg8b.jpg",
+      "phones/gx8bmxthzfeh27njt5vt.jpg",
+      "phones/k4gtajlghmrbszeg0blq.jpg"
+    ],
+    "quantity": 9,
+    "color": "Midnight",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "81119",
+    "description": "iPhone SE 2022 is an ideological continuation of the SE model released on that occasion. It's worth seeing an inexpensive iPhone with a smart processor and a modern camera. Everything is packaged in the already familiar case similar to the iPhone 8 model. Apparently, the display is oversized and its diagonal is 4.7 inches, which in turn will make the iPhone SE 2022 one of the largest compact smartphones on the market. Apple possessed a smartphone with an Apple A15 Bionic processor, exactly the same as in the iPhone 14 family.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:37.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939e"
+    },
+    "enabled": true,
+    "name": "iPhone XR",
+    "sale": false,
+    "currentPrice": 403,
+    "previousPrice": 422,
+    "categories": "cellphone",
+    "imageUrls": [
+      "phones/fblzd7svqrx6orcjufuj.jpg",
+      "phones/px1tkqlsbbluy3nl3fnt.png",
+      "phones/bp8saex5ieoigpbc5ric.png"
+    ],
+    "quantity": 3,
+    "color": "Black",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "224237",
+    "description": "The iPhone XR features an innovative 6.1-inch Liquid Retina display with a resolution of 1732×828 pixels. The new screen is the most advanced LCD display in a smartphone. A special backlighting algorithm allows the screen to 'stretch' in the corners. This technology and advanced True Tone function reproduces the true color of the image across the entire area of the sensor.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:38.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de6939f"
+    },
+    "enabled": true,
+    "name": "iPad 10.9 (2022)",
+    "sale": false,
+    "currentPrice": 480,
+    "previousPrice": 505,
+    "categories": "tablet",
+    "imageUrls": [
+      "ipad/tvdxh7mzqa253crbi4hb.jpg",
+      "ipad/ptb7pqfoqpsqexnlegtm.jpg",
+      "ipad/c8bjtu3bdczluijryubp.jpg"
+    ],
+    "quantity": 3,
+    "color": "Blue",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "82159",
+    "description": "Updated design The well-known and popular Apple iPad series has received a major update in the form of the Apple iPad 10 10.9 (2022). Apple presented its new device in four colors, three of which look very bright and will definitely find their fans. The body is made of the usual aluminum alloy and provides a serious level of reliability of the device. It should also be noted the convenient location of the front camera (12 MP), located not on the side of the tablet, but above the screen in landscape orientation. Now you can safely use the iPad, holding it with both hands and have free access to the camera.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:39.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a0"
+    },
+    "enabled": true,
+    "name": "iPad Air (2022)",
+    "sale": true,
+    "currentPrice": 539,
+    "previousPrice": 589,
+    "categories": "tablet",
+    "imageUrls": ["ipad/yoydc55qdd3ztm6sempo.jpeg"],
+    "quantity": 3,
+    "color": "Purple",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "81130",
+    "description": "Your mobile creative studio. The powerful Apple M1 processor will help you bring your ideas to life. Shoot 4K video and edit it directly on iPad Air. Thanks to Apple Pencil* of the 2nd generation, you will be able to create wonderful drawings and illustrations with smooth tonal transitions - brushes can be changed right in the process of work. And the M1 processor with advanced graphics processing capabilities and advanced machine learning technologies will open new perspectives for creativity. Edit photos, write music - you will be able to realize your potential as you wish.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:41.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a1"
+    },
+    "enabled": true,
+    "name": "iPad mini 6",
+    "sale": false,
+    "currentPrice": 489,
+    "previousPrice": 550,
+    "categories": "tablet",
+    "imageUrls": [
+      "ipad/bmjbkc13mzfnzws3urur.jpg",
+      "ipad/tmafz6tumxtt2tsld1in.jpg",
+      "ipad/hfgzlzsbeipibopkpoac.jpg"
+    ],
+    "quantity": 1,
+    "color": "Space Gray",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "76949",
+    "description": "Despite the enlarged screen, the tablet will remain as compact and light. Due to its small dimensions, it will become an indispensable companion on trips and travels, and you can also take it with you to study and work. The case of iPad mini 6 is made of aluminum, and the front panel is covered with impact-resistant Gorilla Glass. It will protect the screen from scratches and mechanical damage. Data protection is implemented through Face ID technology.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:43.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a2"
+    },
+    "enabled": true,
+    "name": "iPad Pro 11 M1",
+    "sale": false,
+    "currentPrice": 855,
+    "previousPrice": 879,
+    "categories": "tablet",
+    "imageUrls": [
+      "ipad/iuyhmztkdikq8hulx8xz.jpg",
+      "ipad/ygdpg6qgtc4v2l7drtqh.jpg",
+      "ipad/mvxmnauaomxlka3dc5hf.jpg"
+    ],
+    "quantity": 5,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "79704",
+    "description": "M1 chip. iPad Pro with the M1 chip is the fastest iPad. It is designed so that the unique technologies in the M1 chip - such as the advanced signal processing processor and unified memory architecture - fully reveal their potential. And thanks to the energy efficiency of the M1, the thin and light iPad Pro can work without recharging all day - it is an amazing combination of power and compactness.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:44.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a3"
+    },
+    "enabled": true,
+    "name": "iPad Pro 11 M2",
+    "sale": false,
+    "currentPrice": 880,
+    "previousPrice": 924,
+    "categories": "tablet",
+    "imageUrls": [
+      "ipad/adtc5r9johqn3fhrb11v.jpg",
+      "ipad/bbxwqcoy9kjlvlt7dp7x.jpg",
+      "ipad/xlp3dgc2ofpkjjinknb1.jpg",
+      "ipad/blrphwjdpmzrkzuckz48.jpg"
+    ],
+    "quantity": 7,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "82173",
+    "description": "Bright Retina display. As the company claims, the new display provides realistic detail. This feature is great for people who edit photos or videos. Full-screen SDR brightness is at a high level here and is 600 nits. True Tone technology works with a system of multi-channel sensors and it is thanks to it that your device has the ability to adjust the color temperature of the screen. The image on the screen will look as natural as possible and does not depend on environmental conditions.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:45.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a4"
+    },
+    "enabled": true,
+    "name": "iPad Pro 12.9 M1",
+    "sale": false,
+    "currentPrice": 1036,
+    "previousPrice": 1053,
+    "categories": "tablet",
+    "imageUrls": ["ipad/bztmmdglijvbed99ndbj.jpg"],
+    "quantity": 3,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "79714",
+    "description": "M1 chip. iPad Pro with the M1 chip is the fastest iPad. It is designed so that the unique technologies in the M1 chip - such as the advanced signal processing processor and unified memory architecture - fully reveal their potential. And thanks to the energy efficiency of the M1, the thin and light iPad Pro can work without recharging all day - it is an amazing combination of power and compactness.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:46.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a5"
+    },
+    "enabled": true,
+    "name": "iPad Pro 12.9 M2",
+    "sale": false,
+    "currentPrice": 1090,
+    "previousPrice": 1143,
+    "categories": "tablet",
+    "imageUrls": [
+      "ipad/ozhx5naig9fclgcqcjxj.jpg",
+      "ipad/hkpgwv7bz8u5mf2py0zm.jpg",
+      "ipad/oxvk1jo7shwk5a9drdyv.jpg"
+    ],
+    "quantity": 9,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "128gb",
+    "itemNo": "82193",
+    "description": "Next generation productivity Apple has installed a new powerful M2 chip with an 8-core central processor in the Apple iPad Pro 12.9'. In turn, this chip provides increased performance by up to 15%. There is also a 10-core graphics processor, which increases graphic performance by up to 35%. Thanks to the new chip, you'll be able to create photorealistic 3D projects, complex augmented reality models, and of course play AAA games at high frame rates, and you can turn your iPad into your canvas with the second-generation Apple Pencil.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:46:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a6"
+    },
+    "enabled": true,
+    "name": "MacBook Air 13",
+    "sale": false,
+    "currentPrice": 900,
+    "previousPrice": 942,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/flipjvlv2imhg90eklc7.jpg",
+      "laptop/ecrazdt6rqyskqdhbexv.jpg",
+      "laptop/bak9fycsx7k3uqv5ltbo.jpg",
+      "laptop/mgvplcecfgckdpofhhnj.jpg"
+    ],
+    "quantity": 7,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "256gb",
+    "itemNo": "79213",
+    "description": "Apple MacBook Air 13 Late 2020 is not an ordinary update of a popular compact and affordable laptop, but a real new era of Apple laptops. The processor of the laptop is the SoC (System-on-a-Chip) Apple M1, which is based on the ARM architecture (as in smartphones). Now the laptop has become even more similar to your favorite iPhone or iPad. Using the Apple M1 processor, which consists of 8 cores (4 high performance and 4 energy efficient), as well as a 7 or 8 core graphics accelerator and 16 cores of the Neural Engine system.All this together will allow the laptop to work even faster and render faster than before, at the same time silently (no fans).",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:47:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a7"
+    },
+    "enabled": true,
+    "name": "MacBook Air 13.6",
+    "sale": false,
+    "currentPrice": 1202,
+    "previousPrice": 1300,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/dqmgoy1qu9zzecx8ygu6.jpg",
+      "laptop/xodqfu2q30q2jlpp1poc.jpg",
+      "laptop/mvwidmcb7wqyubdfqken.jpg",
+      "laptop/zlkszl5kqi2evxsshipo.jpg",
+      "laptop/xr8t40vhosr67xio83kn.jpg",
+      "laptop/kdzuyojphgncmku1fzqf.jpg"
+    ],
+    "quantity": 18,
+    "color": "Starlight",
+    "brand": "Apple",
+    "storage": "256gb",
+    "itemNo": "81172",
+    "description": "Apple MacBook Air M2 (2022) with completely new design and M2 processor will definitely impress you. Up to 18 hours of battery life, a large and beautiful Liquid Retina display, an advanced camera and sound will definitely appeal to every modern user who appreciates convenience in technology and stylish design. The Apple MacBook Air M2 (2022) delivers exceptional speed and energy efficiency in a durable aluminum body thanks to the new M2 processor. The laptop will allow you to work, play or create anything and anywhere with complete satisfaction.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:48:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a8"
+    },
+    "enabled": true,
+    "name": "MacBook Pro 14 M1Pro",
+    "sale": true,
+    "currentPrice": 1646,
+    "previousPrice": 1700,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/rblwsbxp2iiezttfihzn.jpg",
+      "laptop/phvwrqjtbwcrlaw52dfi.jpg",
+      "laptop/mlfnnxi8ibphcg8geyrk.jpg",
+      "laptop/dxwzv4lqwraij1byxann.jpg"
+    ],
+    "quantity": 11,
+    "color": "Space Gray",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "80725",
+    "description": "Apple MacBook Pro 14' 2021 is a novelty in the company's line of laptops, which received an updated design and hardware. The new 14.2-inch Apple MacBook Pro 14' 2021 Liquid Retina XDR display has almost no frames, due to which the FullHD camera is installed in an expressive cutout . The screen has a resolution of 3014x1964 pixels, a refresh rate of up to 120 Hz and a peak brightness of 1600 nits. A high level of performance is achieved thanks to the use of a processor of our own development - Apple M1 Pro, which has 14 and 16 graphics cores, depending on the version. The changes also affected the list of connectors.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:50:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693a9"
+    },
+    "enabled": true,
+    "name": "MacBook Pro 16 M1Pro",
+    "sale": false,
+    "currentPrice": 1986,
+    "previousPrice": 20022,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/u4klyid9kku0pbk892ae.jpg",
+      "laptop/vlzcic6svprjgkzm5xxc.jpg",
+      "laptop/gvkfkt6xmqxbhlhr1znz.jpg",
+      "laptop/txz5vucqxqomxuwhiggx.jpg"
+    ],
+    "quantity": 9,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "80718",
+    "description": "Apple MacBook Pro 16' 2021 is an updated laptop in the company's professional line, which has simply received a huge number of innovations. The Apple MacBook Pro 16' 2021 is equipped with a 16.2-inch mini-LED display with a resolution of 3456x2234 pixels, a refresh rate of up to 120 Hz , which supports True Tone technology and a peak brightness of 1600 nits. This is enough to surprise with excellent clarity and color reproduction.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:51:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693aa"
+    },
+    "enabled": true,
+    "name": "MacBook Pro 13.3 M2",
+    "sale": false,
+    "currentPrice": 1299,
+    "previousPrice": 1351,
+    "imageUrls": [
+      "laptop/whx98s46yflzr4s73wpn.jpg",
+      "laptop/tsscpndxukbaza09k5c0.jpg",
+      "laptop/eb9tjgyabteztvvf2vod.jpg"
+    ],
+    "quantity": 3,
+    "color": "Silver",
+    "brand": "Apple",
+    "storage": "256gb",
+    "itemNo": "81179",
+    "description": "The updated model has an M2 chip and gives the laptop even more functions. You can work up to 20 hours without charging, and the active cooling system contributes to high productivity. With a Retina display, an HD FaceTime camera and studio-quality microphones, the Macbook Pro 13 (2022) is the most convenient laptop. Aluminum body thanks to the new M2 processor. The laptop will allow you to work, play or create anything and anywhere with complete satisfaction.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:52:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693ab"
+    },
+    "enabled": true,
+    "name": "MacBook Pro 14 M2Pro",
+    "sale": true,
+    "currentPrice": 2130,
+    "previousPrice": 2200,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/sdepzez7fzpettjgfijv.jpg",
+      "laptop/qrzl8b33r2wo9gaobmxj.jpg",
+      "laptop/tav0dycwuvguhz7ihjbu.jpg",
+      "laptop/dluqrk4nmcjodvsjxdee.jpg"
+    ],
+    "quantity": 4,
+    "color": "Space Gray",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "82570",
+    "description": "Thanks to the efficiency of Apple Silicon, fans don't even need to be turned on for most everyday tasks. And for heavier work processes, advanced thermal systems move air with a low fan speed. MacBook Pro uses a flash-based storage architecture designed to make everyday tasks quick and fast. For demanding workflows with large configuration files, up to 8 TB provides even greater performance.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:53:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693ac"
+    },
+    "enabled": true,
+    "name": "MacBook Pro 16 M2Pro",
+    "sale": false,
+    "currentPrice": 2285,
+    "previousPrice": 2350,
+    "categories": "laptop",
+    "imageUrls": [
+      "laptop/p11n1gf9ewkow58idhb3.jpg",
+      "laptop/iozw5spsx4oehskul5q6.jpg",
+      "laptop/mlfnnxi8ibphcg8geyrk.jpg",
+      "laptop/kvfjulhnxuaf2qra1yft.jpg"
+    ],
+    "quantity": 4,
+    "color": "Space Gray",
+    "brand": "Apple",
+    "storage": "512gb",
+    "itemNo": "82577",
+    "description": "A new level of performance and cooling. Thanks to the efficiency of Apple Silicon, fans don't even need to be turned on for most everyday tasks. And for heavier work processes, advanced thermal systems move air with a low fan speed. MacBook Pro uses a flash-based storage architecture designed to make everyday tasks quick and fast. For demanding workflows with large configuration files, up to 8 TB provides even greater performance.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:54:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693ad"
+    },
+    "enabled": true,
+    "name": "Watch SE GPS 40mm",
+    "sale": false,
+    "currentPrice": 255,
+    "previousPrice": 270,
+    "categories": "watch",
+    "imageUrls": [
+      "watch/jbcbry7kqdema1theyas.jpg",
+      "watch/ryofzc12xgjrckzkpicg.jpg"
+    ],
+    "quantity": 4,
+    "color": "Space Gray",
+    "brand": "Apple",
+    "itemNo": "81153",
+    "description": "Apple Watch SE is a more affordable version of Apple's smart watch. They received the same design as in the older model, and the difference affected only the materials of the body - only aluminum. The Apple Watch SE is equipped with a processor twice as fast as the Series 3, and also has a larger screen. Watches allow you to comfortably monitor all notifications from your smartphone, answer calls, messages, manage music listening and monitor physical activity during training. The watches are equipped with a built-in optical heart rate monitor, and are also able to record the state of sleep. A huge selection of straps will help add more individuality to the Apple Watch SE.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:55:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693ae"
+    },
+    "enabled": true,
+    "name": "Watch SE 2 GPS 40mm",
+    "sale": false,
+    "currentPrice": 277,
+    "previousPrice": 301,
+    "categories": "watch",
+    "imageUrls": [
+      "watch/b93yzgqfmd2qvwwju9yo.jpg",
+      "watch/lgecuxdetrgniex9iaqt.jpg",
+      "watch/guncpdaz7iqkpue1h9s8.jpg"
+    ],
+    "quantity": 6,
+    "color": "Midnight",
+    "brand": "Apple",
+    "itemNo": "81891",
+    "description": "Apple presented three colorful new products that will surprise everyone around. This accessory will not only brighten up your everyday look, but also take care of your health. The most powerful sensors are designed to monitor your well-being and health in general. Convenient design, dual-core processor and many other useful features, which we will talk about below. Sneaky in the most necessary moments. The first thing to note is that the body remains the same. Apple watch, as always, pleased us with the high quality of the materials. Aluminum case and a strap made of fluoroelastomer that is pleasant to the touch. The Velcro fastener is an interesting detail, it will provide you with high strength and protect the Apple Watch SE from drops. Travel, do sports, swim or dance and be confident in this novelty. The best mini assistant, thanks to which you will conquer new peaks much easier and faster.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:56:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693af"
+    },
+    "enabled": true,
+    "name": "Watch Series 7 GPS 41mm",
+    "sale": false,
+    "currentPrice": 349,
+    "previousPrice": 367,
+    "categories": "watch",
+    "imageUrls": [
+      "watch/o8nbc9u4ga5tkq32cfhs.jpg",
+      "watch/pazo3hcc3a4mvj699n1q.jpg"
+    ],
+    "quantity": 8,
+    "color": "Green",
+    "brand": "Apple",
+    "itemNo": "80631",
+    "description": "Apple Watch Series 7 is the latest smartwatch that comes with tons of new features. No borders, now even more freedom and convenience when using smart watches. Apple was able to do an incredible thing - increase the screen area by 20% without increasing the size of the smart watch itself. And dead zones on the device are now 40% smaller.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:57:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b0"
+    },
+    "enabled": true,
+    "name": "Watch Series 8 GPS 41mm",
+    "sale": true,
+    "currentPrice": 380,
+    "previousPrice": 450,
+    "categories": "watch",
+    "imageUrls": [
+      "watch/jrdjcivisxz1j74ipyig.jpg",
+      "watch/bprz8lkhferkpl1le6ra.jpg",
+      "watch/d718qtyeskrtvrajeiyp.jpg"
+    ],
+    "quantity": 9,
+    "color": "Midnight",
+    "brand": "Apple",
+    "itemNo": "83014",
+    "description": "The design of the case of the new Apple Watch 8, which has already become a classic, is completely smooth and devoid of visual defects. And the excellent contrast display with the Always on Display function only complements this image. The narrow frame of the screen together with the large diagonal of the Retina display allows you to place a maximum of useful information on it, including convenient text typing and display of your favorite widgets.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T12:59:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b1"
+    },
+    "enabled": true,
+    "name": "Watch Ultra GPS+LTE 49mm Titanium Case",
+    "sale": false,
+    "currentPrice": 880,
+    "previousPrice": 1000,
+    "categories": "watch",
+    "imageUrls": [
+      "watch/s0agudbi6ukntarjkhyz.jpg",
+      "watch/uymoyzkbhsn59orfwvu6.jpg",
+      "watch/hknwjancifqfkwtzqalg.jpg"
+    ],
+    "quantity": 14,
+    "color": "Yellow",
+    "brand": "Apple",
+    "itemNo": "81890",
+    "description": "A redesigned approach to the production of cases for the new Apple Watch Ultra allows you to use them in the harshest conditions on the planet: at depth during diving, in bitter cold or in unbearable heat. Titanium was chosen as the main material, because only it combined the unique properties of lightness, strength and corrosion resistance. All elements on the case, including the screen, are protected from impacts and any damage. The watch screen is made in such a way that the edges of the sapphire glass are completely covered by a layer of metal. This provides maximum protection against chipping and cracking. Also, Apple Watch Ultra is waterproof even at a depth of 100 meters under water, and its protective characteristics meet the military standard MIL-STD 810H.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:00:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b2"
+    },
+    "enabled": true,
+    "name": "AirPods 3rd generation with Lightning Charging Case",
+    "sale": false,
+    "currentPrice": 181,
+    "previousPrice": 200,
+    "categories": "headphones",
+    "imageUrls": [
+      "headphone/egj1bm6mwsa0imaesroo.jpg",
+      "headphone/kcytnfnwrjttjvxcu0zr.jpg",
+      "headphone/m8lm5oq0h7bj1pv1luzx.jpg",
+      "headphone/cv0ujhkjeibecrqxojzp.jpg"
+    ],
+    "quantity": 35,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "82656",
+    "description": "Apple AirPods 3 wireless headphones are headphones with high-quality sound that can give you immersive sound. They have the ability to turn on transparency mode so you can hear what's going on around you. The shape of the headphones and earpieces can now be comfortable throughout the day.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:01:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b3"
+    },
+    "enabled": true,
+    "name": "AirPods Pro 2 with MagSafe Charging Case with Speaker",
+    "sale": false,
+    "currentPrice": 231,
+    "previousPrice": 260,
+    "categories": "headphones",
+    "imageUrls": [
+      "headphone/qmnxgqndghmgouxxxvvu.jpg",
+      "headphone/dklzkmtsbwegqxwhkqri.jpg",
+      "headphone/sjcqwnfv0uxdlkklty46.jpg",
+      "headphone/u3iq1sms73tzasqoi2yo.jpg"
+    ],
+    "quantity": 29,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "81913",
+    "description": "New AirPods Pro 2 appeared in the world with a new H2 chip. This is a big leap towards better music playback and a good level of energy saving. The updated processor works on a complex algorithm that does an excellent job of both sound processing and amplification. Now you will be able to experience your favorite tracks much better with high detail and deep bass. H2 is also responsible for the improved function of active noise cancellation and transparent sound, which show much better results than previous models of Apple headphones.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:02:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b4"
+    },
+    "enabled": true,
+    "name": "AirPods Max",
+    "sale": false,
+    "currentPrice": 597,
+    "previousPrice": 700,
+    "categories": "headphones",
+    "imageUrls": [
+      "headphone/cyy2e2nqbsssfwgphpuu.jpg",
+      "headphone/gr3gfqtiz9d7gfvjugg1.jpg",
+      "headphone/k2cq1hof1pdi5ya5agkf.jpg"
+    ],
+    "quantity": 2,
+    "color": "Green",
+    "brand": "Apple",
+    "itemNo": "81169",
+    "description": "AirPods Max is a completely new take on full-sized headphones. All elements of AirPods Max are designed in such a way that the headphones fit optimally to the head of any shape. Thanks to this, incredible sound quality is achieved. The wide upper part of the headband is made of breathable mesh fabric, which evenly distributes the weight of the headphones and thereby reduces pressure on the head. The stainless steel bracket is covered with a soft material, so the headband is strong, flexible and comfortable.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:03:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b5"
+    },
+    "enabled": true,
+    "name": "AirPods with Wireless Charging Case",
+    "sale": false,
+    "currentPrice": 180,
+    "previousPrice": 210,
+    "categories": "headphones",
+    "imageUrls": [
+      "headphone/llseeccc5tmdwcexl5s4.jpg",
+      "headphone/gr3gfqtiz9d7gfvjugg1.jpg",
+      "headphone/k2cq1hof1pdi5ya5agkf.jpg"
+    ],
+    "quantity": 21,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "76959",
+    "description": "This product is covered by a 3-month warranty from our store, as well as a 12-month warranty from the manufacturer.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:04:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b6"
+    },
+    "enabled": true,
+    "name": "AirPods with Charging Case",
+    "sale": false,
+    "currentPrice": 124,
+    "previousPrice": 135,
+    "categories": "headphones",
+    "imageUrls": [
+      "headphone/sslp8uenriow7lelyfuq.jpg",
+      "headphone/iucdbuqw1jyf7kineniw.jpg",
+      "headphone/tilz1ugsfltibwkbdvy8.jpg"
+    ],
+    "quantity": 18,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "76973",
+    "description": "This product is covered by a 3-month warranty from our store, as well as a 12-month warranty from the manufacturer.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:05:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b7"
+    },
+    "enabled": true,
+    "name": "PowerBank XO LED Screen 50000 mAh",
+    "sale": false,
+    "currentPrice": 100,
+    "previousPrice": 110,
+    "categories": "accessories",
+    "imageUrls": ["accessories/jyaovkbc136bawanor5d.jpg"],
+    "quantity": 1,
+    "color": "Black",
+    "brand": "XO",
+    "itemNo": "82569",
+    "description": "The Remax PR-125 power bank is designed for comfortable and safe charging of gadgets, capable of charging most modern smartphone models in minimal time, thanks to the support of QuickCharge 22.5W and USB Power Delivery 20W fast charging technologies.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:06:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b8"
+    },
+    "enabled": true,
+    "name": "PowerBank Bipow Pro Digital Display Fast Charge Power bank 10000 mAh",
+    "sale": true,
+    "currentPrice": 40,
+    "previousPrice": 70,
+    "categories": "accessories",
+    "imageUrls": ["accessories/zx1arzsewvlxtm7cs4ut.jpg"],
+    "quantity": 2,
+    "color": "Blue",
+    "brand": "Baseus",
+    "itemNo": "82387",
+    "description": "The portable battery is equipped with 4 connectors, which allows you to charge up to 3 gadgets at the same time. Suitable for charging smartphones, tablets, headphones, smart watches, game consoles and other small gadgets. Support for fast charging protocols PD, FCP, QC, AFC allows you to quickly charge iPhone, as well as gadgets of brands Huawei, Samsung, Mi, etc.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:07:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693b9"
+    },
+    "enabled": true,
+    "name": "PowerBank Bole Series 20W+22.5W PD+QC Fast Charging 30000 mAh",
+    "sale": false,
+    "currentPrice": 65,
+    "previousPrice": 75,
+    "categories": "accessories",
+    "imageUrls": [
+      "accessories/nvhn1thjvdrhaq351gza.jpg",
+      "accessories/jucictotwocfq2dhitzu.jpg"
+    ],
+    "quantity": 2,
+    "color": "Blue",
+    "brand": "Remax",
+    "itemNo": "82518",
+    "description": "The Remax RPP-522 Bole power bank is designed for comfortable and safe charging of gadgets, capable of charging most modern smartphone models in a minimal time, thanks to the support of QuickCharge 22.5W and USB Power Delivery 20W fast charging technologies.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:08:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693ba"
+    },
+    "enabled": true,
+    "name": "Adapter card reader i-Flash Device 32GB",
+    "sale": true,
+    "currentPrice": 22,
+    "previousPrice": 37,
+    "categories": "accessories",
+    "imageUrls": ["accessories/lunxyh16zagbgfxhr34v.jpg"],
+    "quantity": 3,
+    "color": "Silver",
+    "brand": "Ingelion",
+    "itemNo": "81543",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:09:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693bb"
+    },
+    "enabled": true,
+    "name": "Flash drive USB 3.0 SDHC/SDXC/microSDHC/SDXC",
+    "sale": false,
+    "currentPrice": 7,
+    "previousPrice": 12,
+    "categories": "accessories",
+    "imageUrls": ["accessories/tahtxb5ugkzsamtptmgz.jpg"],
+    "quantity": 5,
+    "color": "White",
+    "brand": "Transcend",
+    "itemNo": "76061",
+    "description": "",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:11:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693bc"
+    },
+    "enabled": true,
+    "name": "Magic Keyboard Folio for iPad 10th gen.",
+    "sale": true,
+    "currentPrice": 290,
+    "previousPrice": 350,
+    "categories": "accessories",
+    "imageUrls": [
+      "accessories/gezw9es8aws9ebu0t0bl.jpg",
+      "accessories/o9b5sviinmpgvo6umk8r.jpg",
+      "accessories/krvn2ftzpxgrk7ljbbk8.jpg",
+      "accessories/rtrnwxmjzpyvs9y9syrq.jpg",
+      "accessories/rki2gldz3yvswqsf8q7l.jpg"
+    ],
+    "quantity": 7,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "82658",
+    "description": "",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:12:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693bd"
+    },
+    "enabled": true,
+    "name": "TV 4K 2022 Wi-Fi",
+    "sale": false,
+    "currentPrice": 165,
+    "previousPrice": 170,
+    "categories": "accessories",
+    "imageUrls": ["accessories/fyukbh2vlfjcmrrjp6tc.jpg"],
+    "quantity": 7,
+    "color": "Balck",
+    "brand": "Apple",
+    "storage": "64gb",
+    "itemNo": "82560",
+    "description": "The new Apple TV 4K brings Apple TV+, Apple Music, Apple Fitness+ and Apple Arcade together with all your favorite streaming apps — in our best picture and sound quality. With the lightning-fast performance of the A15 Bionic chip, intuitive controls and seamless interaction with your smart home devices and accessories. It's everything you love about Apple — on your biggest screen.",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:13:47.042Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "648dfd1ee01e091d8de693be"
+    },
+    "enabled": true,
+    "name": "Magic Keyboard 2021",
+    "sale": false,
+    "currentPrice": 100,
+    "previousPrice": 127,
+    "categories": "accessories",
+    "imageUrls": ["accessories/yqvbfrr0dptfdg0fdgff.jpg"],
+    "quantity": 8,
+    "color": "White",
+    "brand": "Apple",
+    "itemNo": "81151",
+    "guarantee": "3 months",
+    "date": {
+      "$date": "2019-10-14T13:14:47.042Z"
+    }
+  }
+]

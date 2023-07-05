@@ -6,7 +6,7 @@ import Basket from './pages/Basket';
 import HomeContent from './pages/Home';
 import Header from './components/Header';
 import ProductDescription from './components/ProductDescription';
-import PageNotFound from './components/NFP';
+import PageNotFound from './components/NotFoundPage';
 import store from './redux/store';
 import theme from './themes/theme';
 import ProductsContent from './pages/Products';
@@ -37,3 +37,4 @@ function App() {
 }
 
 export default App;
+

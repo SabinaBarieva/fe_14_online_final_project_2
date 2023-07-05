@@ -22,7 +22,7 @@ const productsSlice = createSlice({
       state.products = action.payload.products;
       state.total = action.payload.total;
     },
-    errorFetchingProducts: (state, action) => {
+    errorFetchingProducts: (state) => {
       state.isFetching = false;
     },
   },
