@@ -1,17 +1,17 @@
-const Product = require("../models/Product");
+const Product = require('../models/Product');
 
-exports.filtersInformation = async (req, res, next) => {
+exports.productFilters = async (req, res, next) => {
   try {
     const dbResponse = await Product.aggregate()
       .match({ enabled: true })
       .facet({
-        categories: [{ $group: { _id: "$categories", quantity: { $sum: 1 } } }],
+        categories: [{ $group: { _id: '$categories', quantity: { $sum: 1 } } }],
         priceMinAndMax: [
           {
             $group: {
               _id: {},
-              priceMin: { $min: "$currentPrice" },
-              priceMax: { $max: "$currentPrice" },
+              priceMin: { $min: '$currentPrice' },
+              priceMax: { $max: '$currentPrice' },
             },
           },
         ],
@@ -22,8 +22,10 @@ exports.filtersInformation = async (req, res, next) => {
       categories: categories.map(({ _id, quantity }) => {
         return { name: _id, quantity };
       }),
-      priceMin,
-      priceMax,
+      price: {
+        min: priceMin,
+        max: priceMax,
+      },
     });
   } catch (err) {
     res.status(400).json({
