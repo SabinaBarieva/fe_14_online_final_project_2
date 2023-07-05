@@ -14,6 +14,11 @@ export const productSlice = createSlice({
     isLoaded: null,
     error: null,
   },
+  reducers: {
+    setProduct: (state, action) => {
+      state.product = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getProduct.pending, (state) => {
       state.isLoading = true;
