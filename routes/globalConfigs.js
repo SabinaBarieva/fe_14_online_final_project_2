@@ -8,7 +8,7 @@ const {
   updateConfig,
   deleteConfig,
   getConfigs,
-  getConfigById
+  getConfigById,
 } = require("../controllers/globalConfigs");
 
 // @route   POST /configs
