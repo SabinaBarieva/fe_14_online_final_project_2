@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "@babel/eslint-parser": "^7.22.5",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.10.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/lato": "^5.0.3",
+    "@fontsource/roboto": "^5.0.3",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@mui/system": "^5.13.6",
