@@ -2,51 +2,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
-
-const Title = styled('div')({
-  fontWeight: '400',
-  fontSize: '40px',
-  lineHeight: '47px',
-  color: '#616467',
-});
-const Description = styled('div')({
-  fontWeight: '400',
-  fontSize: '18px',
-  letterSpacing: '0.015em',
-  color: '#9A9292',
-  margin: '15px 0',
-});
-const Price = styled('div')({
-  fontWeight: '500',
-  fontSize: '20px',
-  lineHeight: '132%',
-  letterSpacing: '0.015em',
-  color: '#434343',
-});
-const CountBoxes = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '46px',
-  height: '46px',
-  background: '#F5F7FB',
-});
-const Guarantee = styled('div')({
-  textAlign: 'right',
-  fontWeight: '400',
-  fontSize: '18px',
-  letterSpacing: '0.015em',
-  color: '#9A9292',
-  margin: '15px 0',
-  paddingRight: '20px',
-});
+import {
+  Title,
+  Description,
+  Price,
+  CountBoxes,
+  Guarantee,
+} from '../../themes/themeProduct';
 
 function ProductDescription() {
   const dispatch = useDispatch();
