@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import getProductsFilters from '../../api/getProductsFilters';
+import { setErrorMessage } from './errorsSlice';
 
 const initialState = {
   categories: [],
@@ -9,13 +10,19 @@ const initialState = {
   isLoading: false,
   isLoaded: false,
 };
-const findItemIndexInArray = (item, array) =>
-  array.findIndex((arrayItem) => arrayItem === item);
 
-export const fetchFilters = createAsyncThunk('filters/fetch', async () => {
-  const filters = await getProductsFilters();
-  return filters;
-});
+export const fetchFilters = createAsyncThunk(
+  'filters/fetch',
+  async (_, { dispatch }) => {
+    try {
+      const filters = await getProductsFilters();
+      return filters;
+    } catch (error) {
+      dispatch(setErrorMessage({ error: error.message }));
+      throw error;
+    }
+  }
+);
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
@@ -51,6 +58,10 @@ const filtersSlice = createSlice({
       state.isLoading = false;
       state.isLoaded = true;
       state.availableFilters = action.payload;
+    });
+    builder.addCase(fetchFilters.rejected, (state) => {
+      state.isLoading = false;
+      state.isLoaded = false;
     });
   },
 });
