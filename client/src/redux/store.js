@@ -4,7 +4,10 @@ import categoriesSlice from './slices/categoriesSlice';
 import errorsSlice from './slices/errorsSlice';
 import sliceModal from './slices/modalSlice';
 import sliceForm from './slices/formSlice';
+// eslint-disable-next-line import/no-named-as-default
 import productSlice from './slices/productSlice';
+import filtersSlice from './slices/filtersSlice';
+import basketSlice from './slices/basketSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +17,8 @@ const store = configureStore({
     toolkitModal: sliceModal,
     toolkitForm: sliceForm,
     product: productSlice,
+    filters: filtersSlice,
+    basket: basketSlice,
   },
 });
 

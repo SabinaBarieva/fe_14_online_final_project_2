@@ -2,19 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PatternFormat } from 'react-number-format';
 import { useFormik } from 'formik';
-import {
-  TextField,
-  FormControl,
-  Container,
-  Typography,
-  Button,
-  IconButton,
-  Grid,
-} from '@mui/material';
+import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
 import { closeForm, openApp } from '../../redux/slices/formSlice';
+import {
+  StyledForm,
+  StyledButton,
+  StyledInputBase,
+  StyledIconButton,
+  StyledGrid,
+  StyledTypography,
+  StyledFormBackground,
+} from '../../themes/themeOrder';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -59,318 +60,316 @@ export default function OrderForm() {
 
   return (
     isOpenForm && (
-      <form
-        ref={formRef}
-        onSubmit={formik.handleSubmit}
-        style={{
-          margin: 'auto',
-          position: 'relative',
-          borderRadius: 20,
-          maxWidth: 600,
-          boxShadow: '0 0 30px 6px #42445a',
-        }}>
-        <Container
-          component="div"
+      <StyledFormBackground component="div">
+        <form
+          ref={formRef}
+          onSubmit={formik.handleSubmit}
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingLeft: 50,
+            padding: '10px 0',
+            top: '10%',
+            margin: 'auto',
+            position: 'relative',
+            borderRadius: 20,
+            maxWidth: 660,
+            boxShadow: '0 0 30px 6px #42445a',
           }}>
-          <Typography component="h5" variant="h5">
-            Order
-          </Typography>
-          <IconButton onClick={closed}>
-            <Close />
-          </IconButton>
-        </Container>
-        <FormControl>
           <Container
             component="div"
             style={{
               display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              flexDirection: 'row',
+              paddingLeft: 50,
             }}>
-            <Container component="div" style={{ maxWidth: 300, padding: 0 }}>
-              <Container component="div">
-                <TextField
-                  variant="outlined"
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="FirstName"
-                  onBlur={formik.handleBlur}
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.firstName && formik.errors.firstName ? (
-                  <Typography variant="paragraph" component="p">
-                    {formik.errors.firstName}
-                  </Typography>
-                ) : (
-                  <Typography variant="paragraph" component="p">
-                    {' '}
-                  </Typography>
-                )}
-              </Container>
-              <Container component="div">
-                <TextField
-                  variant="outlined"
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="LastName"
-                  onBlur={formik.handleBlur}
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.lastName && formik.errors.lastName ? (
-                  <Typography variant="paragraph" component="p">
-                    {formik.errors.lastName}
-                  </Typography>
-                ) : (
-                  <Typography variant="paragraph" component="p">
-                    {' '}
-                  </Typography>
-                )}
-              </Container>
-              <Container component="div" style={{ padding: '10px 30px' }}>
-                <PatternFormat
-                  variant="outlined"
-                  style={{
-                    border: 'none',
-                    minHeight: 50,
-                    padding: '0 15px',
-                    borderRadius: 50,
-                  }}
-                  format="+# (###) #### ###"
-                  allowEmptyFormatting
-                  mask="_"
-                  id="phone"
-                  name="phone"
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.phone && formik.errors.phone ? (
-                  <Typography variant="paragraph" component="p">
-                    {formik.errors.phone}
-                  </Typography>
-                ) : (
-                  <Typography variant="paragraph" component="p">
-                    {' '}
-                  </Typography>
-                )}
-              </Container>
-            </Container>
-
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                backgroundColor: (theme) => theme.palette.secondary.main,
-              }}>
-              <Typography variant="h6">Card for payment</Typography>
-              <Grid item xs={12}>
-                <PatternFormat
-                  style={{
-                    marginBottom: 5,
-                    width: 160,
-                    border: 'none',
-                    minHeight: 40,
-                    padding: '0 20px',
-                    borderRadius: 50,
-                  }}
-                  variant="outlined"
-                  label="Card Number"
-                  placeholder="#### #### #### ####"
-                  format="#### #### #### ####"
-                  id="cardNumber"
-                  name="cardNumber"
-                  onBlur={formik.handleBlur}
-                  value={formik.values.cardNumber}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.cardNumber && formik.errors.cardNumber ? (
-                  <Typography variant="paragraph" component="p">
-                    {formik.errors.cardNumber}
-                  </Typography>
-                ) : (
-                  <Typography variant="paragraph" component="p">
-                    {' '}
-                  </Typography>
-                )}
-              </Grid>
-              <Grid container spacing={3}>
-                <Grid item xs={2} style={{ paddingLeft: '0' }}>
-                  <PatternFormat
-                    style={{
-                      margin: '0 7px 5px 7px',
-                      width: 50,
-                      border: 'none',
-                      minHeight: 40,
-                      padding: '0 20px',
-                      borderRadius: 50,
-                    }}
-                    variant="outlined"
-                    label="Expiration Month"
-                    placeholder="MM"
-                    format="##"
-                    id="expirationMonth"
-                    name="expirationMonth"
-                    onBlur={formik.handleBlur}
-                    value={formik.values.expirationMonth}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.expirationMonth &&
-                  formik.errors.expirationMonth ? (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {formik.errors.expirationMonth}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {' '}
-                    </Typography>
-                  )}
-                </Grid>
-                <Grid item xs={2} style={{ paddingLeft: '0' }}>
-                  <PatternFormat
-                    style={{
-                      marginBottom: 5,
-                      width: 50,
-                      border: 'none',
-                      minHeight: 40,
-                      padding: '0 20px',
-                      borderRadius: 50,
-                    }}
-                    variant="outlined"
-                    label="Expiration Year"
-                    placeholder="YY"
-                    format="##"
-                    id="expirationYear"
-                    name="expirationYear"
-                    onBlur={formik.handleBlur}
-                    value={formik.values.expirationYear}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.expirationYear &&
-                  formik.errors.expirationYear ? (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {formik.errors.expirationYear}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {' '}
-                    </Typography>
-                  )}
-                </Grid>
-                <Grid item xs={6} style={{ paddingLeft: '0' }}>
-                  <PatternFormat
-                    style={{
-                      marginBottom: 5,
-                      width: 65,
-                      border: 'none',
-                      minHeight: 40,
-                      padding: '0 20px',
-                      borderRadius: 50,
-                    }}
-                    variant="outlined"
-                    label="CVV"
-                    placeholder="CVV"
-                    format="###"
-                    id="cvv"
-                    name="cvv"
-                    onBlur={formik.handleBlur}
-                    value={formik.values.cvv}
-                    onChange={formik.handleChange}
-                  />
-                  {formik.touched.cvv && formik.errors.cvv ? (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {formik.errors.cvv}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      variant="paragraph"
-                      component="p"
-                      style={{ height: 40 }}>
-                      {' '}
-                    </Typography>
-                  )}
-                </Grid>
-              </Grid>
-            </Grid>
-            <Container component="div">
-              <TextField
-                variant="outlined"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                style={{ width: '100%' }}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.email && formik.errors.email ? (
-                <Typography variant="paragraph" component="p">
-                  {formik.errors.email}
-                </Typography>
-              ) : (
-                <Typography variant="paragraph" component="p">
-                  {' '}
-                </Typography>
-              )}
-            </Container>
-            <Container component="div">
-              <TextField
-                variant="outlined"
-                type="text"
-                id="address"
-                name="address"
-                placeholder="Address"
-                style={{ width: '100%' }}
-                onBlur={formik.handleBlur}
-                value={formik.values.address}
-                onChange={formik.handleChange}
-              />
-              {formik.touched.address && formik.errors.address ? (
-                <Typography variant="paragraph" component="p">
-                  {formik.errors.address}
-                </Typography>
-              ) : (
-                <Typography variant="paragraph" component="p">
-                  {' '}
-                </Typography>
-              )}
-            </Container>
+            <StyledTypography component="h5" variant="h5">
+              Order
+            </StyledTypography>
+            <StyledIconButton onClick={closed}>
+              <Close />
+            </StyledIconButton>
           </Container>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            type="submit">
-            Order
-          </Button>
-        </FormControl>
-      </form>
+          <Container>
+            <Container
+              component="div"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                flexDirection: 'row',
+              }}>
+              <Container component="div" style={{ maxWidth: 300, padding: 0 }}>
+                <StyledForm>
+                  <StyledInputBase
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="FirstName"
+                    onBlur={formik.handleBlur}
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.firstName && formik.errors.firstName ? (
+                    <StyledTypography variant="paragraph" component="p">
+                      {formik.errors.firstName}
+                    </StyledTypography>
+                  ) : (
+                    <StyledTypography variant="paragraph" component="p">
+                      {' '}
+                    </StyledTypography>
+                  )}
+                </StyledForm>
+                <StyledForm>
+                  <StyledInputBase
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="LastName"
+                    onBlur={formik.handleBlur}
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.lastName && formik.errors.lastName ? (
+                    <StyledTypography variant="paragraph" component="p">
+                      {formik.errors.lastName}
+                    </StyledTypography>
+                  ) : (
+                    <StyledTypography variant="paragraph" component="p">
+                      {' '}
+                    </StyledTypography>
+                  )}
+                </StyledForm>
+                <StyledForm style={{ padding: '10px 5px' }}>
+                  <PatternFormat
+                    style={{
+                      width: '95%',
+                      border: 'none',
+                      minHeight: 45,
+                      padding: '0 20px',
+                      borderRadius: 50,
+                    }}
+                    format="+# (###) #### ###"
+                    allowEmptyFormatting
+                    mask="_"
+                    id="phone"
+                    name="phone"
+                    onBlur={formik.handleBlur}
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.phone && formik.errors.phone ? (
+                    <StyledTypography variant="paragraph" component="p">
+                      {formik.errors.phone}
+                    </StyledTypography>
+                  ) : (
+                    <StyledTypography variant="paragraph" component="p">
+                      {' '}
+                    </StyledTypography>
+                  )}
+                </StyledForm>
+              </Container>
+              <StyledGrid
+                container
+                spacing={2}
+                style={{
+                  backgroundColor: '#C4C4C4',
+                  marginBottom: 10,
+                }}>
+                <StyledTypography variant="h6">
+                  Card for payment
+                </StyledTypography>
+                <StyledGrid item xs={12}>
+                  <PatternFormat
+                    style={{
+                      marginBottom: 5,
+                      width: 180,
+                      border: 'none',
+                      minHeight: 40,
+                      padding: '0 20px',
+                      borderRadius: 50,
+                    }}
+                    label="Card Number"
+                    placeholder="#### #### #### ####"
+                    format="#### #### #### ####"
+                    id="cardNumber"
+                    name="cardNumber"
+                    onBlur={formik.handleBlur}
+                    value={formik.values.cardNumber}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.cardNumber && formik.errors.cardNumber ? (
+                    <StyledTypography variant="paragraph" component="p">
+                      {formik.errors.cardNumber}
+                    </StyledTypography>
+                  ) : (
+                    <StyledTypography variant="paragraph" component="p">
+                      {' '}
+                    </StyledTypography>
+                  )}
+                </StyledGrid>
+                <StyledGrid container spacing={3}>
+                  <StyledGrid item xs={2} style={{ paddingLeft: '0' }}>
+                    <PatternFormat
+                      style={{
+                        margin: '0 7px 5px 7px',
+                        width: 80,
+                        border: 'none',
+                        minHeight: 40,
+                        padding: '0 20px',
+                        borderRadius: 50,
+                      }}
+                      label="Expiration Month"
+                      placeholder="MM"
+                      format="##"
+                      id="expirationMonth"
+                      name="expirationMonth"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.expirationMonth}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.expirationMonth &&
+                    formik.errors.expirationMonth ? (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {formik.errors.expirationMonth}
+                      </StyledTypography>
+                    ) : (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {' '}
+                      </StyledTypography>
+                    )}
+                  </StyledGrid>
+                  <StyledGrid item xs={2} style={{ paddingLeft: '0' }}>
+                    <PatternFormat
+                      style={{
+                        marginBottom: 5,
+                        width: 80,
+                        border: 'none',
+                        minHeight: 40,
+                        padding: '0 20px',
+                        borderRadius: 50,
+                      }}
+                      label="Expiration Year"
+                      placeholder="YY"
+                      format="##"
+                      id="expirationYear"
+                      name="expirationYear"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.expirationYear}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.expirationYear &&
+                    formik.errors.expirationYear ? (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {formik.errors.expirationYear}
+                      </StyledTypography>
+                    ) : (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {' '}
+                      </StyledTypography>
+                    )}
+                  </StyledGrid>
+                  <StyledGrid item xs={6} style={{ paddingLeft: '0' }}>
+                    <PatternFormat
+                      style={{
+                        marginBottom: 5,
+                        width: 90,
+                        border: 'none',
+                        minHeight: 40,
+                        padding: '0 20px',
+                        borderRadius: 50,
+                      }}
+                      label="CVV"
+                      placeholder="CVV"
+                      format="###"
+                      id="cvv"
+                      name="cvv"
+                      onBlur={formik.handleBlur}
+                      value={formik.values.cvv}
+                      onChange={formik.handleChange}
+                    />
+                    {formik.touched.cvv && formik.errors.cvv ? (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {formik.errors.cvv}
+                      </StyledTypography>
+                    ) : (
+                      <StyledTypography
+                        variant="paragraph"
+                        component="p"
+                        style={{ height: 40 }}>
+                        {' '}
+                      </StyledTypography>
+                    )}
+                  </StyledGrid>
+                </StyledGrid>
+              </StyledGrid>
+              <StyledForm>
+                <StyledInputBase
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  style={{ width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                />
+                {formik.touched.email && formik.errors.email ? (
+                  <StyledTypography variant="paragraph" component="p">
+                    {formik.errors.email}
+                  </StyledTypography>
+                ) : (
+                  <StyledTypography variant="paragraph" component="p">
+                    {' '}
+                  </StyledTypography>
+                )}
+              </StyledForm>
+              <StyledForm>
+                <StyledInputBase
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="Address"
+                  style={{ width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
+                />
+                {formik.touched.address && formik.errors.address ? (
+                  <StyledTypography variant="paragraph" component="p">
+                    {formik.errors.address}
+                  </StyledTypography>
+                ) : (
+                  <StyledTypography variant="paragraph" component="p">
+                    {' '}
+                  </StyledTypography>
+                )}
+              </StyledForm>
+            </Container>
+            <StyledButton
+              variant="contained"
+              color="primary"
+              disableElevation
+              type="submit">
+              Order
+            </StyledButton>
+          </Container>
+        </form>
+      </StyledFormBackground>
     )
   );
 }
