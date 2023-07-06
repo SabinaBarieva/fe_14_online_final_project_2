@@ -1,15 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Button,
-  Modal,
-  Container,
-  Typography,
-  IconButton,
-} from '@mui/material';
+import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { closeModal } from '../../redux/slices/modalSlice';
 import { openApp } from '../../redux/slices/formSlice';
+import {
+  StyledTypography,
+  StyledButton,
+  StyledIconButton,
+  StyledModal,
+  StyledModalContainer,
+} from '../../themes/themeOrder';
 
 export default function ModalOrdered() {
   const dispatch = useDispatch();
@@ -37,8 +38,8 @@ export default function ModalOrdered() {
   }, []);
 
   return (
-    <Modal ref={modalRef} open={modal} onClose={closed}>
-      <Container>
+    <StyledModal ref={modalRef} open={modal} onClose={closed}>
+      <StyledModalContainer>
         <Container
           component="div"
           style={{
@@ -46,24 +47,24 @@ export default function ModalOrdered() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Typography component="h5" variant="h5">
+          <StyledTypography component="h5" variant="h5">
             {textHeader}
-          </Typography>
-          <IconButton onClick={closed}>
+          </StyledTypography>
+          <StyledIconButton onClick={closed}>
             <Close />
-          </IconButton>
+          </StyledIconButton>
         </Container>
-        <Typography component="p" variant="body1">
+        <StyledTypography component="p" variant="body1">
           {textModal}
-        </Typography>
-        <Button
+        </StyledTypography>
+        <StyledButton
           variant="contained"
           color="primary"
           disableElevation
           onClick={closed}>
           Ok
-        </Button>
-      </Container>
-    </Modal>
+        </StyledButton>
+      </StyledModalContainer>
+    </StyledModal>
   );
 }
