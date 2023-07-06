@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
@@ -34,9 +35,9 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(getProduct(77552));
+    dispatch(getProduct(id));
   }, [dispatch]);
 
   const [mainImage, setMainImage] = useState('');
