@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import {
-  currentProduct,
-  currentProductIsLoading,
-  currentProductIsLoaded,
-} from '../../redux/selectors';
+import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
+import getImg from '../../cloudinary';
 
 const Title = styled('div')({
   fontWeight: '400',
@@ -47,22 +45,13 @@ const Guarantee = styled('div')({
   letterSpacing: '0.015em',
   color: '#9A9292',
   margin: '15px 0',
+  paddingRight: '20px',
 });
 
 function ProductDescription() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getProduct(77552));
-  }, [dispatch]);
-
-  const changeMainPhoto = (e) => {
-    const mainPhoto = document.querySelector('.main-photo');
-    if (e.target.classList.contains('photo-from-gallery')) {
-      mainPhoto.src = e.target.getAttribute('src');
-    }
-  };
-
+  const isLoading = useSelector(currentProductIsLoading);
   const {
     // enabled,
     // quantity,
@@ -73,19 +62,38 @@ function ProductDescription() {
     color,
     brand,
     storage,
-    // itemNo,
+    itemNo,
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const isLoaded = useSelector(currentProductIsLoaded);
-  const isLoading = useSelector(currentProductIsLoading);
+
+  useEffect(() => {
+    dispatch(getProduct(77552));
+  }, [dispatch]);
+
+  const [mainImage, setMainImage] = useState('');
+
+  useEffect(() => {
+    if (imageUrls) {
+      setMainImage(imageUrls[0]);
+    }
+  }, [imageUrls]);
+
+  const changeMainPhoto = (e) => {
+    const urlString = e.target.getAttribute('src');
+    const url = new URL(urlString);
+    const path = url.pathname;
+    const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
+    setMainImage(cleanedPath);
+  };
 
   if (isLoading) {
     return <div>LOADING</div>;
   }
-  if (isLoaded) {
+
+  if (imageUrls) {
     return (
-      <Grid container sx={{ width: '90%', margin: '25px auto' }}>
+      <Grid container sx={{ width: '91%', margin: '25px auto' }}>
         <Grid
           item
           xs={12}
@@ -95,11 +103,11 @@ function ProductDescription() {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <img
+          <AdvancedImage
             className="main-photo"
-            src={imageUrls[0]}
-            alt={name}
             width="100%"
+            cldImg={getImg.image(mainImage)}
+            alt="main-img"
           />
         </Grid>
         <Grid
@@ -127,18 +135,19 @@ function ProductDescription() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  width: { sm: '144px', xs: '66px' },
                 }}>
-                <img
+                <AdvancedImage
                   className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width="85px"
-                  height="85px"
+                  width="100%"
+                  cldImg={getImg.image(photo)}
+                  alt="mini-img"
                   onClick={changeMainPhoto}
                 />
               </Grid>
             ))}
           </Grid>
+          <Guarantee>{itemNo}</Guarantee>
           <Title>
             {brand} {name} {storage} {color}
           </Title>
@@ -207,13 +216,13 @@ function ProductDescription() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  width: '85px',
                 }}>
-                <img
+                <AdvancedImage
                   className="photo-from-gallery"
-                  src={photo}
-                  alt="img"
-                  width="85px"
-                  height="85px"
+                  width="100%"
+                  cldImg={getImg.image(photo)}
+                  alt="mini-img"
                   onClick={changeMainPhoto}
                 />
               </Grid>

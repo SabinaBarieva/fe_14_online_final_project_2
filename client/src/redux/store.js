@@ -7,6 +7,7 @@ import sliceForm from './slices/formSlice';
 // eslint-disable-next-line import/no-named-as-default
 import productSlice from './slices/productSlice';
 import filtersSlice from './slices/filtersSlice';
+import basketSlice from './slices/basketSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     toolkitForm: sliceForm,
     product: productSlice,
     filters: filtersSlice,
+    basket: basketSlice,
   },
 });
 
