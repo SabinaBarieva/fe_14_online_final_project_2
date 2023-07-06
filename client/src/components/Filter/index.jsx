@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useReducer, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   Button,
@@ -26,19 +26,18 @@ import {
   setMaxPrice,
   setMinPrice,
 } from '../../redux/slices/filtersSlice';
+import theme from '../../themes/theme';
 
 function Filter() {
-  const filterSectionBreakPointWidth = 800;
   const [filterOpen, setFilterOpen] = useState(false);
 
   const closeCallback = () => {
     setFilterOpen(false);
   };
-  const smallScreen = useMediaQuery(
-    `(max-width:${filterSectionBreakPointWidth}px)`
-  );
-  if (!smallScreen) return <FilterSection />;
-  return (
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  return !smallScreen ? (
+    <FilterSection />
+  ) : (
     <>
       <IconButton
         onClick={() => {
