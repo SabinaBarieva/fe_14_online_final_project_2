@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
+import { addToBasket, minusItem } from '../../redux/slices/basketSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
@@ -19,11 +20,11 @@ import {
 
 function ProductDescription() {
   const dispatch = useDispatch();
-
+  const { itemsBasket, price } = useSelector((state) => state.basket);
   const isLoading = useSelector(currentProductIsLoading);
   const {
     // enabled,
-    // quantity,
+    quantity,
     // categories,
     name,
     currentPrice,
@@ -54,6 +55,30 @@ function ProductDescription() {
     const path = url.pathname;
     const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
     setMainImage(cleanedPath);
+  };
+
+  const onClickAdd = () => {
+    const item = {
+      name,
+      itemNo,
+      imageUrls,
+      currentPrice,
+      quantity,
+      count: 0,
+    };
+    dispatch(addToBasket(item));
+  };
+
+  const onClickMinus = () => {
+    const item = {
+      name,
+      itemNo,
+      imageUrls,
+      currentPrice,
+      quantity,
+      count: 0,
+    };
+    dispatch(minusItem(item));
   };
 
   if (isLoading) {
@@ -129,6 +154,9 @@ function ProductDescription() {
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
+                }}
+                onClick={() => {
+                  onClickMinus();
                 }}>
                 -
               </CountBoxes>
@@ -143,6 +171,9 @@ function ProductDescription() {
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
+                }}
+                onClick={() => {
+                  onClickAdd();
                 }}>
                 +
               </CountBoxes>

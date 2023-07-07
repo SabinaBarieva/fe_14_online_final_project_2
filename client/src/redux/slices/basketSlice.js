@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  priceAll: 0,
   itemsBasket: [],
-  price: 0,
 };
 const basketSlice = createSlice({
   name: 'basket',
@@ -10,35 +10,53 @@ const basketSlice = createSlice({
   reducers: {
     addToBasket: (state, action) => {
       const seachItem = state.itemsBasket.find(
-        (item) => item.id === action.payload.id
+        (item) => item.itemNo === action.payload.itemNo
       );
       if (seachItem) {
-        seachItem.count += 1;
+        if (seachItem.count !== seachItem.quantity) {
+          seachItem.count += 1;
+        } else {
+          // eslint-disable-next-line no-alert
+          window.confirm(
+            'Sorry, the product you have chosen is no longer in stock.'
+          );
+        }
       } else {
         state.itemsBasket.push({
           ...action.payload,
           count: 1,
         });
       }
-      state.price = state.itemsBasket.reduce(
-        (sum, item) => item.price * item.count + sum,
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
         0
       );
     },
     minusItem: (state, action) => {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
-      if (findItem) {
+      const findItem = state.itemsBasket.find(
+        (obj) => obj.itemNo === action.payload.itemNo
+      );
+      if (findItem.count === 1) {
+        state.itemsBasket = state.itemsBasket.filter(
+          (item) => item.itemNo !== action.payload.itemNo
+        );
+      }
+      if (findItem && findItem.count > 0) {
         findItem.count -= 1;
       }
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
+      );
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
-        (item) => item.id !== action.payload
+        (item) => item.itemNo !== action.payload.itemNo
       );
     },
     clearBasket(state) {
       state.itemsBasket = [];
-      state.price = [];
+      state.priceAll = [];
     },
   },
 });
