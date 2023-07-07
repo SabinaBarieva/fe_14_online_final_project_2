@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  priceAll: 0,
   itemsBasket: [],
-  price: 0,
 };
 const basketSlice = createSlice({
   name: 'basket',
@@ -12,6 +12,7 @@ const basketSlice = createSlice({
       const seachItem = state.itemsBasket.find(
         (item) => item.id === action.payload.id
       );
+
       if (seachItem) {
         seachItem.count += 1;
       } else {
@@ -20,25 +21,27 @@ const basketSlice = createSlice({
           count: 1,
         });
       }
-      state.price = state.itemsBasket.reduce(
+      state.priceAll = state.itemsBasket.reduce(
         (sum, item) => item.price * item.count + sum,
         0
       );
     },
     minusItem: (state, action) => {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
+      const findItem = state.itemsBasket.find(
+        (obj) => obj.id === action.payload.id
+      );
       if (findItem) {
         findItem.count -= 1;
       }
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
-        (item) => item.id !== action.payload
+        (item) => item.id !== action.payload.id
       );
     },
     clearBasket(state) {
       state.itemsBasket = [];
-      state.price = [];
+      state.priceAll = [];
     },
   },
 });

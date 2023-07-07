@@ -72,6 +72,7 @@ function ProductsList() {
     currentPath === '/'
       ? { xs: 0.5, sm: 0.5, md: 0.5, lg: 0.5 }
       : { xs: 1, sm: 1.5, md: 2, lg: 3 };
+
   return (
     <div>
       {isFetching ? (
