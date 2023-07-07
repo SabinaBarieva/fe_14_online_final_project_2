@@ -9,6 +9,7 @@ import productSlice from './slices/productSlice';
 import filtersSlice from './slices/filtersSlice';
 import basketSlice from './slices/basketSlice';
 import searchSlice from './slices/searchSlice';
+import searchResultsSlice from './slices/searchResultsSlice';
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     filters: filtersSlice,
     basket: basketSlice,
     search: searchSlice,
+    searchList: searchResultsSlice,
   },
 });
 

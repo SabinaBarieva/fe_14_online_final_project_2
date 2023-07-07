@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
-import { closeForm, openApp } from '../../redux/slices/formSlice';
+import { openApp } from '../../redux/slices/formSlice';
 import {
   StyledForm,
   StyledButton,
@@ -19,7 +19,7 @@ import {
 
 export default function OrderForm() {
   const dispatch = useDispatch();
-  const isOpenForm = useSelector((state) => state.toolkitForm.statusForm);
+  const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
 
   const closed = () => {
@@ -53,7 +53,6 @@ export default function OrderForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(closeForm());
       dispatch(orderBasket(values));
     },
   });

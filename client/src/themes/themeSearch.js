@@ -18,18 +18,18 @@ const animationFadeOut = keyframes`
     width: 0;
   }`;
 
-const StyledSearch = styled(Container)({
+const StyledSearch = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row-reverse',
   alignItems: 'center',
   height: 50,
   '& .MuiInput-root:before': {
-    borderBottom: '2px solid black',
+    borderBottom: `2px solid ${theme.palette.primary.dark}`,
   },
   '& .MuiInput-root:after': {
-    borderBottom: '2px solid white',
+    borderBottom: `2px solid ${theme.palette.primary.section}`,
   },
-});
+}));
 
 const StyledSearchWrapper = styled(Container)({
   width: 300,
@@ -49,18 +49,36 @@ const StyledInput = styled(Input)({
   },
 });
 
-const StyledList = styled(List)({
+const StyledList = styled(List)(({ theme }) => ({
   width: 300,
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
-});
+  backgroundColor: 'rgba(252, 249, 246, 0.5)',
+  zIndex: 999,
+  maxHeight: 350,
+  overflow: 'auto',
+  '&.MuiList-root::-webkit-scrollbar': {
+    width: 10,
+  },
+  '&.MuiList-root::-webkit-scrollbar-track': {
+    background: 'none',
+  },
+  '&.MuiList-root::-webkit-scrollbar-thumb': {
+    background: `${theme.palette.primary.light}`,
+    borderRadius: 5,
+    width: 10,
+  },
+  '&.MuiList-root::-webkit-scrollbar-thumb:hover': {
+    background: `${theme.palette.primary.main}`,
+  },
+}));
 
-const StyledListItem = styled(RouterLink)({
-  color: 'black',
+const StyledListItem = styled(RouterLink)(({ theme }) => ({
+  color: `${theme.palette.primary.dark}`,
   textDecoration: 'none',
   padding: '0 10px',
-});
+}));
 
 export {
   StyledSearch,

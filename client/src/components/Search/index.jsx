@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../../redux/slices/productsSlice';
+import { fetchArrayProducts } from '../../redux/slices/searchResultsSlice';
 import {
   setSelect,
   setValue,
@@ -24,12 +24,11 @@ export default function Search() {
   const select = useSelector((state) => state.search.statusSelect);
   const inputClass = useSelector((state) => state.search.statusInputClass);
   const statusIconType = useSelector((state) => state.search.statusIconType);
-  const products = useSelector((state) => state.products.products);
   const searchRef = useRef(null);
 
-  if (products.length === 0) {
-    dispatch(fetchProducts({}));
-  }
+  useEffect(() => {
+    dispatch(fetchArrayProducts());
+  }, []);
 
   const renderIcon = () => {
     if (statusIconType === 'search') {

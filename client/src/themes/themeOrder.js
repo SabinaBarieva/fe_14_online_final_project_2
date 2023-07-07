@@ -15,10 +15,10 @@ const StyledForm = styled(FormControl)({
   width: '100%',
 });
 
-const StyledButton = styled(Button)({
+const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
     display: 'block',
-    fontFamily: 'Lato',
+    fontFamily: `${theme.typography.fontFamily.primary}`,
     fontSize: '1.2rem',
     fontWeight: 400,
     lineHeight: '1.5rem',
@@ -26,12 +26,12 @@ const StyledButton = styled(Button)({
     height: 50,
     margin: '10px auto',
     padding: '13px 18px',
-    backgroundColor: '#211F1C',
+    backgroundColor: `${theme.palette.primary.dark}`,
   },
   '&.MuiButton-contained': {
     borderRadius: 50,
   },
-});
+}));
 
 const StyledIconButton = styled(IconButton)({
   height: 30,
@@ -40,11 +40,11 @@ const StyledIconButton = styled(IconButton)({
   borderRadius: '20%',
 });
 
-const StyledInputBase = styled(InputBase)({
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
   margin: 5,
   width: '90%',
   boxSizing: 'border-box',
-  border: 'black 1px solid',
+  border: `1px solid ${theme.palette.primary.dark}`,
   borderRadius: 50,
   minHeight: 40,
   '& .MuiInputBase-input': {
@@ -59,7 +59,7 @@ const StyledInputBase = styled(InputBase)({
     minHeight: 40,
     borderRadius: 50,
   },
-});
+}));
 
 const StyledGrid = styled(Grid)({
   margin: 0,
@@ -69,12 +69,12 @@ const StyledGrid = styled(Grid)({
   minWidth: 50,
 });
 
-const StyledTypography = styled(Typography)({
+const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   '&.MuiTypography-paragraph': {
     margin: 0,
     fontSize: '0.6rem',
-    color: 'red',
+    color: `${theme.palette.secondary.main}`,
     height: 12,
   },
 
@@ -84,15 +84,15 @@ const StyledTypography = styled(Typography)({
 
   '&.MuiTypography-h5': {
     margin: '10px auto',
-    color: '#334756',
-    fontFamily: 'Lato',
+    color: `${theme.palette.primary.main}`,
+    fontFamily: `${theme.typography.fontFamily.primary}`,
     fontSize: '2rem',
     fontWeight: 700,
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',
   },
-});
+}));
 
 const StyledModal = styled(Modal)({
   margin: 'auto',
@@ -106,18 +106,18 @@ const StyledModal = styled(Modal)({
   },
 });
 
-const StyledModalContainer = styled(Container)({
+const StyledModalContainer = styled(Container)(({ theme }) => ({
   padding: 20,
   lineHeight: 1.5,
   borderRadius: 20,
-  boxShadow: '0 0 30px 6px #42445a',
+  boxShadow: `0 0 30px 6px ${theme.palette.primary.header}`,
   textAlign: 'center',
-});
+}));
 
 const StyledFormBackground = styled(Container)({
   backgroundColor: 'white',
   position: 'fixed',
-  zIndex: 0,
+  zIndex: 999,
   right: 0,
   bottom: 0,
   top: 0,
