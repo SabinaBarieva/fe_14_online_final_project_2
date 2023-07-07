@@ -12,11 +12,11 @@ const basketSlice = createSlice({
       const seachItem = state.itemsBasket.find(
         (item) => item.itemNo === action.payload.itemNo
       );
+
       if (seachItem) {
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += 1;
         } else {
-          // eslint-disable-next-line no-alert
           window.confirm(
             'Sorry, the product you have chosen is no longer in stock.'
           );
@@ -36,18 +36,9 @@ const basketSlice = createSlice({
       const findItem = state.itemsBasket.find(
         (obj) => obj.itemNo === action.payload.itemNo
       );
-      if (findItem.count === 1) {
-        state.itemsBasket = state.itemsBasket.filter(
-          (item) => item.itemNo !== action.payload.itemNo
-        );
-      }
-      if (findItem && findItem.count > 0) {
+      if (findItem) {
         findItem.count -= 1;
       }
-      state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.currentPrice * item.count + sum,
-        0
-      );
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
