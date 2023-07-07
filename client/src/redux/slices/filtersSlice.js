@@ -4,8 +4,8 @@ import { setErrorMessage } from './errorsSlice';
 
 const initialState = {
   categories: [],
-  minPrice: 0,
-  maxPrice: 0,
+  minPrice: null,
+  maxPrice: null,
   availableFilters: {},
   isLoading: false,
   isLoaded: false,
@@ -38,10 +38,10 @@ const filtersSlice = createSlice({
     },
 
     setMinPrice: (state, { payload: { price } }) => {
-      state.minPrice = Number(price);
+      state.minPrice = price;
     },
     setMaxPrice: (state, { payload: { price } }) => {
-      state.maxPrice = Number(price);
+      state.maxPrice = price;
     },
     resetFilters: (state) => ({
       ...initialState,
