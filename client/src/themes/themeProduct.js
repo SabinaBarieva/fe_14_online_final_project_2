@@ -28,6 +28,16 @@ export const CountBoxes = styled('div')({
   height: '46px',
   background: '#F5F7FB',
 });
+export const CountInput = styled('input')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  width: '46px',
+  height: '46px',
+  background: '#F5F7FB',
+  border: '0',
+});
 export const Guarantee = styled('div')({
   textAlign: 'right',
   fontWeight: '400',

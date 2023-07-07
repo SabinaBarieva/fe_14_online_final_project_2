@@ -7,7 +7,6 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import { addToBasket, minusItem } from '../../redux/slices/basketSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
@@ -15,6 +14,7 @@ import {
   Description,
   Price,
   CountBoxes,
+  CountInput,
   Guarantee,
 } from '../../themes/themeProduct';
 
@@ -41,6 +41,18 @@ function ProductDescription() {
   }, [dispatch]);
 
   const [mainImage, setMainImage] = useState('');
+  const [countToBasket, setCountToBasket] = useState(1);
+
+  const increase = () => {
+    if (countToBasket < quantity) {
+      setCountToBasket(countToBasket + 1);
+    }
+  };
+  const decrease = () => {
+    if (countToBasket >= 2) {
+      setCountToBasket(countToBasket - 1);
+    }
+  };
 
   useEffect(() => {
     if (imageUrls) {
@@ -130,22 +142,27 @@ function ProductDescription() {
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
-                onClick={() => {}}>
+                onClick={() => {
+                  decrease();
+                }}>
                 -
               </CountBoxes>
-              <CountBoxes
+              <CountInput
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                1
-              </CountBoxes>
+                }}
+                value={countToBasket}
+              />
+
               <CountBoxes
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
-                onClick={() => {}}>
+                onClick={() => {
+                  increase();
+                }}>
                 +
               </CountBoxes>
             </Grid>
