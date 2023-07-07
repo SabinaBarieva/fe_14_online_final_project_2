@@ -48,23 +48,25 @@ function BasketContent() {
         {itemsBasket.map((el) => (
           <TableRow key={Math.random()}>
             <Img>
-              <img width={123} height={123} src={el.img} alt="" />
+              <img width={123} height={123} src={el.imgUrl} alt="" />
               {el.name}
             </Img>
-            <TableCell>$ {el.price * el.count}</TableCell>
+            <TableCell>$ {el.currentPrice * el.count}</TableCell>
             <TableCell>
               <button
                 disabled={el.count === 1}
-                onClick={() => dispatch(minusItem({ id: el.id }))}>
+                onClick={() => dispatch(minusItem({ itemNo: el.itemNo }))}>
                 <BiMinus />
               </button>
               <b>{el.count}</b>
-              <button onClick={() => dispatch(addToBasket({ id: el.id }))}>
+              <button
+                onClick={() => dispatch(addToBasket({ itemNo: el.itemNo }))}>
                 <BiPlus />
               </button>
             </TableCell>
             <TableCell>
-              <button onClick={() => dispatch(deleteBasket({ id: el.id }))}>
+              <button
+                onClick={() => dispatch(deleteBasket({ itemNo: el.itemNo }))}>
                 <LiaTrashSolid />
               </button>
             </TableCell>

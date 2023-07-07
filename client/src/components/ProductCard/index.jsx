@@ -155,10 +155,10 @@ function ProductCard({ product }) {
   };
   const onClickAdd = () => {
     const item = {
-      id: product.itemNo,
-      img: product.imageUrls,
       name: product.name,
-      price: product.currentPrice,
+      itemNo: product.itemNo,
+      imageUrls: product.imageUrls,
+      currentPrice: product.currentPrice,
       quantity: product.quantity,
       count: 0,
     };

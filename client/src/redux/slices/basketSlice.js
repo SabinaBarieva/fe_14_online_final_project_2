@@ -10,11 +10,17 @@ const basketSlice = createSlice({
   reducers: {
     addToBasket: (state, action) => {
       const seachItem = state.itemsBasket.find(
-        (item) => item.id === action.payload.id
+        (item) => item.itemNo === action.payload.itemNo
       );
 
       if (seachItem) {
-        seachItem.count += 1;
+        if (seachItem.count !== seachItem.quantity) {
+          seachItem.count += 1;
+        } else {
+          window.confirm(
+            'Sorry, the product you have chosen is no longer in stock.'
+          );
+        }
       } else {
         state.itemsBasket.push({
           ...action.payload,
@@ -22,13 +28,13 @@ const basketSlice = createSlice({
         });
       }
       state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.price * item.count + sum,
+        (sum, item) => item.currentPrice * item.count + sum,
         0
       );
     },
     minusItem: (state, action) => {
       const findItem = state.itemsBasket.find(
-        (obj) => obj.id === action.payload.id
+        (obj) => obj.itemNo === action.payload.itemNo
       );
       if (findItem) {
         findItem.count -= 1;
@@ -36,7 +42,7 @@ const basketSlice = createSlice({
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.itemNo !== action.payload.itemNo
       );
     },
     clearBasket(state) {
