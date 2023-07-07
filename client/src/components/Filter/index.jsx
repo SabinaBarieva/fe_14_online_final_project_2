@@ -10,7 +10,6 @@ import {
   FormLabel,
   Grid,
   IconButton,
-  Slider,
   Stack,
   TextField,
   useMediaQuery,
@@ -60,37 +59,56 @@ function Filter() {
 }
 
 function FilterSection() {
-  const [priceMinValue, setPriceMinValue] = useState(0);
-  const [priceMaxValue, setPriceMaxValue] = useState(0);
-  const [priceInputMinValue, setPriceInputMinValue] = useState(0);
-  const [priceInputMaxValue, setPriceInputMaxValue] = useState(0);
-  const [priceMinBoundary, setPriceMinBoundary] = useState(0);
-  const [priceMaxBoundary, setPriceMaxBoundary] = useState(0);
-  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchFilters());
-  }, []);
-  const availableFilters = useSelector(
-    (state) => state.filters.availableFilters
+  const [cachedMinValue, setCachedMinValue] = useState(null);
+  const [cachedMaxValue, setCachedMaxValue] = useState(null);
+  const [priceMinBoundary, setPriceMinBoundary] = useState();
+  const [priceMaxBoundary, setPriceMaxBoundary] = useState();
+  const { categories, price } = useSelector(
+    ({ filters }) => filters.availableFilters
   );
   const selectedCategories = useSelector(({ filters }) => filters.categories);
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
   useEffect(() => {
-    if (isLoadedFilters) {
-      const { price, categories: availableCategories } = availableFilters;
+    if (!isLoadedFilters) dispatch(fetchFilters());
+    else {
       const { min: priceMin, max: priceMax } = price;
-      setPriceMinValue(priceMin);
-      setPriceMaxValue(priceMax);
-      setPriceInputMinValue(priceMin);
-      setPriceInputMaxValue(priceMax);
       setPriceMinBoundary(priceMin);
       setPriceMaxBoundary(priceMax);
-      setCategories(availableCategories);
     }
   }, [isLoadedFilters]);
-
+  const isNumber = (number) =>
+    number !== null &&
+    number !== undefined &&
+    number !== '' &&
+    !Number.isNaN(number);
+  const categoryCheckboxCallback = ({ target }) => {
+    const { checked, name } = target;
+    if (checked) dispatch(addCategory(name));
+    else dispatch(removeCategory(name));
+  };
+  const minPriceCallback = ({ target }) => {
+    const { value } = target;
+    if (value < 0) setCachedMinValue(0);
+    else if (!isNumber(cachedMinValue)) setCachedMinValue(priceMinBoundary);
+    else if (isNumber(value)) setCachedMinValue(value);
+  };
+  const maxPriceCallback = ({ target }) => {
+    const { value } = target;
+    if (value < 0) setCachedMaxValue(0);
+    else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
+    else if (isNumber(value)) setCachedMaxValue(value);
+  };
+  const setPriceCallback = () => {
+    dispatch(setMinPrice(cachedMinValue));
+    dispatch(setMaxPrice(cachedMaxValue));
+  };
+  const resetFiltersCallback = () => {
+    dispatch(resetFilters());
+    setCachedMinValue(null);
+    setCachedMaxValue(null);
+  };
   if (isLoadingFilters) return <CircularProgress />;
   if (isLoadedFilters)
     return (
@@ -99,97 +117,64 @@ function FilterSection() {
         <Stack sx={{ width: '300px' }} padding={3} spacing={{ xs: 1, sm: 2 }}>
           <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>
             <FormLabel>Product Category</FormLabel>
-            {categories
-              // .sort((a, b) => a.name - b.name)
-              .map(({ name: categoryName }) => (
+            {[...categories]
+              .sort((firstCategory, secondCategory) =>
+                firstCategory.name.localeCompare(secondCategory.name)
+              )
+              .map(({ name: categoryName, id, quantity }) => (
                 <FormControlLabel
-                  key={categoryName}
+                  key={id}
                   control={<Checkbox />}
-                  label={categoryName}
-                  name={categoryName}
-                  checked={selectedCategories.includes(categoryName)}
+                  label={`${categoryName} (${quantity})`}
+                  name={id}
+                  checked={selectedCategories.includes(id)}
                   labelPlacement="start"
-                  onClick={({ target: { checked, name } }) => {
-                    if (checked) dispatch(addCategory(name));
-                    else dispatch(removeCategory(name));
-                  }}
+                  onClick={categoryCheckboxCallback}
                 />
               ))}
-          </FormGroup>
-
-          <FormGroup>
             <FormLabel>Price</FormLabel>
             <Stack spacing={{ xs: 3 }}>
-              <Grid container spacing={2} justifyContent="center">
+              <Grid
+                container
+                spacing={2}
+                rowGap={2}
+                justifyContent="center"
+                justifyItems="center">
                 <Grid item>
                   <TextField
-                    value={priceInputMinValue}
+                    value={isNumber(cachedMinValue) ? cachedMinValue : ''}
+                    placeholder="Min"
                     size="10"
                     type="number"
                     min={priceMinBoundary}
                     sx={{ width: '100px' }}
-                    onChange={({ target: { value } }) => {
-                      setPriceInputMinValue(value);
-                      if (value <= priceMaxValue)
-                        setPriceMinValue(Number(value));
-                      dispatch(setMinPrice(Number(value)));
-                      if (value < priceMinBoundary)
-                        setPriceInputMinValue(priceMinBoundary);
-                    }}
+                    onChange={minPriceCallback}
                   />
                 </Grid>
                 <Grid item>
                   <TextField
-                    value={priceInputMaxValue}
+                    value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
+                    placeholder="Max"
                     type="number"
-                    max={priceMaxBoundary}
                     sx={{ width: '100px' }}
-                    onChange={({ target: { value } }) => {
-                      // console.log(value);
-                      setPriceInputMaxValue(value);
-                      if (value >= priceMinValue) {
-                        setPriceMaxValue(Number(value));
-                        dispatch(setMaxPrice(Number(value)));
-                      }
-                      if (value > priceMaxBoundary)
-                        setPriceInputMaxValue(priceMaxBoundary);
-                    }}
+                    onChange={maxPriceCallback}
                   />
                 </Grid>
-              </Grid>
-              <Grid container padding="20px" justifyContent="center">
-                <Grid item xs>
-                  <Slider
-                    value={[priceMinValue, priceMaxValue]}
-                    valueLabelDisplay="on"
-                    disableSwap
-                    min={priceMinBoundary}
-                    max={priceMaxBoundary}
-                    onChange={(_, value) => {
-                      const [minValue, maxValue] = value;
-                      setPriceMinValue(minValue);
-                      setPriceInputMinValue(minValue);
-                      setPriceMaxValue(maxValue);
-                      setPriceInputMaxValue(maxValue);
-                      dispatch(setMinPrice(minValue));
-                      dispatch(setMaxPrice(maxValue));
-                    }}
-                  />
+                <Grid item>
+                  <Button variant="contained" onClick={setPriceCallback}>
+                    Set Price
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    width={3}
+                    onClick={resetFiltersCallback}>
+                    Reset
+                  </Button>
                 </Grid>
               </Grid>
             </Stack>
-            <Button variant="outlined">Filter</Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                dispatch(resetFilters());
-                setPriceMaxValue(priceMaxBoundary);
-                setPriceMinValue(priceMinBoundary);
-                setPriceInputMinValue(priceMinBoundary);
-                setPriceInputMaxValue(priceMaxBoundary);
-              }}>
-              Reset
-            </Button>
           </FormGroup>
         </Stack>
       </section>
