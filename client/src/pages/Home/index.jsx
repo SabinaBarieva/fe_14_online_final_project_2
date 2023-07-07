@@ -46,7 +46,7 @@ function HomeContent() {
       }}>
       <SectionTitle variant="h2">Products</SectionTitle>
       <Box sx={{ width: '93%' }}>
-        <ProductsList />
+        <ProductsList perPage={8} />
       </Box>
       <Box sx={{ margin: '3% auto' }}>
         <Link to="/product">

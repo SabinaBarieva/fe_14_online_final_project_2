@@ -11,7 +11,7 @@ import basketSlice from './slices/basketSlice';
 const store = configureStore({
   reducer: {
     products: productsSlice,
-    categories: categoriesSlice,
+    categories: 'cellphone' /* categoriesSlice */,
     errors: errorsSlice,
     toolkitModal: sliceModal,
     toolkitForm: sliceForm,

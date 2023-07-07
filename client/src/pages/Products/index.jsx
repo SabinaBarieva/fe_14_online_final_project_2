@@ -13,7 +13,7 @@ function ProductsContent() {
         paddingRight: '1%',
         margin: '2% auto',
       }}>
-      <ProductsList />
+      <ProductsList perPage={10} />
     </Container>
   );
 }

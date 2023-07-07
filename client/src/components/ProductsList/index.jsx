@@ -1,9 +1,9 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, Pagination } from '@mui/material';
 import { styled, spacing } from '@mui/system';
-/* import PropTypes from 'prop-types'; */
+import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import { RadiusButton } from '../Buttons';
@@ -33,7 +33,7 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
   minHeight: '35px',
   maxWidth: '140px',
   maxHeight: '80px',
-  margin: '3% auto',
+  margin: '20% auto',
   [theme.breakpoints.between('xs', 'md')]: {
     fontSize: '1rem',
     minWidth: '100px',
@@ -51,23 +51,26 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
   },
 }));
 
-function ProductsList() {
-  /* const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] =  useState() */
+function ProductsList({ perPage }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const total = useSelector((state) => state.products.total);
   const products = useSelector((state) => state.products.products);
-  /*  const categories = useSelector((state) => state.categories.categories); */
+  /* const categories = useSelector((state) => state.categories.categories); */
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts({}));
-  }, [dispatch]);
-  /* const lastproductIndex = currentPage * perPage
-  const firstproductIndex = lastproductIndex - perPage */
+    dispatch(fetchProducts({, perPage, currentPage }));
+  }, [dispatch, currentPage]);
+  const countPagination = Math.round(total / perPage);
+  /* const lastProductIndex = currentPage * perPage
+  const firstProductIndex = lastProductIndex - perPage
+  const currentProduct =  */
   const location = useLocation();
   const currentPath = location.pathname;
   /*  const handleLoadMoreClick = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   }; */
+
   const gridSpacing =
     currentPath === '/'
       ? { xs: 0.5, sm: 0.5, md: 0.5, lg: 0.5 }
@@ -114,10 +117,21 @@ function ProductsList() {
             )}
           </Grid>
           {currentPath === '/' ? null : (
-            <Box sx={{ mx: 'auto', width: 200 }}>
-              <LoadMoreBtn sx={{ textTransform: 'capitalize' }} variant="solid">
-                Load More
-              </LoadMoreBtn>
+            <Box sx={{ mx: 'auto', width: 500 }}>
+              <Box sx={{ mx: 'auto', width: 200 }}>
+                <LoadMoreBtn
+                  sx={{ textTransform: 'capitalize' }}
+                  variant="solid">
+                  Load More
+                </LoadMoreBtn>
+              </Box>
+              <Pagination
+                count={countPagination}
+                color="primary"
+                page={currentPage}
+                onChange={(_, num) => setCurrentPage(num)}
+                sx={{ mx: 'auto', width: 400 }}
+              />
             </Box>
           )}
         </div>
@@ -128,7 +142,6 @@ function ProductsList() {
 
 export default ProductsList;
 
-/*
 ProductsList.propTypes = {
   perPage: PropTypes.number,
 };
@@ -136,4 +149,3 @@ ProductsList.propTypes = {
 ProductsList.defaultProps = {
   perPage: 10,
 };
-*/
