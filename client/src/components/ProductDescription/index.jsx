@@ -40,19 +40,14 @@ function ProductDescription() {
 
   const [countToBasket, setCountToBasket] = useState(1);
   const increase = () => {
-    if (countToBasket < quantity) {
-      setCountToBasket(countToBasket + 1);
-    }
+    setCountToBasket(countToBasket + 1);
   };
   const decrease = () => {
-    if (countToBasket >= 2) {
-      setCountToBasket(countToBasket - 1);
-    }
+    setCountToBasket(countToBasket - 1);
   };
   const onChangeValue = (value) => {
-    // const valueToNum = +value;
     if (+value < 1) {
-      setCountToBasket(1);
+      setCountToBasket(0);
     } else if (+value > quantity) {
       setCountToBasket(quantity);
     } else {
@@ -148,6 +143,7 @@ function ProductDescription() {
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
+                disabled={countToBasket <= 1}
                 onClick={() => {
                   decrease();
                 }}>
@@ -171,6 +167,7 @@ function ProductDescription() {
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
+                disabled={countToBasket === quantity}
                 onClick={() => {
                   increase();
                 }}>
