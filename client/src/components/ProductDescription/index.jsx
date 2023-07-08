@@ -20,11 +20,10 @@ import {
 
 function ProductDescription() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const {
-    // enabled,
     quantity,
-    // categories,
     name,
     currentPrice,
     imageUrls,
@@ -35,14 +34,11 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const { id } = useParams();
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch]);
 
-  const [mainImage, setMainImage] = useState('');
   const [countToBasket, setCountToBasket] = useState(1);
-
   const increase = () => {
     if (countToBasket < quantity) {
       setCountToBasket(countToBasket + 1);
@@ -53,13 +49,23 @@ function ProductDescription() {
       setCountToBasket(countToBasket - 1);
     }
   };
+  const onChangeValue = (value) => {
+    // const valueToNum = +value;
+    if (+value < 1) {
+      setCountToBasket(1);
+    } else if (+value > quantity) {
+      setCountToBasket(quantity);
+    } else {
+      setCountToBasket(+value);
+    }
+  };
 
+  const [mainImage, setMainImage] = useState('');
   useEffect(() => {
     if (imageUrls) {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
-
   const changeMainPhoto = (e) => {
     const urlString = e.target.getAttribute('src');
     const url = new URL(urlString);
@@ -152,9 +158,14 @@ function ProductDescription() {
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
+                type="number"
+                controls={false}
                 value={countToBasket}
+                min={1}
+                onChange={(e) => {
+                  onChangeValue(e.target.value);
+                }}
               />
-
               <CountBoxes
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },

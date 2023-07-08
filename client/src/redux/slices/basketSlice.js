@@ -12,7 +12,6 @@ const basketSlice = createSlice({
       const seachItem = state.itemsBasket.find(
         (item) => item.itemNo === action.payload.itemNo
       );
-
       if (seachItem) {
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += 1;
