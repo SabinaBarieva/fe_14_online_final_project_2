@@ -39,7 +39,11 @@ function ProductDescription() {
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
+  // eslint-disable-next-line consistent-return
   const increase = () => {
+    if (countToBasket === '') {
+      return setCountToBasket(1);
+    }
     setCountToBasket(countToBasket + 1);
   };
   const decrease = () => {
@@ -47,7 +51,7 @@ function ProductDescription() {
   };
   const onChangeValue = (value) => {
     if (+value < 1) {
-      setCountToBasket(0);
+      setCountToBasket('');
     } else if (+value > quantity) {
       setCountToBasket(quantity);
     } else {
