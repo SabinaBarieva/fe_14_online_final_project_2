@@ -15,7 +15,6 @@ export default function BreadCrumbs() {
   const crumbs = [];
   let crumbPath = '';
   const [showSeparator, setShowSeparator] = useState(true);
-  const paramsId = Number(Object.keys(params)[0]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,9 +42,15 @@ export default function BreadCrumbs() {
       const isCurrentPage = location.pathname === crumbPath;
       const isLastCrumb = index === path.length - 1;
 
-      if (isLastCrumb && !paramsId) {
-        const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
-        crumbs.push(<StyledSpan key={crumbPath}>{capitalizedStr}</StyledSpan>);
+      if (isLastCrumb) {
+        if (params.id && product) {
+          crumbs.push(<StyledSpan key="paramsId">{product.name}</StyledSpan>);
+        } else {
+          const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
+          crumbs.push(
+            <StyledSpan key={crumbPath}>{capitalizedStr}</StyledSpan>
+          );
+        }
       } else if (!isCurrentPage) {
         const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
         crumbs.push(
@@ -56,10 +61,6 @@ export default function BreadCrumbs() {
       }
     }
   });
-
-  if (paramsId && product) {
-    crumbs.push(<StyledSpan key="paramsId">{product.name}</StyledSpan>);
-  }
 
   if (crumbs.length === 0) {
     return null;

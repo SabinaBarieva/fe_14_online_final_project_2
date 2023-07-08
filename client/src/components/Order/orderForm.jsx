@@ -6,7 +6,8 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
-import { closeForm, openApp } from '../../redux/slices/formSlice';
+import { openApp } from '../../redux/slices/formSlice';
+import { clearBasket } from '../../redux/slices/basketSlice';
 import {
   StyledForm,
   StyledButton,
@@ -53,7 +54,7 @@ export default function OrderForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(closeForm());
+      dispatch(clearBasket());
       dispatch(orderBasket(values));
     },
   });
