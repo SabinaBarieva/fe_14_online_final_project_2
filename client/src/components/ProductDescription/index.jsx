@@ -162,6 +162,10 @@ function ProductDescription() {
                 controls={false}
                 value={countToBasket}
                 min={1}
+                onBlur={(e) => {
+                  // eslint-disable-next-line no-unused-expressions
+                  e.target.value === '' ? setCountToBasket(1) : null;
+                }}
                 onChange={(e) => {
                   onChangeValue(e.target.value);
                 }}
