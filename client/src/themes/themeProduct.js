@@ -39,11 +39,11 @@ export const CountInput = styled('input')({
   background: '#F5F7FB',
   border: '0',
   '&::-webkit-outer-spin-button': {
-    '-webkit-appearance': 'none',
+    WebkitAppearance: 'none',
     margin: 0,
   },
   '&::-webkit-inner-spin-button': {
-    '-webkit-appearance': 'none',
+    WebkitAppearance: 'none',
     margin: 0,
   },
 });

@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
+import { addSeveraltoBasket } from '../../redux/slices/basketSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
@@ -41,9 +42,6 @@ function ProductDescription() {
   const [countToBasket, setCountToBasket] = useState(1);
   // eslint-disable-next-line consistent-return
   const increase = () => {
-    if (countToBasket === '') {
-      return setCountToBasket(1);
-    }
     setCountToBasket(countToBasket + 1);
   };
   const decrease = () => {
@@ -57,6 +55,17 @@ function ProductDescription() {
     } else {
       setCountToBasket(+value);
     }
+  };
+  const clickToBasket = () => {
+    const item = {
+      itemNo,
+      imageUrls,
+      name,
+      currentPrice,
+      quantity,
+      count: countToBasket,
+    };
+    dispatch(addSeveraltoBasket(item));
   };
 
   const [mainImage, setMainImage] = useState('');
@@ -200,7 +209,10 @@ function ProductDescription() {
                     },
                   },
                 }}
-                variant="contained">
+                variant="contained"
+                onClick={() => {
+                  clickToBasket();
+                }}>
                 Add to basket
               </Button>
             </Grid>

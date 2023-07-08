@@ -48,8 +48,36 @@ const basketSlice = createSlice({
       state.itemsBasket = [];
       state.priceAll = [];
     },
+    addSeveraltoBasket: (state, action) => {
+      // const seachItem = state.itemsBasket.find(
+      //   (item) => item.itemNo === action.payload.itemNo
+      // );
+      // if (seachItem) {
+      // if (seachItem.count !== seachItem.quantity) {
+      //   seachItem.count += 1;
+      // } else {
+      //   window.confirm(
+      //     'Sorry, the product you have chosen is no longer in stock.'
+      //   );
+      // }
+      // } else {
+      state.itemsBasket.push({
+        ...action.payload,
+        count: action.payload.count,
+      });
+      // }
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
+      );
+    },
   },
 });
-export const { addToBasket, deleteBasket, clearBasket, minusItem } =
-  basketSlice.actions;
+export const {
+  addToBasket,
+  deleteBasket,
+  clearBasket,
+  minusItem,
+  addSeveraltoBasket,
+} = basketSlice.actions;
 export default basketSlice.reducer;
