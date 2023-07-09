@@ -48,6 +48,7 @@ const basketSlice = createSlice({
       state.itemsBasket = [];
       state.priceAll = [];
     },
+    // eslint-disable-next-line consistent-return
     addSeveraltoBasket: (state, action) => {
       const seachItem = state.itemsBasket.find(
         (item) => item.itemNo === action.payload.itemNo
@@ -57,7 +58,7 @@ const basketSlice = createSlice({
           action.payload.count + seachItem.count > seachItem.quantity &&
           seachItem.quantity - seachItem.count !== 0
         ) {
-          alert(
+          return alert(
             `ДЕМО СТРОКА! можна додати ще не більше ніж ${
               seachItem.quantity - seachItem.count
             } до вже вибраної кількості товарів`
