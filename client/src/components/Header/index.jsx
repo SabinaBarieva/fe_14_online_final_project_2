@@ -21,7 +21,9 @@ function Header() {
       <header>
         <NavLink to="/">LOGO</NavLink>
         <input type="text" />
-        <NavLink to="/basket">basket content {totalInBasket}</NavLink>
+        <NavLink to="/basket">
+          basket content {totalInBasket === 0 ? null : totalInBasket}
+        </NavLink>
       </header>
       <BreadCrumbs />
       <Outlet />
