@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   StyledRouterLink,
   StyledBreadcrumbs,
@@ -9,6 +10,7 @@ import {
 export default function BreadCrumbs() {
   const location = useLocation();
   const params = useParams();
+  const product = useSelector((state) => state.product.product);
   const path = location.pathname.split('/').filter((crumb) => crumb);
   const crumbs = [];
   let crumbPath = '';
@@ -41,8 +43,14 @@ export default function BreadCrumbs() {
       const isLastCrumb = index === path.length - 1;
 
       if (isLastCrumb) {
-        const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
-        crumbs.push(<StyledSpan key={crumbPath}>{capitalizedStr}</StyledSpan>);
+        if (params.id && product) {
+          crumbs.push(<StyledSpan key="paramsId">{product.name}</StyledSpan>);
+        } else {
+          const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
+          crumbs.push(
+            <StyledSpan key={crumbPath}>{capitalizedStr}</StyledSpan>
+          );
+        }
       } else if (!isCurrentPage) {
         const capitalizedStr = crumb.charAt(0).toUpperCase() + crumb.slice(1);
         crumbs.push(
@@ -53,14 +61,6 @@ export default function BreadCrumbs() {
       }
     }
   });
-
-  if (params.id) {
-    crumbs.push(
-      <StyledRouterLink key="id" color="text.primary">
-        {params.id}
-      </StyledRouterLink>
-    );
-  }
 
   if (crumbs.length === 0) {
     return null;

@@ -2,60 +2,29 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { styled } from '@mui/system';
+import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
+import { addSeveraltoBasket } from '../../redux/slices/basketSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
-
-const Title = styled('div')({
-  fontWeight: '400',
-  fontSize: '40px',
-  lineHeight: '47px',
-  color: '#616467',
-});
-const Description = styled('div')({
-  fontWeight: '400',
-  fontSize: '18px',
-  letterSpacing: '0.015em',
-  color: '#9A9292',
-  margin: '15px 0',
-});
-const Price = styled('div')({
-  fontWeight: '500',
-  fontSize: '20px',
-  lineHeight: '132%',
-  letterSpacing: '0.015em',
-  color: '#434343',
-});
-const CountBoxes = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '46px',
-  height: '46px',
-  background: '#F5F7FB',
-});
-const Guarantee = styled('div')({
-  textAlign: 'right',
-  fontWeight: '400',
-  fontSize: '18px',
-  letterSpacing: '0.015em',
-  color: '#9A9292',
-  margin: '15px 0',
-  paddingRight: '20px',
-});
+import {
+  Title,
+  Description,
+  Price,
+  CountBoxes,
+  CountInput,
+  Guarantee,
+} from '../../themes/themeProduct';
 
 function ProductDescription() {
   const dispatch = useDispatch();
-
+  const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const {
-    // enabled,
-    // quantity,
-    // categories,
+    quantity,
     name,
     currentPrice,
     imageUrls,
@@ -66,19 +35,45 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-
   useEffect(() => {
-    dispatch(getProduct(77552));
+    dispatch(getProduct(id));
   }, [dispatch]);
 
-  const [mainImage, setMainImage] = useState('');
+  const [countToBasket, setCountToBasket] = useState(1);
+  // eslint-disable-next-line consistent-return
+  const increase = () => {
+    setCountToBasket(countToBasket + 1);
+  };
+  const decrease = () => {
+    setCountToBasket(countToBasket - 1);
+  };
+  const onChangeValue = (value) => {
+    if (+value < 1) {
+      setCountToBasket('');
+    } else if (+value > quantity) {
+      setCountToBasket(quantity);
+    } else {
+      setCountToBasket(+value);
+    }
+  };
+  const clickToBasket = () => {
+    const item = {
+      itemNo,
+      imageUrls,
+      name,
+      currentPrice,
+      quantity,
+      count: countToBasket,
+    };
+    dispatch(addSeveraltoBasket(item));
+  };
 
+  const [mainImage, setMainImage] = useState('');
   useEffect(() => {
     if (imageUrls) {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
-
   const changeMainPhoto = (e) => {
     const urlString = e.target.getAttribute('src');
     const url = new URL(urlString);
@@ -160,20 +155,38 @@ function ProductDescription() {
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
+                }}
+                disabled={countToBasket <= 1}
+                onClick={() => {
+                  decrease();
                 }}>
                 -
               </CountBoxes>
+              <CountInput
+                sx={{
+                  width: { xs: '35px', sm: '57px', md: '46px' },
+                  height: { xs: '35px', sm: '57px', md: '46px' },
+                }}
+                type="number"
+                controls={false}
+                value={countToBasket}
+                min={1}
+                onBlur={(e) => {
+                  // eslint-disable-next-line no-unused-expressions
+                  e.target.value === '' ? setCountToBasket(1) : null;
+                }}
+                onChange={(e) => {
+                  onChangeValue(e.target.value);
+                }}
+              />
               <CountBoxes
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                1
-              </CountBoxes>
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
+                }}
+                disabled={countToBasket === quantity}
+                onClick={() => {
+                  increase();
                 }}>
                 +
               </CountBoxes>
@@ -196,7 +209,10 @@ function ProductDescription() {
                     },
                   },
                 }}
-                variant="contained">
+                variant="contained"
+                onClick={() => {
+                  clickToBasket();
+                }}>
                 Add to basket
               </Button>
             </Grid>
