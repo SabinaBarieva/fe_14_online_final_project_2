@@ -13,6 +13,7 @@ const style = {
   background: '#484543',
   display: 'block',
   padding: '4.036% 5.14% 5.8% 5.35%',
+  marginTop: 'auto',
 };
 
 function Footer() {

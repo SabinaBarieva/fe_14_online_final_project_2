@@ -4,6 +4,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import { selectCart } from '../../redux/selectors';
+import AllContent from '../../themes/themeMain';
 
 function Header() {
   const { itemsBasket } = useSelector(selectCart);
@@ -17,7 +18,7 @@ function Header() {
     totalBasketItems();
   });
   return (
-    <>
+    <AllContent>
       <header>
         <NavLink to="/">LOGO</NavLink>
         <input type="text" />
@@ -28,7 +29,7 @@ function Header() {
       <BreadCrumbs />
       <Outlet />
       <Footer />
-    </>
+    </AllContent>
   );
 }
 
