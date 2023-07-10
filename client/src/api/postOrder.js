@@ -1,3 +1,4 @@
+import { AppError } from '../errors/errors';
 import { orderEP } from './constants';
 import fetchApi from './fetchApi';
 
@@ -26,7 +27,7 @@ import fetchApi from './fetchApi';
  *
  * @returns {Object} Object with order information or AppError with message
  */
-export const postOrder = ({
+const postOrder = async ({
   products,
   email,
   mobile,
@@ -35,7 +36,7 @@ export const postOrder = ({
   deliveryAddress,
   shipping = {},
 }) => {
-  fetchApi(orderEP, {
+  const response = await fetchApi(orderEP, {
     method: 'POST',
     body: JSON.stringify({
       products,
@@ -47,6 +48,9 @@ export const postOrder = ({
       shipping,
     }),
   });
+  if (response.message) {
+    throw new AppError(response.message, { context: response });
+  }
+  return response;
 };
-fetchApi;
-orderEP;
+export default postOrder;
