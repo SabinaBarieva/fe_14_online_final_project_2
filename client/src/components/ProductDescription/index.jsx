@@ -74,9 +74,6 @@ function ProductDescription() {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
-  const changeMainPhoto = (e) => {
-    setMainImage(e.target.getAttribute('data-img'));
-  };
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -135,7 +132,9 @@ function ProductDescription() {
                   width="100%"
                   cldImg={getImg.image(photo)}
                   alt="mini-img"
-                  onClick={changeMainPhoto}
+                  onClick={(e) => {
+                    setMainImage(e.target.getAttribute('data-img'));
+                  }}
                 />
               </Grid>
             ))}
