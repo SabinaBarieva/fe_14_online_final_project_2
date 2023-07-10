@@ -75,11 +75,7 @@ function ProductDescription() {
     }
   }, [imageUrls]);
   const changeMainPhoto = (e) => {
-    const urlString = e.target.getAttribute('src');
-    const url = new URL(urlString);
-    const path = url.pathname;
-    const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
-    setMainImage(cleanedPath);
+    setMainImage(e.target.getAttribute('data-img'));
   };
 
   if (isLoading) {
@@ -135,6 +131,7 @@ function ProductDescription() {
                 }}>
                 <AdvancedImage
                   className="photo-from-gallery"
+                  data-img={photo}
                   width="100%"
                   cldImg={getImg.image(photo)}
                   alt="mini-img"
