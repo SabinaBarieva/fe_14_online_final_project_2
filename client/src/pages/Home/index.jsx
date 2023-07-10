@@ -32,9 +32,6 @@ const AllProductsBtn = styled(SquareButton)(({ theme }) => ({
   maxHeight: '54px',
 }));
 function HomeContent() {
-  // const id = useSelector() id товара
-  /* const id = 123; */
-
   return (
     <Container
       maxWidth="xxl"
@@ -45,7 +42,7 @@ function HomeContent() {
         backgroundColor: '#FCF9F6',
       }}>
       <SectionTitle variant="h2">Products</SectionTitle>
-      <Box sx={{ width: '93%' }}>
+      <Box sx={{ width: '93%', mx: 'auto' }}>
         <ProductsList perPage={8} />
       </Box>
       <Box sx={{ margin: '3% auto' }}>

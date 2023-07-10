@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
+import { AdvancedImage } from '@cloudinary/react';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
 import { setProduct } from '../../redux/slices/productSlice';
+import getImg from '../../cloudinary';
 
 const CardContainer = styled(Card)(({ theme }) => ({
   outline: 'solid 1px transparent',
@@ -156,10 +158,11 @@ function ProductCard({ product }) {
   return (
     <CardContainer sx={{ boxShadow: 'none' }}>
       <Box sx={{ position: 'relative' }}>
-        <CardImg
-          component="img"
-          alt={product.categories}
-          image="https://hotline.ua/img/tx/343/3437076345.jpg"
+        <AdvancedImage
+          className="photo-from-gallery"
+          width="100%"
+          cldImg={getImg.image(product.imageUrls[0])}
+          alt={product.name + product.color}
         />
         <Box
           sx={{

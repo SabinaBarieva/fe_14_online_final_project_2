@@ -53,23 +53,32 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
 
 function ProductsList({ perPage }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [loadedProducts, setLoadedProducts] = useState([]);
+  const [isLoadMoreClicked, setLoadMoreClicked] = useState(false);
   const total = useSelector((state) => state.products.total);
-  const products = useSelector((state) => state.products.products);
-  /* const categories = useSelector((state) => state.categories.categories); */
+  const storeProducts = useSelector((state) => state.products.products);
+  const categories = useSelector((state) => state.categories.categories);
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts({, perPage, currentPage }));
+    dispatch(fetchProducts({ categories, perPage, startPage: currentPage }));
   }, [dispatch, currentPage]);
+
+  function productsForLoadMore() {
+    setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
+  }
+  console.log(loadedProducts);
+  console.log(storeProducts);
+
   const countPagination = Math.round(total / perPage);
-  /* const lastProductIndex = currentPage * perPage
-  const firstProductIndex = lastProductIndex - perPage
-  const currentProduct =  */
   const location = useLocation();
   const currentPath = location.pathname;
-  /*  const handleLoadMoreClick = () => {
+  const products = isLoadMoreClicked ? loadedProducts : storeProducts;
+  const handleLoadMoreClick = () => {
     setCurrentPage((prevPage) => prevPage + 1);
-  }; */
+    setLoadMoreClicked(true);
+    productsForLoadMore();
+  };
 
   const gridSpacing =
     currentPath === '/'
@@ -121,7 +130,8 @@ function ProductsList({ perPage }) {
               <Box sx={{ mx: 'auto', width: 200 }}>
                 <LoadMoreBtn
                   sx={{ textTransform: 'capitalize' }}
-                  variant="solid">
+                  variant="solid"
+                  onClick={handleLoadMoreClick}>
                   Load More
                 </LoadMoreBtn>
               </Box>
