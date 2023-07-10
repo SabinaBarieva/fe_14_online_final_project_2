@@ -1,4 +1,14 @@
 import { styled } from '@mui/system';
+import {
+  Button,
+  FormControl,
+  IconButton,
+  InputBase,
+  Grid,
+  Typography,
+  Modal,
+  Container,
+} from '@mui/material';
 
 export const Title = styled('div')({
   fontWeight: '400',
@@ -28,7 +38,13 @@ export const CountBoxes = styled('button')({
   height: '46px',
   background: '#F5F7FB',
   border: '0',
+  '&:hover': {
+    cursor: 'pointer',
+    color: '#F5F7FB',
+    backgroundColor: '#211F1C',
+  },
 });
+
 export const CountInput = styled('input')({
   display: 'flex',
   justifyContent: 'center',

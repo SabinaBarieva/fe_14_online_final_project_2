@@ -118,9 +118,10 @@ function ProductDescription() {
           <Grid
             container
             sx={{
-              display: { xs: 'flex', md: 'none' },
+              display: 'flex',
               justifyContent: 'space-around',
               margin: '15px 0',
+              order: { xs: '0', md: '1' },
             }}>
             {imageUrls.map((photo) => (
               <Grid
@@ -216,33 +217,6 @@ function ProductDescription() {
                 Add to basket
               </Button>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: 'space-around',
-              marginTop: '15px',
-            }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '85px',
-                }}>
-                <AdvancedImage
-                  className="photo-from-gallery"
-                  width="100%"
-                  cldImg={getImg.image(photo)}
-                  alt="mini-img"
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
           </Grid>
         </Grid>
       </Grid>
