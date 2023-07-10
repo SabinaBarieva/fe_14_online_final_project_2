@@ -64,10 +64,6 @@ function ProductsList({ perPage }) {
     dispatch(fetchProducts({ categories, perPage, startPage: currentPage }));
   }, [dispatch, currentPage]);
 
-  function productsForLoadMore() {
-    setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
-  }
-  console.log(loadedProducts);
   console.log(storeProducts);
 
   const countPagination = Math.round(total / perPage);
@@ -77,7 +73,7 @@ function ProductsList({ perPage }) {
   const handleLoadMoreClick = () => {
     setCurrentPage((prevPage) => prevPage + 1);
     setLoadMoreClicked(true);
-    productsForLoadMore();
+    setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
   };
 
   const gridSpacing =
@@ -140,7 +136,11 @@ function ProductsList({ perPage }) {
                 count={countPagination}
                 color="primary"
                 page={currentPage}
-                onChange={(_, num) => setCurrentPage(num)}
+                onChange={(_, num) => {
+                  setCurrentPage(num);
+                  setLoadMoreClicked(false);
+                  setLoadedProducts([]);
+                }}
                 sx={{ mx: 'auto', width: 400 }}
               />
             </Box>
