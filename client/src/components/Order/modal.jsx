@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { closeModal } from '../../redux/slices/modalSlice';
-import { openApp } from '../../redux/slices/formSlice';
+import { closeForm } from '../../redux/slices/formSlice';
 import {
   StyledTypography,
   StyledButton,
@@ -20,7 +20,7 @@ export default function ModalOrdered() {
   const modalRef = useRef(null);
 
   const closed = () => {
-    dispatch(openApp());
+    dispatch(closeForm());
     dispatch(closeModal());
   };
 

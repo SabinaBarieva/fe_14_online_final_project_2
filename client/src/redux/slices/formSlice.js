@@ -11,6 +11,10 @@ const formSlice = createSlice({
       state.statusForm = true;
       state.statusButton = false;
     },
+    closeForm(state) {
+      state.statusForm = false;
+      state.statusButton = false;
+    },
     openApp(state) {
       state.statusForm = false;
       state.statusButton = true;
@@ -19,4 +23,4 @@ const formSlice = createSlice({
 });
 
 export default formSlice.reducer;
-export const { openForm, openApp } = formSlice.actions;
+export const { openForm, closeForm, openApp } = formSlice.actions;
