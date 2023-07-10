@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { StyledListItem } from '../../themes/themeSearch';
 import { classChange } from '../../redux/slices/searchSlice';
+import { getProduct } from '../../redux/slices/productSlice';
 
 export default function Item(props) {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ export default function Item(props) {
 
   const handleIconClick = () => {
     dispatch(classChange());
+    dispatch(getProduct(itemNo));
   };
 
   return (
