@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const sliceForm = createSlice({
+const formSlice = createSlice({
   name: 'form',
   initialState: {
     statusForm: false,
@@ -22,5 +22,5 @@ const sliceForm = createSlice({
   },
 });
 
-export default sliceForm.reducer;
-export const { openForm, closeForm, openApp } = sliceForm.actions;
+export default formSlice.reducer;
+export const { openForm, closeForm, openApp } = formSlice.actions;
