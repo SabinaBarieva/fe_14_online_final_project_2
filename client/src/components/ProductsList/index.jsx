@@ -65,6 +65,7 @@ function ProductsList({ perPage }) {
     dispatch(fetchProducts({ categories, perPage, startPage: currentPage }));
   }, [dispatch, currentPage]);
 
+
   const countPagination = Math.round(total / perPage);
   const location = useLocation();
   const currentPath = location.pathname;
@@ -78,7 +79,7 @@ function ProductsList({ perPage }) {
 
   const gridSpacing =
     currentPath === '/'
-      ? { xs: 0.5, sm: 0.5, md: 0.5, lg: 0.5 }
+      ? { xs: 1.5, sm: 2, md: 2.5, lg: 3 }
       : { xs: 1, sm: 1.5, md: 2, lg: 3 };
 
   return (

@@ -9,11 +9,12 @@ import {
   Box,
   useMediaQuery,
 } from '@mui/material';
-import { styled, useTheme } from '@mui/system';
+import { styled, useTheme, shadows } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
-import { AdvancedImage, lazyload } from '@cloudinary/react';
+import { AdvancedImage } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { color } from '@cloudinary/url-gen/qualifiers/background';
+import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
@@ -21,22 +22,25 @@ import { setProduct } from '../../redux/slices/productSlice';
 import { addToBasket } from '../../redux/slices/basketSlice';
 
 const CardContainer = styled(Card)(({ theme }) => ({
-  outline: 'solid 1px transparent',
+  outline: `solid 1px transparent`,
   marginBottom: '5%',
   minWidth: 'fit-content',
   backgroundColor: 'transparent',
   [theme.breakpoints.between('xs', 'md')]: {
     maxWidth: '150px',
+    minHeight: '200px',
   },
   [theme.breakpoints.between('md', 'lg')]: {
     maxWidth: '183px',
+    minHeight: '322px',
   },
   [theme.breakpoints.up('lg')]: {
     maxWidth: '203px',
+    minHeight: '418px',
   },
 }));
 
-/* const CardImg = styled(AdvancedImage)(({ theme }) => ({
+const CardImg = styled(AdvancedImage)(({ theme }) => ({
   minWidth: '160px',
   minHeight: '200px',
   borderRadius: '10px',
@@ -52,7 +56,7 @@ const CardContainer = styled(Card)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     maxWidth: '203px',
   },
-})); */
+}));
 
 const DetailButton = styled(RadiusButton)(({ theme }) => ({
   fontSize: '0.625rem',
@@ -78,6 +82,7 @@ const DetailButton = styled(RadiusButton)(({ theme }) => ({
 
 const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   backgroundColor: 'white',
+  outline: `1px solid ${theme.palette.primary.buttonhover}`,
   /*  minWidth: '29px',
   minHeight: '17px', */
   maxWidth: '40px',
@@ -85,6 +90,7 @@ const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.primary.buttonhover,
+    outline: `1px solid transparent`,
   },
   '& svg': {
     marginTop: '5%',
@@ -170,6 +176,45 @@ function ProductCard({ product }) {
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
 
+  /* const getImageSize = () => {
+    const currentBreakpoints = {
+      xs: xsBreakpoint,
+      md: mdBreakpoint,
+      lg: lgBreakpoint,
+    };
+    const imgSizesProductsPage = {
+      xs: { width: 150, height: 200 },
+      sm: { width: 150, height: 200 },
+      md: { width: 183, height: 289 },
+      lg: { width: 203, height: 293 },
+    };
+
+    const imageSizesHomePage = {
+      xs: { width: 129, height: 200 },
+      sm: { width: 129, height: 200 },
+      md: { width: 196, height: 322 },
+      lg: { width: 269, height: 418 },
+    };
+    const currentBreakpoint = Object.keys(currentBreakpoints).find(
+      (breakpoint) => currentBreakpoints[breakpoint]
+    );
+    if (
+      currentPath !== '/' &&
+      currentBreakpoint &&
+      imgSizesProductsPage[currentBreakpoint]
+    ) {
+      return imgSizesProductsPage[currentBreakpoint];
+    }
+    if (
+      currentPath === '/' &&
+      currentBreakpoint &&
+      imageSizesHomePage[currentBreakpoint]
+    ) {
+      return imageSizesHomePage[currentBreakpoint];
+    }
+    return { width: 150, height: 200 };
+  }; */
+
   const handleDetailClick = () => {
     dispatch(setProduct(product));
   };
@@ -187,11 +232,18 @@ function ProductCard({ product }) {
   };
 
   return (
-    <CardContainer sx={{ boxShadow: 'none' }}>
+    <CardContainer sx={{ boxShadow: 6 }}>
       <Box sx={{ position: 'relative' }}>
         <AdvancedImage
           width="100%"
-          cldImg={getImg.image(product.imageUrls[0])}
+          cldImg={
+            getImg.image(product.imageUrls[0])
+            /*  .resize(
+              pad().width(imageSize.width).height(imageSize.height)
+              .background(color(`${theme.palette.primary.section}`))
+            )
+            .roundCorners(byRadius(50, 50)) */
+          }
           alt={product.name + product.color}
         />
         <Box

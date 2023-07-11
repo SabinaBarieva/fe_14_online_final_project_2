@@ -11,7 +11,7 @@ const theme = createTheme({
       light: '#616467',
       header: '#484543',
       section: '#FCF9F6',
-      buttonhover: 'background: #ACACAC',
+      buttonhover: '#ACACAC',
     },
     secondary: {
       main: '#ff6565',
