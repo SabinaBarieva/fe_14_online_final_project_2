@@ -29,11 +29,12 @@ import theme from '../../themes/theme';
 
 function Filter() {
   const [filterOpen, setFilterOpen] = useState(false);
-
   const closeCallback = () => {
     setFilterOpen(false);
   };
+
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return !smallScreen ? (
     <FilterSection />
   ) : (
@@ -64,12 +65,14 @@ function FilterSection() {
   const [cachedMaxValue, setCachedMaxValue] = useState(null);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
+
   const { categories, price } = useSelector(
     ({ filters }) => filters.availableFilters
   );
   const selectedCategories = useSelector(({ filters }) => filters.categories);
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
+
   useEffect(() => {
     if (!isLoadedFilters) dispatch(fetchFilters());
     else {
@@ -109,6 +112,7 @@ function FilterSection() {
     setCachedMinValue(null);
     setCachedMaxValue(null);
   };
+
   if (isLoadingFilters) return <CircularProgress />;
   if (isLoadedFilters)
     return (

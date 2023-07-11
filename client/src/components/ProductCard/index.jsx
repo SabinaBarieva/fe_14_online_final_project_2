@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
 import { setProduct } from '../../redux/slices/productSlice';
+import { addToBasket } from '../../redux/slices/basketSlice';
 
 const CardContainer = styled(Card)(({ theme }) => ({
   outline: 'solid 1px transparent',
@@ -152,6 +153,17 @@ function ProductCard({ product }) {
   const handleAddToCartClick = () => {
     dispatch(setProduct(product));
   };
+  const onClickAdd = () => {
+    const item = {
+      name: product.name,
+      itemNo: product.itemNo,
+      imageUrls: product.imageUrls,
+      currentPrice: product.currentPrice,
+      quantity: product.quantity,
+      count: 0,
+    };
+    dispatch(addToBasket(item));
+  };
 
   return (
     <CardContainer sx={{ boxShadow: 'none' }}>
@@ -174,19 +186,17 @@ function ProductCard({ product }) {
           <Link to={`/product/${product.itemNo}`} style={{ marginRight: '7%' }}>
             <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
           </Link>
-          <Link to={`/product/${product.itemNo}`}>
-            <AddToCartBtn variant="solid" disabled={false}>
-              <SvgIcon
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '51%',
-                  transform: 'translate(-50%, -50%)',
-                }}>
-                <CartIcon />
-              </SvgIcon>
-            </AddToCartBtn>
-          </Link>
+          <AddToCartBtn onClick={onClickAdd} variant="solid" disabled={false}>
+            <SvgIcon
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '51%',
+                transform: 'translate(-50%, -50%)',
+              }}>
+              <CartIcon />
+            </SvgIcon>
+          </AddToCartBtn>
         </Box>
       </Box>
       {currentPath !== '/' ? (
