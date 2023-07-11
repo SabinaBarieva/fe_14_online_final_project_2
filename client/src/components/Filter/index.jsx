@@ -61,8 +61,10 @@ function Filter() {
 
 function FilterSection() {
   const dispatch = useDispatch();
-  const [cachedMinValue, setCachedMinValue] = useState(null);
-  const [cachedMaxValue, setCachedMaxValue] = useState(null);
+  const minPrice = useSelector(({ filters }) => filters.minPrice);
+  const maxPrice = useSelector(({ filters }) => filters.maxPrice);
+  const [cachedMinValue, setCachedMinValue] = useState(minPrice);
+  const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
 
