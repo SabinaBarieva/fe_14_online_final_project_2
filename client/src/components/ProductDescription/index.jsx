@@ -74,13 +74,6 @@ function ProductDescription() {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
-  const changeMainPhoto = (e) => {
-    const urlString = e.target.getAttribute('src');
-    const url = new URL(urlString);
-    const path = url.pathname;
-    const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
-    setMainImage(cleanedPath);
-  };
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -118,9 +111,10 @@ function ProductDescription() {
           <Grid
             container
             sx={{
-              display: { xs: 'flex', md: 'none' },
+              display: 'flex',
               justifyContent: 'space-around',
               margin: '15px 0',
+              order: { xs: '0', md: '1' },
             }}>
             {imageUrls.map((photo) => (
               <Grid
@@ -134,10 +128,13 @@ function ProductDescription() {
                 }}>
                 <AdvancedImage
                   className="photo-from-gallery"
+                  data-img={photo}
                   width="100%"
                   cldImg={getImg.image(photo)}
                   alt="mini-img"
-                  onClick={changeMainPhoto}
+                  onClick={(e) => {
+                    setMainImage(e.target.getAttribute('data-img'));
+                  }}
                 />
               </Grid>
             ))}
@@ -216,33 +213,6 @@ function ProductDescription() {
                 Add to basket
               </Button>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: 'space-around',
-              marginTop: '15px',
-            }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '85px',
-                }}>
-                <AdvancedImage
-                  className="photo-from-gallery"
-                  width="100%"
-                  cldImg={getImg.image(photo)}
-                  alt="mini-img"
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
           </Grid>
         </Grid>
       </Grid>
