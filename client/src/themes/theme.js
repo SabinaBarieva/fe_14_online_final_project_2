@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 import '@fontsource/roboto';
 import '@fontsource/lato';
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {

@@ -39,10 +39,18 @@ const basketSlice = createSlice({
       if (findItem) {
         findItem.count -= 1;
       }
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
+      );
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
         (item) => item.itemNo !== action.payload.itemNo
+      );
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
       );
     },
     clearBasket(state) {
