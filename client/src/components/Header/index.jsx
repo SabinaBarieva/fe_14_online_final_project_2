@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { Outlet, NavLink } from 'react-router-dom';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
+import Search from '../Search';
 import { selectCart } from '../../redux/selectors';
+import AllContent from '../../themes/themeMain';
 
 function Header() {
   const { itemsBasket } = useSelector(selectCart);
@@ -17,10 +19,10 @@ function Header() {
     totalBasketItems();
   });
   return (
-    <>
+    <AllContent>
       <header>
         <NavLink to="/">LOGO</NavLink>
-        <input type="text" />
+        <Search />
         <NavLink to="/basket">
           basket content {totalInBasket === 0 ? null : totalInBasket}
         </NavLink>
@@ -28,7 +30,7 @@ function Header() {
       <BreadCrumbs />
       <Outlet />
       <Footer />
-    </>
+    </AllContent>
   );
 }
 

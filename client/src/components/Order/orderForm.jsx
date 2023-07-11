@@ -20,7 +20,7 @@ import {
 
 export default function OrderForm() {
   const dispatch = useDispatch();
-  const isOpenForm = useSelector((state) => state.toolkitForm.statusForm);
+  const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
 
   const closed = () => {
