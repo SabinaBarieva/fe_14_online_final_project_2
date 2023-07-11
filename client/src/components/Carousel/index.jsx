@@ -1,64 +1,53 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { connect } from 'react-redux';
-// import Product from '../Product';
-// import getProducts from '../../api/getProducts';
-
+import { Pagination, Navigation } from 'swiper';
+import { useSelector, useDispatch } from 'react-redux';
+// import { connect } from 'react-redux';
+import { Grid, Box } from '@mui/material';
+import ProductCard from '../ProductCard';
+import { fetchProducts } from '../../redux/slices/productsSlice';
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import './styles.css';
 
-import "./styles.css";
-
-// import required modules
-import { Pagination, Navigation } from "swiper";
-
-const Carousel = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // const { id, name, currentPrice, categories, imageUrls, color, brand } = products;
-  // console.log(product)
+function Carousel() {
+  const products = useSelector((state) => state.products.products);
+  const isFetching = useSelector((state) => state.products.isFetching);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts({}));
+  }, [dispatch]);
   return (
-    <> 
-    <h2 className='promo-title'>promotional offers</h2>
-    <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-      </Swiper>
-    {/* <Swiper spaceBetween={50} slidesPerView={3} onSlideChange={() => console.log('slide change')} onSwiper={(swiper) => console.log(swiper)}>
-      {products.map((product) => (
-          <SwiperSlide
-          key={product.name}
-          product={product}
-          >
-          </SwiperSlide>
-      ))}
-    </Swiper> */}
-    </>
+    <div>
+      {isFetching ? (
+        <div>Loading...</div>
+      ) : (
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper">
+          {products
+            .filter((el) => el.sale === true)
+            .map((product) => (
+              <SwiperSlide>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
+    </div>
   );
-};
-const mapStateToProps = (state) => ({
-  products: state.products.products,
-});
+}
+// const mapStateToProps = (state) => ({
+//   products: state.products.products,
+// });
 
-export default connect(mapStateToProps, null)(Carousel);
+export default Carousel;

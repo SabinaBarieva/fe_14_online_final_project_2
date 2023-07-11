@@ -7,6 +7,7 @@ import { styled } from '@mui/system';
 import ProductsList from '../../components/ProductsList';
 import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
+import Carousel from '../../components/Carousel';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.primary,
@@ -62,6 +63,10 @@ function HomeContent() {
             <ArrowIcon />
           </AllProductsBtn>
         </Link>
+      </Box>
+      <SectionTitle variant="h2">Promotional offers</SectionTitle>
+      <Box sx={{ width: '93%' }}>
+        <Carousel />
       </Box>
     </Container>
   );
