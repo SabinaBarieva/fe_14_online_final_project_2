@@ -68,8 +68,10 @@ function Filter() {
 
 function FilterSection() {
   const dispatch = useDispatch();
-  const [cachedMinValue, setCachedMinValue] = useState(null);
-  const [cachedMaxValue, setCachedMaxValue] = useState(null);
+  const minPrice = useSelector(({ filters }) => filters.minPrice);
+  const maxPrice = useSelector(({ filters }) => filters.maxPrice);
+  const [cachedMinValue, setCachedMinValue] = useState(minPrice);
+  const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
 
@@ -100,14 +102,18 @@ function FilterSection() {
   };
   const minPriceCallback = ({ target }) => {
     const { value } = target;
-    if (value < 0) setCachedMinValue(0);
-    else if (!isNumber(cachedMinValue)) setCachedMinValue(priceMinBoundary);
+    if (isNumber(value) && value < 0) setCachedMinValue(0);
+    else if (value === '') setCachedMinValue(null);
+    else if (!isNumber(cachedMinValue) && (value === '1' || value === '-1'))
+      setCachedMinValue(priceMinBoundary);
     else if (isNumber(value)) setCachedMinValue(value);
   };
   const maxPriceCallback = ({ target }) => {
     const { value } = target;
     if (value < 0) setCachedMaxValue(0);
-    else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
+    else if (value === '') setCachedMaxValue(null);
+    else if (!isNumber(cachedMaxValue) && (value === '1' || value === '-1'))
+      setCachedMaxValue(priceMaxBoundary);
     else if (isNumber(value)) setCachedMaxValue(value);
   };
   const setPriceCallback = () => {
@@ -175,6 +181,7 @@ function FilterSection() {
                     type="number"
                     min={priceMinBoundary}
                     onChange={minPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                     sx={{ width: '95%' }}
                   />
                 </Grid>
@@ -185,6 +192,7 @@ function FilterSection() {
                     placeholder={`${priceMaxBoundary} $`}
                     type="number"
                     onChange={maxPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                     sx={{
                       width: '95%',
                       padding: '0',
