@@ -2,9 +2,17 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import { styled } from '@mui/system';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  useMediaQuery,
+} from '@mui/material';
+import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
+import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
 import { setProduct } from '../../redux/slices/productSlice';
@@ -26,15 +34,23 @@ const CardContainer = styled(Card)(({ theme }) => ({
   },
 }));
 
-const CardImg = styled(CardMedia)(({ theme }) => ({
+/* const CardImg = styled(AdvancedImage)(({ theme }) => ({
   minWidth: '160px',
-  display: 'block',
   minHeight: '200px',
   borderRadius: '10px',
   marginBottom: '5%',
   maxHeight: '296px',
   maxWidth: '203px',
-}));
+  [theme.breakpoints.between('xs', 'md')]: {
+    maxWidth: '150px',
+  },
+  [theme.breakpoints.between('md', 'lg')]: {
+    maxWidth: '183px',
+  },
+  [theme.breakpoints.up('lg')]: {
+    maxWidth: '203px',
+  },
+})); */
 
 const DetailButton = styled(RadiusButton)(({ theme }) => ({
   fontSize: '0.625rem',
@@ -147,12 +163,22 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
+  const theme = useTheme();
+  /*   const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+  const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const breakpointDimensions = {
+    xs: { width: 150, height: 200 },
+    sm: { width: 150, height: 200 },
+    md: { width: 183, height: 289 },
+    lg: { width: 203, height: 293 },
+  }; */
+
   const handleDetailClick = () => {
     dispatch(setProduct(product));
   };
-  const handleAddToCartClick = () => {
-    dispatch(setProduct(product));
-  };
+
   const onClickAdd = () => {
     const item = {
       name: product.name,
@@ -168,10 +194,10 @@ function ProductCard({ product }) {
   return (
     <CardContainer sx={{ boxShadow: 'none' }}>
       <Box sx={{ position: 'relative' }}>
-        <CardImg
-          component="img"
-          alt={product.categories}
-          image="https://hotline.ua/img/tx/343/3437076345.jpg"
+        <AdvancedImage
+          width="100%"
+          cldImg={getImg.image(product.imageUrls[0])}
+          alt={product.name + product.color}
         />
         <Box
           sx={{

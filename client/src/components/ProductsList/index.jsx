@@ -58,23 +58,23 @@ function ProductsList({ perPage }) {
   const total = useSelector((state) => state.products.total);
   const storeProducts = useSelector((state) => state.products.products);
   const categories = useSelector((state) => state.categories.categories);
+  const filters = useSelector((state) => state.filters.filters);
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts({ categories, perPage, startPage: currentPage }));
   }, [dispatch, currentPage]);
 
-  console.log(storeProducts);
-
   const countPagination = Math.round(total / perPage);
   const location = useLocation();
   const currentPath = location.pathname;
   const products = isLoadMoreClicked ? loadedProducts : storeProducts;
-  const handleLoadMoreClick = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-    setLoadMoreClicked(true);
-    setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
-  };
+
+  useEffect(() => {
+    if (isLoadMoreClicked) {
+      setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
+    }
+  }, [isLoadMoreClicked, storeProducts]);
 
   const gridSpacing =
     currentPath === '/'
@@ -128,7 +128,10 @@ function ProductsList({ perPage }) {
                 <LoadMoreBtn
                   sx={{ textTransform: 'capitalize' }}
                   variant="solid"
-                  onClick={handleLoadMoreClick}>
+                  onClick={() => {
+                    setLoadMoreClicked(true);
+                    setCurrentPage((prevPage) => prevPage + 1);
+                  }}>
                   Load More
                 </LoadMoreBtn>
               </Box>
