@@ -12,8 +12,6 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 
 function App() {
-  // const id = useSelector() id товара
-  const id = 123;
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -23,10 +21,7 @@ function App() {
               <Route index element={<HomeContent />} />
               <Route path="/basket" element={<Basket />} />
               <Route path="/product" element={<ProductsContent />} />
-              <Route
-                path={`/product/:${id}`}
-                element={<ProductDescription />}
-              />
+              <Route path="/product/:id" element={<ProductDescription />} />
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </Routes>
