@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const sliceModal = createSlice({
+const modalSlice = createSlice({
   name: 'modal',
   initialState: {
     statusOrder: '',
@@ -21,5 +21,5 @@ const sliceModal = createSlice({
   },
 });
 
-export default sliceModal.reducer;
-export const { orderBasket, closeModal } = sliceModal.actions;
+export default modalSlice.reducer;
+export const { orderBasket, closeModal } = modalSlice.actions;

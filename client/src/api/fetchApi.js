@@ -4,9 +4,15 @@ import {
   notFoundErrorMessage,
 } from '../errors/errors';
 
-const fetchApi = async (url) => {
+const fetchApi = async (url, options) => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      ...options,
+    });
     if (response.ok && response.status === 200) {
       return await response.json();
     }

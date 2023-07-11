@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProducts from '../../api/getProducts';
 import { setErrorMessage } from './errorsSlice';
 
@@ -8,58 +8,51 @@ const initialState = {
   isFetching: false,
   isFetched: false,
 };
-// const getProducts = createAsyncThunk();
-const productsSlice = createSlice({
-  name: 'products',
-  initialState,
-  reducers: {
-    startFetchingProducts: (state) => {
-      state.isFetching = true;
-    },
-    finishFetchingProducts: (state, action) => {
-      state.isFetching = false;
-      state.isFetched = true;
-      state.products = action.payload.products;
-      state.total = action.payload.total;
-    },
-    errorFetchingProducts: (state) => {
-      state.isFetching = false;
-    },
-  },
-});
-
-export const {
-  startFetchingProducts,
-  finishFetchingProducts,
-  errorFetchingProducts,
-} = productsSlice.actions;
-export default productsSlice.reducer;
-export const fetchProducts =
-  ({ categories = [], perPage = 10, startPage = 1 }) =>
-  async (dispatch) => {
-    dispatch(startFetchingProducts());
+export const fetchProducts = createAsyncThunk(
+  'products/fetch',
+  async (
+    { categories = [], perPage = 10, startPage = 1, minPrice, maxPrice, sort },
+    { dispatch }
+  ) => {
     try {
-      const result = await getProducts({
+      return await getProducts({
         categories,
         startPage,
         perPage,
+        minPrice,
+        maxPrice,
+        sort,
       });
-      dispatch(
-        finishFetchingProducts({
-          products: result.products,
-          total: result.productsQuantity,
-        })
-      );
-    } catch (e) {
-      dispatch(
-        errorFetchingProducts({
-          error: e.message,
-        })
-      );
+    } catch (error) {
       dispatch(
         setErrorMessage({
-          error: e.message,
+          error: error.message,
         })
       );
+      throw error;
     }
-  };
+  }
+);
+const productsSlice = createSlice({
+  name: 'products',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProducts.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(fetchProducts.fulfilled, (state, { payload }) => {
+      const { products, productsQuantity } = payload;
+      state.products = products;
+      state.total = productsQuantity;
+      state.isFetching = false;
+      state.isFetched = true;
+    });
+    builder.addCase(fetchProducts.rejected, (state) => {
+      state.isFetching = false;
+      state.isFetched = false;
+    });
+  },
+});
+
+export default productsSlice.reducer;
