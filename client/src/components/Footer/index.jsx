@@ -7,7 +7,8 @@ import {
   TableFooter,
   CssBaseline,
 } from '@mui/material';
-import Img from '../Image';
+import { AdvancedImage } from '@cloudinary/react';
+import getImg from '../../cloudinary';
 
 const style = {
   background: '#484543',
@@ -53,40 +54,41 @@ function Footer() {
                 href="https://uk-ua.facebook.com/"
                 underline="none"
                 target="_blank">
-                <Img
+                {/* <Img
                   src="../../img/facebook.png"
                   alt="facebook"
                   className="link-img link-img__facebook"
+                /> */}
+                <AdvancedImage
+                  cldImg={getImg.image('footer/ktcnkvsswuh8c89e2rjb.png')}
+                  alt="facebook"
                 />
               </Link>
               <Link
                 href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F"
                 underline="none"
                 target="_blank">
-                <Img
-                  src="../../img/instagram.png"
+                <AdvancedImage
+                  cldImg={getImg.image('footer/mniuaxo36cyqgybjg40f.png')}
                   alt="instagram"
-                  className="link-img link-img__instagram"
                 />
               </Link>
               <Link
                 href="https://twitter.com/?lang=uk"
                 underline="none"
                 target="_blank">
-                <Img
-                  src="../../img/twitter.png"
+                <AdvancedImage
+                  cldImg={getImg.image('footer/j6a0n80trcx5p4ztqyqm.png')}
                   alt="twitter"
-                  className="link-img link-img__twitter"
                 />
               </Link>
               <Link
                 href="https://www.youtube.com/"
                 underline="none"
                 target="_blank">
-                <Img
-                  src="../../img/youtube.png"
+                <AdvancedImage
+                  cldImg={getImg.image('footer/ihssemitolz25bykodi4.png')}
                   alt="youtube"
-                  className="link-img link-img__youtube"
                 />
               </Link>
             </Stack>
