@@ -97,15 +97,18 @@ function FilterSection() {
     const { value } = target;
     if (isNumber(value) && value < 0) setCachedMinValue(0);
     else if (value === '') setCachedMinValue(null);
+    else if (!isNumber(cachedMinValue) && (value === '1' || value === '-1'))
+      setCachedMinValue(priceMinBoundary);
     else if (isNumber(value)) setCachedMinValue(value);
-    else if (!isNumber(cachedMinValue)) setCachedMinValue(priceMinBoundary);
   };
   const maxPriceCallback = ({ target }) => {
     const { value } = target;
     if (value < 0) setCachedMaxValue(0);
     else if (value === '') setCachedMaxValue(null);
+    else if (!isNumber(cachedMaxValue) && (value === '1' || value === '-1'))
+      setCachedMaxValue(priceMaxBoundary);
     else if (isNumber(value)) setCachedMaxValue(value);
-    else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
+    // else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
   };
   const setPriceCallback = () => {
     dispatch(setMinPrice(cachedMinValue));
