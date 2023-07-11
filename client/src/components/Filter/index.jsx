@@ -151,8 +151,9 @@ function FilterSection() {
             </FormLabel>
             <Stack>
               <Grid container justifyContent="space-between">
-                <Grid item md={6}>
+                <Grid item xs={6}>
                   <TextField
+                    size="small"
                     value={isNumber(cachedMinValue) ? cachedMinValue : ''}
                     placeholder={`${priceMinBoundary} $`}
                     type="number"
@@ -161,23 +162,26 @@ function FilterSection() {
                     sx={{ width: '95%' }}
                   />
                 </Grid>
-                <Grid item md={6} sx={{ textAlign: 'right' }}>
+                <Grid item xs={6} sx={{ textAlign: 'right' }}>
                   <TextField
+                    size="small"
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
                     placeholder={`${priceMaxBoundary} $`}
                     type="number"
                     onChange={maxPriceCallback}
-                    sx={{ width: '95%' }}
+                    sx={{ width: '95%', padding: '0' }}
                   />
                 </Grid>
               </Grid>
               <Grid container>
-                <Grid item xs={6} md={12}>
+                <Grid item xs={12}>
                   <Button
                     sx={{
-                      minWidth: { md: '100%' },
+                      minWidth: '100%',
                       borderRadius: '8px',
                       marginTop: '20px',
+                      textTransform: 'capitalize',
+                      background: '#000',
                     }}
                     variant="contained"
                     onClick={setPriceCallback}>
@@ -187,13 +191,31 @@ function FilterSection() {
                 <Grid item xs={6} md={12}>
                   <Button
                     sx={{
-                      minWidth: { md: '100%' },
-                      marginTop: { md: '65px' },
+                      width: { xs: '98%', md: '100%' },
+                      marginTop: { xs: '40%', md: '65px' },
+                      border: '1px solid #000',
                       borderRadius: '8px',
+                      textTransform: 'capitalize',
                     }}
                     variant="outlined"
                     onClick={resetFiltersCallback}>
                     Clear Filter
+                  </Button>
+                </Grid>
+                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                  <Button
+                    sx={{
+                      display: { md: 'none' },
+                      width: { xs: '98%' },
+                      marginTop: { xs: '40%' },
+                      borderRadius: '8px',
+                      textAlign: 'right',
+                      textTransform: 'capitalize',
+                      background: '#000',
+                    }}
+                    variant="contained"
+                    onClick={resetFiltersCallback}>
+                    Apply
                   </Button>
                 </Grid>
               </Grid>
