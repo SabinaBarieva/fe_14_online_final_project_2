@@ -11,7 +11,9 @@ import {
 } from '@mui/material';
 import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
-import { AdvancedImage, lazyload, responsive } from '@cloudinary/react';
+import { AdvancedImage, lazyload } from '@cloudinary/react';
+import { pad } from '@cloudinary/url-gen/actions/resize';
+import { color } from '@cloudinary/url-gen/qualifiers/background';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
@@ -164,16 +166,9 @@ function ProductCard({ product }) {
   const location = useLocation();
   const currentPath = location.pathname;
   const theme = useTheme();
-  /*   const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'md'));
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
-
-  const breakpointDimensions = {
-    xs: { width: 150, height: 200 },
-    sm: { width: 150, height: 200 },
-    md: { width: 183, height: 289 },
-    lg: { width: 203, height: 293 },
-  }; */
 
   const handleDetailClick = () => {
     dispatch(setProduct(product));
