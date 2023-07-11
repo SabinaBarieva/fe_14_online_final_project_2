@@ -108,7 +108,6 @@ function FilterSection() {
     else if (!isNumber(cachedMaxValue) && (value === '1' || value === '-1'))
       setCachedMaxValue(priceMaxBoundary);
     else if (isNumber(value)) setCachedMaxValue(value);
-    // else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
   };
   const setPriceCallback = () => {
     dispatch(setMinPrice(cachedMinValue));
@@ -160,6 +159,7 @@ function FilterSection() {
                     min={priceMinBoundary}
                     sx={{ width: '100px' }}
                     onChange={minPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                   />
                 </Grid>
                 <Grid item>
@@ -169,6 +169,7 @@ function FilterSection() {
                     type="number"
                     sx={{ width: '100px' }}
                     onChange={maxPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                   />
                 </Grid>
                 <Grid item>
