@@ -14,6 +14,7 @@ import {
   TextField,
   useMediaQuery,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -123,10 +124,19 @@ function FilterSection() {
   if (isLoadedFilters)
     return (
       <FilterStyles>
-        <h2>Filter</h2>
-        <Stack sx={{ width: '300px' }} padding={3} spacing={{ xs: 1, sm: 2 }}>
+        <Typography
+          sx={{ fontSize: '20px', fontWeight: '700', fontFamily: 'Roboto' }}>
+          Filter
+        </Typography>
+        <Stack
+          sx={{ width: '300px', fontFamily: 'Roboto' }}
+          padding={3}
+          spacing={{ xs: 1, sm: 2 }}>
           <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>
-            <FormLabel sx={{ fontWeight: 'bold' }}>Product Category</FormLabel>
+            <FormLabel
+              sx={{ fontWeight: '550', color: '#000', marginBottom: '10px' }}>
+              Product Category
+            </FormLabel>
             {[...categories]
               .sort((firstCategory, secondCategory) =>
                 firstCategory.name.localeCompare(secondCategory.name)
@@ -143,10 +153,16 @@ function FilterSection() {
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
+                    margin: '0',
                   }}
                 />
               ))}
-            <FormLabel sx={{ margin: '10px 0 20px', fontWeight: 'bold' }}>
+            <FormLabel
+              sx={{
+                margin: '10px 0 20px',
+                fontWeight: '550',
+                color: '#000',
+              }}>
               Price range
             </FormLabel>
             <Stack>
@@ -169,7 +185,10 @@ function FilterSection() {
                     placeholder={`${priceMaxBoundary} $`}
                     type="number"
                     onChange={maxPriceCallback}
-                    sx={{ width: '95%', padding: '0' }}
+                    sx={{
+                      width: '95%',
+                      padding: '0',
+                    }}
                   />
                 </Grid>
               </Grid>
