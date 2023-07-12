@@ -15,6 +15,7 @@ export default function BreadCrumbs() {
   const crumbs = [];
   let crumbPath = '';
   const [showSeparator, setShowSeparator] = useState(true);
+  const paramsId = Number(Object.keys(params)[0]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,7 +42,6 @@ export default function BreadCrumbs() {
 
       const isCurrentPage = location.pathname === crumbPath;
       const isLastCrumb = index === path.length - 1;
-
       if (isLastCrumb) {
         if (params.id && product) {
           crumbs.push(<StyledSpan key="paramsId">{product.name}</StyledSpan>);

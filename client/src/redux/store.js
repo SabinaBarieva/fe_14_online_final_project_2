@@ -21,6 +21,7 @@ import filtersSlice from './slices/filtersSlice';
 import basketSlice from './slices/basketSlice';
 import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
+import modalInProduct from './slices/productModalSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   basket: basketSlice,
   search: searchSlice,
   searchList: searchResultsSlice,
+  modalInProduct,
 });
 
 const persistConfig = {

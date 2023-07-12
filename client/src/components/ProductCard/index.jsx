@@ -272,22 +272,22 @@ function ProductCard({ product }) {
           </AddToCartBtn>
         </Box>
       </Box>
-        <CardInfo>
-          <ProductName
-            variant="h2"
-            sx={{
-              fontSize: {
-                sm: '1rem',
-                lg: '0.875rem',
-              },
-            }}>
-            {product.name}
-          </ProductName>
-          <ProductPrice>
-            {`\u0024`}
-            {product.currentPrice}
-          </ProductPrice>
-        </CardInfo>
+      <CardInfo>
+        <ProductName
+          variant="h2"
+          sx={{
+            fontSize: {
+              sm: '1rem',
+              lg: '0.875rem',
+            },
+          }}>
+          {product.name}
+        </ProductName>
+        <ProductPrice>
+          {`\u0024`}
+          {product.currentPrice}
+        </ProductPrice>
+      </CardInfo>
       ) : null}
     </CardContainer>
   );

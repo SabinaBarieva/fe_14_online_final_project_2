@@ -14,6 +14,7 @@ import {
   TextField,
   useMediaQuery,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -26,6 +27,7 @@ import {
   setMinPrice,
 } from '../../redux/slices/filtersSlice';
 import theme from '../../themes/theme';
+import { FilterStyles } from '../../themes/themeFilter';
 
 function Filter() {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -46,7 +48,12 @@ function Filter() {
         <FilterAltIcon />
       </IconButton>
 
-      <Dialog fullScreen open={filterOpen}>
+      <Dialog
+        fullScreen
+        open={filterOpen}
+        sx={{
+          display: 'flex',
+        }}>
         <IconButton onClick={closeCallback}>
           <CancelIcon
             sx={{ position: 'absolute', top: '30px', right: '30px' }}
@@ -61,8 +68,10 @@ function Filter() {
 
 function FilterSection() {
   const dispatch = useDispatch();
-  const [cachedMinValue, setCachedMinValue] = useState(null);
-  const [cachedMaxValue, setCachedMaxValue] = useState(null);
+  const minPrice = useSelector(({ filters }) => filters.minPrice);
+  const maxPrice = useSelector(({ filters }) => filters.maxPrice);
+  const [cachedMinValue, setCachedMinValue] = useState(minPrice);
+  const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
 
@@ -93,14 +102,18 @@ function FilterSection() {
   };
   const minPriceCallback = ({ target }) => {
     const { value } = target;
-    if (value < 0) setCachedMinValue(0);
-    else if (!isNumber(cachedMinValue)) setCachedMinValue(priceMinBoundary);
+    if (isNumber(value) && value < 0) setCachedMinValue(0);
+    else if (value === '') setCachedMinValue(null);
+    else if (!isNumber(cachedMinValue) && (value === '1' || value === '-1'))
+      setCachedMinValue(priceMinBoundary);
     else if (isNumber(value)) setCachedMinValue(value);
   };
   const maxPriceCallback = ({ target }) => {
     const { value } = target;
     if (value < 0) setCachedMaxValue(0);
-    else if (!isNumber(cachedMaxValue)) setCachedMaxValue(priceMaxBoundary);
+    else if (value === '') setCachedMaxValue(null);
+    else if (!isNumber(cachedMaxValue) && (value === '1' || value === '-1'))
+      setCachedMaxValue(priceMaxBoundary);
     else if (isNumber(value)) setCachedMaxValue(value);
   };
   const setPriceCallback = () => {
@@ -116,72 +129,127 @@ function FilterSection() {
   if (isLoadingFilters) return <CircularProgress />;
   if (isLoadedFilters)
     return (
-      <section>
-        <h2>Filters</h2>
-        <Stack sx={{ width: '300px' }} padding={3} spacing={{ xs: 1, sm: 2 }}>
+      <FilterStyles>
+        <Typography
+          sx={{ fontSize: '20px', fontWeight: '700', fontFamily: 'Roboto' }}>
+          Filter
+        </Typography>
+        <Stack
+          sx={{ width: '300px', fontFamily: 'Roboto' }}
+          padding={3}
+          spacing={{ xs: 1, sm: 2 }}>
           <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>
-            <FormLabel>Product Category</FormLabel>
+            <FormLabel
+              sx={{ fontWeight: '550', color: '#000', marginBottom: '10px' }}>
+              Product Category
+            </FormLabel>
             {[...categories]
               .sort((firstCategory, secondCategory) =>
                 firstCategory.name.localeCompare(secondCategory.name)
               )
-              .map(({ name: categoryName, id, quantity }) => (
+              .map(({ name: categoryName, id }) => (
                 <FormControlLabel
                   key={id}
                   control={<Checkbox />}
-                  label={`${categoryName} (${quantity})`}
+                  label={`${categoryName}`}
                   name={id}
                   checked={selectedCategories.includes(id)}
                   labelPlacement="start"
                   onClick={categoryCheckboxCallback}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    margin: '0',
+                  }}
                 />
               ))}
-            <FormLabel>Price</FormLabel>
-            <Stack spacing={{ xs: 3 }}>
-              <Grid
-                container
-                spacing={2}
-                rowGap={2}
-                justifyContent="center"
-                justifyItems="center">
-                <Grid item>
+            <FormLabel
+              sx={{
+                margin: '10px 0 20px',
+                fontWeight: '550',
+                color: '#000',
+              }}>
+              Price range
+            </FormLabel>
+            <Stack>
+              <Grid container justifyContent="space-between">
+                <Grid item xs={6}>
                   <TextField
+                    size="small"
                     value={isNumber(cachedMinValue) ? cachedMinValue : ''}
-                    placeholder="Min"
-                    size="10"
+                    placeholder={`${priceMinBoundary} $`}
                     type="number"
                     min={priceMinBoundary}
-                    sx={{ width: '100px' }}
                     onChange={minPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
+                    sx={{ width: '95%' }}
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={6} sx={{ textAlign: 'right' }}>
                   <TextField
+                    size="small"
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
-                    placeholder="Max"
+                    placeholder={`${priceMaxBoundary} $`}
                     type="number"
-                    sx={{ width: '100px' }}
                     onChange={maxPriceCallback}
+                    onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
+                    sx={{
+                      width: '95%',
+                      padding: '0',
+                    }}
                   />
                 </Grid>
-                <Grid item>
-                  <Button variant="contained" onClick={setPriceCallback}>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Button
+                    sx={{
+                      minWidth: '100%',
+                      borderRadius: '8px',
+                      marginTop: '20px',
+                      textTransform: 'capitalize',
+                      background: '#000',
+                    }}
+                    variant="contained"
+                    onClick={setPriceCallback}>
                     Set Price
                   </Button>
                 </Grid>
-                <Grid item>
+                <Grid item xs={6} md={12}>
                   <Button
-                    variant="contained"
-                    width={3}
+                    sx={{
+                      width: { xs: '98%', md: '100%' },
+                      marginTop: { xs: '40%', md: '65px' },
+                      border: '1px solid #000',
+                      borderRadius: '8px',
+                      textTransform: 'capitalize',
+                    }}
+                    variant="outlined"
                     onClick={resetFiltersCallback}>
-                    Reset
+                    Clear Filter
+                  </Button>
+                </Grid>
+                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                  <Button
+                    sx={{
+                      display: { md: 'none' },
+                      width: { xs: '98%' },
+                      marginTop: { xs: '40%' },
+                      borderRadius: '8px',
+                      textAlign: 'right',
+                      textTransform: 'capitalize',
+                      background: '#000',
+                    }}
+                    variant="contained"
+                    onClick={resetFiltersCallback}>
+                    Apply
                   </Button>
                 </Grid>
               </Grid>
             </Stack>
           </FormGroup>
         </Stack>
-      </section>
+      </FilterStyles>
     );
 }
 export default Filter;
