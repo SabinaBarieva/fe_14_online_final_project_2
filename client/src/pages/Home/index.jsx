@@ -8,6 +8,7 @@ import ProductsList from '../../components/ProductsList';
 import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
 import Category from '../../components/Category';
+import ModalBasket from '../../components/ModalForBasket';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.primary,
@@ -39,6 +40,7 @@ function HomeContent() {
   return (
     <Container maxWidth="xxl">
       <Category />
+      <ModalBasket />
       <Container
         maxWidth="xxl"
         sx={{
