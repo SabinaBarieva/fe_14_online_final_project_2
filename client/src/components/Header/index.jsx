@@ -17,9 +17,9 @@ import {
   ListItem,
   CssBaseline,
 } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
@@ -93,7 +93,9 @@ function Header() {
               <Search />
               <NavLink to="/basket">
                 <Grid container direction="row">
-                  <ShoppingCartIcon />
+                  <ShoppingCartOutlinedIcon
+                    sx={{ color: '#616467', width: '28.7px', height: '32px' }}
+                  />
                   <Typography>
                     {totalInBasket === 0 ? null : totalInBasket}
                   </Typography>
@@ -135,7 +137,9 @@ function Header() {
             </div>
             <NavLink to="/basket">
               <Grid container direction="row">
-                <ShoppingCartIcon />
+                <ShoppingCartOutlinedIcon
+                  sx={{ color: '#616467', width: '28.7px', height: '32px' }}
+                />
                 <Typography>
                   {totalInBasket === 0 ? null : totalInBasket}
                 </Typography>
