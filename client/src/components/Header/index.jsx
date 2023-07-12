@@ -10,6 +10,12 @@ import {
   Toolbar,
   Container,
   Hidden,
+  IconButton,
+  SwipeableDrawer,
+  Divider,
+  List,
+  ListItem,
+  CssBaseline,
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,6 +30,7 @@ import AllContent from '../../themes/themeMain';
 function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const [totalInBasket, setTotalInBasket] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
@@ -34,18 +41,23 @@ function Header() {
   });
   return (
     <AllContent>
+      <CssBaseline />
       <AppBar
         position="sticky"
-        color="default"
         sx={{
-          padding: {
-            xs: '0 0 0 1.25rem',
-            md: '0 0.01rem 0.19rem 3.44rem',
-            lg: '2.81rem 4.81rem 1.94rem 6.5rem',
-          },
+          background: '#F8F8F8',
+          boxShadow: 'none',
         }}>
-        <Container maxWidth="100%">
-          <Toolbar>
+        <Container maxWidth="100%" style={{ padding: '0' }}>
+          <Toolbar
+            sx={{
+              justifyContent: 'space-between',
+              padding: {
+                xs: '0 0 0 1.25rem',
+                md: '0 0 0 3.44rem',
+                lg: '2.75rem 4.81rem 1.94rem 6.5rem',
+              },
+            }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
               <Grid container direction="row">
                 <Typography
@@ -77,7 +89,7 @@ function Header() {
                 </Stack>
               </Grid>
             </NavLink>
-            <Hidden mdDown>
+            <Hidden lgDown>
               <Search />
               <NavLink to="/basket">
                 <Grid container direction="row">
@@ -88,11 +100,55 @@ function Header() {
                 </Grid>
               </NavLink>
             </Hidden>
-            <Hidden mdUp>
-              <MenuIcon />
+            <Hidden lgUp>
+              <IconButton style={{ padding: '0' }}>
+                <MenuIcon
+                  onClick={() => setOpen(true)}
+                  sx={{
+                    backgroundColor: '#393D45',
+                    color: '#F4F4F4',
+                    width: '100%',
+                    height: '100%',
+                    maxWidth: { xs: '52px', md: '114px' },
+                    maxHeight: { xs: '52px', md: '109px' },
+                  }}
+                />
+              </IconButton>
             </Hidden>
           </Toolbar>
         </Container>
+        <SwipeableDrawer
+          anchor="top"
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ padding: '0.5rem' }}>
+            <div>
+              <IconButton>
+                <CloseIcon onClick={() => setOpen(false)} />
+              </IconButton>
+            </div>
+            <NavLink to="/basket">
+              <Grid container direction="row">
+                <ShoppingCartIcon />
+                <Typography>
+                  {totalInBasket === 0 ? null : totalInBasket}
+                </Typography>
+              </Grid>
+            </NavLink>
+          </Grid>
+          <Divider />
+          <List>
+            <ListItem>
+              <Search />
+            </ListItem>
+          </List>
+        </SwipeableDrawer>
       </AppBar>
       <BreadCrumbs />
       <Outlet />
