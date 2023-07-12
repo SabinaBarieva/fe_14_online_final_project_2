@@ -3,12 +3,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
+import { Close } from '@mui/icons-material';
 import { getProduct } from '../../redux/slices/productSlice';
 import { addSeveraltoBasket } from '../../redux/slices/basketSlice';
-import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
+import {
+  currentProduct,
+  currentProductIsLoading,
+  modaInProductSlice,
+  selectCart,
+} from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
   Title,
@@ -18,6 +30,7 @@ import {
   CountInput,
   Guarantee,
 } from '../../themes/themeProduct';
+import { openModal, closeModal } from '../../redux/slices/productModalSlice';
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -39,6 +52,8 @@ function ProductDescription() {
     dispatch(getProduct(id));
   }, [dispatch]);
 
+  const { isModalOpen, text } = useSelector(modaInProductSlice);
+  const { itemsBasket } = useSelector(selectCart);
   const [countToBasket, setCountToBasket] = useState(1);
   // eslint-disable-next-line consistent-return
   const increase = () => {
@@ -56,7 +71,20 @@ function ProductDescription() {
       setCountToBasket(+value);
     }
   };
+
+  // eslint-disable-next-line consistent-return
   const clickToBasket = () => {
+    const seachItem = itemsBasket.find((item) => item.itemNo === itemNo);
+
+    if (seachItem) {
+      const count = quantity - seachItem.count;
+      if (
+        countToBasket + seachItem.count > quantity &&
+        quantity - seachItem.count !== 0
+      ) {
+        return dispatch(openModal(count));
+      }
+    }
     const item = {
       itemNo,
       imageUrls,
@@ -81,141 +109,163 @@ function ProductDescription() {
 
   if (imageUrls) {
     return (
-      <Grid container sx={{ width: '91%', margin: '25px auto' }}>
-        <Grid
-          item
-          xs={12}
-          md={5}
+      <>
+        <Dialog
+          open={isModalOpen}
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            textAlign: 'center',
           }}>
-          <AdvancedImage
-            className="main-photo"
-            width="100%"
-            cldImg={getImg.image(mainImage)}
-            alt="main-img"
+          <Close
+            sx={{
+              position: 'absolute',
+              top: '8px',
+              right: '8px',
+            }}
+            onClick={() => {
+              dispatch(closeModal());
+            }}
           />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={7}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            width: '90%',
-          }}>
+          <DialogTitle>Not enough products</DialogTitle>
+          <DialogContent>
+            <DialogContentText>{text}</DialogContentText>
+          </DialogContent>
+        </Dialog>
+        <Grid container sx={{ width: '91%', margin: '25px auto' }}>
           <Grid
-            container
+            item
+            xs={12}
+            md={5}
             sx={{
               display: 'flex',
-              justifyContent: 'space-around',
-              margin: '15px 0',
-              order: { xs: '0', md: '1' },
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: { sm: '144px', xs: '66px' },
-                }}>
-                <AdvancedImage
-                  className="photo-from-gallery"
-                  data-img={photo}
-                  width="100%"
-                  cldImg={getImg.image(photo)}
-                  alt="mini-img"
-                  onClick={(e) => {
-                    setMainImage(e.target.getAttribute('data-img'));
+            <AdvancedImage
+              className="main-photo"
+              width="100%"
+              cldImg={getImg.image(mainImage)}
+              alt="main-img"
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={7}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-around',
+              width: '90%',
+            }}>
+            <Grid
+              container
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                margin: '15px 0',
+                order: { xs: '0', md: '1' },
+              }}>
+              {imageUrls.map((photo) => (
+                <Grid
+                  key={photo}
+                  item
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: { sm: '144px', xs: '66px' },
+                  }}>
+                  <AdvancedImage
+                    className="photo-from-gallery"
+                    data-img={photo}
+                    width="100%"
+                    cldImg={getImg.image(photo)}
+                    alt="mini-img"
+                    onClick={(e) => {
+                      setMainImage(e.target.getAttribute('data-img'));
+                    }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+            <Guarantee>{itemNo}</Guarantee>
+            <Title>
+              {brand} {name} {storage} {color}
+            </Title>
+            <Description>{description}</Description>
+            <Price>Price: {currentPrice}$</Price>
+            <Guarantee>Apple guarantee {guarantee}</Guarantee>
+            <Grid container>
+              <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
+                <CountBoxes
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}
+                  disabled={countToBasket <= 1}
+                  onClick={() => {
+                    decrease();
+                  }}>
+                  -
+                </CountBoxes>
+                <CountInput
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}
+                  type="number"
+                  controls={false}
+                  value={countToBasket}
+                  min={1}
+                  onBlur={(e) => {
+                    // eslint-disable-next-line no-unused-expressions
+                    e.target.value === '' ? setCountToBasket(1) : null;
+                  }}
+                  onChange={(e) => {
+                    onChangeValue(e.target.value);
                   }}
                 />
+                <CountBoxes
+                  sx={{
+                    width: { xs: '35px', sm: '57px', md: '46px' },
+                    height: { xs: '35px', sm: '57px', md: '46px' },
+                  }}
+                  disabled={countToBasket === quantity}
+                  onClick={() => {
+                    increase();
+                  }}>
+                  +
+                </CountBoxes>
               </Grid>
-            ))}
-          </Grid>
-          <Guarantee>{itemNo}</Guarantee>
-          <Title>
-            {brand} {name} {storage} {color}
-          </Title>
-          <Description>{description}</Description>
-          <Price>Price: {currentPrice}$</Price>
-          <Guarantee>Apple guarantee {guarantee}</Guarantee>
-          <Grid container>
-            <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}
-                disabled={countToBasket <= 1}
-                onClick={() => {
-                  decrease();
-                }}>
-                -
-              </CountBoxes>
-              <CountInput
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}
-                type="number"
-                controls={false}
-                value={countToBasket}
-                min={1}
-                onBlur={(e) => {
-                  // eslint-disable-next-line no-unused-expressions
-                  e.target.value === '' ? setCountToBasket(1) : null;
-                }}
-                onChange={(e) => {
-                  onChangeValue(e.target.value);
-                }}
-              />
-              <CountBoxes
-                sx={{
-                  width: { xs: '35px', sm: '57px', md: '46px' },
-                  height: { xs: '35px', sm: '57px', md: '46px' },
-                }}
-                disabled={countToBasket === quantity}
-                onClick={() => {
-                  increase();
-                }}>
-                +
-              </CountBoxes>
-            </Grid>
-            <Grid item md={8} xs={12}>
-              <Button
-                sx={{
-                  marginTop: { xs: '10px', md: '0' },
-                  padding: '9px 18px',
-                  backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-                  color: { xs: '#616467', md: '#fff' },
-                  borderRadius: 0,
-                  border: '1px solid #211F1C',
-                  '&:hover': {
-                    backgroundColor: { xs: '#211F1C', md: '#fff' },
-                    color: { xs: '#F5F7FB', md: '#211F1C' },
-                    border: {
-                      xs: '1px solid #211F1C',
-                      md: '1px solid #211F1C',
+              <Grid item md={8} xs={12}>
+                <Button
+                  sx={{
+                    marginTop: { xs: '10px', md: '0' },
+                    padding: '9px 18px',
+                    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                    color: { xs: '#616467', md: '#fff' },
+                    borderRadius: 0,
+                    border: '1px solid #211F1C',
+                    '&:hover': {
+                      backgroundColor: { xs: '#211F1C', md: '#fff' },
+                      color: { xs: '#F5F7FB', md: '#211F1C' },
+                      border: {
+                        xs: '1px solid #211F1C',
+                        md: '1px solid #211F1C',
+                      },
                     },
-                  },
-                }}
-                variant="contained"
-                onClick={() => {
-                  clickToBasket();
-                }}>
-                Add to basket
-              </Button>
+                  }}
+                  variant="contained"
+                  onClick={() => {
+                    clickToBasket();
+                  }}>
+                  Add to basket
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </>
     );
   }
 }

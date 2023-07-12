@@ -38,10 +38,18 @@ const basketSlice = createSlice({
       if (findItem) {
         findItem.count -= 1;
       }
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
+      );
     },
     deleteBasket: (state, action) => {
       state.itemsBasket = state.itemsBasket.filter(
         (item) => item.itemNo !== action.payload.itemNo
+      );
+      state.priceAll = state.itemsBasket.reduce(
+        (sum, item) => item.currentPrice * item.count + sum,
+        0
       );
     },
     clearBasket(state) {
@@ -54,16 +62,6 @@ const basketSlice = createSlice({
         (item) => item.itemNo === action.payload.itemNo
       );
       if (seachItem) {
-        if (
-          action.payload.count + seachItem.count > seachItem.quantity &&
-          seachItem.quantity - seachItem.count !== 0
-        ) {
-          return alert(
-            `ДЕМО СТРОКА! можна додати ще не більше ніж ${
-              seachItem.quantity - seachItem.count
-            } до вже вибраної кількості товарів`
-          );
-        }
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += action.payload.count;
         } else {

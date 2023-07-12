@@ -7,6 +7,7 @@ import { styled } from '@mui/system';
 import ProductsList from '../../components/ProductsList';
 import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
+import Category from '../../components/Category';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.primary,
@@ -36,33 +37,36 @@ function HomeContent() {
   /* const id = 123; */
 
   return (
-    <Container
-      maxWidth="xxl"
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        backgroundColor: '#FCF9F6',
-      }}>
-      <SectionTitle variant="h2">Products</SectionTitle>
-      <Box sx={{ width: '93%' }}>
-        <ProductsList />
-      </Box>
-      <Box sx={{ margin: '3% auto' }}>
-        <Link to="/product">
-          <AllProductsBtn sx={{ alignItems: 'center' }}>
-            <Typography
-              sx={{
-                fontSize: '0.75rem',
-                textTransform: 'capitalize',
-                marginRight: '5%',
-              }}>
-              All Products
-            </Typography>
-            <ArrowIcon />
-          </AllProductsBtn>
-        </Link>
-      </Box>
+    <Container maxWidth="xxl">
+      <Category />
+      <Container
+        maxWidth="xxl"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          backgroundColor: '#FCF9F6',
+        }}>
+        <SectionTitle variant="h2">Products</SectionTitle>
+        <Box sx={{ width: '93%' }}>
+          <ProductsList />
+        </Box>
+        <Box sx={{ margin: '3% auto' }}>
+          <Link to="/product">
+            <AllProductsBtn sx={{ alignItems: 'center' }}>
+              <Typography
+                sx={{
+                  fontSize: '0.75rem',
+                  textTransform: 'capitalize',
+                  marginRight: '5%',
+                }}>
+                All Products
+              </Typography>
+              <ArrowIcon />
+            </AllProductsBtn>
+          </Link>
+        </Box>
+      </Container>
     </Container>
   );
 }
