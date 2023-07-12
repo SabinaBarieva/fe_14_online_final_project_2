@@ -62,12 +62,6 @@ const basketSlice = createSlice({
         (item) => item.itemNo === action.payload.itemNo
       );
       if (seachItem) {
-        if (
-          action.payload.count + seachItem.count > seachItem.quantity &&
-          seachItem.quantity - seachItem.count !== 0
-        ) {
-          return;
-        }
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += action.payload.count;
         } else {
