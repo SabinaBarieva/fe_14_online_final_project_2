@@ -3,13 +3,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { Close } from '@mui/icons-material';
 import { getProduct } from '../../redux/slices/productSlice';
 import { addSeveraltoBasket } from '../../redux/slices/basketSlice';
-import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
+import {
+  currentProduct,
+  currentProductIsLoading,
+  modaInProductSlice,
+  selectCart,
+} from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
   Title,
@@ -19,6 +30,7 @@ import {
   CountInput,
   Guarantee,
 } from '../../themes/themeProduct';
+import { openModal, closeModal } from '../../redux/slices/productModalSlice';
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -40,6 +52,8 @@ function ProductDescription() {
     dispatch(getProduct(id));
   }, [dispatch]);
 
+  const { isModalOpen, text } = useSelector(modaInProductSlice);
+  const { itemsBasket } = useSelector(selectCart);
   const [countToBasket, setCountToBasket] = useState(1);
   // eslint-disable-next-line consistent-return
   const increase = () => {
@@ -57,7 +71,20 @@ function ProductDescription() {
       setCountToBasket(+value);
     }
   };
+
+  // eslint-disable-next-line consistent-return
   const clickToBasket = () => {
+    const seachItem = itemsBasket.find((item) => item.itemNo === itemNo);
+
+    if (seachItem) {
+      const count = quantity - seachItem.count;
+      if (
+        countToBasket + seachItem.count > quantity &&
+        quantity - seachItem.count !== 0
+      ) {
+        return dispatch(openModal(count));
+      }
+    }
     const item = {
       itemNo,
       imageUrls,
@@ -76,8 +103,6 @@ function ProductDescription() {
     }
   }, [imageUrls]);
 
-  const [open, setOpen] = useState(true);
-
   if (isLoading) {
     return <div>LOADING</div>;
   }
@@ -86,25 +111,24 @@ function ProductDescription() {
     return (
       <>
         <Dialog
-          open={open}
+          open={isModalOpen}
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
             textAlign: 'center',
           }}>
           <Close
             sx={{
               position: 'absolute',
-              top: '5px',
-              right: '5px',
+              top: '8px',
+              right: '8px',
             }}
             onClick={() => {
-              setOpen(false);
+              dispatch(closeModal());
             }}
           />
           <DialogTitle>Not enough products</DialogTitle>
-          <DialogContent>You can add not more than ... products</DialogContent>
+          <DialogContent>
+            <DialogContentText>{text}</DialogContentText>
+          </DialogContent>
         </Dialog>
         <Grid container sx={{ width: '91%', margin: '25px auto' }}>
           <Grid

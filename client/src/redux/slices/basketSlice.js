@@ -66,11 +66,7 @@ const basketSlice = createSlice({
           action.payload.count + seachItem.count > seachItem.quantity &&
           seachItem.quantity - seachItem.count !== 0
         ) {
-          return alert(
-            `ДЕМО СТРОКА! можна додати ще не більше ніж ${
-              seachItem.quantity - seachItem.count
-            } до вже вибраної кількості товарів`
-          );
+          return;
         }
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += action.payload.count;

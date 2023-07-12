@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isOpen: true,
+  isModalOpen: false,
   text: '',
 };
 const modalInProduct = createSlice({
@@ -9,11 +9,12 @@ const modalInProduct = createSlice({
   initialState,
   reducers: {
     openModal(state, action) {
-      state.isOpen = true;
-      state.text = `Hlo`;
+      state.isModalOpen = true;
+      state.text = `You can add not more than ${action.payload} products`;
     },
     closeModal(state) {
-      state.statusModal = false;
+      state.isModalOpen = false;
+      state.text = '';
     },
   },
 });
