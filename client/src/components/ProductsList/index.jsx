@@ -57,14 +57,25 @@ function ProductsList({ perPage }) {
   const [isLoadMoreClicked, setLoadMoreClicked] = useState(false);
   const total = useSelector((state) => state.products.total);
   const storeProducts = useSelector((state) => state.products.products);
-  const categories = useSelector((state) => state.categories.categories);
-  const filters = useSelector((state) => state.filters.filters);
+  const categories = useSelector((state) => state.filters.categories);
+  const minFilterPrice = useSelector((state) => state.filters.minPrice);
+  const maxFilterPrice = useSelector((state) => state.filters.maxPrice);
+  const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
+  const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
+  console.log(formattedMinPrice);
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts({ categories, perPage, startPage: currentPage }));
-  }, [dispatch, currentPage]);
-
+    dispatch(
+      fetchProducts({
+        categories,
+        perPage,
+        startPage: currentPage,
+        minPrice: formattedMinPrice,
+        maxPrice: formattedMaxPrice,
+      })
+    );
+  }, [dispatch, currentPage, formattedMinPrice, formattedMaxPrice]);
 
   const countPagination = Math.round(total / perPage);
   const location = useLocation();

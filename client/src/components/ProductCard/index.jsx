@@ -12,7 +12,7 @@ import {
 import { styled, useTheme, shadows } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
 import { AdvancedImage } from '@cloudinary/react';
-import { pad } from '@cloudinary/url-gen/actions/resize';
+import { fit, pad, fill } from '@cloudinary/url-gen/actions/resize';
 import { color } from '@cloudinary/url-gen/qualifiers/background';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
@@ -23,9 +23,11 @@ import { addToBasket } from '../../redux/slices/basketSlice';
 
 const CardContainer = styled(Card)(({ theme }) => ({
   outline: `solid 1px transparent`,
+  borderRadius: '25px',
   marginBottom: '5%',
-  minWidth: 'fit-content',
   backgroundColor: 'transparent',
+  minHeight: '200px',
+  maxHeight: '418px',
   [theme.breakpoints.between('xs', 'md')]: {
     maxWidth: '150px',
     minHeight: '200px',
@@ -40,7 +42,7 @@ const CardContainer = styled(Card)(({ theme }) => ({
   },
 }));
 
-const CardImg = styled(AdvancedImage)(({ theme }) => ({
+/* const CardImg = styled(AdvancedImage)(({ theme }) => ({
   minWidth: '160px',
   minHeight: '200px',
   borderRadius: '10px',
@@ -56,7 +58,7 @@ const CardImg = styled(AdvancedImage)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     maxWidth: '203px',
   },
-}));
+})); */
 
 const DetailButton = styled(RadiusButton)(({ theme }) => ({
   fontSize: '0.625rem',
@@ -176,7 +178,7 @@ function ProductCard({ product }) {
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
 
-  /* const getImageSize = () => {
+  const getImageSize = () => {
     const currentBreakpoints = {
       xs: xsBreakpoint,
       md: mdBreakpoint,
@@ -213,7 +215,7 @@ function ProductCard({ product }) {
       return imageSizesHomePage[currentBreakpoint];
     }
     return { width: 150, height: 200 };
-  }; */
+  };
 
   const handleDetailClick = () => {
     dispatch(setProduct(product));
@@ -230,20 +232,18 @@ function ProductCard({ product }) {
     };
     dispatch(addToBasket(item));
   };
-
   return (
     <CardContainer sx={{ boxShadow: 6 }}>
       <Box sx={{ position: 'relative' }}>
         <AdvancedImage
           width="100%"
-          cldImg={
-            getImg.image(product.imageUrls[0])
-            /*  .resize(
-              pad().width(imageSize.width).height(imageSize.height)
-              .background(color(`${theme.palette.primary.section}`))
+          cldImg={getImg
+            .image(product.imageUrls[0])
+            .resize(
+              fill().width(getImageSize().width).height(getImageSize().height)
+              /* .background(color(`white`)) */
             )
-            .roundCorners(byRadius(50, 50)) */
-          }
+            .roundCorners(byRadius(15, 15))}
           alt={product.name + product.color}
         />
         <Box
@@ -272,7 +272,6 @@ function ProductCard({ product }) {
           </AddToCartBtn>
         </Box>
       </Box>
-      {currentPath !== '/' ? (
         <CardInfo>
           <ProductName
             variant="h2"
@@ -303,7 +302,7 @@ ProductCard.propTypes = {
     quantity: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
-    storage: PropTypes.string.isRequired,
+    storage: PropTypes.string,
     itemNo: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     guarantee: PropTypes.string.isRequired,
