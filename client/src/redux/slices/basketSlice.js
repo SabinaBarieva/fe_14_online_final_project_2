@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   priceAll: 0,
   itemsBasket: [],
-  modal: 'false',
-  modalText: 'text',
+  modal: false,
+  modalText: '',
 };
 const basketSlice = createSlice({
   name: 'basket',
@@ -18,8 +18,8 @@ const basketSlice = createSlice({
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += 1;
         } else {
-          state.modal = 'true';
-          state.modalText = `Sory, there are only ${seachItem.quantity} units of this product in stock`;
+          state.modal = true;
+          state.modalText = `Sorry, there are only ${seachItem.quantity} units of this product in stock`;
         }
       } else {
         state.itemsBasket.push({
@@ -76,9 +76,8 @@ const basketSlice = createSlice({
         if (seachItem.count !== seachItem.quantity) {
           seachItem.count += action.payload.count;
         } else {
-          window.confirm(
-            'Sorry, the product you have chosen is no longer in stock.'
-          );
+          state.modal = true;
+          state.modalText = `Sorry, there are only ${seachItem.quantity} units of this product in stock`;
         }
       } else {
         state.itemsBasket.push({
@@ -93,6 +92,7 @@ const basketSlice = createSlice({
     },
     closeModalBasket(state) {
       state.modal = false;
+      state.modalText = '';
     },
   },
 });
