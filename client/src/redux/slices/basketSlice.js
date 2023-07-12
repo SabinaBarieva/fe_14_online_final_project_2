@@ -51,7 +51,6 @@ const basketSlice = createSlice({
         (sum, item) => item.currentPrice * item.count + sum,
         0
       );
-      
     },
     clearBasket(state) {
       state.itemsBasket = [];

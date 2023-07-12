@@ -29,7 +29,7 @@ import {
   minusItem,
 } from '../../redux/slices/basketSlice';
 import cld from '../../cloudinary';
-import { theme } from '../../themes/theme';
+import theme from '../../themes/theme';
 import BasketEmpty from '../../components/BasketEmpty';
 
 const columns = [
