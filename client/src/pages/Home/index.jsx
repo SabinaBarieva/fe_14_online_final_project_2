@@ -7,6 +7,7 @@ import { styled } from '@mui/system';
 import ProductsList from '../../components/ProductsList';
 import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
+import Category from '../../components/Category';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.primary,
@@ -44,6 +45,7 @@ function HomeContent() {
         flexDirection: 'column',
         backgroundColor: '#FCF9F6',
       }}>
+      <Category />
       <SectionTitle variant="h2">Products</SectionTitle>
       <Box sx={{ width: '93%' }}>
         <ProductsList />
