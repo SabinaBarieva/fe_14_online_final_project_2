@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import { addToBasket, minusItem } from '../../redux/slices/basketSlice';
+import { addSeveraltoBasket } from '../../redux/slices/basketSlice';
 import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
@@ -15,17 +15,16 @@ import {
   Description,
   Price,
   CountBoxes,
+  CountInput,
   Guarantee,
 } from '../../themes/themeProduct';
 
 function ProductDescription() {
   const dispatch = useDispatch();
-  const { itemsBasket, price } = useSelector((state) => state.basket);
+  const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const {
-    // enabled,
     quantity,
-    // categories,
     name,
     currentPrice,
     imageUrls,
@@ -36,50 +35,45 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const { id } = useParams();
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch]);
 
-  const [mainImage, setMainImage] = useState('');
+  const [countToBasket, setCountToBasket] = useState(1);
+  // eslint-disable-next-line consistent-return
+  const increase = () => {
+    setCountToBasket(countToBasket + 1);
+  };
+  const decrease = () => {
+    setCountToBasket(countToBasket - 1);
+  };
+  const onChangeValue = (value) => {
+    if (+value < 1) {
+      setCountToBasket('');
+    } else if (+value > quantity) {
+      setCountToBasket(quantity);
+    } else {
+      setCountToBasket(+value);
+    }
+  };
+  const clickToBasket = () => {
+    const item = {
+      itemNo,
+      imageUrls,
+      name,
+      currentPrice,
+      quantity,
+      count: countToBasket,
+    };
+    dispatch(addSeveraltoBasket(item));
+  };
 
+  const [mainImage, setMainImage] = useState('');
   useEffect(() => {
     if (imageUrls) {
       setMainImage(imageUrls[0]);
     }
   }, [imageUrls]);
-
-  const changeMainPhoto = (e) => {
-    const urlString = e.target.getAttribute('src');
-    const url = new URL(urlString);
-    const path = url.pathname;
-    const cleanedPath = path.replace('/dtvbxgclg/image/upload/v1/', '');
-    setMainImage(cleanedPath);
-  };
-
-  const onClickAdd = () => {
-    const item = {
-      name,
-      itemNo,
-      imageUrls,
-      currentPrice,
-      quantity,
-      count: 0,
-    };
-    dispatch(addToBasket(item));
-  };
-
-  const onClickMinus = () => {
-    const item = {
-      name,
-      itemNo,
-      imageUrls,
-      currentPrice,
-      quantity,
-      count: 0,
-    };
-    dispatch(minusItem(item));
-  };
 
   if (isLoading) {
     return <div>LOADING</div>;
@@ -117,9 +111,10 @@ function ProductDescription() {
           <Grid
             container
             sx={{
-              display: { xs: 'flex', md: 'none' },
+              display: 'flex',
               justifyContent: 'space-around',
               margin: '15px 0',
+              order: { xs: '0', md: '1' },
             }}>
             {imageUrls.map((photo) => (
               <Grid
@@ -133,10 +128,13 @@ function ProductDescription() {
                 }}>
                 <AdvancedImage
                   className="photo-from-gallery"
+                  data-img={photo}
                   width="100%"
                   cldImg={getImg.image(photo)}
                   alt="mini-img"
-                  onClick={changeMainPhoto}
+                  onClick={(e) => {
+                    setMainImage(e.target.getAttribute('data-img'));
+                  }}
                 />
               </Grid>
             ))}
@@ -155,25 +153,37 @@ function ProductDescription() {
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
+                disabled={countToBasket <= 1}
                 onClick={() => {
-                  onClickMinus();
+                  decrease();
                 }}>
                 -
               </CountBoxes>
-              <CountBoxes
+              <CountInput
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
-                }}>
-                1
-              </CountBoxes>
+                }}
+                type="number"
+                controls={false}
+                value={countToBasket}
+                min={1}
+                onBlur={(e) => {
+                  // eslint-disable-next-line no-unused-expressions
+                  e.target.value === '' ? setCountToBasket(1) : null;
+                }}
+                onChange={(e) => {
+                  onChangeValue(e.target.value);
+                }}
+              />
               <CountBoxes
                 sx={{
                   width: { xs: '35px', sm: '57px', md: '46px' },
                   height: { xs: '35px', sm: '57px', md: '46px' },
                 }}
+                disabled={countToBasket === quantity}
                 onClick={() => {
-                  onClickAdd();
+                  increase();
                 }}>
                 +
               </CountBoxes>
@@ -196,37 +206,13 @@ function ProductDescription() {
                     },
                   },
                 }}
-                variant="contained">
+                variant="contained"
+                onClick={() => {
+                  clickToBasket();
+                }}>
                 Add to basket
               </Button>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              justifyContent: 'space-around',
-              marginTop: '15px',
-            }}>
-            {imageUrls.map((photo) => (
-              <Grid
-                key={photo}
-                item
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '85px',
-                }}>
-                <AdvancedImage
-                  className="photo-from-gallery"
-                  width="100%"
-                  cldImg={getImg.image(photo)}
-                  alt="mini-img"
-                  onClick={changeMainPhoto}
-                />
-              </Grid>
-            ))}
           </Grid>
         </Grid>
       </Grid>

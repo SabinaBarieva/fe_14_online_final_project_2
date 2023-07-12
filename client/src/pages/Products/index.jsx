@@ -12,8 +12,7 @@ function ProductsContent() {
           display: 'flex',
           justifyContent: 'center',
           flexDirection: 'column',
-          paddingLeft: '1%',
-          paddingRight: '1%',
+          padding: '0 1%',
           margin: '2% auto',
         }}>
         <ProductsList />

@@ -8,9 +8,9 @@ import { StyledButton } from '../../themes/themeOrder';
 
 export default function ButtonOrder() {
   const dispatch = useDispatch();
-  const isOpenForm = useSelector((state) => state.toolkitForm.statusForm);
-  const buttons = useSelector((state) => state.toolkitForm.statusButton);
-  const isOpenModal = useSelector((state) => state.toolkitModal.statusModal);
+  const isOpenForm = useSelector((state) => state.form.statusForm);
+  const buttons = useSelector((state) => state.form.statusButton);
+  const isOpenModal = useSelector((state) => state.modal.statusModal);
 
   const form = () => (isOpenForm ? <OrderForm /> : null);
 

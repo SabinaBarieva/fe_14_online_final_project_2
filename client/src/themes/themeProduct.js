@@ -20,13 +20,38 @@ export const Price = styled('div')({
   letterSpacing: '0.015em',
   color: '#434343',
 });
-export const CountBoxes = styled('div')({
+export const CountBoxes = styled('button')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   width: '46px',
   height: '46px',
   background: '#F5F7FB',
+  border: '0',
+  '&:hover': {
+    cursor: 'pointer',
+    color: '#F5F7FB',
+    backgroundColor: '#211F1C',
+  },
+});
+
+export const CountInput = styled('input')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  width: '46px',
+  height: '46px',
+  background: '#F5F7FB',
+  border: '0',
+  '&::-webkit-outer-spin-button': {
+    WebkitAppearance: 'none',
+    margin: 0,
+  },
+  '&::-webkit-inner-spin-button': {
+    WebkitAppearance: 'none',
+    margin: 0,
+  },
 });
 export const Guarantee = styled('div')({
   textAlign: 'right',
