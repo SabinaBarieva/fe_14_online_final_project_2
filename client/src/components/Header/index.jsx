@@ -17,8 +17,10 @@ import {
   ListItem,
   CssBaseline,
   Badge,
+  Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { styled } from '@mui/material/styles';
@@ -111,6 +113,15 @@ function Header() {
               </Grid>
             </NavLink>
             <Hidden lgDown>
+              <NavLink to="/" style={{ textDecoration: 'none' }}>
+                Home /
+              </NavLink>
+              <NavLink to="/product" style={{ textDecoration: 'none' }}>
+                Product /
+              </NavLink>
+              <NavLink to="/" style={{ textDecoration: 'none' }}>
+                About
+              </NavLink>
               <Search />
               <NavLink to="/basket">
                 <IconButton>
@@ -126,6 +137,12 @@ function Header() {
                   </StyledBadge>
                 </IconButton>
               </NavLink>
+              <Button
+                variant="contained"
+                endIcon={<LoginOutlinedIcon />}
+                sx={{ background: '#211F1C', width: '113px', height: '40px' }}>
+                Login
+              </Button>
             </Hidden>
             <Hidden lgUp>
               <IconButton style={{ padding: '0' }}>
@@ -174,6 +191,12 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
+            <Button
+              variant="contained"
+              endIcon={<LoginOutlinedIcon />}
+              sx={{ background: '#211F1C', width: '113px', height: '40px' }}>
+              Login
+            </Button>
           </Grid>
           <Divider />
           <List>
