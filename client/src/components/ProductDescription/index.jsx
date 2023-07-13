@@ -216,6 +216,7 @@ function ProductDescription() {
                 <Button
                   disabled={quantity === 0}
                   sx={{
+                    fontFamily: 'Roboto',
                     marginTop: { xs: '10px', md: '0' },
                     padding: '9px 18px',
                     backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
