@@ -11,7 +11,11 @@ import {
   addSeveraltoBasket,
   closeModalBasket,
 } from '../../redux/slices/basketSlice';
-import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
+import {
+  currentProduct,
+  currentProductIsLoading,
+  allProductsInBase,
+} from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
   Title,
@@ -22,6 +26,7 @@ import {
   Guarantee,
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
+import PageNotFound from '../NotFoundPage';
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -39,6 +44,10 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
+  const all = useSelector(allProductsInBase);
+  const allProducts = [...all];
+  const qwe = allProducts.find((item) => item.itemNo === id);
+
   useEffect(() => {
     dispatch(getProduct(id));
     return () => {
@@ -86,10 +95,13 @@ function ProductDescription() {
     return <div>LOADING</div>;
   }
 
+  if (!qwe) {
+    return <PageNotFound />;
+  }
+
   if (imageUrls) {
     return (
       <>
-        {' '}
         <ModalBasket />
         <Grid container sx={{ width: '91%', margin: '25px auto' }}>
           <Grid
