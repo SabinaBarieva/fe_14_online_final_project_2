@@ -154,7 +154,9 @@ function ProductDescription() {
               {brand} {name} {storage} {color}
             </Title>
             <Description>{description}</Description>
-            <Price>Price: {currentPrice}$</Price>
+            <Price>
+              {quantity === 0 ? 'Not in stock' : `${currentPrice}$`}
+            </Price>
             <Guarantee>Apple guarantee {guarantee}</Guarantee>
             <Grid container>
               <Grid item md={4} xs={12} sx={{ display: 'flex', gap: '14px' }}>
@@ -200,6 +202,7 @@ function ProductDescription() {
               </Grid>
               <Grid item md={8} xs={12}>
                 <Button
+                  disabled={quantity === 0}
                   sx={{
                     marginTop: { xs: '10px', md: '0' },
                     padding: '9px 18px',
