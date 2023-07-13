@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
@@ -46,7 +46,7 @@ function ProductDescription() {
   } = useSelector(currentProduct);
   const all = useSelector(allProductsInBase);
   const allProducts = [...all];
-  const qwe = allProducts.find((item) => item.itemNo === id);
+  const isIdExist = allProducts.find((item) => item.itemNo === id);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -92,10 +92,10 @@ function ProductDescription() {
   }, [imageUrls]);
 
   if (isLoading) {
-    return <div>LOADING</div>;
+    return <CircularProgress />;
   }
 
-  if (!qwe) {
+  if (!isIdExist) {
     return <PageNotFound />;
   }
 
