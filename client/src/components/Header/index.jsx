@@ -31,6 +31,20 @@ import Search from '../Search';
 import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 
+const activeLinkDecoration = ({ isActive }) => ({
+  color: '#5E5E5E',
+  textAlign: 'center',
+  fontFamily: 'Roboto',
+  fontSize: '16px',
+  fontStyle: 'normal',
+  textDecoration: isActive ? 'underline' : 'none',
+  textUnderlinePosition: isActive ? 'under' : 'none',
+  fontWeight: isActive ? '700' : '400',
+  cursor: isActive ? 'default' : 'pointer',
+  width: isActive ? '65px' : '',
+  height: isActive ? '22px' : '',
+});
+
 function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const [totalInBasket, setTotalInBasket] = useState(0);
@@ -113,13 +127,44 @@ function Header() {
               </Grid>
             </NavLink>
             <Hidden lgDown>
-              <NavLink to="/" style={{ textDecoration: 'none' }}>
-                Home /
+              <NavLink
+                to="/"
+                style={activeLinkDecoration}
+                className="header_link">
+                Home
               </NavLink>
-              <NavLink to="/product" style={{ textDecoration: 'none' }}>
-                Product /
+              <Typography
+                sx={{
+                  color: '#393D45',
+                  fontFamily: 'Roboto',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}>
+                /
+              </Typography>
+              <NavLink
+                to="/product"
+                style={activeLinkDecoration}
+                className="header_link">
+                Product
               </NavLink>
-              <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Typography
+                sx={{
+                  color: '#393D45',
+                  fontFamily: 'Roboto',
+                  fontSize: '16px',
+                  fontStyle: 'normal',
+                  fontWeight: '400',
+                  lineHeight: 'normal',
+                }}>
+                /
+              </Typography>
+              <NavLink
+                to="/"
+                style={activeLinkDecoration}
+                className="header_link">
                 About
               </NavLink>
               <Search />
@@ -200,8 +245,38 @@ function Header() {
           </Grid>
           <Divider />
           <List>
-            <ListItem>
+            <ListItem sx={{ justifyContent: 'center' }}>
               <Search />
+            </ListItem>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/"
+                style={activeLinkDecoration}
+                className="header_link">
+                Home
+              </NavLink>
+            </ListItem>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/product"
+                style={activeLinkDecoration}
+                className="header_link">
+                Product
+              </NavLink>
+            </ListItem>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/"
+                style={activeLinkDecoration}
+                className="header_link">
+                About
+              </NavLink>
             </ListItem>
           </List>
         </SwipeableDrawer>
