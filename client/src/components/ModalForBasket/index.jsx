@@ -1,17 +1,13 @@
 import { Close } from '@mui/icons-material';
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@mui/material';
+import { Dialog, Button, DialogContentText, DialogTitle } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { selectCart } from '../../redux/selectors';
 import { closeModalBasket } from '../../redux/slices/basketSlice';
 
 function ModalBasket() {
-  const { priceAll, itemsBasket, modal, modalText } = useSelector(selectCart);
+  const { modal, modalText } = useSelector(selectCart);
 
   const dispatch = useDispatch();
 
@@ -24,17 +20,25 @@ function ModalBasket() {
       <Close
         sx={{
           position: 'absolute',
-          top: '8px',
-          right: '8px',
+          top: { xs: '20px', md: '30px' },
+          right: { xs: '20px', md: '30px' },
         }}
         onClick={() => {
           dispatch(closeModalBasket());
         }}
       />
-      <DialogTitle>Not enough products</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{modalText}</DialogContentText>
-      </DialogContent>
+      <DialogTitle
+        sx={{ background: '#d3dbe3', fontSize: { sx: '22px', md: '32px' } }}>
+        Not enough products
+      </DialogTitle>
+      <DialogContentText
+        sx={{
+          margin: '20px',
+          padding: '20px',
+          fontSize: { sx: '17px', md: '27px' },
+        }}>
+        {modalText}
+      </DialogContentText>
     </Dialog>
   );
 }
