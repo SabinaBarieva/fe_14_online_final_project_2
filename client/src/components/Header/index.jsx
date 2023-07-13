@@ -16,10 +16,12 @@ import {
   List,
   ListItem,
   CssBaseline,
+  Badge,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { styled } from '@mui/material/styles';
 import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
@@ -31,6 +33,25 @@ function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const [totalInBasket, setTotalInBasket] = useState(0);
   const [open, setOpen] = useState(false);
+
+  // eslint-disable-next-line no-unused-vars
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: 3,
+      top: 4,
+      border: `none`,
+      padding: '0',
+      color: '#F5F7FB',
+      backgroundColor: '#FF6565',
+      fontFamily: 'Josefin Sans',
+      fontSize: '10px',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      lineHeight: 'normal',
+      minWidth: '12.5px',
+      height: '12.1px',
+    },
+  }));
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
@@ -92,14 +113,18 @@ function Header() {
             <Hidden lgDown>
               <Search />
               <NavLink to="/basket">
-                <Grid container direction="row">
-                  <ShoppingCartOutlinedIcon
-                    sx={{ color: '#616467', width: '28.7px', height: '32px' }}
-                  />
-                  <Typography>
-                    {totalInBasket === 0 ? null : totalInBasket}
-                  </Typography>
-                </Grid>
+                <IconButton>
+                  <StyledBadge
+                    badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                    <ShoppingCartOutlinedIcon
+                      sx={{
+                        color: '#616467',
+                        width: '28.7px',
+                        height: '32px ',
+                      }}
+                    />
+                  </StyledBadge>
+                </IconButton>
               </NavLink>
             </Hidden>
             <Hidden lgUp>
@@ -136,14 +161,18 @@ function Header() {
               </IconButton>
             </div>
             <NavLink to="/basket">
-              <Grid container direction="row">
-                <ShoppingCartOutlinedIcon
-                  sx={{ color: '#616467', width: '28.7px', height: '32px' }}
-                />
-                <Typography>
-                  {totalInBasket === 0 ? null : totalInBasket}
-                </Typography>
-              </Grid>
+              <IconButton>
+                <StyledBadge
+                  badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                  <ShoppingCartOutlinedIcon
+                    sx={{
+                      color: '#616467',
+                      width: '28.7px',
+                      height: '32px ',
+                    }}
+                  />
+                </StyledBadge>
+              </IconButton>
             </NavLink>
           </Grid>
           <Divider />
