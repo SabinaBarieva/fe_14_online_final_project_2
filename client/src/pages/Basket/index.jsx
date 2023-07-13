@@ -31,6 +31,7 @@ import {
 import cld from '../../cloudinary';
 import theme from '../../themes/theme';
 import BasketEmpty from '../../components/BasketEmpty';
+import ModalBasket from '../../components/ModalForBasket';
 
 const columns = [
   { id: 'product', label: 'Product' },
@@ -60,6 +61,7 @@ function BasketContent() {
   }
   return (
     <Container maxWidth="xxl">
+      <ModalBasket />
       <Table
         key={Math.random()}
         style={{
