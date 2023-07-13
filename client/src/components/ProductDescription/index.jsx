@@ -184,6 +184,7 @@ function ProductDescription() {
                   -
                 </CountBoxes>
                 <CountInput
+                  disabled={quantity === 0}
                   sx={{
                     width: { xs: '35px', sm: '57px', md: '46px' },
                     height: { xs: '35px', sm: '57px', md: '46px' },
@@ -205,7 +206,7 @@ function ProductDescription() {
                     width: { xs: '35px', sm: '57px', md: '46px' },
                     height: { xs: '35px', sm: '57px', md: '46px' },
                   }}
-                  disabled={countToBasket === quantity}
+                  disabled={countToBasket === quantity || quantity === 0}
                   onClick={() => {
                     increase();
                   }}>
