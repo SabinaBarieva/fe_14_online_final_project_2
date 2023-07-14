@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button, CircularProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
@@ -92,7 +92,8 @@ function ProductDescription() {
   }, [imageUrls]);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LinearProgress />;
+    // return <CircularProgress />;
   }
 
   if (!isIdExist) {
@@ -217,6 +218,7 @@ function ProductDescription() {
                 <Button
                   disabled={quantity === 0}
                   sx={{
+                    marginLeft: '15px',
                     fontFamily: 'Roboto',
                     marginTop: { xs: '10px', md: '0' },
                     padding: '9px 18px',
