@@ -166,7 +166,8 @@ function ProductCard({ product }) {
   };
 
   return (
-    <CardContainer sx={{ boxShadow: 'none' }}>
+    <CardContainer sx={{ boxShadow: 'none',
+  margin: '0 auto 5%' }}>
       <Box sx={{ position: 'relative' }}>
         <CardImg
           component="img"
