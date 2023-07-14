@@ -190,9 +190,10 @@ function Header() {
               </Button>
             </Hidden>
             <Hidden lgUp>
-              <IconButton style={{ padding: '0' }}>
+              <IconButton
+                style={{ padding: '0' }}
+                onClick={() => setOpen(true)}>
                 <MenuIcon
-                  onClick={() => setOpen(true)}
                   sx={{
                     backgroundColor: '#393D45',
                     color: '#F4F4F4',
@@ -218,8 +219,8 @@ function Header() {
             alignItems="center"
             sx={{ padding: '0.5rem' }}>
             <div>
-              <IconButton>
-                <CloseIcon onClick={() => setOpen(false)} />
+              <IconButton onClick={() => setOpen(false)}>
+                <CloseIcon />
               </IconButton>
             </div>
             <NavLink to="/basket">
