@@ -12,7 +12,7 @@ import {
 import { styled, useTheme, shadows } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
 import { AdvancedImage } from '@cloudinary/react';
-import { fit, pad, fill } from '@cloudinary/url-gen/actions/resize';
+import { minimumPad } from '@cloudinary/url-gen/actions/resize';
 import { color } from '@cloudinary/url-gen/qualifiers/background';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
@@ -23,23 +23,21 @@ import { addToBasket } from '../../redux/slices/basketSlice';
 
 const CardContainer = styled(Card)(({ theme }) => ({
   outline: `solid 1px transparent`,
-  borderRadius: '25px',
+  borderRadius: '15px',
   marginBottom: '5%',
-  backgroundColor: 'transparent',
-  minHeight: '200px',
-  maxHeight: '418px',
-  [theme.breakpoints.between('xs', 'md')]: {
+  height: '100%',
+  /* [theme.breakpoints.between('xs', 'md')]: {
     maxWidth: '150px',
-    minHeight: '200px',
+    /!* minHeight: '200px', *!/
   },
   [theme.breakpoints.between('md', 'lg')]: {
     maxWidth: '183px',
-    minHeight: '322px',
+    /!* minHeight: '322px', *!/
   },
   [theme.breakpoints.up('lg')]: {
     maxWidth: '203px',
-    minHeight: '418px',
-  },
+    /!*  minHeight: '418px', *!/
+  }, */
 }));
 
 /* const CardImg = styled(AdvancedImage)(({ theme }) => ({
@@ -68,7 +66,7 @@ const DetailButton = styled(RadiusButton)(({ theme }) => ({
   [theme.breakpoints.between('xs', 'md')]: {
     textTransform: 'capitalize',
     minWidth: '77px',
-    minHeight: '17px',
+    minHeight: '20px',
   },
   [theme.breakpoints.between('md', 'lg')]: {
     fontSize: '0.75rem',
@@ -85,8 +83,6 @@ const DetailButton = styled(RadiusButton)(({ theme }) => ({
 const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   backgroundColor: 'white',
   outline: `1px solid ${theme.palette.primary.buttonhover}`,
-  /*  minWidth: '29px',
-  minHeight: '17px', */
   maxWidth: '40px',
   maxHeight: '26px',
   position: 'relative',
@@ -103,10 +99,10 @@ const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   },
   [theme.breakpoints.between('xs', 'md')]: {
     minWidth: '29px',
-    minHeight: '17px',
+    minHeight: '20px',
     '& svg': {
-      width: '13px',
-      height: '12px',
+      width: '17px',
+      height: '16px',
     },
   },
   [theme.breakpoints.between('md', 'lg')]: {
@@ -134,9 +130,9 @@ const CardInfo = styled(CardContent)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'baseline',
   padding: '0',
-  paddingLeft: '15%',
+  paddingLeft: '8%',
   marginTop: '3%',
-  width: '80%',
+  width: '93%',
   [theme.breakpoints.between('xs', 'sm')]: {
     display: 'block',
     textAlign: 'left',
@@ -149,8 +145,11 @@ const CardInfo = styled(CardContent)(({ theme }) => ({
 
 const ProductName = styled(Typography)(({ theme }) => ({
   fontWeight: '700',
+  width: '70%',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
   [theme.breakpoints.between('xs', 'sm')]: {
-    fontSize: '1rem',
+    fontSize: '.9rem',
     lineHeight: '1rem',
     marginBottom: '2%',
   },
@@ -233,14 +232,17 @@ function ProductCard({ product }) {
     dispatch(addToBasket(item));
   };
   return (
-    <CardContainer sx={{ boxShadow: 6 }}>
-      <Box sx={{ position: 'relative' }}>
+    <CardContainer
+      sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>
+      <Box sx={{ position: 'relative', padding: '10% 0' }}>
         <AdvancedImage
           width="100%"
           cldImg={getImg
             .image(product.imageUrls[0])
             .resize(
-              fill().width(getImageSize().width).height(getImageSize().height)
+              minimumPad()
+                .width(getImageSize().width)
+                .height(getImageSize().height)
               /* .background(color(`white`)) */
             )
             .roundCorners(byRadius(15, 15))}
@@ -255,6 +257,7 @@ function ProductCard({ product }) {
             display: 'flex',
             justifyContent: 'center',
             transform: 'translate(-50%, -50%)',
+            alignItems: 'end',
           }}>
           <Link to={`/product/${product.itemNo}`} style={{ marginRight: '7%' }}>
             <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
@@ -272,22 +275,23 @@ function ProductCard({ product }) {
           </AddToCartBtn>
         </Box>
       </Box>
-      <CardInfo>
-        <ProductName
-          variant="h2"
-          sx={{
-            fontSize: {
-              sm: '1rem',
-              lg: '0.875rem',
-            },
-          }}>
-          {product.name}
-        </ProductName>
-        <ProductPrice>
-          {`\u0024`}
-          {product.currentPrice}
-        </ProductPrice>
-      </CardInfo>
+      {currentPath !== '/' ? (
+        <CardInfo>
+          <ProductName
+            variant="h2"
+            sx={{
+              fontSize: {
+                sm: '1rem',
+                lg: '0.875rem',
+              },
+            }}>
+            {product.name}
+          </ProductName>
+          <ProductPrice>
+            {`\u0024`}
+            {product.currentPrice}
+          </ProductPrice>
+        </CardInfo>
       ) : null}
     </CardContainer>
   );

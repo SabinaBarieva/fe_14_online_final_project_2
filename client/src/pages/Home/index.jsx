@@ -38,11 +38,10 @@ function HomeContent() {
   /* const id = 123; */
 
   return (
-    <Container maxWidth="xxl">
+    <Container maxWidth="xxl" sx={{ padding: '0 3%' }}>
       <Category />
       <ModalBasket />
       <Container
-        maxWidth="xxl"
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -50,10 +49,10 @@ function HomeContent() {
           backgroundColor: '#FCF9F6',
         }}>
         <SectionTitle variant="h2">Products</SectionTitle>
-        <Box sx={{ width: '93%', mx: 'auto' }}>
+        <Box>
           <ProductsList perPage={8} />
         </Box>
-        <Box sx={{ margin: '3% auto' }}>
+        <Box sx={{ margin: '10% auto' }}>
           <Link to="/product">
             <AllProductsBtn sx={{ alignItems: 'center' }}>
               <Typography

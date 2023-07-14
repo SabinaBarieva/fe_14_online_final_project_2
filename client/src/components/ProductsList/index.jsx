@@ -1,14 +1,18 @@
 import { React, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { Grid, Box, Pagination } from '@mui/material';
-import { styled, spacing } from '@mui/system';
+import { Grid, Box, Pagination, LinearProgress } from '@mui/material';
+import { styled, spacing, useTheme } from '@mui/system';
 import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import { RadiusButton } from '../Buttons';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'baseline',
+  height: 'auto',
   [theme.breakpoints.between('xs', 'md')]: {
     '&:nth-of-type(n+5)': {
       display: 'none',
@@ -33,7 +37,7 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
   minHeight: '35px',
   maxWidth: '140px',
   maxHeight: '80px',
-  margin: '20% auto',
+  margin: '20%  0 10% 0',
   [theme.breakpoints.between('xs', 'md')]: {
     fontSize: '1rem',
     minWidth: '100px',
@@ -52,6 +56,7 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
 }));
 
 function ProductsList({ perPage }) {
+  const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [loadedProducts, setLoadedProducts] = useState([]);
   const [isLoadMoreClicked, setLoadMoreClicked] = useState(false);
@@ -62,7 +67,7 @@ function ProductsList({ perPage }) {
   const maxFilterPrice = useSelector((state) => state.filters.maxPrice);
   const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
   const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
-  console.log(formattedMinPrice);
+
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -90,74 +95,78 @@ function ProductsList({ perPage }) {
 
   const gridSpacing =
     currentPath === '/'
-      ? { xs: 1.5, sm: 2, md: 2.5, lg: 3 }
+      ? { xs: 1.5, sm: 2, md: 2.5, lg: 6 }
       : { xs: 1, sm: 1.5, md: 2, lg: 3 };
 
   return (
     <div>
       {isFetching ? (
-        <div>Loading...</div>
+        <LinearProgress
+          sx={{
+            backgroundColor: `${theme.palette.primary.light}`,
+            width: '80%',
+            mx: 'auto',
+          }}
+        />
       ) : (
         <div>
           <Grid container spacing={gridSpacing}>
             {products.map((product) =>
               currentPath === '/' ? (
                 <StyledGrid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
                   item
                   xs={6}
                   sm={6}
                   md={4}
                   lg={3}
-                  key={product.itemNo}
-                  width="fit-content"
-                  height="fit-content">
+                  key={product.itemNo}>
                   <ProductCard product={product} />
                 </StyledGrid>
               ) : (
                 <Grid
                   display="flex"
                   justifyContent="center"
-                  alignItems="center"
+                  alignItems="baseline"
                   item
                   xs={6}
                   sm={6}
-                  md={4}
+                  md={6}
                   lg={3}
                   key={product.itemNo}
-                  width="fit-content"
-                  height="fit-content">
+                  height="auto">
                   <ProductCard product={product} />
                 </Grid>
               )
             )}
           </Grid>
           {currentPath === '/' ? null : (
-            <Box sx={{ mx: 'auto', width: 500 }}>
-              <Box sx={{ mx: 'auto', width: 200 }}>
-                <LoadMoreBtn
-                  sx={{ textTransform: 'capitalize' }}
-                  variant="solid"
-                  onClick={() => {
-                    setLoadMoreClicked(true);
-                    setCurrentPage((prevPage) => prevPage + 1);
-                  }}>
-                  Load More
-                </LoadMoreBtn>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}>
+              <LoadMoreBtn
+                sx={{ textTransform: 'capitalize' }}
+                variant="solid"
+                onClick={() => {
+                  setLoadMoreClicked(true);
+                  setCurrentPage((prevPage) => prevPage + 1);
+                }}>
+                Load More
+              </LoadMoreBtn>
+              <Box>
+                <Pagination
+                  count={countPagination}
+                  color="primary"
+                  page={currentPage}
+                  onChange={(_, num) => {
+                    setCurrentPage(num);
+                    setLoadMoreClicked(false);
+                    setLoadedProducts([]);
+                  }}
+                />
               </Box>
-              <Pagination
-                count={countPagination}
-                color="primary"
-                page={currentPage}
-                onChange={(_, num) => {
-                  setCurrentPage(num);
-                  setLoadMoreClicked(false);
-                  setLoadedProducts([]);
-                }}
-                sx={{ mx: 'auto', width: 400 }}
-              />
             </Box>
           )}
         </div>
