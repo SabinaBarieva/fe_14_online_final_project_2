@@ -162,7 +162,7 @@ function Header() {
                 /
               </Typography>
               <NavLink
-                to="/"
+                to="/about"
                 style={activeLinkDecoration}
                 className="header_link">
                 About
@@ -273,7 +273,7 @@ function Header() {
               sx={{ justifyContent: 'center' }}
               onClick={() => setOpen(false)}>
               <NavLink
-                to="/"
+                to="/about"
                 style={activeLinkDecoration}
                 className="header_link">
                 About
