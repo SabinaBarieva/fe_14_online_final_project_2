@@ -23,6 +23,7 @@ function Footer() {
             md: '1.12rem 16.36rem 1.5rem',
             lg: '3.63rem 4.36rem 5.24rem 4.81rem',
           },
+          marginTop: 'auto',
         }}>
         <Grid
           container

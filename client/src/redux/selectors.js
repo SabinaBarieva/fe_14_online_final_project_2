@@ -4,3 +4,4 @@ export const currentProductIsLoading = (state) => state.product.isLoading;
 export const currentProductGallery = (state) => state.product.gallery;
 export const selectCart = (state) => state.basket;
 export const modaInProductSlice = (state) => state.modalInProduct;
+export const allProductsInBase = (state) => state.searchList.resultArray;
