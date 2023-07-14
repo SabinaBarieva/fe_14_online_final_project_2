@@ -7,6 +7,8 @@ import { styled } from '@mui/system';
 import ProductsList from '../../components/ProductsList';
 import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
+import Category from '../../components/Category';
+import ModalBasket from '../../components/ModalForBasket';
 import PromoCarousel from '../../components/Carousel';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
@@ -37,37 +39,37 @@ function HomeContent() {
   /* const id = 123; */
 
   return (
-    <Container
-      maxWidth="xxl"
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        backgroundColor: '#FCF9F6',
-      }}>
-      <SectionTitle variant="h2">Products</SectionTitle>
-      <Box sx={{ width: '93%' }}>
-        <ProductsList />
-      </Box>
-      <Box sx={{ margin: '3% auto' }}>
-        <Link to="/product">
-          <AllProductsBtn sx={{ alignItems: 'center' }}>
-            <Typography
-              sx={{
-                fontSize: '0.75rem',
-                textTransform: 'capitalize',
-                marginRight: '5%',
-              }}>
-              All Products
-            </Typography>
-            <ArrowIcon />
-          </AllProductsBtn>
-        </Link>
-      </Box>
-      <SectionTitle variant="h2">Promotional offers</SectionTitle>
-      <Box sx={{ width: '93%' }}>
-        <PromoCarousel />
-      </Box>
+    <Container maxWidth="xxl">
+      <Category />
+      <ModalBasket />
+      <Container
+        maxWidth="xxl"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          backgroundColor: '#FCF9F6',
+        }}>
+        <SectionTitle variant="h2">Products</SectionTitle>
+        <Box sx={{ width: '93%' }}>
+          <ProductsList />
+        </Box>
+        <Box sx={{ margin: '3% auto' }}>
+          <Link to="/product">
+            <AllProductsBtn sx={{ alignItems: 'center' }}>
+              <Typography
+                sx={{
+                  fontSize: '0.75rem',
+                  textTransform: 'capitalize',
+                  marginRight: '5%',
+                }}>
+                All Products
+              </Typography>
+              <ArrowIcon />
+            </AllProductsBtn>
+          </Link>
+        </Box>
+      </Container>
     </Container>
   );
 }
