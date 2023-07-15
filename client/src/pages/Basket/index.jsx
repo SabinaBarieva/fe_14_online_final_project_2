@@ -56,6 +56,7 @@ function BasketContent() {
   const { priceAll, itemsBasket } = useSelector(selectCart);
   const totalCount = itemsBasket.reduce((sum, item) => sum + item.count, 0);
   const dispatch = useDispatch();
+
   if (!priceAll) {
     return <BasketEmpty />;
   }
