@@ -200,26 +200,23 @@ function FilterSection() {
                   />
                 </Grid>
               </Grid>
-              <Grid container>
-                <Grid item xs={12}>
+              <Button
+                sx={{
+                  minWidth: '100%',
+                  borderRadius: '8px',
+                  marginTop: '20px',
+                  textTransform: 'capitalize',
+                  background: '#000',
+                }}
+                variant="contained"
+                onClick={setPriceCallback}>
+                Set Price
+              </Button>
+              <Grid container sx={{ marginTop: '35px' }}>
+                <Grid item xs={6}>
                   <Button
                     sx={{
-                      minWidth: '100%',
-                      borderRadius: '8px',
-                      marginTop: '20px',
-                      textTransform: 'capitalize',
-                      background: '#000',
-                    }}
-                    variant="contained"
-                    onClick={setPriceCallback}>
-                    Set Price
-                  </Button>
-                </Grid>
-                <Grid item xs={6} md={12}>
-                  <Button
-                    sx={{
-                      width: { xs: '98%', md: '100%' },
-                      marginTop: { xs: '40%', md: '65px' },
+                      width: '98%',
                       border: '1px solid #000',
                       borderRadius: '8px',
                       textTransform: 'capitalize',
@@ -229,14 +226,11 @@ function FilterSection() {
                     Clear Filter
                   </Button>
                 </Grid>
-                <Grid item xs={6} sm={6} md={12} sx={{ textAlign: 'right' }}>
+                <Grid item xs={6}>
                   <Button
                     sx={{
-                      display: { md: 'none' },
-                      width: { xs: '98%' },
-                      marginTop: { xs: '40%' },
+                      width: '98%',
                       borderRadius: '8px',
-                      textAlign: 'right',
                       textTransform: 'capitalize',
                       background: '#000',
                     }}
