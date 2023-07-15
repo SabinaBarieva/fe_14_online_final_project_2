@@ -59,10 +59,10 @@ const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
 function ProductsList({ perPage }) {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
-  const [loadedProducts, setLoadedProducts] = useState([]);
-  const [isLoadMoreClicked, setLoadMoreClicked] = useState(false);
+  /*  const [loadedProducts, setLoadedProducts] = useState([]);
+  const [isLoadMoreClicked, setLoadMoreClicked] = useState(false); */
   const total = useSelector((state) => state.products.total);
-  const storeProducts = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.products.products);
   const categories = useSelector((state) => state.filters.categories);
   const minFilterPrice = useSelector((state) => state.filters.minPrice);
   const maxFilterPrice = useSelector((state) => state.filters.maxPrice);
@@ -86,18 +86,18 @@ function ProductsList({ perPage }) {
   const countPagination = Math.round(total / perPage);
   const location = useLocation();
   const currentPath = location.pathname;
-  const products = isLoadMoreClicked ? loadedProducts : storeProducts;
+  /*  const products = isLoadMoreClicked ? loadedProducts : storeProducts; */
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (isLoadMoreClicked) {
       setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
     }
-  }, [isLoadMoreClicked, storeProducts]);
+  }, [isLoadMoreClicked, storeProducts]); */
 
   useEffect(() => {
     if (currentPath !== '/product') {
       dispatch(resetFilters());
-      setLoadedProducts([]);
+      /*  setLoadedProducts([]); */
     }
   }, [currentPath]);
 
@@ -154,7 +154,7 @@ function ProductsList({ perPage }) {
                 flexDirection: 'column',
                 alignItems: 'center',
               }}>
-              <LoadMoreBtn
+              {/*  <LoadMoreBtn
                 sx={{ textTransform: 'capitalize' }}
                 variant="solid"
                 onClick={() => {
@@ -162,7 +162,7 @@ function ProductsList({ perPage }) {
                   setCurrentPage((prevPage) => prevPage + 1);
                 }}>
                 Load More
-              </LoadMoreBtn>
+              </LoadMoreBtn> */}
               <Box>
                 <Pagination
                   count={countPagination}
@@ -170,8 +170,8 @@ function ProductsList({ perPage }) {
                   page={currentPage}
                   onChange={(_, num) => {
                     setCurrentPage(num);
-                    setLoadMoreClicked(false);
-                    setLoadedProducts([]);
+                    /* setLoadMoreClicked(false);
+                    setLoadedProducts([]); */
                   }}
                 />
               </Box>
