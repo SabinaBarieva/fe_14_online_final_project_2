@@ -229,7 +229,7 @@ function FilterSection() {
                     Clear Filter
                   </Button>
                 </Grid>
-                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                <Grid item xs={6} sm={6} md={12} sx={{ textAlign: 'right' }}>
                   <Button
                     sx={{
                       display: { md: 'none' },

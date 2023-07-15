@@ -307,9 +307,9 @@ ProductCard.propTypes = {
     color: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
     storage: PropTypes.string,
-    itemNo: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    guarantee: PropTypes.string.isRequired,
+    itemNo: PropTypes.string,
+    description: PropTypes.string,
+    guarantee: PropTypes.string,
   }).isRequired,
 };
 

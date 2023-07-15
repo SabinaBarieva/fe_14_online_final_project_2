@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import { RadiusButton } from '../Buttons';
+import { resetFilters } from '../../redux/slices/filtersSlice';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
@@ -92,6 +93,13 @@ function ProductsList({ perPage }) {
       setLoadedProducts((prevProducts) => [...prevProducts, ...storeProducts]);
     }
   }, [isLoadMoreClicked, storeProducts]);
+
+  useEffect(() => {
+    if (currentPath !== '/product') {
+      dispatch(resetFilters());
+      setLoadedProducts([]);
+    }
+  }, [currentPath]);
 
   const gridSpacing =
     currentPath === '/'
