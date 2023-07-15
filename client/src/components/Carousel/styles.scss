@@ -1,0 +1,26 @@
+.swiper-slide {
+text-align: center;
+}
+
+
+.swiper-wrapper {
+    margin: 0px auto 20px;
+    flex-wrap: nowrap;
+  }
+// @media (max-width: 768px) {
+//   .swiper-wrapper {
+//     margin: 35px auto;
+//     flex-wrap: nowrap;
+//   }
+//   }
+
+
+.swiper-pagination-fraction {
+  bottom: 0;
+}
+
+.swiper-pagination-bullet {
+  width: 25px;
+  height: 5px;
+  border-radius: 5px;
+}

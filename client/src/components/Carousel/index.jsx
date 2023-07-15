@@ -1,91 +1,65 @@
-import { React, useEffect, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper';
 import { useSelector, useDispatch } from 'react-redux';
-import Carousel from 'react-material-ui-carousel';
-// import { Paper, Button } from '@mui/material'
-// import { Grid, Box } from '@mui/material';
-import Home from '@mui/icons-material/Home';
-import ProductCard from '../ProductCard';
+import { useLocation } from 'react-router-dom';
 import { fetchProducts } from '../../redux/slices/productsSlice';
+import ProductCard from '../ProductCard';
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+import './styles.scss';
 
-function PromoCarousel(props) {
+function Carousel() {
   const products = useSelector((state) => state.products.products);
-  // const storeProducts = useSelector((state) => state.products.products);
-  // const [loadedProducts, setLoadedProducts] = useState([]);
   const isFetching = useSelector((state) => state.products.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProducts({}));
   }, [dispatch]);
-
   return (
     <div>
       {isFetching ? (
         <div>Loading...</div>
       ) : (
-        <Carousel navButtonsAlwaysVisible={true} autoPlay={false}>
+        <Swiper
+          breakpoints={{
+            440: {
+              width: 440,
+              slidesPerView: 2,
+              navigation: true,
+            },
+            768: {
+              width: 768,
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            928: {
+              width: 928,
+              slidesPerView: 4,
+            },
+          }}
+          slidesPerView={1}
+          spaceBetween={10}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="saleCarousel">
+          {/* {console.log('prod', products)} */}
           {products
-            .filter((el) => el.sale === true)
+            // .filter((el) => el.sale === true)
             .map((product) => (
-              <ProductCard product={product} />
+              <SwiperSlide>
+                <ProductCard product={product} />
+              </SwiperSlide>
             ))}
-        </Carousel>
+        </Swiper>
       )}
     </div>
   );
 }
-export default PromoCarousel;
-// .filter((el) => el.sale === true)
-
-// import React, { useRef, useState, useEffect } from 'react';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Pagination, Navigation } from 'swiper';
-// import { useSelector, useDispatch } from 'react-redux';
-// // import { connect } from 'react-redux';
-// import { Grid, Box } from '@mui/material';
-// import ProductCard from '../ProductCard';
-// import { fetchProducts } from '../../redux/slices/productsSlice';
-// // Import Swiper styles
-// import 'swiper/scss';
-// import 'swiper/scss/navigation';
-// import 'swiper/scss/pagination';
-// import './styles.css';
-
-// function Carousel() {
-//   const products = useSelector((state) => state.products.products);
-//   const isFetching = useSelector((state) => state.products.isFetching);
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(fetchProducts({}));
-//   }, [dispatch]);
-//   return (
-//     <div>
-//       {isFetching ? (
-//         <div>Loading...</div>
-//       ) : (
-//         <Swiper
-//           slidesPerView={3}
-//           spaceBetween={30}
-//           loop={true}
-//           pagination={{
-//             clickable: true,
-//           }}
-//           navigation={true}
-//           modules={[Pagination, Navigation]}
-//           className="mySwiper">
-//           {products
-//             .filter((el) => el.sale === true)
-//             .map((product) => (
-//               <SwiperSlide>
-//                 <ProductCard product={product} />
-//               </SwiperSlide>
-//             ))}
-//         </Swiper>
-//       )}
-//     </div>
-//   );
-// }
-// // const mapStateToProps = (state) => ({
-// //   products: state.products.products,
-// // });
-
-// export default Carousel;
+export default Carousel;
