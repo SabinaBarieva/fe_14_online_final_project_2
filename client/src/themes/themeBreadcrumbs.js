@@ -1,6 +1,14 @@
 import { Breadcrumbs } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, keyframes } from '@mui/system';
 import { Link as RouterLink } from 'react-router-dom';
+
+const animationLoading = keyframes`
+0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }`;
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   padding: '20px 10px',
@@ -10,6 +18,9 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   fontSize: '1.5rem',
   borderRadius: 10,
   boxShadow: `0px 10px 20px -10px ${theme.palette.primary.main}`,
+  '& .MuiBreadcrumbs-ol': {
+    flexWrap: 'nowrap',
+  },
   '& .MuiBreadcrumbs-li:last-child': {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -52,6 +63,11 @@ const StyledSpan = styled('span')(({ theme }) => ({
   textOverflow: 'ellipsis',
   [theme.breakpoints.between('xs', 'sm')]: {
     padding: 0,
+  },
+  '&.loading': {
+    textOverflow: 'clip',
+    display: 'block',
+    animation: `${animationLoading} 2s linear infinite forwards`,
   },
 }));
 
