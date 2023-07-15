@@ -17,6 +17,8 @@ import modalSlice from './slices/modalSlice';
 import formSlice from './slices/formSlice';
 // eslint-disable-next-line import/no-named-as-default
 import productSlice from './slices/productSlice';
+// eslint-disable-next-line import/no-named-as-default
+import allProductSlice from './slices/allProdsSlice';
 import filtersSlice from './slices/filtersSlice';
 import basketSlice from './slices/basketSlice';
 import searchSlice from './slices/searchSlice';
@@ -29,6 +31,7 @@ const rootReducer = combineReducers({
   modal: modalSlice,
   form: formSlice,
   product: productSlice,
+  allProducts: allProductSlice,
   filters: filtersSlice,
   basket: basketSlice,
   search: searchSlice,
