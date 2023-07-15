@@ -11,7 +11,6 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import productsSlice from './slices/productsSlice';
-import productsSaleSlice from './slices/productsSaleSlice';
 import categoriesSlice from './slices/categoriesSlice';
 import errorsSlice from './slices/errorsSlice';
 import modalSlice from './slices/modalSlice';
@@ -25,7 +24,6 @@ import searchResultsSlice from './slices/searchResultsSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
-  productsSale: productsSaleSlice,
   categories: categoriesSlice,
   errors: errorsSlice,
   modal: modalSlice,
