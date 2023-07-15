@@ -50,9 +50,6 @@ function ProductDescription() {
 
   useEffect(() => {
     dispatch(getProduct(id));
-    return () => {
-      dispatch(closeModalBasket());
-    };
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
@@ -89,11 +86,13 @@ function ProductDescription() {
     if (imageUrls) {
       setMainImage(imageUrls[0]);
     }
+    return () => {
+      dispatch(closeModalBasket());
+    };
   }, [imageUrls]);
 
   if (isLoading) {
     return <LinearProgress />;
-    // return <CircularProgress />;
   }
 
   if (!isIdExist) {
@@ -164,9 +163,9 @@ function ProductDescription() {
             </Grid>
             <Guarantee>{itemNo}</Guarantee>
             <Title>
-              {brand} {name} {storage} {color}
+              {brand || null} {name || null} {storage || null} {color}
             </Title>
-            <Description>{description}</Description>
+            <Description>{description || null}</Description>
             <Price>
               {quantity === 0 ? 'Not in stock' : `${currentPrice}$`}
             </Price>
