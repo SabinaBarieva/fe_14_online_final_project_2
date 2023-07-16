@@ -5,7 +5,13 @@ import { AdvancedImage } from '@cloudinary/react';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import getImg from '../../cloudinary';
-import { Title } from '../../themes/themeAboutUs';
+import {
+  Title,
+  Phone,
+  Telegram,
+  Email,
+  Links,
+} from '../../themes/themeAboutUs';
 
 function About() {
   return (
@@ -45,26 +51,27 @@ function About() {
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            textAlign: 'center',
+            paddingRight: { xl: '35px' },
           }}>
           <Grid
             item
             xs={12}
-            lg={5}
+            xl={5}
             sx={{
               displa: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-around',
             }}>
-            <p>
-              Call us <a href="tel:+380671112233">+38 (067) 111-22-33</a>
-            </p>
-            <p>
-              Text us <a href="https://t.me/flschat">Telegram</a>
-            </p>
-            <p>
-              Mail to us <a href="mailto:mail@example.com">mail@example.com</a>
-            </p>
+            <Phone>
+              Call us
+              <Links href="tel:+380671112233"> +38 (067) 111-22-33</Links>
+            </Phone>
+            <Telegram>
+              Text us <Links href="https://t.me/flschat">Telegram</Links>
+            </Telegram>
+            <Email>
+              Mail to us
+              <Links href="mailto:mail@example.com"> mail@example.com</Links>
+            </Email>
           </Grid>
           <Grid item xs={12} lg={5}>
             <Box>
@@ -73,7 +80,7 @@ function About() {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1526.0021470212216!2d30.521324267562047!3d50.45057572721975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce505f2c2b6f%3A0x3c708bc302925049!2z0KLQpiBHTE9CVVM!5e0!3m2!1suk!2sua!4v1689360541297!5m2!1suk!2sua"
                 width="350"
                 height="200"
-                allowFullScreen=""
+                allowFullScreen="true"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
