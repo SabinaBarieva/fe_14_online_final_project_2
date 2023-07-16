@@ -51,6 +51,7 @@ function About() {
           sx={{
             display: 'flex',
             justifyContent: 'center',
+            textAlign: 'center',
             paddingRight: { xl: '35px' },
           }}>
           <Grid
