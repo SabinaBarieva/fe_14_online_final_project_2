@@ -229,89 +229,89 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        <SwipeableDrawer
-          anchor="top"
-          open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ padding: '0.5rem' }}>
-            <div>
-              <IconButton>
-                <CloseIcon onClick={() => setOpen(false)} />
-              </IconButton>
-            </div>
-            <NavLink to="/basket" onClick={() => setOpen(false)}>
-              <IconButton style={{ padding: '0', margin: '0' }}>
-                <StyledBadge
-                  badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-                  <ShoppingCartOutlinedIcon
-                    sx={{
-                      color: '#616467',
-                      width: '28.7px',
-                      height: '32px ',
-                    }}
-                  />
-                </StyledBadge>
-              </IconButton>
-            </NavLink>
-            <Button
-              variant="contained"
-              endIcon={<LoginOutlinedIcon />}
-              sx={{
-                background: '#211F1C',
-                width: '113px',
-                height: '40px',
-                margin: '0',
-                padding: '0',
-              }}
-              onClick={() => setOpen(false)}>
-              Login
-            </Button>
-          </Grid>
-          <Divider />
-          <List style={{ height: '100vh' }}>
-            <ListItem
-              sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
-              <NavLink
-                to="/"
-                style={activeLinkDecoration}
-                className="header_link">
-                Home
+        <Hidden only={['lg', 'xl', 'xxl']}>
+          <SwipeableDrawer
+            anchor="top"
+            open={open}
+            onOpen={() => setOpen(true)}
+            onClose={() => setOpen(false)}>
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ padding: '0.5rem' }}>
+              <div>
+                <IconButton>
+                  <CloseIcon onClick={() => setOpen(false)} />
+                </IconButton>
+              </div>
+              <NavLink to="/basket" onClick={() => setOpen(false)}>
+                <IconButton style={{ padding: '0', margin: '0' }}>
+                  <StyledBadge
+                    badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                    <ShoppingCartOutlinedIcon
+                      sx={{
+                        color: '#616467',
+                        width: '28.7px',
+                        height: '32px ',
+                      }}
+                    />
+                  </StyledBadge>
+                </IconButton>
               </NavLink>
-            </ListItem>
-            <ListItem
-              sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
-              <NavLink
-                to="/product"
-                style={activeLinkDecoration}
-                className="header_link">
-                Product
-              </NavLink>
-            </ListItem>
-            <ListItem
-              sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
-              <NavLink
-                to="/about"
-                style={activeLinkDecoration}
-                className="header_link">
-                About
-              </NavLink>
-            </ListItem>
-            <ListItem sx={{ justifyContent: 'center' }}>
-              <Hidden only={['lg', 'xl', 'xxl']}>
+              <Button
+                variant="contained"
+                endIcon={<LoginOutlinedIcon />}
+                sx={{
+                  background: '#211F1C',
+                  width: '113px',
+                  height: '40px',
+                  margin: '0',
+                  padding: '0',
+                }}
+                onClick={() => setOpen(false)}>
+                Login
+              </Button>
+            </Grid>
+            <Divider />
+            <List style={{ height: '100vh' }}>
+              <ListItem
+                sx={{ justifyContent: 'center' }}
+                onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/"
+                  style={activeLinkDecoration}
+                  className="header_link">
+                  Home
+                </NavLink>
+              </ListItem>
+              <ListItem
+                sx={{ justifyContent: 'center' }}
+                onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/product"
+                  style={activeLinkDecoration}
+                  className="header_link">
+                  Product
+                </NavLink>
+              </ListItem>
+              <ListItem
+                sx={{ justifyContent: 'center' }}
+                onClick={() => setOpen(false)}>
+                <NavLink
+                  to="/about"
+                  style={activeLinkDecoration}
+                  className="header_link">
+                  About
+                </NavLink>
+              </ListItem>
+              <ListItem sx={{ justifyContent: 'center' }}>
                 <Search />
-              </Hidden>
-            </ListItem>
-          </List>
-        </SwipeableDrawer>
+              </ListItem>
+            </List>
+          </SwipeableDrawer>
+        </Hidden>
       </AppBar>
       <BreadCrumbs />
       <Outlet />
