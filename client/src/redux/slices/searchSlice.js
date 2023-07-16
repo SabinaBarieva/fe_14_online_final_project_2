@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const searchSlice = createSlice({
   name: 'search',
@@ -56,34 +56,40 @@ const delay = (ms) => {
   });
 };
 
-export const classChange = () => async (dispatch, getState) => {
-  const statusIcon = getState().search.statusIconType;
+export const classChange = createAsyncThunk(
+  'search/classChange',
+  async (_, { dispatch, getState }) => {
+    const statusIcon = getState().search.statusIconType;
 
-  if (statusIcon === 'search') {
-    dispatch(setInputClassFade());
-    dispatch(toggleInput());
-    await delay(750);
-    dispatch(showCloseIcon());
+    if (statusIcon === 'search') {
+      dispatch(setInputClassFade());
+      dispatch(toggleInput());
+      await delay(750);
+      dispatch(showCloseIcon());
+    }
+    if (statusIcon === 'close') {
+      dispatch(setValue(''));
+      dispatch(setSelect(false));
+      dispatch(setInputClassFadeOut());
+      await delay(800);
+      dispatch(toggleInput());
+      dispatch(showSearchIcon());
+    }
   }
-  if (statusIcon === 'close') {
-    dispatch(setValue(''));
-    dispatch(setSelect(false));
-    dispatch(setInputClassFadeOut());
-    await delay(800);
-    dispatch(toggleInput());
-    dispatch(showSearchIcon());
-  }
-};
+);
 
-export const close = () => async (dispatch, getState) => {
-  const statusIcon = getState().search.statusIconType;
+export const close = createAsyncThunk(
+  'search/close',
+  async (_, { dispatch, getState }) => {
+    const statusIcon = getState().search.statusIconType;
 
-  if (statusIcon === 'close') {
-    dispatch(setValue(''));
-    dispatch(setSelect(false));
-    dispatch(setInputClassFadeOut());
-    await delay(800);
-    dispatch(toggleInput());
-    dispatch(showSearchIcon());
+    if (statusIcon === 'close') {
+      dispatch(setValue(''));
+      dispatch(setSelect(false));
+      dispatch(setInputClassFadeOut());
+      await delay(800);
+      dispatch(toggleInput());
+      dispatch(showSearchIcon());
+    }
   }
-};
+);
