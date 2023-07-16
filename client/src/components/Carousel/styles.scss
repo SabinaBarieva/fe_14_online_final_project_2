@@ -21,13 +21,13 @@
     height: 5px;
     border-radius: 5px;
     &-active {
-      background: rgb(66, 20, 20);
+      background: rgb(46, 45, 45);
     }
   }
 }
 .swiper-button-prev, .swiper-button-next {
   color: rgb(202, 199, 199);
   &:hover {
-    color: rgb(66, 20, 20);
+    color: rgb(46, 45, 45);
   }
 }
