@@ -29,7 +29,7 @@ export default allProdsSlice.reducer;
 export const { startGetArray, finishGetArray, errorGetArray } =
   allProdsSlice.actions;
 
-export const fetchAllProducts = () => async (dispatch) => {
+export const getAllProducts = () => async (dispatch) => {
   dispatch(startGetArray());
   try {
     const resultArray = await fetchApi(productsEP);

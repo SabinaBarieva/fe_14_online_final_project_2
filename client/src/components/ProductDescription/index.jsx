@@ -27,7 +27,7 @@ import {
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
-import { fetchAllProducts } from '../../redux/slices/allProdsSlice';
+import { getAllProducts } from '../../redux/slices/allProdsSlice';
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ function ProductDescription() {
 
   useEffect(() => {
     dispatch(getProduct(id));
-    dispatch(fetchAllProducts());
+    dispatch(getAllProducts());
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
