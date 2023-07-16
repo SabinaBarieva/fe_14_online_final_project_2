@@ -1,5 +1,6 @@
 .swiper-slide {
-text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .swiper-pagination {
@@ -15,5 +16,14 @@ text-align: center;
     width: 25px;
     height: 5px;
     border-radius: 5px;
+    &-active {
+      background: rgb(66, 20, 20);
+    }
+  }
+}
+.swiper-button-prev, .swiper-button-next {
+  color: rgb(202, 199, 199);
+  &:hover {
+    color: rgb(66, 20, 20);
   }
 }

@@ -1,22 +1,23 @@
-import React, { useRef, useState, useEffect } from 'react';
+/* eslint-disable import/no-unresolved */
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { fetchProducts } from '../../redux/slices/productsSlice';
+import { getAllProducts } from '../../redux/slices/allProdsSlice';
 import ProductCard from '../ProductCard';
 // Import Swiper styles
 import 'swiper/scss';
+import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import './styles.scss';
 
 function Carousel() {
-  const products = useSelector((state) => state.products.products);
-  const isFetching = useSelector((state) => state.products.isFetching);
+  const products = useSelector((state) => state.allProducts.allProds);
+  const isFetching = useSelector((state) => state.allProducts.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts({}));
+    dispatch(getAllProducts({}));
   }, [dispatch]);
   return (
     <div>
@@ -26,11 +27,12 @@ function Carousel() {
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
-          loop={true}
+          // autoplay={{ delay: 2000 }}
+          loop
           pagination={{
             clickable: true,
           }}
-          navigation={true}
+          navigation
           modules={[Pagination, Navigation]}
           className="saleCarousel"
           breakpoints={{
@@ -45,9 +47,8 @@ function Carousel() {
               slidesPerView: 4,
             },
           }}>
-          {/* {console.log('prod', products)} */}
           {products
-            // .filter((el) => el.sale === true)
+            .filter((el) => el.sale === true)
             .map((product) => (
               <SwiperSlide>
                 <ProductCard product={product} />

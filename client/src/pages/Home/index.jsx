@@ -50,6 +50,10 @@ function HomeContent() {
           flexDirection: 'column',
           backgroundColor: '#FCF9F6',
         }}>
+        <SectionTitle variant="h2">Daily Sale</SectionTitle>
+        <Box sx={{ width: '93%' }}>
+          <Carousel />
+        </Box>
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box sx={{ width: '93%' }}>
           <ProductsList />
@@ -68,10 +72,6 @@ function HomeContent() {
               <ArrowIcon />
             </AllProductsBtn>
           </Link>
-        </Box>
-        <SectionTitle variant="h2">Daily Sale</SectionTitle>
-        <Box sx={{ width: '93%' }}>
-          <Carousel />
         </Box>
       </Container>
     </Container>
