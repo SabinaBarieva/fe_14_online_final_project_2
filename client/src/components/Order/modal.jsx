@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { closeModal } from '../../redux/slices/modalSlice';
 import { closeForm } from '../../redux/slices/formSlice';
+import { sendOrder } from '../../redux/slices/orderSlice';
 import {
   StyledTypography,
   StyledButton,
@@ -22,6 +23,7 @@ export default function ModalOrdered() {
   const closed = () => {
     dispatch(closeForm());
     dispatch(closeModal());
+    dispatch(sendOrder());
   };
 
   const handleClickOutside = (event) => {

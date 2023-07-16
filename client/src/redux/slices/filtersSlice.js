@@ -36,7 +36,6 @@ const filtersSlice = createSlice({
       );
       if (categoryIndex > -1) categories.splice(categoryIndex, 1);
     },
-
     setMinPrice: (state, { payload: { price } }) => {
       state.minPrice = price;
     },
