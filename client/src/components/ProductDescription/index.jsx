@@ -113,7 +113,7 @@ function ProductDescription() {
             sx={{
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'start',
             }}>
             <AdvancedImage
               className="main-photo"
