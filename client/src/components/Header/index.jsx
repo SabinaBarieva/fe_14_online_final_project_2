@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Outlet, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { AdvancedImage } from '@cloudinary/react';
 import {
   Typography,
@@ -30,6 +30,7 @@ import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
 import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
+import { resetFilters } from '../../redux/slices/filtersSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -49,6 +50,11 @@ function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const [totalInBasket, setTotalInBasket] = useState(0);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  if (location.pathname !== '/product') {
+    dispatch(resetFilters());
+  }
 
   // eslint-disable-next-line no-unused-vars
   const StyledBadge = styled(Badge)(({ theme }) => ({
