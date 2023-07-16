@@ -27,7 +27,7 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const AllProductsBtn = styled(SquareButton)(({ theme }) => ({
+const AllProductsBtn = styled(SquareButton)(() => ({
   minWidth: '128px',
   minHeight: '32px',
   maxWidth: '218px',

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import fetchApi from '../../api/fetchApi';
 import { productsEP } from '../../api/constants';
 import { setErrorMessage } from './errorsSlice';
