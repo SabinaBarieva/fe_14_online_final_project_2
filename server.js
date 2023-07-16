@@ -67,7 +67,6 @@ app.use('/api/comments', comments);
 app.use('/api/shipping-methods', shippingMethods);
 app.use('/api/payment-methods', paymentMethods);
 app.use('/api/partners', partners);
-app.use('/api/novaposhta', novaposhta);
 // app.use('/', mainRoute);
 
 // Server static assets if in production
