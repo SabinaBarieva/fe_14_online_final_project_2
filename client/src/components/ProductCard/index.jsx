@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -9,11 +9,10 @@ import {
   Box,
   useMediaQuery,
 } from '@mui/material';
-import { styled, useTheme, shadows } from '@mui/system';
+import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
 import { AdvancedImage } from '@cloudinary/react';
 import { minimumPad } from '@cloudinary/url-gen/actions/resize';
-import { color } from '@cloudinary/url-gen/qualifiers/background';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
@@ -21,42 +20,12 @@ import { RadiusButton } from '../Buttons';
 import { setProduct } from '../../redux/slices/productSlice';
 import { addToBasket } from '../../redux/slices/basketSlice';
 
-const CardContainer = styled(Card)(({ theme }) => ({
+const CardContainer = styled(Card)(() => ({
   outline: `solid 1px transparent`,
   borderRadius: '15px',
   marginBottom: '5%',
   height: '100%',
-  /* [theme.breakpoints.between('xs', 'md')]: {
-    maxWidth: '150px',
-    /!* minHeight: '200px', *!/
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    maxWidth: '183px',
-    /!* minHeight: '322px', *!/
-  },
-  [theme.breakpoints.up('lg')]: {
-    maxWidth: '203px',
-    /!*  minHeight: '418px', *!/
-  }, */
 }));
-
-/* const CardImg = styled(AdvancedImage)(({ theme }) => ({
-  minWidth: '160px',
-  minHeight: '200px',
-  borderRadius: '10px',
-  marginBottom: '5%',
-  maxHeight: '296px',
-  maxWidth: '203px',
-  [theme.breakpoints.between('xs', 'md')]: {
-    maxWidth: '150px',
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    maxWidth: '183px',
-  },
-  [theme.breakpoints.up('lg')]: {
-    maxWidth: '203px',
-  },
-})); */
 
 const DetailButton = styled(RadiusButton)(({ theme }) => ({
   fontSize: '0.625rem',
@@ -123,6 +92,12 @@ const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   },
 }));
 
+const Label = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.dark,
+  fontSize: '0.625rem',
+  lineHeight: '0.75rem',
+}));
+
 const CardInfo = styled(CardContent)(({ theme }) => ({
   color: theme.palette.primary.light,
   fontFamily: theme.typography.fontFamily.secondary,
@@ -159,13 +134,10 @@ const ProductName = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const ProductPrice = styled(Typography)(({ theme }) => ({
+const ProductPrice = styled(Typography)(() => ({
   fontWeight: '400',
   fontSize: '.875rem',
   lineHeight: '1rem',
-  /* [theme.breakpoints.between('xs', 'sm')]: {
-    marginBottom: '10px',
-  }, */
 }));
 
 function ProductCard({ product }) {
@@ -187,7 +159,7 @@ function ProductCard({ product }) {
       xs: { width: 150, height: 200 },
       sm: { width: 150, height: 200 },
       md: { width: 183, height: 289 },
-      lg: { width: 203, height: 293 },
+      lg: { width: 183, height: 289 },
     };
 
     const imageSizesHomePage = {
@@ -243,7 +215,6 @@ function ProductCard({ product }) {
               minimumPad()
                 .width(getImageSize().width)
                 .height(getImageSize().height)
-              /* .background(color(`white`)) */
             )
             .roundCorners(byRadius(15, 15))}
           alt={product.name + product.color}
@@ -262,17 +233,21 @@ function ProductCard({ product }) {
           <Link to={`/product/${product.itemNo}`} style={{ marginRight: '7%' }}>
             <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
           </Link>
-          <AddToCartBtn onClick={onClickAdd} variant="solid" disabled={false}>
-            <SvgIcon
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '51%',
-                transform: 'translate(-50%, -50%)',
-              }}>
-              <CartIcon />
-            </SvgIcon>
-          </AddToCartBtn>
+          {product.quantity === 0 ? (
+            <AddToCartBtn onClick={onClickAdd} variant="solid">
+              <SvgIcon
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '51%',
+                  transform: 'translate(-50%, -50%)',
+                }}>
+                <CartIcon />
+              </SvgIcon>
+            </AddToCartBtn>
+          ) : (
+            <Label>Out of stock</Label>
+          )}
         </Box>
       </Box>
       {currentPath !== '/' ? (
