@@ -246,7 +246,15 @@ function ProductCard({ product }) {
               </SvgIcon>
             </AddToCartBtn>
           ) : (
-            <Label>Out of stock</Label>
+            <Box
+              sx={{
+                borderRadius: '10px',
+                border: '1px solid #ACACAC',
+                padding: '3% 4%',
+                backgroundColor: 'white',
+              }}>
+              <Label>Out of stock</Label>
+            </Box>
           )}
         </Box>
       </Box>

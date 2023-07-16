@@ -18,7 +18,6 @@ import {
 const StyledGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'baseline',
   height: 'auto',
   [theme.breakpoints.between('xs', 'md')]: {
     '&:nth-of-type(n+5)': {
@@ -59,7 +58,7 @@ function ProductsList({ perPage }) {
         maxPrice: formattedMaxPrice,
       })
     );
-  }, [dispatch, currentPage, formattedMinPrice, formattedMaxPrice]);
+  }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
 
   const countPagination = Math.round(total / perPage);
   const location = useLocation();
@@ -71,16 +70,13 @@ function ProductsList({ perPage }) {
   return (
     <div>
       {isFetching ? (
-        <>
-          <LinearProgress
-            sx={{
-              backgroundColor: `${theme.palette.primary.light}`,
-              width: '80%',
-              mx: 'auto',
-            }}
-          />
-          <p>Loading</p>
-        </>
+        <LinearProgress
+          sx={{
+            backgroundColor: `${theme.palette.primary.light}`,
+            width: '80%',
+            mx: 'auto',
+          }}
+        />
       ) : (
         <div>
           <Grid container spacing={gridSpacing}>
@@ -92,21 +88,22 @@ function ProductsList({ perPage }) {
                   sm={6}
                   md={4}
                   lg={3}
-                  key={product.itemNo}>
+                  key={product.itemNo}
+                  sx={{ alignItems: 'baseline' }}>
                   <ProductCard product={product} />
                 </StyledGrid>
               ) : (
                 <Grid
                   display="flex"
                   justifyContent="center"
-                  alignItems="baseline"
                   item
                   xs={6}
                   sm={6}
                   md={6}
                   lg={3}
                   key={product.itemNo}
-                  height="auto">
+                  height="auto"
+                  sx={{ alignItems: 'baseline' }}>
                   <ProductCard product={product} />
                 </Grid>
               )
