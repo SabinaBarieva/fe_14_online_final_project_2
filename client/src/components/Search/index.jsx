@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchArrayProducts } from '../../redux/slices/searchResultsSlice';
+import {
+  fetchArrayProducts,
+  clearResultArray,
+} from '../../redux/slices/searchResultsSlice';
 import {
   setSelect,
   setValue,
@@ -27,12 +30,12 @@ export default function Search() {
   const searchRef = useRef(null);
 
   useEffect(() => {
-    dispatch(fetchArrayProducts(value));
+    dispatch(fetchArrayProducts());
   }, []);
 
   const renderIcon = () => {
     if (statusIconType === 'search') {
-      // dispatch(clearResultArray());
+      dispatch(clearResultArray());
       return <SearchIcon />;
     }
     if (statusIconType === 'close') {
@@ -43,14 +46,14 @@ export default function Search() {
 
   const [typingTimeout, setTypingTimeout] = useState(null);
 
-  const handleInputChange = (inputValue) => {
+  const handleInputChange = () => {
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
 
     setTypingTimeout(
       setTimeout(() => {
-        dispatch(fetchArrayProducts(inputValue));
+        dispatch(fetchArrayProducts());
       }, 1000)
     );
   };
@@ -60,7 +63,7 @@ export default function Search() {
     dispatch(setValue(inputValue));
     if (inputValue.length >= 3) {
       dispatch(setSelect(true));
-      handleInputChange(inputValue);
+      handleInputChange();
     } else {
       dispatch(setSelect(false));
     }

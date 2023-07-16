@@ -36,9 +36,10 @@ const StyledSearchWrapper = styled(Container)({
   padding: '0!important',
 });
 
-const StyledButtonIcon = styled(Icon)({
+const StyledButtonIcon = styled(Icon)(({ theme }) => ({
   cursor: 'pointer',
-});
+  color: `${theme.palette.primary.main}`,
+}));
 
 const StyledInput = styled(Input)({
   '&.fade': {
@@ -54,7 +55,7 @@ const StyledList = styled(List)(({ theme }) => ({
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: 'rgba(252, 249, 246, 0.5)',
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
   zIndex: 999,
   maxHeight: 350,
   overflow: 'auto',
