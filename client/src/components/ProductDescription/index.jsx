@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
@@ -11,11 +11,7 @@ import {
   addSeveraltoBasket,
   closeModalBasket,
 } from '../../redux/slices/basketSlice';
-import {
-  currentProduct,
-  currentProductIsLoading,
-  allProductsInBase,
-} from '../../redux/selectors';
+import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
   Title,
@@ -26,8 +22,6 @@ import {
   Guarantee,
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
-import PageNotFound from '../NotFoundPage';
-import { getAllProducts } from '../../redux/slices/allProdsSlice';
 
 function ProductDescription() {
   const dispatch = useDispatch();
@@ -45,13 +39,20 @@ function ProductDescription() {
     description,
     guarantee,
   } = useSelector(currentProduct);
-  const all = useSelector(allProductsInBase);
-  const allProducts = [...all];
-  const isIdExist = allProducts.find((item) => item.itemNo === id);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
+      if (response.status === 400) {
+        navigate('/product/not-found');
+      }
+      return response.json();
+    });
+  });
 
   useEffect(() => {
     dispatch(getProduct(id));
-    dispatch(getAllProducts());
+    // dispatch(getAllProducts());
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
@@ -95,10 +96,6 @@ function ProductDescription() {
 
   if (isLoading) {
     return <LinearProgress />;
-  }
-
-  if (!isIdExist) {
-    return <PageNotFound />;
   }
 
   if (imageUrls) {
