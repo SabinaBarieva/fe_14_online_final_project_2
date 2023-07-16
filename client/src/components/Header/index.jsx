@@ -40,10 +40,8 @@ const activeLinkDecoration = ({ isActive }) => ({
   fontStyle: 'normal',
   textDecoration: isActive ? 'underline' : 'none',
   textUnderlinePosition: isActive ? 'under' : 'none',
-  fontWeight: isActive ? '700' : '400',
+  fontWeight: isActive ? '900' : '400',
   cursor: isActive ? 'default' : 'pointer',
-  width: isActive ? '65px' : '',
-  height: isActive ? '22px' : '',
 });
 
 function Header() {
@@ -90,6 +88,8 @@ function Header() {
         sx={{
           background: '#F8F8F8',
           boxShadow: 'none',
+          padding: '0',
+          margin: '0',
         }}>
         <Container maxWidth="100%" style={{ padding: '0' }}>
           <Toolbar
@@ -98,7 +98,7 @@ function Header() {
               padding: {
                 xs: '0 0 0 1.25rem',
                 md: '0 0 0 3.44rem',
-                lg: '2.75rem 4.81rem 1.94rem 6.5rem',
+                lg: '2rem',
               },
             }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
@@ -107,6 +107,8 @@ function Header() {
                   variant="h5"
                   gutterBottom
                   sx={{
+                    margin: '0',
+                    padding: '0',
                     color: '#616467',
                     fontFamily: 'Lato',
                     fontStyle: 'normal',
@@ -132,7 +134,7 @@ function Header() {
                 </Stack>
               </Grid>
             </NavLink>
-            <Hidden lgDown>
+            <Hidden only={['xs', 'sm', 'md']}>
               <NavLink
                 to="/"
                 style={activeLinkDecoration}
@@ -173,9 +175,16 @@ function Header() {
                 className="header_link">
                 About
               </NavLink>
-              <Search />
+              <Container
+                style={{
+                  maxWidth: '300px',
+                  padding: '0',
+                  margin: '0',
+                }}>
+                <Search />
+              </Container>
               <NavLink to="/basket">
-                <IconButton>
+                <IconButton style={{ padding: '0', margin: '0' }}>
                   <StyledBadge
                     badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
                     <ShoppingCartOutlinedIcon
@@ -191,11 +200,17 @@ function Header() {
               <Button
                 variant="contained"
                 endIcon={<LoginOutlinedIcon />}
-                sx={{ background: '#211F1C', width: '113px', height: '40px' }}>
+                sx={{
+                  background: '#211F1C',
+                  width: '113px',
+                  height: '40px',
+                  padding: '0',
+                  margin: '0',
+                }}>
                 Login
               </Button>
             </Hidden>
-            <Hidden lgUp>
+            <Hidden only={['lg', 'xl', 'xxl']}>
               <IconButton
                 style={{ padding: '0' }}
                 onClick={() => setOpen(true)}>
@@ -205,8 +220,8 @@ function Header() {
                     color: '#F4F4F4',
                     width: '100%',
                     height: '100%',
-                    maxWidth: { xs: '52px', md: '114px' },
-                    maxHeight: { xs: '52px', md: '109px' },
+                    maxWidth: { xs: '50px', md: '85px' },
+                    maxHeight: { xs: '50px', md: '85px' },
                   }}
                 />
               </IconButton>
@@ -225,12 +240,12 @@ function Header() {
             alignItems="center"
             sx={{ padding: '0.5rem' }}>
             <div>
-              <IconButton onClick={() => setOpen(false)}>
-                <CloseIcon />
+              <IconButton>
+                <CloseIcon onClick={() => setOpen(false)} />
               </IconButton>
             </div>
-            <NavLink to="/basket">
-              <IconButton>
+            <NavLink to="/basket" onClick={() => setOpen(false)}>
+              <IconButton style={{ padding: '0', margin: '0' }}>
                 <StyledBadge
                   badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
                   <ShoppingCartOutlinedIcon
@@ -246,15 +261,19 @@ function Header() {
             <Button
               variant="contained"
               endIcon={<LoginOutlinedIcon />}
-              sx={{ background: '#211F1C', width: '113px', height: '40px' }}>
+              sx={{
+                background: '#211F1C',
+                width: '113px',
+                height: '40px',
+                margin: '0',
+                padding: '0',
+              }}
+              onClick={() => setOpen(false)}>
               Login
             </Button>
           </Grid>
           <Divider />
-          <List>
-            <ListItem sx={{ justifyContent: 'center' }}>
-              <Search />
-            </ListItem>
+          <List style={{ height: '100vh' }}>
             <ListItem
               sx={{ justifyContent: 'center' }}
               onClick={() => setOpen(false)}>
@@ -284,6 +303,9 @@ function Header() {
                 className="header_link">
                 About
               </NavLink>
+            </ListItem>
+            <ListItem sx={{ justifyContent: 'center' }}>
+              <Search />
             </ListItem>
           </List>
         </SwipeableDrawer>
