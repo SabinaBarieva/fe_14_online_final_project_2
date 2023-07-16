@@ -1,11 +1,10 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, Navigation, Autoplay } from 'swiper';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllProducts } from '../../redux/slices/allProdsSlice';
 import ProductCard from '../ProductCard';
-// Import Swiper styles
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
@@ -27,13 +26,13 @@ function Carousel() {
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
-          // autoplay={{ delay: 2000 }}
+          autoplay={{ delay: 5000 }}
           loop
           pagination={{
             clickable: true,
           }}
           navigation
-          modules={[Pagination, Navigation]}
+          modules={[Pagination, Navigation, Autoplay]}
           className="saleCarousel"
           breakpoints={{
             440: {
