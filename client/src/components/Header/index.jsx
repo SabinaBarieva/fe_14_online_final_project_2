@@ -306,7 +306,9 @@ function Header() {
               </NavLink>
             </ListItem>
             <ListItem sx={{ justifyContent: 'center' }}>
-              <Search />
+              <Hidden only={['lg', 'xl', 'xxl']}>
+                <Search />
+              </Hidden>
             </ListItem>
           </List>
         </SwipeableDrawer>
