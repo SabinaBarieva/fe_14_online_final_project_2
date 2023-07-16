@@ -103,6 +103,18 @@ function Header() {
             }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
               <Grid container direction="row">
+                <Stack
+                  sx={{
+                    width: { xs: '1.7rem', md: '2.0rem' },
+                    height: { xs: '1.7rem', md: '2.0rem' },
+                    margin: '4px 2px 0 0',
+                  }}>
+                  <AdvancedImage
+                    cldImg={getImg.image('header/frfdurnw7br9n8gxqfdy.png')}
+                    alt="twitter"
+                    width="100%"
+                  />
+                </Stack>
                 <Typography
                   variant="h5"
                   gutterBottom
@@ -121,17 +133,6 @@ function Header() {
                   }}>
                   Apple Shop
                 </Typography>
-                <Stack
-                  sx={{
-                    width: { xs: '1.7rem', md: '2.0rem' },
-                    height: { xs: '1.7rem', md: '2.0rem' },
-                  }}>
-                  <AdvancedImage
-                    cldImg={getImg.image('header/frfdurnw7br9n8gxqfdy.png')}
-                    alt="twitter"
-                    width="100%"
-                  />
-                </Stack>
               </Grid>
             </NavLink>
             <Hidden only={['xs', 'sm', 'md']}>
@@ -216,12 +217,12 @@ function Header() {
                 onClick={() => setOpen(true)}>
                 <MenuIcon
                   sx={{
-                    backgroundColor: '#393D45',
-                    color: '#F4F4F4',
+                    backgroundColor: '#F4F4F4',
+                    color: '#393D45',
                     width: '100%',
                     height: '100%',
-                    maxWidth: { xs: '50px', md: '85px' },
-                    maxHeight: { xs: '50px', md: '85px' },
+                    maxWidth: { xs: '50px', md: '75px' },
+                    maxHeight: { xs: '50px', md: '75px' },
                   }}
                 />
               </IconButton>
