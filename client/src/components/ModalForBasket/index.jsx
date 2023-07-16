@@ -1,6 +1,6 @@
 import { Close } from '@mui/icons-material';
-import { Dialog, Button, DialogContentText, DialogTitle } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Dialog, DialogContentText, DialogTitle } from '@mui/material';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCart } from '../../redux/selectors';
