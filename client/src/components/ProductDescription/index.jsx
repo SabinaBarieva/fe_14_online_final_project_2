@@ -6,7 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { getProduct } from '../../redux/slices/productSlice';
+import { setProduct, getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
@@ -43,13 +43,25 @@ function ProductDescription() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
+    // eslint-disable-next-line consistent-return
+    fetch(`http://localhost:3000/api/products/${id}`).then(async (response) => {
       if (response.status >= 400) {
-        navigate('/product/not-found');
+        return navigate('/product/not-found');
       }
-      return response.json();
+      if (response.ok && response.status === 200) {
+        const product = await response.json();
+        console.log(product);
+        return dispatch(setProduct(product));
+      }
+      // return response.json();
     });
-    dispatch(getProduct(id));
+    // fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
+    //   if (response.status >= 400) {
+    //     navigate('/product/not-found');
+    //   }
+    //   return response.json();
+    // });
+    // // dispatch(getProduct(id));
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
