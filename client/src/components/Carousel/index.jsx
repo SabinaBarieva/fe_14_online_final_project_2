@@ -24,22 +24,6 @@ function Carousel() {
         <div>Loading...</div>
       ) : (
         <Swiper
-          breakpoints={{
-            440: {
-              width: 440,
-              slidesPerView: 2,
-              navigation: true,
-            },
-            768: {
-              width: 768,
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            928: {
-              width: 928,
-              slidesPerView: 4,
-            },
-          }}
           slidesPerView={1}
           spaceBetween={10}
           loop={true}
@@ -48,7 +32,19 @@ function Carousel() {
           }}
           navigation={true}
           modules={[Pagination, Navigation]}
-          className="saleCarousel">
+          className="saleCarousel"
+          breakpoints={{
+            440: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            980: {
+              slidesPerView: 4,
+            },
+          }}>
           {/* {console.log('prod', products)} */}
           {products
             // .filter((el) => el.sale === true)
