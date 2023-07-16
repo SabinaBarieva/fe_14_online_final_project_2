@@ -4,7 +4,7 @@ import { productsEP } from '../../api/constants';
 import { setErrorMessage } from './errorsSlice';
 
 const allProdsSlice = createSlice({
-  name: 'searchList',
+  name: 'allProducts',
   initialState: {
     allProds: [],
     isFetching: false,
