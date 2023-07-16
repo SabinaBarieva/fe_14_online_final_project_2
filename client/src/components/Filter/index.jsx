@@ -200,20 +200,9 @@ function FilterSection() {
                   />
                 </Grid>
               </Grid>
-              <Button
-                sx={{
-                  minWidth: '100%',
-                  borderRadius: '8px',
-                  marginTop: '20px',
-                  textTransform: 'capitalize',
-                  background: '#000',
-                }}
-                variant="contained"
-                onClick={setPriceCallback}>
-                Set Price
-              </Button>
+
               <Grid container sx={{ marginTop: '35px' }}>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <Button
                     sx={{
                       width: '98%',
@@ -226,17 +215,18 @@ function FilterSection() {
                     Clear Filter
                   </Button>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <Button
                     sx={{
-                      width: '98%',
+                      minWidth: '100%',
                       borderRadius: '8px',
+                      marginTop: '20px',
                       textTransform: 'capitalize',
                       background: '#000',
                     }}
                     variant="contained"
-                    onClick={resetFiltersCallback}>
-                    Apply
+                    onClick={setPriceCallback}>
+                    Set Price
                   </Button>
                 </Grid>
               </Grid>
