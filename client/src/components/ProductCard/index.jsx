@@ -203,6 +203,7 @@ function ProductCard({ product }) {
     };
     dispatch(addToBasket(item));
   };
+  console.log(product.quantity);
   return (
     <CardContainer
       sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>
@@ -233,7 +234,7 @@ function ProductCard({ product }) {
           <Link to={`/product/${product.itemNo}`} style={{ marginRight: '7%' }}>
             <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
           </Link>
-          {product.quantity === 0 ? (
+          {product.quantity !== 0 ? (
             <AddToCartBtn onClick={onClickAdd} variant="solid">
               <SvgIcon
                 sx={{
