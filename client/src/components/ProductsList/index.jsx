@@ -1,14 +1,24 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { Grid, Box } from '@mui/material';
-import { styled, spacing } from '@mui/system';
-/* import PropTypes from 'prop-types'; */
+import { Grid, Box, Pagination, LinearProgress } from '@mui/material';
+import { styled, useTheme } from '@mui/system';
+import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
-import { RadiusButton } from '../Buttons';
+import {
+  categoriesFilter,
+  isFetchingProductsList,
+  maximalPrice,
+  minimalPrice,
+  productsList,
+  totalNumberProducts,
+} from '../../redux/selectors';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  height: 'auto',
   [theme.breakpoints.between('xs', 'md')]: {
     '&:nth-of-type(n+5)': {
       display: 'none',
@@ -26,99 +36,97 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
   },
 }));
 
-const LoadMoreBtn = styled(RadiusButton)(({ theme }) => ({
-  fontWeight: '400',
-  fontFamily: theme.typography.fontFamily.secondary,
-  minWidth: '100px',
-  minHeight: '35px',
-  maxWidth: '140px',
-  maxHeight: '80px',
-  margin: '3% auto',
-  [theme.breakpoints.between('xs', 'md')]: {
-    fontSize: '1rem',
-    minWidth: '100px',
-    minHeight: '35px',
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    fontSize: '1.1rem',
-    minWidth: '120px',
-    minHeight: '40px',
-  },
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '1.25rem',
-    minWidth: '140px',
-    minHeight: '45px',
-  },
-}));
-
-function ProductsList() {
-  /* const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] =  useState() */
-  const products = useSelector((state) => state.products.products);
-  /*  const categories = useSelector((state) => state.categories.categories); */
-  const isFetching = useSelector((state) => state.products.isFetching);
+function ProductsList({ perPage }) {
+  const theme = useTheme();
+  const [currentPage, setCurrentPage] = useState(1);
+  const total = useSelector(totalNumberProducts);
+  const products = useSelector(productsList);
+  const categories = useSelector(categoriesFilter);
+  const minFilterPrice = useSelector(minimalPrice);
+  const maxFilterPrice = useSelector(maximalPrice);
+  const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
+  const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
+  const isFetching = useSelector(isFetchingProductsList);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts({}));
-  }, [dispatch]);
-  /* const lastproductIndex = currentPage * perPage
-  const firstproductIndex = lastproductIndex - perPage */
+    dispatch(
+      fetchProducts({
+        categories,
+        perPage,
+        startPage: currentPage,
+        minPrice: formattedMinPrice,
+        maxPrice: formattedMaxPrice,
+      })
+    );
+  }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
+
+  const countPagination = Math.round(total / perPage);
   const location = useLocation();
   const currentPath = location.pathname;
-  /*  const handleLoadMoreClick = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  }; */
+  const spacingHomePage = { xs: 1.5, sm: 2, md: 2.5, lg: 6 };
+  const spacingProductsPage = { xs: 1, sm: 1.5, md: 2, lg: 3 };
   const gridSpacing =
-    currentPath === '/'
-      ? { xs: 0.5, sm: 0.5, md: 0.5, lg: 0.5 }
-      : { xs: 1, sm: 1.5, md: 2, lg: 3 };
-
+    currentPath === '/' ? spacingHomePage : spacingProductsPage;
   return (
     <div>
       {isFetching ? (
-        <div>Loading...</div>
+        <LinearProgress
+          sx={{
+            backgroundColor: `${theme.palette.primary.light}`,
+            width: '80%',
+            mx: 'auto',
+          }}
+        />
       ) : (
         <div>
           <Grid container spacing={gridSpacing}>
             {products.map((product) =>
               currentPath === '/' ? (
                 <StyledGrid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
                   item
                   xs={6}
                   sm={6}
                   md={4}
                   lg={3}
                   key={product.itemNo}
-                  width="fit-content"
-                  height="fit-content">
+                  sx={{ alignItems: 'baseline' }}>
                   <ProductCard product={product} />
                 </StyledGrid>
               ) : (
                 <Grid
                   display="flex"
                   justifyContent="center"
-                  alignItems="center"
                   item
                   xs={6}
                   sm={6}
-                  md={4}
+                  md={6}
                   lg={3}
                   key={product.itemNo}
-                  width="fit-content"
-                  height="fit-content">
+                  height="auto"
+                  sx={{ alignItems: 'baseline' }}>
                   <ProductCard product={product} />
                 </Grid>
               )
             )}
           </Grid>
           {currentPath === '/' ? null : (
-            <Box sx={{ mx: 'auto', width: 200 }}>
-              <LoadMoreBtn sx={{ textTransform: 'capitalize' }} variant="solid">
-                Load More
-              </LoadMoreBtn>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}>
+              <Box>
+                <Pagination
+                  sx={{ margin: '25% auto 10%' }}
+                  count={countPagination}
+                  color="primary"
+                  page={currentPage}
+                  onChange={(_, num) => {
+                    setCurrentPage(num);
+                  }}
+                />
+              </Box>
             </Box>
           )}
         </div>
@@ -129,7 +137,6 @@ function ProductsList() {
 
 export default ProductsList;
 
-/*
 ProductsList.propTypes = {
   perPage: PropTypes.number,
 };
@@ -137,4 +144,3 @@ ProductsList.propTypes = {
 ProductsList.defaultProps = {
   perPage: 10,
 };
-*/

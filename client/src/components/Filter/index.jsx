@@ -27,7 +27,7 @@ import {
   setMinPrice,
 } from '../../redux/slices/filtersSlice';
 import theme from '../../themes/theme';
-import { FilterStyles } from '../../themes/themeFilter';
+import FilterStyles from '../../themes/themeFilter';
 
 function Filter() {
   const [filterOpen, setFilterOpen] = useState(false);
