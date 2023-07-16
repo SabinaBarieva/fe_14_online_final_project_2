@@ -43,7 +43,7 @@ function ProductDescription() {
   const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
-      if (response.status === 400) {
+      if (response.status >= 400) {
         navigate('/product/not-found');
       }
       return response.json();
