@@ -41,6 +41,7 @@ function ProductDescription() {
   } = useSelector(currentProduct);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
       if (response.status >= 400) {
@@ -48,11 +49,7 @@ function ProductDescription() {
       }
       return response.json();
     });
-  });
-
-  useEffect(() => {
     dispatch(getProduct(id));
-    // dispatch(getAllProducts());
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
