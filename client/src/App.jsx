@@ -11,6 +11,7 @@ import PageNotFound from './components/NotFoundPage';
 import store, { persistor } from './redux/store';
 import theme from './themes/theme';
 import ProductsContent from './pages/Products';
+import About from './components/AboutUs';
 
 function App() {
   return (
@@ -20,10 +21,12 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Header />}>
+                <Route path="/about" element={<About />} />
                 <Route index element={<HomeContent />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
                 <Route path="/product/:id" element={<ProductDescription />} />
+                <Route path="/product/not-found" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
               </Route>
             </Routes>

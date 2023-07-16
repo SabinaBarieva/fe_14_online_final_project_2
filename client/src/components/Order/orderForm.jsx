@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PatternFormat } from 'react-number-format';
 import { useFormik } from 'formik';
@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
-import { openApp } from '../../redux/slices/formSlice';
+import { openApp, closeForm } from '../../redux/slices/formSlice';
 import { clearBasket } from '../../redux/slices/basketSlice';
 import {
   StyledForm,
@@ -17,11 +17,35 @@ import {
   StyledTypography,
   StyledFormBackground,
 } from '../../themes/themeOrder';
+import { createOrder, saveOrder } from '../../redux/slices/orderSlice';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
+  const itemsBasket = useSelector((state) => state.basket.itemsBasket);
   const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
+
+  const elem = (values) => {
+    const name = `${values.firstName} ${values.lastName}`;
+    const phone = values.phone.replace(/\D/g, '');
+    const emailAdress = values.email;
+    const bodyMail = `
+      <div>
+        Thank you for choosing our online store for your recent purchase. We
+        will process your order and prepare it for shipment as soon as possible.
+        You will receive a separate email notification once your order is
+        shipped, along with tracking details.
+      </div>`;
+    const addressString = values.address;
+    const [street = '', number = '', rest = ''] = addressString.split(', ');
+    const addressObj = {
+      firstAdress: street,
+      secondAdress: number,
+      restAdress: rest,
+    };
+    dispatch(createOrder(itemsBasket));
+    dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
+  };
 
   const closed = () => {
     dispatch(openApp());
@@ -54,8 +78,10 @@ export default function OrderForm() {
     },
     validationSchema,
     onSubmit: (values) => {
-      dispatch(clearBasket());
+      elem(values);
       dispatch(orderBasket(values));
+      dispatch(closeForm());
+      dispatch(clearBasket());
     },
   });
 
@@ -72,6 +98,7 @@ export default function OrderForm() {
             position: 'relative',
             borderRadius: 20,
             maxWidth: 660,
+            backgroundColor: 'white',
             boxShadow: '0 0 30px 6px #42445a',
           }}>
           <Container

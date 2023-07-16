@@ -101,13 +101,14 @@ const StyledModal = styled(Modal)({
   width: '50%',
   maxWidth: 500,
   '& .MuiModal-backdrop': {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(128, 128, 128, 0.5)',
     zIndex: -1,
   },
 });
 
 const StyledModalContainer = styled(Container)(({ theme }) => ({
   padding: 20,
+  backgroundColor: 'white',
   lineHeight: 1.5,
   borderRadius: 20,
   boxShadow: `0 0 30px 6px ${theme.palette.primary.header}`,
@@ -115,7 +116,7 @@ const StyledModalContainer = styled(Container)(({ theme }) => ({
 }));
 
 const StyledFormBackground = styled(Container)({
-  backgroundColor: 'white',
+  backgroundColor: 'rgba(128, 128, 128, 0.5)',
   position: 'fixed',
   zIndex: 999,
   right: 0,

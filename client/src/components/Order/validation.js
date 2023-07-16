@@ -19,16 +19,29 @@ const validationSchema = Yup.object({
     .max(100, 'Max 100 letters allowed')
     .required('This field is required!'),
   phone: Yup.string()
+    // .matches(/^\+?[0-9]+\s?\(\d{3}\)\s?\d{4}\s?\d{3}$/, 'Invalid phone number')
     .matches(/^\+?[0-9]+\s?\(\d{3}\)\s?\d{4}\s?\d{3}$/, 'Invalid phone number')
     .required('This field is required!'),
-  cardNumber: Yup.number()
+  cardNumber: Yup.string()
     .typeError('Card number must be a number')
-    .integer('Card number must be an integer')
-    .positive('Card number must be positive')
     .required('This field is required!')
-    .test('len', 'The card number must contain exactly 16 digits', (val) => {
+    .test('luhn', 'Invalid card number', (val) => {
       if (val) {
-        return val.toString().length === 16;
+        const cardNumberWithoutSpaces = val.replace(/\s/g, '');
+        let sum = 0;
+        let shouldDouble = false;
+        for (let i = cardNumberWithoutSpaces.length - 1; i >= 0; i -= 1) {
+          let digit = parseInt(cardNumberWithoutSpaces.charAt(i), 10);
+          if (shouldDouble) {
+            digit *= 2;
+            if (digit > 9) {
+              digit -= 9;
+            }
+          }
+          sum += digit;
+          shouldDouble = !shouldDouble;
+        }
+        return sum % 10 === 0 && cardNumberWithoutSpaces.length === 16;
       }
       return true;
     }),
