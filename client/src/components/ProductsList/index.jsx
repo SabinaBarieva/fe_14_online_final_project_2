@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
+  allProductsInBase,
   categoriesFilter,
   isFetchingProductsList,
   maximalPrice,
@@ -14,6 +15,7 @@ import {
   productsList,
   totalNumberProducts,
 } from '../../redux/selectors';
+import { getAllProducts } from '../../redux/slices/allProdsSlice';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
@@ -40,7 +42,8 @@ function ProductsList({ perPage }) {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
-  const products = useSelector(productsList);
+  const productsForProducts = useSelector(productsList);
+  const productsForHomePage = useSelector(allProductsInBase);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
@@ -60,13 +63,33 @@ function ProductsList({ perPage }) {
     );
   }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
 
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
   const countPagination = Math.round(total / perPage);
   const location = useLocation();
   const currentPath = location.pathname;
-  const spacingHomePage = { xs: 1.5, sm: 2, md: 2.5, lg: 6 };
-  const spacingProductsPage = { xs: 1, sm: 1.5, md: 2, lg: 3 };
+  const spacingHomePage = {
+    xs: 1.5,
+    sm: 2,
+    md: 2.5,
+    lg: 6,
+  };
+  const spacingProductsPage = {
+    xs: 1,
+    sm: 1.5,
+    md: 2,
+    lg: 3,
+  };
+
+  console.log(productsForHomePage);
   const gridSpacing =
     currentPath === '/' ? spacingHomePage : spacingProductsPage;
+
+  const filterProductsForHomePage = (productsForFilter) => {
+    return productsForFilter.filter((product) => product.quantity !== 0);
+  };
   return (
     <div>
       {isFetching ? (
@@ -80,34 +103,36 @@ function ProductsList({ perPage }) {
       ) : (
         <div>
           <Grid container spacing={gridSpacing}>
-            {products.map((product) =>
-              currentPath === '/' ? (
-                <StyledGrid
-                  item
-                  xs={6}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  key={product.itemNo}
-                  sx={{ alignItems: 'baseline' }}>
-                  <ProductCard product={product} />
-                </StyledGrid>
-              ) : (
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  item
-                  xs={6}
-                  sm={6}
-                  md={6}
-                  lg={3}
-                  key={product.itemNo}
-                  height="auto"
-                  sx={{ alignItems: 'baseline' }}>
-                  <ProductCard product={product} />
-                </Grid>
-              )
-            )}
+            {currentPath === '/'
+              ? filterProductsForHomePage(productsForHomePage).map(
+                  (product) => (
+                    <StyledGrid
+                      item
+                      xs={6}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      key={product.itemNo}
+                      sx={{ alignItems: 'baseline' }}>
+                      <ProductCard product={product} />
+                    </StyledGrid>
+                  )
+                )
+              : productsForProducts.map((product) => (
+                  <Grid
+                    display="flex"
+                    justifyContent="center"
+                    item
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={3}
+                    key={product.itemNo}
+                    height="auto"
+                    sx={{ alignItems: 'baseline' }}>
+                    <ProductCard product={product} />
+                  </Grid>
+                ))}
           </Grid>
           {currentPath === '/' ? null : (
             <Box

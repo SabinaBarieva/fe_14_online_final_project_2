@@ -203,7 +203,6 @@ function ProductCard({ product }) {
     };
     dispatch(addToBasket(item));
   };
-  console.log(product.quantity);
   return (
     <CardContainer
       sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>
@@ -216,8 +215,7 @@ function ProductCard({ product }) {
               minimumPad()
                 .width(getImageSize().width)
                 .height(getImageSize().height)
-            )
-            .roundCorners(byRadius(15, 15))}
+            )}
           alt={product.name + product.color}
         />
         <Box
