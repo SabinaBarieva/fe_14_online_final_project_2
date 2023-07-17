@@ -9,6 +9,7 @@ const modalSlice = createSlice({
   },
   reducers: {
     orderBasket(state, action) {
+      console.log('hello from orderBasket', action.payload);
       state.statusOrder = 'Ordered';
       state.statusModal = true;
       state.text = `Dear, ${action.payload.firstName} ${action.payload.lastName}. 

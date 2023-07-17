@@ -35,6 +35,7 @@ const orderSlice = createSlice({
       });
     },
     saveOrder: (state, action) => {
+      console.log('hello from saveOrder');
       state.email = action.payload.emailAdress;
       state.phone = action.payload.phone;
       state.name = action.payload.name;
@@ -42,6 +43,7 @@ const orderSlice = createSlice({
       state.adress = action.payload.addressObj;
     },
     sendOrder: (state) => {
+      console.log('hello from sendOrder');
       postOrder({
         products: state.productsBasket,
         email: state.email,
@@ -74,6 +76,7 @@ export const getProductsBasket = createAsyncThunk(
   'order/getProductsBasket',
   async ({ itemNo, quantity }, { dispatch }) => {
     dispatch(startGetProduct());
+    console.log('hello from getProductsBasket');
 
     try {
       const resultArray = await getProduct(itemNo);
@@ -92,6 +95,7 @@ export const getProductsBasket = createAsyncThunk(
 export const createOrder = createAsyncThunk(
   'order/createOrder',
   async (cards, { dispatch }) => {
+    console.log('hello from createOrder');
     const promises = cards.map((elem) =>
       dispatch(getProductsBasket({ itemNo: elem.itemNo, quantity: elem.count }))
     );

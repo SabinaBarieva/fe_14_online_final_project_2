@@ -7,7 +7,6 @@ import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
 import { openApp, closeForm } from '../../redux/slices/formSlice';
-import { clearBasket } from '../../redux/slices/basketSlice';
 import {
   StyledForm,
   StyledButton,
@@ -43,6 +42,7 @@ export default function OrderForm() {
       secondAdress: number,
       restAdress: rest,
     };
+    console.log('hello');
     dispatch(createOrder(itemsBasket));
     dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
   };
@@ -80,8 +80,7 @@ export default function OrderForm() {
     onSubmit: (values) => {
       elem(values);
       dispatch(orderBasket(values));
-      dispatch(closeForm());
-      dispatch(clearBasket());
+      dispatch(openApp());
     },
   });
 
@@ -93,7 +92,7 @@ export default function OrderForm() {
           onSubmit={formik.handleSubmit}
           style={{
             padding: '10px 0',
-            top: '20%',
+            top: '10%',
             margin: 'auto',
             position: 'relative',
             borderRadius: 20,
