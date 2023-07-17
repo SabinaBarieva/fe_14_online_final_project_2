@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { StyledList } from '../../themes/themeSearch';
+// eslint-disable-next-line import/no-cycle
 import Item from './item';
 
 export default function List() {

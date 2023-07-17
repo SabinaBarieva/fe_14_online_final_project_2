@@ -1,6 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Table,
@@ -54,7 +54,7 @@ const Title = styled('div')({
 
 function BasketContent() {
   const { priceAll, itemsBasket } = useSelector(selectCart);
-  const totalCount = itemsBasket.reduce((sum, item) => sum + item.count, 0);
+  /*   const totalCount = itemsBasket.reduce((sum, item) => sum + item.count, 0); */
   const dispatch = useDispatch();
 
   if (!priceAll) {

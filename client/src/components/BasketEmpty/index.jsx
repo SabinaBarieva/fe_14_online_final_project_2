@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AdvancedImage } from '@cloudinary/react';
-import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import errorEmpty from '../../cloudinary';
-
-const Text = styled('div')({
-  color: '#9A9292',
-  margin: '20px 0',
-});
 
 function BasketEmpty() {
   const empty = errorEmpty.image('404/nwmbxz7zfhxn1t1rd0sg.png');
