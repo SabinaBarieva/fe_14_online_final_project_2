@@ -278,7 +278,6 @@ function BasketContent() {
           </Grid>
         </Grid>
       </Grid>
-      <Button onClick={onClickClear}>clear</Button>
     </Grid>
   );
 }
