@@ -50,18 +50,9 @@ function ProductDescription() {
       }
       if (response.ok && response.status === 200) {
         const product = await response.json();
-        console.log(product);
         return dispatch(setProduct(product));
       }
-      // return response.json();
     });
-    // fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
-    //   if (response.status >= 400) {
-    //     navigate('/product/not-found');
-    //   }
-    //   return response.json();
-    // });
-    // // dispatch(getProduct(id));
   }, [dispatch]);
 
   const [countToBasket, setCountToBasket] = useState(1);
