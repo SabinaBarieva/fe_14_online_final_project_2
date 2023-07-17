@@ -29,11 +29,24 @@ function Category() {
               firstCategory.name.localeCompare(secondCategory.name)
             )
             .map(({ name: categoryName, id }) => (
-              <Grid item lg={1} md={2} sm={4} xs={6}>
-                <Link to="./product">
+              <Grid
+                item
+                lg={1}
+                md={2}
+                sm={4}
+                xs={6}
+                sx={{ justifyContent: 'center', display: 'flex' }}>
+                <Link
+                  to="./product"
+                  style={{
+                    display: 'block',
+                    textDecoration: 'none',
+                    color: '#000000',
+                    margin: '0 auto',
+                  }}>
                   <Button
                     sx={{
-                      width: '200px',
+                      width: 'max-content',
                       height: '40px',
                       fontFamily: theme.typography.fontFamily.primary,
                       fontWeight: '700px',

@@ -55,7 +55,7 @@ const basketSlice = createSlice({
     },
     clearBasket(state) {
       state.itemsBasket = [];
-      state.priceAll = [];
+      state.priceAll = 0;
     },
     // eslint-disable-next-line consistent-return
     addSeveraltoBasket: (state, action) => {
