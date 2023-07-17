@@ -76,8 +76,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'static')));
 
   app.get('*', (req, res) => {
-    // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    res.sendStatus(404);
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 module.exports = app;
