@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Image } from '@mui/icons-material';
 import { StyledListItem } from '../../themes/themeSearch';
 import { classChange } from '../../redux/slices/searchSlice';
 import { getProduct } from '../../redux/slices/productSlice';
