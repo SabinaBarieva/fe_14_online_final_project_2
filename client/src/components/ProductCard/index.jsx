@@ -203,7 +203,6 @@ function ProductCard({ product }) {
     };
     dispatch(addToBasket(item));
   };
-  console.log(product.quantity);
   return (
     <CardContainer
       sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>

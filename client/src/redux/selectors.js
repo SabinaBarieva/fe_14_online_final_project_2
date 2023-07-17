@@ -12,3 +12,4 @@ export const minimalPrice = (state) => state.filters.minPrice;
 export const maximalPrice = (state) => state.filters.maxPrice;
 export const isFetchingProductsList = (state) => state.products.isFetching;
 export const isBurgerOpen = (state) => state.burgerMenu.openBurger;
+
