@@ -19,8 +19,7 @@ const validationSchema = Yup.object({
     .max(100, 'Max 100 letters allowed')
     .required('This field is required!'),
   phone: Yup.string()
-    // .matches(/^\+?[0-9]+\s?\(\d{3}\)\s?\d{4}\s?\d{3}$/, 'Invalid phone number')
-    .matches(/^\+?[0-9]+\s?\(\d{3}\)\s?\d{4}\s?\d{3}$/, 'Invalid phone number')
+    .matches(/^\+?[0-9]+\s?\(\d{3}\)\s?\d{4}\s?\d{4}$/, 'Invalid phone number')
     .required('This field is required!'),
   cardNumber: Yup.string()
     .typeError('Card number must be a number')

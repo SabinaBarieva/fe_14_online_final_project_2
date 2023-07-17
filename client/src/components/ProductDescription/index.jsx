@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
@@ -11,7 +11,11 @@ import {
   addSeveraltoBasket,
   closeModalBasket,
 } from '../../redux/slices/basketSlice';
-import { currentProduct, currentProductIsLoading } from '../../redux/selectors';
+import {
+  currentProduct,
+  currentProductIsLoading,
+  errorInProduct,
+} from '../../redux/selectors';
 import getImg from '../../cloudinary';
 import {
   Title,
@@ -22,11 +26,13 @@ import {
   Guarantee,
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
+import PageNotFound from '../NotFoundPage';
 
 function ProductDescription() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
+  const isError = useSelector(errorInProduct);
   const {
     quantity,
     name,
@@ -40,15 +46,7 @@ function ProductDescription() {
     guarantee,
   } = useSelector(currentProduct);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    fetch(`http://localhost:3000/api/products/${id}`).then((response) => {
-      if (response.status >= 400) {
-        navigate('/product/not-found');
-      }
-      return response.json();
-    });
     dispatch(getProduct(id));
   }, [dispatch]);
 
@@ -93,6 +91,10 @@ function ProductDescription() {
 
   if (isLoading) {
     return <LinearProgress />;
+  }
+
+  if (isError) {
+    return <PageNotFound />;
   }
 
   if (imageUrls) {
