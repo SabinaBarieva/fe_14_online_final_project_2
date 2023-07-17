@@ -43,7 +43,7 @@ function Carousel() {
           navigation
           modules={[Pagination, Navigation, Autoplay]}
           className="saleCarousel"
-          key={product.itemNo}
+          // key={product.itemNo}
           breakpoints={{
             440: {
               slidesPerView: 2,
