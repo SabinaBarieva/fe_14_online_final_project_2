@@ -15,7 +15,7 @@ export const Description = styled('div')({
 });
 export const Price = styled('div')({
   fontWeight: '500',
-  fontSize: '20px',
+  fontSize: '2rem',
   lineHeight: '132%',
   letterSpacing: '0.015em',
   color: '#434343',
@@ -61,4 +61,10 @@ export const Guarantee = styled('div')({
   color: '#9A9292',
   margin: '15px 0',
   paddingRight: '20px',
+});
+
+export const PrevPrice = styled('sup')({
+  color: 'red',
+  margin: '30px 10px',
+  fontSize: '1.2rem',
 });
