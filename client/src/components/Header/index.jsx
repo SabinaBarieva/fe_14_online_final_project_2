@@ -28,9 +28,10 @@ import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
-import { selectCart } from '../../redux/selectors';
+import { isBurgerOpen, selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
+import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -45,14 +46,23 @@ const activeLinkDecoration = ({ isActive }) => ({
 });
 
 function Header() {
+  const [totalInBasket, setTotalInBasket] = useState('0');
   const { itemsBasket } = useSelector(selectCart);
-  const [totalInBasket, setTotalInBasket] = useState(0);
-  const [open, setOpen] = useState(false);
+  const openMenu = useSelector(isBurgerOpen);
+  // const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   if (location.pathname !== '/product') {
     dispatch(resetFilters());
   }
+
+  const totalBasketItems = () => {
+    const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
+    setTotalInBasket(total);
+  };
+  useEffect(() => {
+    totalBasketItems();
+  });
 
   // eslint-disable-next-line no-unused-vars
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -73,13 +83,6 @@ function Header() {
     },
   }));
 
-  const totalBasketItems = () => {
-    const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
-    setTotalInBasket(total);
-  };
-  useEffect(() => {
-    totalBasketItems();
-  });
   return (
     <AllContent>
       <CssBaseline />
@@ -135,7 +138,7 @@ function Header() {
                 </Typography>
               </Grid>
             </NavLink>
-            <Hidden only={['xs', 'sm', 'md']}>
+            <Hidden lgDown>
               <NavLink
                 to="/"
                 style={activeLinkDecoration}
@@ -211,10 +214,10 @@ function Header() {
                 Login
               </Button>
             </Hidden>
-            <Hidden only={['lg', 'xl', 'xxl']}>
+            <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
-                onClick={() => setOpen(true)}>
+                onClick={() => dispatch(burgerOpen())}>
                 <MenuIcon
                   sx={{
                     backgroundColor: '#F4F4F4',
@@ -229,12 +232,12 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        <Hidden only={['lg', 'xl', 'xxl']}>
+        <Hidden lgUp>
           <SwipeableDrawer
             anchor="top"
-            open={open}
-            onOpen={() => setOpen(true)}
-            onClose={() => setOpen(false)}>
+            open={openMenu}
+            onOpen={() => dispatch(burgerOpen())}
+            onClose={() => dispatch(burgerClose())}>
             <Grid
               container
               direction="row"
@@ -242,11 +245,11 @@ function Header() {
               alignItems="center"
               sx={{ padding: '0.5rem' }}>
               <div>
-                <IconButton>
-                  <CloseIcon onClick={() => setOpen(false)} />
+                <IconButton onClick={() => dispatch(burgerClose())}>
+                  <CloseIcon />
                 </IconButton>
               </div>
-              <NavLink to="/basket" onClick={() => setOpen(false)}>
+              <NavLink to="/basket" onClick={() => dispatch(burgerClose())}>
                 <IconButton style={{ padding: '0', margin: '0' }}>
                   <StyledBadge
                     badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
@@ -270,7 +273,7 @@ function Header() {
                   margin: '0',
                   padding: '0',
                 }}
-                onClick={() => setOpen(false)}>
+                onClick={() => dispatch(burgerClose())}>
                 Login
               </Button>
             </Grid>
@@ -278,7 +281,7 @@ function Header() {
             <List style={{ height: '100vh' }}>
               <ListItem
                 sx={{ justifyContent: 'center' }}
-                onClick={() => setOpen(false)}>
+                onClick={() => dispatch(burgerClose())}>
                 <NavLink
                   to="/"
                   style={activeLinkDecoration}
@@ -288,7 +291,7 @@ function Header() {
               </ListItem>
               <ListItem
                 sx={{ justifyContent: 'center' }}
-                onClick={() => setOpen(false)}>
+                onClick={() => dispatch(burgerClose())}>
                 <NavLink
                   to="/product"
                   style={activeLinkDecoration}
@@ -298,7 +301,7 @@ function Header() {
               </ListItem>
               <ListItem
                 sx={{ justifyContent: 'center' }}
-                onClick={() => setOpen(false)}>
+                onClick={() => dispatch(burgerClose())}>
                 <NavLink
                   to="/about"
                   style={activeLinkDecoration}
