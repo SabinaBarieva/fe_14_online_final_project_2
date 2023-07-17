@@ -24,6 +24,7 @@ import {
   CountBoxes,
   CountInput,
   Guarantee,
+  PrevPrice,
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
@@ -37,6 +38,7 @@ function ProductDescription() {
     quantity,
     name,
     currentPrice,
+    previousPrice,
     imageUrls,
     color,
     brand,
@@ -44,6 +46,7 @@ function ProductDescription() {
     itemNo,
     description,
     guarantee,
+    sale,
   } = useSelector(currentProduct);
 
   useEffect(() => {
@@ -166,6 +169,11 @@ function ProductDescription() {
             <Description>{description || null}</Description>
             <Price>
               {quantity === 0 ? 'Not in stock' : `${currentPrice}$`}
+              {sale ? (
+                <PrevPrice>
+                  <s>{`${previousPrice}$`}</s>
+                </PrevPrice>
+              ) : null}
             </Price>
             <Guarantee>{guarantee} of guarantee </Guarantee>
             <Grid container>
