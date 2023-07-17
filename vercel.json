@@ -1,6 +1,6 @@
 {
     "buildCommand": "cd ./client && npm run build",
-    "installCommand": "cd ./client && npm install -g install-peerdeps && npx install-peerdeps --dev eslint-config-airbnb && npx install-peerdeps --dev eslint-config-airbnb-base",
+    "installCommand": "cd ./client && npm install -g --legacy-peer-deps install-peerdeps && npx install-peerdeps --dev eslint-config-airbnb && npx install-peerdeps --dev eslint-config-airbnb-base",
     "outputDirectory": "./client/build",
     "version": 2,
 
