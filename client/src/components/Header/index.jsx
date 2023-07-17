@@ -45,11 +45,29 @@ const activeLinkDecoration = ({ isActive }) => ({
   cursor: isActive ? 'default' : 'pointer',
 });
 
+// eslint-disable-next-line no-unused-vars
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: 3,
+    top: 4,
+    border: `none`,
+    padding: '0',
+    color: '#F5F7FB',
+    backgroundColor: '#FF6565',
+    fontFamily: 'Josefin Sans',
+    fontSize: '10px',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    lineHeight: 'normal',
+    minWidth: '12.5px',
+    height: '12.1px',
+  },
+}));
+
 function Header() {
   const [totalInBasket, setTotalInBasket] = useState('0');
   const { itemsBasket } = useSelector(selectCart);
   const openMenu = useSelector(isBurgerOpen);
-  // const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   if (location.pathname !== '/product') {
@@ -63,25 +81,6 @@ function Header() {
   useEffect(() => {
     totalBasketItems();
   });
-
-  // eslint-disable-next-line no-unused-vars
-  const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-      right: 3,
-      top: 4,
-      border: `none`,
-      padding: '0',
-      color: '#F5F7FB',
-      backgroundColor: '#FF6565',
-      fontFamily: 'Josefin Sans',
-      fontSize: '10px',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      lineHeight: 'normal',
-      minWidth: '12.5px',
-      height: '12.1px',
-    },
-  }));
 
   return (
     <AllContent>
