@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Autoplay } from 'swiper';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
