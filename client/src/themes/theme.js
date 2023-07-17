@@ -29,7 +29,7 @@ const theme = createTheme({
       md: 768,
       lg: 1024,
       xl: 1366,
-      xxl: 1920,
+      // xxl: 1920,
     },
   },
   typography: {
