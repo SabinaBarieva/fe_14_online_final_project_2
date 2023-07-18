@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import Carousel from 'react-material-ui-carousel';
-
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
@@ -34,13 +34,17 @@ function Slider() {
       ) : (
         <Carousel>
           {products.map((product) => (
-            // key={product.itemNo}
-            <AdvancedImage
-              className="main-photo"
-              width="100%"
-              cldImg={getImg.image(product.saleImg)}
-              alt="our-photo"
-            />
+            <Link
+              to={`/product/${product.itemNo}`}
+              style={{ marginRight: '7%' }}>
+              <AdvancedImage
+                key={product.itemNo}
+                className="main-photo"
+                width="100%"
+                cldImg={getImg.image(product.saleImg)}
+                alt="our-photo"
+              />
+            </Link>
           ))}
         </Carousel>
       )}
