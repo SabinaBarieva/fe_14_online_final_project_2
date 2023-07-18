@@ -134,19 +134,37 @@ function FilterSection() {
     setCachedMaxValue(null);
   };
   const setCorrectMinValue = () => {
-    if (cachedMinValue < priceMinBoundary) {
+    console.log(
+      +cachedMinValue,
+      priceMinBoundary,
+      +cachedMaxValue,
+      priceMaxBoundary
+    );
+    if (+cachedMinValue < priceMinBoundary && cachedMinValue !== null) {
       setCachedMinValue(priceMinBoundary);
     }
-    if (cachedMaxValue > cachedMinValue) {
-      setCachedMaxValue(cachedMaxValue);
+    if (+cachedMinValue > priceMaxBoundary) {
+      setCachedMinValue(priceMaxBoundary);
+    }
+    if (+cachedMinValue > +cachedMaxValue && cachedMaxValue !== null) {
+      setCachedMinValue(+cachedMaxValue);
     }
   };
   const setCorrectMaxValue = () => {
-    if (cachedMaxValue > priceMaxBoundary) {
+    console.log(
+      +cachedMinValue,
+      priceMinBoundary,
+      +cachedMaxValue,
+      priceMaxBoundary
+    );
+    if (+cachedMaxValue > priceMaxBoundary) {
       setCachedMaxValue(priceMaxBoundary);
     }
-    if (cachedMaxValue < cachedMinValue) {
-      setCachedMaxValue(cachedMinValue);
+    if (+cachedMaxValue < priceMinBoundary && cachedMaxValue !== null) {
+      setCachedMaxValue(priceMinBoundary);
+    }
+    if (+cachedMinValue > +cachedMaxValue) {
+      setCachedMaxValue(+cachedMinValue);
     }
   };
   if (isLoadingFilters) return <CircularProgress />;
