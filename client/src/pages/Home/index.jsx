@@ -9,7 +9,7 @@ import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
 import Category from '../../components/Category';
 import ModalBasket from '../../components/ModalForBasket';
-import Carousel from '../../components/Carousel';
+import Slider from '../../components/Slider';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.primary,
@@ -50,8 +50,8 @@ function HomeContent() {
           backgroundColor: '#FCF9F6',
         }}>
         <SectionTitle variant="h2">Daily Sale</SectionTitle>
-        <Box sx={{ width: '93%' }}>
-          <Carousel />
+        <Box sx={{ width: '30%', margin: '0% auto' }}>
+          <Slider />
         </Box>
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box>
