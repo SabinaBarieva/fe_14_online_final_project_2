@@ -28,7 +28,7 @@ import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
-import { isBurgerOpen, selectCart } from '../../redux/selectors';
+import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
@@ -67,20 +67,33 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function Header() {
   const [totalInBasket, setTotalInBasket] = useState('0');
   const { itemsBasket } = useSelector(selectCart);
-  const openMenu = useSelector(isBurgerOpen);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
-  if (location.pathname !== '/product') {
-    dispatch(resetFilters());
-  }
+
+  const locationDispatch = () => {
+    if (location.pathname !== '/product') {
+      dispatch(resetFilters());
+    }
+  };
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
     setTotalInBasket(total);
   };
+
+  const openBurgerMenu = () => {
+    if (open === true) {
+      return dispatch(burgerOpen());
+    }
+    return dispatch(burgerClose());
+  };
+
   useEffect(() => {
     totalBasketItems();
-  });
+    locationDispatch();
+    openBurgerMenu();
+  }, [itemsBasket, location, open]);
 
   return (
     <AllContent>
@@ -104,16 +117,16 @@ function Header() {
               },
             }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
-              <Grid container direction="row">
+              <Grid container direction="row" style={{ minWidth: '153px' }}>
                 <Stack
                   sx={{
                     width: { xs: '1.7rem', md: '2.0rem' },
                     height: { xs: '1.7rem', md: '2.0rem' },
-                    margin: '4px 2px 0 0',
+                    margin: '1px 2px 0 0',
                   }}>
                   <AdvancedImage
-                    cldImg={getImg.image('header/frfdurnw7br9n8gxqfdy.png')}
-                    alt="twitter"
+                    cldImg={getImg.image('header/xgm2bpkdqqgg0qlzxh5l.png')}
+                    alt="logo"
                     width="100%"
                   />
                 </Stack>
@@ -178,14 +191,16 @@ function Header() {
                 className="header_link">
                 About
               </NavLink>
-              <Container
-                style={{
-                  maxWidth: '300px',
-                  padding: '0',
-                  margin: '0',
-                }}>
-                <Search />
-              </Container>
+            </Hidden>
+            <Container
+              style={{
+                maxWidth: '300px',
+                padding: '0',
+                margin: '0',
+              }}>
+              <Search />
+            </Container>
+            <Hidden lgDown>
               <NavLink to="/basket">
                 <IconButton style={{ padding: '0', margin: '0' }}>
                   <StyledBadge
@@ -216,7 +231,7 @@ function Header() {
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
-                onClick={() => dispatch(burgerOpen())}>
+                onClick={() => setOpen(true)}>
                 <MenuIcon
                   sx={{
                     backgroundColor: '#F4F4F4',
@@ -231,89 +246,84 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        <Hidden lgUp>
-          <SwipeableDrawer
-            anchor="top"
-            open={openMenu}
-            onOpen={() => dispatch(burgerOpen())}
-            onClose={() => dispatch(burgerClose())}>
-            <Grid
-              container
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{ padding: '0.5rem' }}>
-              <div>
-                <IconButton onClick={() => dispatch(burgerClose())}>
-                  <CloseIcon />
-                </IconButton>
-              </div>
-              <NavLink to="/basket" onClick={() => dispatch(burgerClose())}>
-                <IconButton style={{ padding: '0', margin: '0' }}>
-                  <StyledBadge
-                    badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-                    <ShoppingCartOutlinedIcon
-                      sx={{
-                        color: '#616467',
-                        width: '28.7px',
-                        height: '32px ',
-                      }}
-                    />
-                  </StyledBadge>
-                </IconButton>
+        <SwipeableDrawer
+          anchor="top"
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ padding: '0.5rem' }}>
+            <div>
+              <IconButton onClick={() => setOpen(false)}>
+                <CloseIcon />
+              </IconButton>
+            </div>
+            <NavLink to="/basket" onClick={() => setOpen(false)}>
+              <IconButton style={{ padding: '0', margin: '0' }}>
+                <StyledBadge
+                  badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                  <ShoppingCartOutlinedIcon
+                    sx={{
+                      color: '#616467',
+                      width: '28.7px',
+                      height: '32px ',
+                    }}
+                  />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
+            <Button
+              variant="contained"
+              endIcon={<LoginOutlinedIcon />}
+              sx={{
+                background: '#211F1C',
+                width: '113px',
+                height: '40px',
+                margin: '0',
+                padding: '0',
+              }}
+              onClick={() => setOpen(false)}>
+              Login
+            </Button>
+          </Grid>
+          <Divider />
+          <List>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/"
+                style={activeLinkDecoration}
+                className="header_link">
+                Home
               </NavLink>
-              <Button
-                variant="contained"
-                endIcon={<LoginOutlinedIcon />}
-                sx={{
-                  background: '#211F1C',
-                  width: '113px',
-                  height: '40px',
-                  margin: '0',
-                  padding: '0',
-                }}
-                onClick={() => dispatch(burgerClose())}>
-                Login
-              </Button>
-            </Grid>
-            <Divider />
-            <List style={{ height: '100vh' }}>
-              <ListItem
-                sx={{ justifyContent: 'center' }}
-                onClick={() => dispatch(burgerClose())}>
-                <NavLink
-                  to="/"
-                  style={activeLinkDecoration}
-                  className="header_link">
-                  Home
-                </NavLink>
-              </ListItem>
-              <ListItem
-                sx={{ justifyContent: 'center' }}
-                onClick={() => dispatch(burgerClose())}>
-                <NavLink
-                  to="/product"
-                  style={activeLinkDecoration}
-                  className="header_link">
-                  Product
-                </NavLink>
-              </ListItem>
-              <ListItem
-                sx={{ justifyContent: 'center' }}
-                onClick={() => dispatch(burgerClose())}>
-                <NavLink
-                  to="/about"
-                  style={activeLinkDecoration}
-                  className="header_link">
-                  About
-                </NavLink>
-              </ListItem>
-              <ListItem sx={{ justifyContent: 'center' }}>
-                <Search />
-              </ListItem>
-            </List>
-          </SwipeableDrawer>
-        </Hidden>
+            </ListItem>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/product"
+                style={activeLinkDecoration}
+                className="header_link">
+                Product
+              </NavLink>
+            </ListItem>
+            <ListItem
+              sx={{ justifyContent: 'center' }}
+              onClick={() => setOpen(false)}>
+              <NavLink
+                to="/about"
+                style={activeLinkDecoration}
+                className="header_link">
+                About
+              </NavLink>
+            </ListItem>
+          </List>
+        </SwipeableDrawer>
       </AppBar>
       <BreadCrumbs />
       <Outlet />

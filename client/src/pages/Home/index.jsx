@@ -48,6 +48,8 @@ function HomeContent() {
           justifyContent: 'center',
           flexDirection: 'column',
           backgroundColor: '#FCF9F6',
+          borderRadius: '20px',
+          marginBottom: '20px',
         }}>
         <SectionTitle variant="h2">Daily Sale</SectionTitle>
         <Box sx={{ width: '30%', margin: '0% auto' }}>
