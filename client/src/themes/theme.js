@@ -44,7 +44,7 @@ const theme = createTheme({
         secondary: 'Roboto, sans-serif',
       },
     },
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Lato, Arial, Verdana, Tahoma, sans-serif',
     fontSize: 16,
     fontWeight: '400',
   },
