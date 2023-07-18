@@ -133,7 +133,22 @@ function FilterSection() {
     setCachedMinValue(null);
     setCachedMaxValue(null);
   };
-
+  const setCorrectMinValue = () => {
+    if (cachedMinValue < priceMinBoundary) {
+      setCachedMinValue(priceMinBoundary);
+    }
+    if (cachedMaxValue > cachedMinValue) {
+      setCachedMaxValue(cachedMaxValue);
+    }
+  };
+  const setCorrectMaxValue = () => {
+    if (cachedMaxValue > priceMaxBoundary) {
+      setCachedMaxValue(priceMaxBoundary);
+    }
+    if (cachedMaxValue < cachedMinValue) {
+      setCachedMaxValue(cachedMinValue);
+    }
+  };
   if (isLoadingFilters) return <CircularProgress />;
   if (isLoadedFilters)
     return (
@@ -188,6 +203,9 @@ function FilterSection() {
                     placeholder={`${priceMinBoundary} $`}
                     type="tel"
                     min={priceMinBoundary}
+                    onBlur={() => {
+                      setCorrectMinValue();
+                    }}
                     onChange={minPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                     onKeyDown={({ key }) => {
@@ -203,6 +221,9 @@ function FilterSection() {
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
                     placeholder={`${priceMaxBoundary} $`}
                     type="tel"
+                    onBlur={() => {
+                      setCorrectMaxValue();
+                    }}
                     onChange={maxPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                     onKeyDown={({ key }) => {
