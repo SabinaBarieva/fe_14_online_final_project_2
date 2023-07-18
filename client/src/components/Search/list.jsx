@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import cld from '../../cloudinary';
 import { StyledList } from '../../themes/themeSearch';
 import Item from './item';
 
@@ -20,7 +21,7 @@ export default function List() {
       {isFetched && (
         <StyledList component="div">
           {result.map((item) => (
-            <Item name={item.name} itemNo={item.itemNo} key={item.itemNo} />
+            <Item item={item} key={item.itemNo} />
           ))}
         </StyledList>
       )}
