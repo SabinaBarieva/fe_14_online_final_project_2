@@ -5,6 +5,7 @@ import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
+// eslint-disable-next-line import/named
 import { getAllProducts } from '../../redux/slices/allProdsSlice';
 import ProductCard from '../ProductCard';
 import 'swiper/scss';
