@@ -236,7 +236,7 @@ function ProductDescription() {
                     padding: '9px 18px',
                     backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
                     color: { xs: '#616467', md: '#fff' },
-                    borderRadius: 0,
+                    borderRadius: '7px',
                     border: '1px solid #211F1C',
                     '&:hover': {
                       backgroundColor: { xs: '#211F1C', md: '#fff' },
