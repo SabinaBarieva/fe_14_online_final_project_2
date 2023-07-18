@@ -29,11 +29,12 @@ export default allProdsSlice.reducer;
 export const { startGetArray, finishGetArray, errorGetArray } =
   allProdsSlice.actions;
 
-export const getAllProducts = () => async (dispatch) => {
+export const getAllSaleProducts = () => async (dispatch) => {
   dispatch(startGetArray());
   try {
     const resultArray = await fetchApi(productsEP);
-    dispatch(finishGetArray(resultArray));
+    const saleArray = resultArray.filter((product) => product.saleImg);
+    dispatch(finishGetArray(saleArray));
   } catch (error) {
     dispatch(
       errorGetArray({
