@@ -5,6 +5,43 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Apple Shop</title>
+    <script type="text/javascript">
+      window.helpcrunchSettings = {
+        organization: 'yourappleshop',
+        appId: 'acf8202c-f1d6-46e0-bdd2-298454fcbb0c',
+      };
+    </script>
+    <script type="text/javascript">
+      (function (w, d) {
+        var hS = w.helpcrunchSettings;
+        if (!hS || !hS.organization) {
+          return;
+        }
+        var widgetSrc =
+          'https://' + hS.organization + '.widget.helpcrunch.com/';
+        w.HelpCrunch = function () {
+          w.HelpCrunch.q.push(arguments);
+        };
+        w.HelpCrunch.q = [];
+        function r() {
+          if (d.querySelector('script[src="' + widgetSrc + '"')) {
+            return;
+          }
+          var s = d.createElement('script');
+          s.async = 1;
+          s.type = 'text/javascript';
+          s.src = widgetSrc;
+          (d.body || d.head).appendChild(s);
+        }
+        if (d.readyState === 'complete' || hS.loadImmediately) {
+          r();
+        } else if (w.attachEvent) {
+          w.attachEvent('onload', r);
+        } else {
+          w.addEventListener('load', r, false);
+        }
+      })(window, document);
+    </script>
   </head>
   <body>
     <div id="root"></div>
