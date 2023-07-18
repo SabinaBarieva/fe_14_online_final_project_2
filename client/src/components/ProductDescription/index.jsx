@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
+import { useTheme } from '@mui/system';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
@@ -30,6 +31,7 @@ import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
 
 function ProductDescription() {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
@@ -104,7 +106,12 @@ function ProductDescription() {
     return (
       <>
         <ModalBasket />
-        <Grid container sx={{ width: '91%', margin: '25px auto' }}>
+        <Grid
+          container
+          sx={{
+            maxWidth: '1440px',
+            margin: '25px auto',
+          }}>
           <Grid
             item
             xs={12}
