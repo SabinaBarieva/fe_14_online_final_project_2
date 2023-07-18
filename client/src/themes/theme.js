@@ -33,10 +33,20 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: {
-      primary: 'Lato, sans-serif',
-      secondary: 'Roboto, sans-serif',
+    const: {
+      fontWeight: {
+        normal: 400,
+        bold: 700,
+        semibold: 500,
+      },
+      fontFamily: {
+        primary: 'Lato, sans-serif',
+        secondary: 'Roboto, sans-serif',
+      },
     },
+    fontFamily: 'Roboto, sans-serif',
+    fontSize: 16,
+    fontWeight: '400',
   },
 });
 

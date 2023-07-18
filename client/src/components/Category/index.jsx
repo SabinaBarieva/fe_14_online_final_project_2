@@ -48,8 +48,8 @@ function Category() {
                     sx={{
                       width: 'max-content',
                       height: '40px',
-                      fontFamily: theme.typography.fontFamily.primary,
-                      fontWeight: '700px',
+                      // fontFamily: theme.typography.const.fontFamily.primary,
+                      fontWeight: theme.typography.const.fontWeight.bold,
                       fontSize: '20px',
                       '&:hover': {
                         backgroundColor: '#FFF',

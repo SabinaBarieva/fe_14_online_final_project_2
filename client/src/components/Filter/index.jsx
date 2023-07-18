@@ -160,11 +160,18 @@ function FilterSection() {
     return (
       <FilterStyles>
         <Typography
-          sx={{ fontSize: '20px', fontWeight: '700', fontFamily: 'Roboto' }}>
+          sx={{
+            fontSize: '20px',
+            fontWeight: theme.typography.const.fontWeight.bold,
+            //   fontFamily: 'Roboto'
+          }}>
           Filter
         </Typography>
         <Stack
-          sx={{ width: '300px', fontFamily: 'Roboto' }}
+          sx={{
+            width: '300px',
+            //   fontFamily: 'Roboto'
+          }}
           padding={3}
           spacing={{ xs: 1, sm: 2 }}>
           <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>

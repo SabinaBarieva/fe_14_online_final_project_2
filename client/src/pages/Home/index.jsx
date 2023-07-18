@@ -12,8 +12,8 @@ import ModalBasket from '../../components/ModalForBasket';
 import Slider from '../../components/Slider';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.primary,
-  fontWeight: '700',
+  //   fontFamily: theme.typography.const.fontFamily.primary,
+  fontWeight: theme.typography.const.fontWeight.bold,
   letterSpacing: '0rem',
   color: theme.palette.primary,
   margin: '5% auto',

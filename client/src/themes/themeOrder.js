@@ -18,15 +18,15 @@ const StyledForm = styled(FormControl)({
 const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
     display: 'block',
-    fontFamily: `${theme.typography.fontFamily.primary}`,
+    // fontFamily: theme.typography.const.fontFamily.primary,
     fontSize: '1.2rem',
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: '1.5rem',
     width: 130,
     height: 50,
     margin: '10px auto',
     padding: '13px 18px',
-    backgroundColor: `${theme.palette.primary.dark}`,
+    backgroundColor: theme.palette.primary.dark,
   },
   '&.MuiButton-contained': {
     borderRadius: 50,
@@ -88,9 +88,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   '&.MuiTypography-h5': {
     margin: '10px auto',
     color: `${theme.palette.primary.main}`,
-    fontFamily: `${theme.typography.fontFamily.primary}`,
+    // fontFamily: theme.typography.const.fontFamily.primary,
     fontSize: '2rem',
-    fontWeight: 700,
+    fontWeight: theme.typography.const.fontWeight.bold,
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',

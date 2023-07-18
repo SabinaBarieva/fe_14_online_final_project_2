@@ -36,7 +36,7 @@ import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
   textAlign: 'center',
-  fontFamily: 'Roboto',
+  //   fontFamily: 'Roboto',
   fontSize: '16px',
   fontStyle: 'normal',
   textDecoration: isActive ? 'underline' : 'none',
@@ -54,10 +54,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     padding: '0',
     color: '#F5F7FB',
     backgroundColor: '#FF6565',
-    fontFamily: 'Josefin Sans',
+    // fontFamily: 'Josefin Sans',
     fontSize: '10px',
     fontStyle: 'normal',
-    fontWeight: 400,
+    // fontWeight: 400,
     lineHeight: 'normal',
     minWidth: '12.5px',
     height: '12.1px',
@@ -137,7 +137,7 @@ function Header() {
                     margin: '0',
                     padding: '0',
                     color: '#616467',
-                    fontFamily: 'Lato',
+                    // fontFamily: 'Lato',
                     fontStyle: 'normal',
                     fontWeight: '500',
                     lineHeight: 'normal',
@@ -160,10 +160,10 @@ function Header() {
               <Typography
                 sx={{
                   color: '#393D45',
-                  fontFamily: 'Roboto',
+                  //   fontFamily: 'Roboto',
                   fontSize: '16px',
                   fontStyle: 'normal',
-                  fontWeight: '400',
+                  //   fontWeight: '400',
                   lineHeight: 'normal',
                 }}>
                 /
@@ -177,10 +177,10 @@ function Header() {
               <Typography
                 sx={{
                   color: '#393D45',
-                  fontFamily: 'Roboto',
+                  //   fontFamily: 'Roboto',
                   fontSize: '16px',
                   fontStyle: 'normal',
-                  fontWeight: '400',
+                  //   fontWeight: '400',
                   lineHeight: 'normal',
                 }}>
                 /

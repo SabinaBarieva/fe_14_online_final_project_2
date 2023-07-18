@@ -40,9 +40,9 @@ function Footer() {
               gutterBottom
               sx={{
                 color: '#FFFFFF',
-                fontFamily: 'Roboto',
+                // fontFamily: 'Roboto',
                 fontStyle: 'normal',
-                fontWeight: '700',
+                fontWeight: 700,
                 lineHeight: 'normal',
                 fontSize: {
                   xs: '14px',
@@ -57,9 +57,9 @@ function Footer() {
               color="textSecondary"
               sx={{
                 color: '#FFFFFF',
-                fontFamily: 'Roboto',
+                // fontFamily: 'Roboto',
                 fontStyle: 'normal',
-                fontWeight: '400',
+                // fontWeight: '400',
                 lineHeight: 'normal',
                 fontSize: {
                   xs: '14px',
