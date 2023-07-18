@@ -9,7 +9,6 @@ const formSlice = createSlice({
   reducers: {
     openForm(state) {
       state.statusForm = true;
-      state.statusButton = false;
     },
     closeForm(state) {
       state.statusForm = false;

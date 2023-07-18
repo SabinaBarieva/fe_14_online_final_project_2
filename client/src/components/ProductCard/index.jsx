@@ -13,7 +13,6 @@ import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
 import { AdvancedImage } from '@cloudinary/react';
 import { minimumPad } from '@cloudinary/url-gen/actions/resize';
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { RadiusButton } from '../Buttons';
@@ -287,7 +286,7 @@ ProductCard.propTypes = {
     imageUrls: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     quantity: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
-    brand: PropTypes.string.isRequired,
+    brand: PropTypes.string,
     storage: PropTypes.string,
     itemNo: PropTypes.string,
     description: PropTypes.string,

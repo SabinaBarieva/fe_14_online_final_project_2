@@ -61,13 +61,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StyledGrid = styled(Grid)({
+const StyledGrid = styled(Grid)(({ theme }) => ({
   margin: 0,
   maxWidth: 250,
   paddingLeft: 10,
   borderRadius: 20,
   minWidth: 50,
-});
+  [theme.breakpoints.down(330)]: {
+    paddingLeft: 0,
+  },
+}));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
@@ -118,7 +121,7 @@ const StyledModalContainer = styled(Container)(({ theme }) => ({
 const StyledFormBackground = styled(Container)({
   backgroundColor: 'rgba(128, 128, 128, 0.5)',
   position: 'fixed',
-  zIndex: 999,
+  zIndex: 1500,
   right: 0,
   bottom: 0,
   top: 0,

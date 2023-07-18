@@ -74,7 +74,7 @@ function FilterSection() {
   const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
-
+  let keyOnePressed = false;
   const { categories, price } = useSelector(
     ({ filters }) => filters.availableFilters
   );
@@ -102,17 +102,25 @@ function FilterSection() {
   };
   const minPriceCallback = ({ target }) => {
     const { value } = target;
-    if (isNumber(value) && value < 0) setCachedMinValue(0);
-    else if (value === '') setCachedMinValue(null);
-    else if (!isNumber(cachedMinValue) && (value === '1' || value === '-1'))
+    // if (isNumber(value) && value < 0) setCachedMinValue(0);
+    if (value === '') setCachedMinValue(null);
+    else if (
+      !keyOnePressed &&
+      !isNumber(cachedMinValue) &&
+      (value === '1' || value === '-1')
+    )
       setCachedMinValue(priceMinBoundary);
     else if (isNumber(value)) setCachedMinValue(value);
   };
   const maxPriceCallback = ({ target }) => {
     const { value } = target;
-    if (value < 0) setCachedMaxValue(0);
-    else if (value === '') setCachedMaxValue(null);
-    else if (!isNumber(cachedMaxValue) && (value === '1' || value === '-1'))
+    // if (value < 0) setCachedMaxValue(0);
+    if (value === '') setCachedMaxValue(null);
+    else if (
+      !keyOnePressed &&
+      !isNumber(cachedMaxValue) &&
+      (value === '1' || value === '-1')
+    )
       setCachedMaxValue(priceMaxBoundary);
     else if (isNumber(value)) setCachedMaxValue(value);
   };
@@ -125,7 +133,28 @@ function FilterSection() {
     setCachedMinValue(null);
     setCachedMaxValue(null);
   };
-
+  const setCorrectMinValue = () => {
+    if (+cachedMinValue < priceMinBoundary && cachedMinValue !== null) {
+      setCachedMinValue(priceMinBoundary);
+    }
+    if (+cachedMinValue > priceMaxBoundary) {
+      setCachedMinValue(priceMaxBoundary);
+    }
+    if (+cachedMinValue > +cachedMaxValue && cachedMaxValue !== null) {
+      setCachedMinValue(+cachedMaxValue);
+    }
+  };
+  const setCorrectMaxValue = () => {
+    if (+cachedMaxValue > priceMaxBoundary) {
+      setCachedMaxValue(priceMaxBoundary);
+    }
+    if (+cachedMaxValue < priceMinBoundary && cachedMaxValue !== null) {
+      setCachedMaxValue(priceMinBoundary);
+    }
+    if (+cachedMinValue > +cachedMaxValue) {
+      setCachedMaxValue(+cachedMinValue);
+    }
+  };
   if (isLoadingFilters) return <CircularProgress />;
   if (isLoadedFilters)
     return (
@@ -178,10 +207,17 @@ function FilterSection() {
                     size="small"
                     value={isNumber(cachedMinValue) ? cachedMinValue : ''}
                     placeholder={`${priceMinBoundary} $`}
-                    type="number"
+                    type="tel"
                     min={priceMinBoundary}
+                    onBlur={() => {
+                      setCorrectMinValue();
+                    }}
                     onChange={minPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
+                    onKeyDown={({ key }) => {
+                      if (key === '1' && cachedMinValue === null)
+                        keyOnePressed = true;
+                    }}
                     sx={{ width: '95%' }}
                   />
                 </Grid>
@@ -190,9 +226,16 @@ function FilterSection() {
                     size="small"
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
                     placeholder={`${priceMaxBoundary} $`}
-                    type="number"
+                    type="tel"
+                    onBlur={() => {
+                      setCorrectMaxValue();
+                    }}
                     onChange={maxPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
+                    onKeyDown={({ key }) => {
+                      if (key === '1' && cachedMaxValue === null)
+                        keyOnePressed = true;
+                    }}
                     sx={{
                       width: '95%',
                       padding: '0',
