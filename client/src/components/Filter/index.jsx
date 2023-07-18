@@ -134,12 +134,6 @@ function FilterSection() {
     setCachedMaxValue(null);
   };
   const setCorrectMinValue = () => {
-    console.log(
-      +cachedMinValue,
-      priceMinBoundary,
-      +cachedMaxValue,
-      priceMaxBoundary
-    );
     if (+cachedMinValue < priceMinBoundary && cachedMinValue !== null) {
       setCachedMinValue(priceMinBoundary);
     }
@@ -151,12 +145,6 @@ function FilterSection() {
     }
   };
   const setCorrectMaxValue = () => {
-    console.log(
-      +cachedMinValue,
-      priceMinBoundary,
-      +cachedMaxValue,
-      priceMaxBoundary
-    );
     if (+cachedMaxValue > priceMaxBoundary) {
       setCachedMaxValue(priceMaxBoundary);
     }
