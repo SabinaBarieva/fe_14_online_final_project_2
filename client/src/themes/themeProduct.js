@@ -28,6 +28,7 @@ export const CountBoxes = styled('button')({
   height: '46px',
   background: '#F5F7FB',
   border: '0',
+  borderRadius: '7px',
   '&:hover': {
     cursor: 'pointer',
     color: '#F5F7FB',
@@ -43,6 +44,7 @@ export const CountInput = styled('input')({
   width: '46px',
   height: '46px',
   background: '#F5F7FB',
+  borderRadius: '7px',
   border: '0',
   '&::-webkit-outer-spin-button': {
     WebkitAppearance: 'none',
