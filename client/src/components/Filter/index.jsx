@@ -186,7 +186,7 @@ function FilterSection() {
                     size="small"
                     value={isNumber(cachedMinValue) ? cachedMinValue : ''}
                     placeholder={`${priceMinBoundary} $`}
-                    type="number"
+                    type="tel"
                     min={priceMinBoundary}
                     onChange={minPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
@@ -202,7 +202,7 @@ function FilterSection() {
                     size="small"
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
                     placeholder={`${priceMaxBoundary} $`}
-                    type="number"
+                    type="tel"
                     onChange={maxPriceCallback}
                     onKeyUp={({ key }) => key === 'Enter' && setPriceCallback()}
                     onKeyDown={({ key }) => {
