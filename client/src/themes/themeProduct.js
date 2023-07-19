@@ -29,6 +29,7 @@ export const CountBoxes = styled('button')({
   background: '#F5F7FB',
   border: '0',
   borderRadius: '7px',
+  textDecoration: 'none',
   '&:hover': {
     cursor: 'pointer',
     color: '#F5F7FB',
