@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-/* import { Container } from '@mui/material';
-import PropTypes from 'prop-types'; */
-import { Box, Typography, Container, Grid } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import { Title } from '@mui/icons-material';
 import ProductsList from '../../components/ProductsList';
@@ -39,9 +37,6 @@ const AllProductsBtn = styled(RadiusButton)(() => ({
   maxHeight: '54px',
 }));
 function HomeContent() {
-  // const id = useSelector() id товара
-  /* const id = 123; */
-
   return (
     <div>
       <Category />

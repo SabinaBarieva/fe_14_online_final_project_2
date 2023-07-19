@@ -2,13 +2,14 @@ import { React, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Grid, Box, Pagination, LinearProgress } from '@mui/material';
-import { styled, useTheme } from '@mui/system';
+import { useTheme } from '@mui/system';
 import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
   categoriesFilter,
   homePageProducts,
+  isFetchingAllProducts,
   isFetchingProductsList,
   maximalPrice,
   minimalPrice,
@@ -16,27 +17,7 @@ import {
   totalNumberProducts,
 } from '../../redux/selectors';
 import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
-
-const StyledGrid = styled(Grid)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  height: 'auto',
-  [theme.breakpoints.between('xs', 'md')]: {
-    '&:nth-of-type(n+5)': {
-      display: 'none',
-    },
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    '&:nth-of-type(n+7)': {
-      display: 'none',
-    },
-  },
-  [theme.breakpoints.up('lg')]: {
-    '&:nth-of-type(n+9)': {
-      display: 'none',
-    },
-  },
-}));
+import StyledGrid from '../../themes/themeProductsList';
 
 function ProductsList({ perPage }) {
   const theme = useTheme();
@@ -49,7 +30,10 @@ function ProductsList({ perPage }) {
   const maxFilterPrice = useSelector(maximalPrice);
   const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
   const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
-  const isFetching = useSelector(isFetchingProductsList);
+  const isFetchingProducts = useSelector(isFetchingProductsList);
+  const isFetchingHomeProds = useSelector(isFetchingAllProducts);
+  const location = useLocation();
+  const currentPath = location.pathname;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -68,8 +52,6 @@ function ProductsList({ perPage }) {
   }, [dispatch]);
 
   const countPagination = total ? Math.round(total / perPage) : 0;
-  const location = useLocation();
-  const currentPath = location.pathname;
   const spacingHomePage = {
     xs: 1.5,
     sm: 2,
@@ -84,10 +66,10 @@ function ProductsList({ perPage }) {
   };
   const gridSpacing =
     currentPath === '/' ? spacingHomePage : spacingProductsPage;
-
-  const filterProductsForHomePage = (productsForFilter) => {
-    return productsForFilter.filter((product) => product.quantity !== 0);
-  };
+  const isFetching =
+    currentPath === '/' ? isFetchingHomeProds : isFetchingProducts;
+  const filterProductsForHomePage = (productsForFilter) =>
+    productsForFilter.filter((product) => product.quantity !== 0);
   return (
     <div>
       {isFetching ? (
