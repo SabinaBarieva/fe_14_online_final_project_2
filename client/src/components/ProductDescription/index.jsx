@@ -109,7 +109,6 @@ function ProductDescription() {
           <Grid
             container
             margin="25px auto"
-            backgroundColor="#FCF9F6"
             borderRadius="20px"
             maxWidth={theme.breakpoints.values.xl}>
             <Grid
