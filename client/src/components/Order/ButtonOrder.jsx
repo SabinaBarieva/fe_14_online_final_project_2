@@ -24,7 +24,25 @@ export default function ButtonOrder() {
     <>
       {buttons && (
         <Container>
-          <StyledButton variant="contained" color="primary" onClick={showForm}>
+          <StyledButton
+            variant="contained"
+            sx={{
+              width: {
+                xs: '5rem',
+                sm: '7rem',
+                md: '9rem',
+              },
+              height: {
+                xs: '2rem',
+                sm: '2.5rem',
+                md: '3rem',
+              },
+              backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+              color: { xs: '#616467', md: '#fff' },
+              padding: 0,
+            }}
+            color="primary"
+            onClick={showForm}>
             Check Out
           </StyledButton>
         </Container>

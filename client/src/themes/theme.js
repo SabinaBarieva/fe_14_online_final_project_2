@@ -20,6 +20,8 @@ const theme = createTheme({
     text: {
       primary: '#393D45',
       secondary: '#616467',
+      green: '#1b7a0f',
+      greenTransparent: '#1b7a0f47',
     },
   },
   breakpoints: {
