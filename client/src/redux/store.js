@@ -20,13 +20,11 @@ import productSlice from './slices/productSlice';
 // eslint-disable-next-line import/no-named-as-default
 import allProductSlice from './slices/allProdsSlice';
 import filtersSlice from './slices/filtersSlice';
-
 import basketSlice from './slices/basketSlice';
 import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
 import headerSlice from './slices/headerSlice';
-import allProdsHomeSlice from './slices/allProdsHomeSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -36,7 +34,6 @@ const rootReducer = combineReducers({
   form: formSlice,
   product: productSlice,
   allProducts: allProductSlice,
-  allProdsHomePage: allProdsHomeSlice,
   filters: filtersSlice,
   basket: basketSlice,
   search: searchSlice,
