@@ -17,10 +17,12 @@ const StyledForm = styled(FormControl)({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
+    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+    color: { xs: '#616467', md: '#fff' },
+    borderRadius: '7px',
+    border: '1px solid #211F1C',
+    margin: '10px auto',
     display: 'block',
-    fontFamily: `${theme.typography.fontFamily.primary}`,
-    fontWeight: 400,
-    lineHeight: '1.5rem',
     width: {
       xs: '5rem',
       sm: '7rem',
@@ -31,12 +33,9 @@ const StyledButton = styled(Button)(({ theme }) => ({
       sm: '2.5rem',
       md: '3rem',
     },
-    margin: '10px auto',
-    padding: '13px 18px',
-    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-    color: { xs: '#616467', md: '#fff' },
-    borderRadius: '7px',
-    border: '1px solid #211F1C',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   '&.MuiButton-contained': {
     borderRadius: 50,
