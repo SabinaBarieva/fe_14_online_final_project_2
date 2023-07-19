@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import theme from '../../themes/theme';
+import styled from '@emotion/styled';
 import { addCategory, fetchFilters } from '../../redux/slices/filtersSlice';
+import theme from '../../themes/theme';
 
 function Category() {
   const dispatch = useDispatch();
@@ -17,12 +18,18 @@ function Category() {
   }, [isLoadedFilters]);
   if (isLoadedFilters) {
     return (
-      <Box sx={{ marginBottom: '20px' }}>
+      <Box
+        sx={{
+          maxWidth: 'xl',
+          padding: { xs: '0', md: '1rem', lg: '1rem' },
+          margin: '20px auto',
+        }}>
         <Grid
           container
           sx={{
-            width: '100%',
-            justifyContent: 'space-around',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'space-between',
           }}>
           {[...categories]
             .sort((firstCategory, secondCategory) =>
@@ -30,35 +37,31 @@ function Category() {
             )
             .map(({ name: categoryName, id }) => (
               <Grid
-                item
+                sx={{ display: 'flex', justifyContent: 'center' }}
                 lg={1}
-                md={2}
+                md={4}
                 sm={4}
-                xs={6}
-                sx={{ justifyContent: 'center', display: 'flex' }}>
+                xs={6}>
                 <Link
+                  onClick={() => dispatch(addCategory(id))}
                   to="./product"
                   style={{
-                    display: 'block',
+                    display: 'flex',
                     textDecoration: 'none',
-                    color: '#000000',
+                    color: '#393D45',
                     margin: '0 auto',
+                    justifySelf: 'center',
                   }}>
-                  <Button
+                  <Typography
                     sx={{
-                      width: 'max-content',
-                      height: '40px',
-                      // fontFamily: theme.typography.const.fontFamily.primary,
-                      fontWeight: theme.typography.const.fontWeight.bold,
-                      fontSize: '20px',
+                      fontWeight: '800',
+                      fontSize: '25px',
                       '&:hover': {
-                        backgroundColor: '#FFF',
-                        border: '1px solid #211F1C',
+                        color: theme.palette.primary.light,
                       },
-                    }}
-                    onClick={() => dispatch(addCategory(id))}>
-                    <Typography>{categoryName}</Typography>
-                  </Button>
+                    }}>
+                    {categoryName}
+                  </Typography>
                 </Link>
               </Grid>
             ))}
