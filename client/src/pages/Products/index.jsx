@@ -5,16 +5,11 @@ import Filter from '../../components/Filter';
 
 function ProductsContent() {
   return (
-    <Stack direction={{ md: 'row', sm: 'column' }}>
+    <Stack
+      sx={{ width: '90%', margin: '0 auto' }}
+      direction={{ md: 'row', sm: 'column' }}>
       <Filter />
-      <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          padding: '0 1%',
-          margin: '2% auto',
-        }}>
+      <Container>
         <ProductsList />
       </Container>
     </Stack>
