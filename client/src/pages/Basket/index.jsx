@@ -43,14 +43,14 @@ const columns = [
 ];
 
 const Title = styled('div')({
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '20px',
   lineHeight: '29px',
   color: '#000000',
   justifyContent: 'flex-end',
   display: 'flex',
   padding: '2rem',
-  fontFamily: theme.typography.fontFamily.primary,
+  // fontFamily: theme.typography.const.fontFamily.primary,
 });
 
 function BasketContent() {
@@ -83,9 +83,9 @@ function BasketContent() {
             {columns.map((column) => (
               <TableCell
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  // fontFamily: theme.typography.const.fontFamily.primary,
                   color: '#000000',
-                  fontWeight: '500',
+                  fontWeight: theme.typography.const.fontWeight.semibold,
                   borderBottom: '0',
                   padding: {
                     xs: '0.5rem',
@@ -108,7 +108,7 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  // fontFamily: theme.typography.const.fontFamily.primary,
                   fontWeight: '600',
                   color: '#000000',
                   padding: {
@@ -132,8 +132,8 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
-                  fontWeight: '500',
+                  // fontFamily: theme.typography.const.fontFamily.primary,
+                  fontWeight: theme.typography.const.fontWeight.semibold,
                   padding: {
                     xs: '0.5rem',
                     md: '1.5rem',
@@ -151,7 +151,7 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  //   fontFamily: theme.typography.const.fontFamily.primary,
                   fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
                   padding: {
                     xs: '0.5rem',
@@ -163,7 +163,7 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  //   fontFamily: theme.typography.const.fontFamily.primary,
                   padding: {
                     xs: '0.2rem',
                     sm: '1rem',
@@ -263,9 +263,9 @@ function BasketContent() {
                   textTransform: 'none',
                   width: '130px',
                   height: '50px',
-                  fontFamily: theme.typography.fontFamily.primary,
+                  //   fontFamily: theme.typography.const.fontFamily.primary,
                   fontSize: '20px',
-                  fontWeight: '400',
+                  //   fontWeight: '400',
                   '&:hover': {
                     backgroundColor: '#FFF',
                     color: '#211F1C',
