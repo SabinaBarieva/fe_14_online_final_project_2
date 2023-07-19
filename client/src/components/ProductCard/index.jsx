@@ -2,11 +2,18 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Box, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/system';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  useMediaQuery,
+} from '@mui/material';
+import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
 import { AdvancedImage } from '@cloudinary/react';
 import { minimumPad } from '@cloudinary/url-gen/actions/resize';
+import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { setProduct } from '../../redux/slices/productSlice';
@@ -96,7 +103,8 @@ function ProductCard({ product }) {
               minimumPad()
                 .width(getImageSize().width)
                 .height(getImageSize().height)
-            )}
+            )
+            .roundCorners(byRadius(15, 15))}
           alt={product.name + product.color}
         />
         <Box
@@ -168,7 +176,7 @@ ProductCard.propTypes = {
     imageUrls: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     quantity: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
-    brand: PropTypes.string,
+    brand: PropTypes.string.isRequired,
     storage: PropTypes.string,
     itemNo: PropTypes.string,
     description: PropTypes.string,

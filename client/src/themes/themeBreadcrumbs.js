@@ -12,7 +12,7 @@ const animationLoading = keyframes`
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   padding: '20px 10px',
-  margin: '50px 50px',
+  margin: '50px 100px',
   minHeight: 75,
   height: 'auto',
   fontSize: '1.5rem',
