@@ -20,8 +20,8 @@ function ModalBasket() {
       <Close
         sx={{
           position: 'absolute',
-          top: { xs: '20px', md: '30px' },
-          right: { xs: '20px', md: '30px' },
+          top: { xs: '15px', md: '25px' },
+          right: { xs: '15px', md: '25px' },
         }}
         onClick={() => {
           dispatch(closeModalBasket());
