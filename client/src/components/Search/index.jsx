@@ -25,6 +25,7 @@ export default function Search() {
   const inputClass = useSelector((state) => state.search.statusInputClass);
   const statusIconType = useSelector((state) => state.search.statusIconType);
   const searchRef = useRef(null);
+  const [typingTimeout, setTypingTimeout] = useState(null);
 
   useEffect(() => {
     dispatch(fetchArrayProducts());
@@ -39,8 +40,6 @@ export default function Search() {
     }
     return null;
   };
-
-  const [typingTimeout, setTypingTimeout] = useState(null);
 
   const handleInputChange = () => {
     if (typingTimeout) {

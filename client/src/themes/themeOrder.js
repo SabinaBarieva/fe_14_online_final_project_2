@@ -19,14 +19,24 @@ const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
     display: 'block',
     fontFamily: `${theme.typography.fontFamily.primary}`,
-    fontSize: '1.2rem',
     fontWeight: 400,
     lineHeight: '1.5rem',
-    width: 130,
-    height: 50,
+    width: {
+      xs: '5rem',
+      sm: '7rem',
+      md: '9rem',
+    },
+    height: {
+      xs: '2rem',
+      sm: '2.5rem',
+      md: '3rem',
+    },
     margin: '10px auto',
     padding: '13px 18px',
-    backgroundColor: `${theme.palette.primary.dark}`,
+    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+    color: { xs: '#616467', md: '#fff' },
+    borderRadius: '7px',
+    border: '1px solid #211F1C',
   },
   '&.MuiButton-contained': {
     borderRadius: 50,
