@@ -39,7 +39,7 @@ function HomeContent() {
   /* const id = 123; */
 
   return (
-    <Container maxWidth="xxl" sx={{ padding: '0 3%' }}>
+    <Container sx={{ padding: '0 3%', maxWidth: 'xl' }}>
       <Category />
       <ModalBasket />
       <Container
