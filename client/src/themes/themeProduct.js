@@ -1,13 +1,11 @@
 import { styled } from '@mui/system';
 
 export const Title = styled('div')({
-  //   fontWeight: '400',
-  fontSize: '40px',
+  fontSize: '35px',
   lineHeight: '47px',
   color: '#616467',
 });
 export const Description = styled('div')({
-  //   fontWeight: '400',
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',

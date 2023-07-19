@@ -31,11 +31,22 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const AllProductsBtn = styled(RadiusButton)(() => ({
-  minWidth: '128px',
-  minHeight: '32px',
-  maxWidth: '218px',
-  maxHeight: '54px',
+  fontFamily: theme.typography.fontFamily.primary,
+  fontWeight: '700',
+  letterSpacing: '0rem',
+  color: theme.palette.primary,
+  margin: '5% auto',
+  [theme.breakpoints.between('xs', 'md')]: {
+    fontSize: '1.063rem',
+  },
+  [theme.breakpoints.between('md', 'lg')]: {
+    fontSize: '1.75rem',
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '2.8rem',
+  },
 }));
+
 function HomeContent() {
   return (
     <div>
