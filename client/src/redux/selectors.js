@@ -6,7 +6,7 @@ export const selectCart = (state) => state.basket;
 export const modaInProductSlice = (state) => state.modalInProduct;
 export const allProductsInBase = (state) => state.allProducts.allProds;
 export const allProductsIsFetching = (state) => state.allProducts.isFetching;
-export const saleProds = (state) => state.allProducts.saleProds;
+export const homePageProducts = (state) => state.allProdsHomePage.allProds;
 export const totalNumberProducts = (state) => state.products.total;
 export const productsList = (state) => state.products.products;
 export const categoriesFilter = (state) => state.filters.categories;

@@ -29,28 +29,33 @@ const CardContainer = styled(Card)(() => ({
 const DetailButton = styled(RadiusButton)(({ theme }) => ({
   fontSize: '0.625rem',
   lineHeight: '0.75rem',
-  maxWidth: '104px',
-  maxHeight: '26px',
-  [theme.breakpoints.between('xs', 'md')]: {
+  [theme.breakpoints.between('xs', 'sm')]: {
     textTransform: 'capitalize',
-    minWidth: '77px',
-    minHeight: '20px',
+    width: '77px',
+    height: '20px',
+  },
+  [theme.breakpoints.between('sm', 'md')]: {
+    fontSize: '0.7rem',
+    width: '100px',
+    height: '30px',
   },
   [theme.breakpoints.between('md', 'lg')]: {
     fontSize: '0.75rem',
-    minWidth: '111px',
-    minHeight: '28px',
+    minWidth: '104px',
+    minHeight: '29px',
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '0.625rem',
+    fontSize: '0.785rem',
     minWidth: '104px',
-    minHeight: '26px',
+    minHeight: '30px',
   },
 }));
 
 const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   backgroundColor: 'white',
   outline: `1px solid ${theme.palette.primary.buttonhover}`,
+  width: '30%',
+  height: '90%',
   maxWidth: '40px',
   maxHeight: '26px',
   position: 'relative',
@@ -65,12 +70,21 @@ const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
     maxWidth: '18px',
     maxHeight: '20px',
   },
-  [theme.breakpoints.between('xs', 'md')]: {
+
+  [theme.breakpoints.between('xs', 'sm')]: {
     minWidth: '29px',
     minHeight: '20px',
     '& svg': {
       width: '17px',
       height: '16px',
+    },
+  },
+  [theme.breakpoints.between('sm', 'md')]: {
+    width: '36px',
+    height: '30px',
+    '& svg': {
+      width: '18px',
+      height: '20px',
     },
   },
   [theme.breakpoints.between('md', 'lg')]: {
@@ -83,10 +97,10 @@ const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   },
   [theme.breakpoints.up('lg')]: {
     minWidth: '40px',
-    minHeight: '26px',
+    minHeight: '30px',
     '& svg': {
       width: '17px',
-      height: '18px',
+      height: '20px',
     },
   },
 }));

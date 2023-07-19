@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
 // eslint-disable-next-line import/named
-import { getAllProducts } from '../../redux/slices/allProdsSlice';
+import { getAllProducts } from '../../redux/slices/allSaleProdsSlice';
 import ProductCard from '../ProductCard';
 import 'swiper/scss';
 import 'swiper/scss/autoplay';

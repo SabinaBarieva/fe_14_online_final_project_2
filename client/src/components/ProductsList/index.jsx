@@ -7,15 +7,15 @@ import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
-  allProductsInBase,
   categoriesFilter,
+  homePageProducts,
   isFetchingProductsList,
   maximalPrice,
   minimalPrice,
   productsList,
   totalNumberProducts,
 } from '../../redux/selectors';
-import { getAllProducts } from '../../redux/slices/allProdsSlice';
+import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   display: 'flex',
@@ -43,7 +43,7 @@ function ProductsList({ perPage }) {
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
   const productsForProducts = useSelector(productsList);
-  const productsForHomePage = useSelector(allProductsInBase);
+  const productsForHomePage = useSelector(homePageProducts);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
@@ -64,10 +64,10 @@ function ProductsList({ perPage }) {
   }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllHomeProducts());
   }, [dispatch]);
 
-  const countPagination = Math.round(total / perPage);
+  const countPagination = total ? Math.round(total / perPage) : 0;
   const location = useLocation();
   const currentPath = location.pathname;
   const spacingHomePage = {
@@ -82,8 +82,6 @@ function ProductsList({ perPage }) {
     md: 2,
     lg: 3,
   };
-
-  console.log(productsForHomePage);
   const gridSpacing =
     currentPath === '/' ? spacingHomePage : spacingProductsPage;
 
@@ -102,7 +100,10 @@ function ProductsList({ perPage }) {
         />
       ) : (
         <div>
-          <Grid container spacing={gridSpacing}>
+          <Grid
+            container
+            spacing={gridSpacing}
+            sx={{ padding: '0 1%', margin: '0 auto', width: '90%' }}>
             {currentPath === '/'
               ? filterProductsForHomePage(productsForHomePage).map(
                   (product) => (
@@ -129,7 +130,9 @@ function ProductsList({ perPage }) {
                     lg={3}
                     key={product.itemNo}
                     height="auto"
-                    sx={{ alignItems: 'baseline' }}>
+                    sx={{
+                      alignItems: 'baseline',
+                    }}>
                     <ProductCard product={product} />
                   </Grid>
                 ))}
