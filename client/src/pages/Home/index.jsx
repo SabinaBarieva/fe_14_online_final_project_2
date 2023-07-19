@@ -12,8 +12,8 @@ import ModalBasket from '../../components/ModalForBasket';
 import Slider from '../../components/Slider';
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  //   fontFamily: theme.typography.const.fontFamily.primary,
-  fontWeight: theme.typography.const.fontWeight.bold,
+  fontFamily: theme.typography.fontFamily.primary,
+  fontWeight: '700',
   letterSpacing: '0rem',
   color: theme.palette.primary,
   margin: '5% auto',
@@ -51,10 +51,8 @@ function HomeContent() {
           borderRadius: '20px',
           marginBottom: '20px',
         }}>
-        <SectionTitle variant="h2">Daily Sale</SectionTitle>
-        <Box sx={{ width: '30%', margin: '0% auto' }}>
-          <Slider />
-        </Box>
+        <SectionTitle variant="h2">Best Offer</SectionTitle>
+        <Slider />
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box>
           <ProductsList perPage={8} />
