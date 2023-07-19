@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { Button, LinearProgress } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { useTheme } from '@mui/system';
 import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
@@ -29,9 +28,9 @@ import {
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
+import theme from '../../themes/theme';
 
 function ProductDescription() {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
@@ -108,10 +107,8 @@ function ProductDescription() {
         <ModalBasket />
         <Grid
           container
-          sx={{
-            maxWidth: '1440px',
-            margin: '25px auto',
-          }}>
+          margin="25px auto"
+          maxWidth={theme.breakpoints.values.xl}>
           <Grid
             item
             xs={12}
@@ -120,6 +117,7 @@ function ProductDescription() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'start',
+              padding: '0 20px',
             }}>
             <AdvancedImage
               className="main-photo"
@@ -133,6 +131,7 @@ function ProductDescription() {
             xs={12}
             md={7}
             sx={{
+              padding: '0 20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-around',
