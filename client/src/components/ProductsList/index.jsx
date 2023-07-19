@@ -71,13 +71,12 @@ function ProductsList({ perPage }) {
   const filterProductsForHomePage = (productsForFilter) =>
     productsForFilter.filter((product) => product.quantity !== 0);
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       {isFetching ? (
         <LinearProgress
           sx={{
             backgroundColor: `${theme.palette.primary.light}`,
-            width: '80%',
-            mx: 'auto',
+            mx: '0 auto',
           }}
         />
       ) : (

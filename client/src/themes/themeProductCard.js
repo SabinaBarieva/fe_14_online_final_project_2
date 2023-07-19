@@ -29,8 +29,8 @@ export const DetailButton = styled(RadiusButton)(({ theme }) => ({
   },
   [theme.breakpoints.up('lg')]: {
     fontSize: '0.785rem',
-    minWidth: '104px',
-    minHeight: '30px',
+    minWidth: '85px',
+    minHeight: '25px',
   },
 }));
 
@@ -40,7 +40,7 @@ export const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   width: '30%',
   height: '90%',
   maxWidth: '40px',
-  maxHeight: '26px',
+  maxHeight: '30px',
   position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.primary.buttonhover,
@@ -79,8 +79,8 @@ export const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
     },
   },
   [theme.breakpoints.up('lg')]: {
-    minWidth: '40px',
-    minHeight: '30px',
+    minWidth: '28px',
+    minHeight: '25px',
     '& svg': {
       width: '17px',
       height: '20px',
