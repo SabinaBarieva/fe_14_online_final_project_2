@@ -17,16 +17,25 @@ const StyledForm = styled(FormControl)({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
-    display: 'block',
-    // fontFamily: theme.typography.const.fontFamily.primary,
-    fontSize: '1.2rem',
-    // fontWeight: 400,
-    lineHeight: '1.5rem',
-    width: 130,
-    height: 50,
+    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+    color: { xs: '#616467', md: '#fff' },
+    borderRadius: '7px',
+    border: '1px solid #211F1C',
     margin: '10px auto',
-    padding: '13px 18px',
-    backgroundColor: theme.palette.primary.dark,
+    display: 'block',
+    width: {
+      xs: '5rem',
+      sm: '7rem',
+      md: '9rem',
+    },
+    height: {
+      xs: '2rem',
+      sm: '2.5rem',
+      md: '3rem',
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+    },
   },
   '&.MuiButton-contained': {
     borderRadius: 50,
@@ -88,9 +97,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   '&.MuiTypography-h5': {
     margin: '10px auto',
     color: `${theme.palette.primary.main}`,
-    // fontFamily: theme.typography.const.fontFamily.primary,
+    fontFamily: `${theme.typography.fontFamily.primary}`,
     fontSize: '2rem',
-    fontWeight: theme.typography.const.fontWeight.bold,
+    fontWeight: 700,
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',

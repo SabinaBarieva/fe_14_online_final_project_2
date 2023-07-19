@@ -24,11 +24,7 @@ export default function ButtonOrder() {
     <>
       {buttons && (
         <Container>
-          <StyledButton
-            variant="contained"
-            color="primary"
-            style={{ borderRadius: 0, textTransform: 'none' }}
-            onClick={showForm}>
+          <StyledButton variant="contained" color="primary" onClick={showForm}>
             Check Out
           </StyledButton>
         </Container>
