@@ -113,7 +113,7 @@ const Label = styled(Typography)(({ theme }) => ({
 
 const CardInfo = styled(CardContent)(({ theme }) => ({
   color: theme.palette.primary.light,
-  fontFamily: theme.typography.fontFamily.secondary,
+  //   fontFamily: theme.typography.const.fontFamily.secondary,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'baseline',
@@ -148,7 +148,7 @@ const ProductName = styled(Typography)(({ theme }) => ({
 }));
 
 const ProductPrice = styled(Typography)(() => ({
-  fontWeight: '400',
+  //fontWeight: '400',
   fontSize: '.875rem',
   lineHeight: '1rem',
 }));
