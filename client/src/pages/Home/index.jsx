@@ -1,60 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-/* import { Container } from '@mui/material';
-import PropTypes from 'prop-types'; */
-import { Box, Typography, Container } from '@mui/material';
-import { styled } from '@mui/system';
+import { Box, Typography, Grid } from '@mui/material';
+import { useTheme } from '@mui/system';
+import { AdvancedImage } from '@cloudinary/react';
+import getImg from '../../cloudinary';
 import ProductsList from '../../components/ProductsList';
-import { SquareButton } from '../../components/Buttons';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
 import Category from '../../components/Category';
 import ModalBasket from '../../components/ModalForBasket';
 import Slider from '../../components/Slider';
+import { SectionTitle, AllProductsBtn } from '../../themes/themeHomePage';
 
-const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.primary,
-  fontWeight: '700',
-  letterSpacing: '0rem',
-  color: theme.palette.primary,
-  margin: '5% auto',
-  [theme.breakpoints.between('xs', 'md')]: {
-    fontSize: '1.063rem',
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    fontSize: '1.75rem',
-  },
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '2.8rem',
-  },
-}));
-
-const AllProductsBtn = styled(SquareButton)(() => ({
-  minWidth: '128px',
-  minHeight: '32px',
-  maxWidth: '218px',
-  maxHeight: '54px',
-}));
 function HomeContent() {
+  const theme = useTheme();
   return (
-    <Container sx={{ padding: '0 3%', maxWidth: 'xl' }}>
+    <div
+      style={{
+        maxWidth: '1366px',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+      }}>
       <Category />
       <ModalBasket />
-      <Container
-        sx={{
+      <SectionTitle variant="h2">Daily Sale</SectionTitle>
+      <Slider />
+      <div
+        style={{
+          width: '100%',
+          margin: '10% auto 0',
+          backgroundColor: '#FCF9F6',
           display: 'flex',
           justifyContent: 'center',
           flexDirection: 'column',
-          backgroundColor: '#FCF9F6',
-          borderRadius: '20px',
-          marginBottom: '20px',
         }}>
-        <SectionTitle variant="h2">Best Offer</SectionTitle>
-        <Slider />
         <SectionTitle variant="h2">Products</SectionTitle>
-        <Box>
+        <Box sx={{ width: '90%', margin: '0 auto' }}>
           <ProductsList perPage={8} />
         </Box>
-        <Box sx={{ margin: '10% auto' }}>
+        <Box sx={{ margin: '10% auto 5%' }}>
           <Link to="/product">
             <AllProductsBtn sx={{ alignItems: 'center' }}>
               <Typography
@@ -69,8 +53,103 @@ function HomeContent() {
             </AllProductsBtn>
           </Link>
         </Box>
-      </Container>
-    </Container>
+      </div>
+      <SectionTitle variant="h2">Benefits using our service</SectionTitle>
+      <Box sx={{ width: '80%', margin: '0 auto 10%' }}>
+        <Grid container spacing={{ md: 3, lg: 5 }}>
+          <Grid
+            item
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            sx={{ marginBottom: '5%' }}>
+            <Box sx={{ width: '20%' }}>
+              <AdvancedImage
+                width="100%"
+                cldImg={getImg.image('about/tdmzj6zmka75fjrpdqm7.png')}
+                alt="Best Quality"
+              />
+            </Box>
+            <Typography
+              variant="h6"
+              sx={{ margin: '0 auto', fontSize: '1rem' }}>
+              Best Quality
+            </Typography>
+            <Typography
+              sx={{ textAlign: 'center', width: '70%', fontSize: '0.8rem' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              consectetur, purus
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            sx={{ marginBottom: '5%' }}>
+            <Box sx={{ width: '20%' }}>
+              <AdvancedImage
+                width="100%"
+                cldImg={getImg.image('about/wcldiw2aoks31z8tejzu.png')}
+                alt="Free Shipping"
+              />
+            </Box>
+            <Typography
+              variant="h6"
+              sx={{ margin: '0 auto', fontSize: '1rem' }}>
+              Free Shipping
+            </Typography>
+            <Typography
+              sx={{ textAlign: 'center', width: '70%', fontSize: '0.8rem' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              consectetur, purus
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            sx={{
+              [`${theme.breakpoints.down('lg')}`]: {
+                margin: '3% auto 5%',
+                justifyContent: 'center',
+              },
+            }}>
+            <Box sx={{ width: '20%' }}>
+              <AdvancedImage
+                width="100%"
+                cldImg={getImg.image('about/fruf9huhljjedgj4vclo.png')}
+                alt="Warranty"
+              />
+            </Box>
+            <Typography
+              variant="h6"
+              sx={{ margin: '0 auto', fontSize: '1rem' }}>
+              Warranty
+            </Typography>
+            <Typography
+              sx={{ textAlign: 'center', width: '70%', fontSize: '0.8rem' }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+              consectetur, purus
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </div>
   );
 }
+
 export default HomeContent;

@@ -20,7 +20,7 @@ function Category() {
     return (
       <Box
         sx={{
-          maxWidth: 'xl',
+          width: '90%',
           padding: { xs: '0', md: '1rem', lg: '1rem' },
           margin: '20px auto',
         }}>
