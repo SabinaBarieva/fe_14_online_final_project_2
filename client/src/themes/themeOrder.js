@@ -37,9 +37,6 @@ const StyledButton = styled(Button)(({ theme }) => ({
       backgroundColor: theme.palette.primary.light,
     },
   },
-  '&.MuiButton-contained': {
-    borderRadius: 50,
-  },
 }));
 
 const StyledIconButton = styled(IconButton)({
