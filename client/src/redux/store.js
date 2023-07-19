@@ -25,6 +25,7 @@ import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
 import headerSlice from './slices/headerSlice';
+import allProdsHomeSlice from './slices/allProdsHomeSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   searchList: searchResultsSlice,
   order: orderSlice,
   burgerMenu: headerSlice,
+  allProdsHomePage: allProdsHomeSlice,
 });
 
 const persistConfig = {
