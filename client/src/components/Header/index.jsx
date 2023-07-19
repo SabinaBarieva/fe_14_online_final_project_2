@@ -54,7 +54,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     padding: '0',
     color: '#F5F7FB',
     backgroundColor: '#FF6565',
-    fontFamily: 'Josefin Sans',
+    fontFamily: 'Roboto',
     fontSize: '10px',
     fontStyle: 'normal',
     fontWeight: 400,
@@ -117,7 +117,7 @@ function Header() {
               },
             }}>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
-              <Grid container direction="row" style={{ minWidth: '153px' }}>
+              <Grid container direction="row">
                 <Stack
                   sx={{
                     width: { xs: '1.7rem', md: '2.0rem' },
@@ -130,24 +130,26 @@ function Header() {
                     width="100%"
                   />
                 </Stack>
-                <Typography
-                  variant="h5"
-                  gutterBottom
-                  sx={{
-                    margin: '0',
-                    padding: '0',
-                    color: '#616467',
-                    fontFamily: 'Lato',
-                    fontStyle: 'normal',
-                    fontWeight: '500',
-                    lineHeight: 'normal',
-                    fontSize: {
-                      xs: '25px',
-                      md: '30px',
-                    },
-                  }}>
-                  Apple Shop
-                </Typography>
+                <Hidden mdDown>
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    sx={{
+                      margin: '0',
+                      padding: '0',
+                      color: '#616467',
+                      fontFamily: 'Roboto',
+                      fontStyle: 'normal',
+                      fontWeight: '500',
+                      lineHeight: 'normal',
+                      fontSize: {
+                        xs: '25px',
+                        md: '30px',
+                      },
+                    }}>
+                    Apple Shop
+                  </Typography>
+                </Hidden>
               </Grid>
             </NavLink>
             <Hidden lgDown>
@@ -200,21 +202,22 @@ function Header() {
               }}>
               <Search />
             </Container>
+            <NavLink to="/basket">
+              <IconButton
+                sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
+                <StyledBadge
+                  badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                  <ShoppingCartOutlinedIcon
+                    sx={{
+                      color: '#616467',
+                      width: '28.7px',
+                      height: '32px ',
+                    }}
+                  />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
             <Hidden lgDown>
-              <NavLink to="/basket">
-                <IconButton style={{ padding: '0', margin: '0' }}>
-                  <StyledBadge
-                    badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-                    <ShoppingCartOutlinedIcon
-                      sx={{
-                        color: '#616467',
-                        width: '28.7px',
-                        height: '32px ',
-                      }}
-                    />
-                  </StyledBadge>
-                </IconButton>
-              </NavLink>
               <Button
                 variant="contained"
                 endIcon={<LoginOutlinedIcon />}
@@ -262,20 +265,7 @@ function Header() {
                 <CloseIcon />
               </IconButton>
             </div>
-            <NavLink to="/basket" onClick={() => setOpen(false)}>
-              <IconButton style={{ padding: '0', margin: '0' }}>
-                <StyledBadge
-                  badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-                  <ShoppingCartOutlinedIcon
-                    sx={{
-                      color: '#616467',
-                      width: '28.7px',
-                      height: '32px ',
-                    }}
-                  />
-                </StyledBadge>
-              </IconButton>
-            </NavLink>
+
             <Button
               variant="contained"
               endIcon={<LoginOutlinedIcon />}

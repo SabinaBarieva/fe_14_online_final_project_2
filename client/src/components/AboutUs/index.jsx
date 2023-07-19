@@ -12,16 +12,26 @@ import {
   Email,
   Links,
 } from '../../themes/themeAboutUs';
+import theme from '../../themes/theme';
 
 function About() {
   return (
-    <Grid container sx={{ width: '91%', margin: '0 auto' }}>
+    <Grid
+      container
+      maxWidth={theme.breakpoints.values.xl}
+      sx={{
+        margin: '0 auto',
+        backgroundColor: '#FCF9F6',
+        borderRadius: '20px',
+        marginBottom: '20px',
+      }}>
       <Grid
         item
         xs={12}
         lg={5}
         sx={{
-          margin: '0 auto',
+          padding: '0 20px',
+          margin: '25px auto',
         }}>
         <AdvancedImage
           className="main-photo"
@@ -30,7 +40,7 @@ function About() {
           alt="our-photo"
         />
       </Grid>
-      <Grid item md={12} lg={6}>
+      <Grid item md={12} lg={6} sx={{ margin: '20px' }}>
         <Title>About us</Title>
         <Typography
           sx={{ margin: '30px auto', fontSize: '1.3rem', textAlign: 'right' }}>

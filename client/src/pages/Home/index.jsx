@@ -35,9 +35,6 @@ const AllProductsBtn = styled(SquareButton)(() => ({
   maxHeight: '54px',
 }));
 function HomeContent() {
-  // const id = useSelector() id товара
-  /* const id = 123; */
-
   return (
     <Container maxWidth="xxl" sx={{ padding: '0 3%' }}>
       <Category />
@@ -48,11 +45,11 @@ function HomeContent() {
           justifyContent: 'center',
           flexDirection: 'column',
           backgroundColor: '#FCF9F6',
+          borderRadius: '20px',
+          marginBottom: '20px',
         }}>
-        <SectionTitle variant="h2">Daily Sale</SectionTitle>
-        <Box sx={{ width: '30%', margin: '0% auto' }}>
-          <Slider />
-        </Box>
+        <SectionTitle variant="h2">Best Offer</SectionTitle>
+        <Slider />
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box>
           <ProductsList perPage={8} />
