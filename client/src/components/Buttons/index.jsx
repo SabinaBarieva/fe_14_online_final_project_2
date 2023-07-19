@@ -7,8 +7,8 @@ export const RadiusButton = styled(Button)(({ theme }) => ({
   padding: '0',
   color: 'white',
   backgroundColor: theme.palette.primary.main,
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: '400',
+  //   fontFamily: theme.typography.const.fontFamily.secondary,
+  //   fontWeight: '400',
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },
@@ -20,8 +20,8 @@ export const SquareButton = styled(Button)(({ theme }) => ({
   padding: '0',
   color: 'white',
   backgroundColor: theme.palette.primary.main,
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: '400',
+  //   fontFamily: theme.typography.const.fontFamily.secondary,
+  //   fontWeight: '400',
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },

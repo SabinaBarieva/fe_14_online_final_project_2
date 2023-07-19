@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 
 export const Title = styled('h2')({
   margin: '0',
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '40px',
   lineHeight: '47px',
   color: '#616467',
@@ -13,14 +13,14 @@ export const Links = styled('a')({
   color: 'blue',
 });
 export const Phone = styled('p')({
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '20px',
 });
 export const Telegram = styled('p')({
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '20px',
 });
 export const Email = styled('p')({
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '20px',
 });

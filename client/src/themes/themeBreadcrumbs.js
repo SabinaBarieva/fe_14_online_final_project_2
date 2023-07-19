@@ -55,7 +55,7 @@ const StyledRouterLink = styled(RouterLink)(({ theme }) => ({
 
 const StyledSpan = styled('span')(({ theme }) => ({
   color: theme.palette.primary.light,
-  fontWeight: 'bold',
+  fontWeight: theme.typography.const.fontWeight.bold,
   padding: 10,
   maxWidth: '80%',
   whiteSpace: 'nowrap',

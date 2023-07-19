@@ -1,13 +1,11 @@
 import { styled } from '@mui/system';
 
 export const Title = styled('div')({
-  fontWeight: '400',
-  fontSize: '40px',
+  fontSize: '35px',
   lineHeight: '47px',
   color: '#616467',
 });
 export const Description = styled('div')({
-  fontWeight: '400',
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',
@@ -29,6 +27,7 @@ export const CountBoxes = styled('button')({
   background: '#F5F7FB',
   border: '0',
   borderRadius: '7px',
+  textDecoration: 'none',
   '&:hover': {
     cursor: 'pointer',
     color: '#F5F7FB',
@@ -57,7 +56,7 @@ export const CountInput = styled('input')({
 });
 export const Guarantee = styled('div')({
   textAlign: 'right',
-  fontWeight: '400',
+  //   fontWeight: '400',
   fontSize: '18px',
   letterSpacing: '0.015em',
   color: '#9A9292',

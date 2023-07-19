@@ -13,6 +13,7 @@ import {
   Grid,
   Button,
   TableBody,
+  Typography,
 } from '@mui/material';
 import styled from '@emotion/styled';
 import { BiPlus, BiMinus } from 'react-icons/bi';
@@ -21,6 +22,7 @@ import { AdvancedImage } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { color as clColor } from '@cloudinary/url-gen/qualifiers/background';
 import { Link } from 'react-router-dom';
+import { Box } from '@mui/system';
 import ButtonOrder from '../../components/Order/ButtonOrder';
 import { selectCart } from '../../redux/selectors';
 import {
@@ -42,38 +44,39 @@ const columns = [
   { id: 'total', label: 'Total', width: '15%' },
 ];
 
-const Title = styled('div')({
-  fontWeight: '400',
-  fontSize: '20px',
-  lineHeight: '29px',
-  color: '#000000',
-  justifyContent: 'flex-end',
-  display: 'flex',
-  padding: '2rem',
-  fontFamily: theme.typography.fontFamily.primary,
-});
+const Title = styled(Typography)(() => ({
+  fontWeight: theme.typography.const.fontWeight.bold,
+  letterSpacing: '0rem',
+  color: theme.palette.primary,
+  textAlign: 'end',
+  margin: '2rem 1.5rem 2rem 0',
+
+  [theme.breakpoints.between('xs', 'md')]: {
+    fontSize: '1rem',
+  },
+  [theme.breakpoints.between('md', 'lg')]: {
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '1.5rem',
+  },
+}));
 
 function BasketContent() {
   const { priceAll, itemsBasket } = useSelector(selectCart);
-  /*   const totalCount = itemsBasket.reduce((sum, item) => sum + item.count, 0); */
   const dispatch = useDispatch();
-  const onClickClear = () => {
-    if (window.confirm('Очистить корзину?')) {
-      dispatch(clearBasket());
-    }
-  };
   if (!priceAll) {
     return <BasketEmpty />;
   }
   return (
-    <Grid>
+    <Container sx={{ padding: '0 3%', maxWidth: 'xl' }}>
       <ModalBasket />
       <Table
         key={Math.random()}
         sx={{
           margin: {
             xs: '0',
-            sm: '1',
+            sm: '1rem',
             md: '2rem',
             lg: '3.5rem',
           },
@@ -83,14 +86,13 @@ function BasketContent() {
             {columns.map((column) => (
               <TableCell
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
                   color: '#000000',
-                  fontWeight: '500',
+                  fontWeight: theme.typography.const.fontWeight.semibold,
                   borderBottom: '0',
                   padding: {
-                    xs: '0.5rem',
-                    sm: '1rem',
-                    md: '1.5rem',
+                    xs: '0.3rem',
+                    sm: '0.5rem',
+                    md: '1rem',
                     lg: '2rem',
                   },
                   width: column.width,
@@ -108,7 +110,7 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  // fontFamily: theme.typography.const.fontFamily.primary,
                   fontWeight: '600',
                   color: '#000000',
                   padding: {
@@ -132,8 +134,8 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
-                  fontWeight: '500',
+                  // fontFamily: theme.typography.const.fontFamily.primary,
+                  fontWeight: theme.typography.const.fontWeight.semibold,
                   padding: {
                     xs: '0.5rem',
                     md: '1.5rem',
@@ -151,7 +153,7 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  //   fontFamily: theme.typography.const.fontFamily.primary,
                   fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
                   padding: {
                     xs: '0.5rem',
@@ -163,11 +165,11 @@ function BasketContent() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  fontFamily: theme.typography.fontFamily.primary,
+                  //   fontFamily: theme.typography.const.fontFamily.primary,
                   padding: {
-                    xs: '0.2rem',
-                    sm: '1rem',
-                    md: '2rem',
+                    xs: '0.1rem',
+                    sm: '0.4rem',
+                    md: '1,5rem',
                   },
                   fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
                 }}>
@@ -228,7 +230,7 @@ function BasketContent() {
             display: 'flex',
             justifyContent: 'flex-end',
             alignItems: 'center',
-            // width: '100%',
+            marginRight: '1.5rem',
           }}>
           <Grid
             item
@@ -256,20 +258,22 @@ function BasketContent() {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: '#FFFFFF',
-                  color: '#616467',
-                  borderRadius: 0,
+                  backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                  color: { xs: '#616467', md: '#fff' },
+                  borderRadius: '7px',
                   border: '1px solid #211F1C',
-                  textTransform: 'none',
-                  width: '130px',
-                  height: '50px',
-                  fontFamily: theme.typography.fontFamily.primary,
-                  fontSize: '20px',
-                  fontWeight: '400',
+                  width: {
+                    xs: '5rem',
+                    sm: '7rem',
+                    md: '9rem',
+                  },
+                  height: {
+                    xs: '2rem',
+                    sm: '2.5rem',
+                    md: '3rem',
+                  },
                   '&:hover': {
-                    backgroundColor: '#FFF',
-                    color: '#211F1C',
-                    border: '1px solid #211F1C',
+                    backgroundColor: theme.palette.primary.light,
                   },
                 }}>
                 Close
@@ -278,7 +282,7 @@ function BasketContent() {
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 }
 

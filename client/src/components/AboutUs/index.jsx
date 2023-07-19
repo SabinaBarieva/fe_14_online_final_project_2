@@ -12,13 +12,14 @@ import {
   Email,
   Links,
 } from '../../themes/themeAboutUs';
+import theme from '../../themes/theme';
 
 function About() {
   return (
     <Grid
       container
+      maxWidth={theme.breakpoints.values.xl}
       sx={{
-        width: '91%',
         margin: '0 auto',
         backgroundColor: '#FCF9F6',
         borderRadius: '20px',
