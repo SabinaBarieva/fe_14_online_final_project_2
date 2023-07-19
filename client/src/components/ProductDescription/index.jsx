@@ -108,6 +108,8 @@ function ProductDescription() {
         <Grid
           container
           margin="25px auto"
+          backgroundColor="#FCF9F6"
+          borderRadius="20px"
           maxWidth={theme.breakpoints.values.xl}>
           <Grid
             item
@@ -117,7 +119,7 @@ function ProductDescription() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'start',
-              padding: '0 20px',
+              padding: '20px',
             }}>
             <AdvancedImage
               className="main-photo"
