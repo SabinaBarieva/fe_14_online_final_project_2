@@ -55,9 +55,7 @@ function HomeContent() {
           backgroundColor: '#FCF9F6',
         }}>
         <SectionTitle variant="h2">Daily Sale</SectionTitle>
-        <Box sx={{ width: '100%', margin: '0 auto' }}>
-          <Slider />
-        </Box>
+        <Slider />
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box sx={{ width: '90%', margin: '0 auto' }}>
           <ProductsList perPage={8} />
