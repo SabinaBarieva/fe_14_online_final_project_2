@@ -16,12 +16,12 @@ const theme = createTheme({
     secondary: {
       main: '#ff6565',
       contrastText: '#f5f7fb',
+      green: '#1b7a0f',
+      greenTransparent: '#1b7a0f47',
     },
     text: {
       primary: '#393D45',
       secondary: '#616467',
-      green: '#1b7a0f',
-      greenTransparent: '#1b7a0f47',
     },
   },
   breakpoints: {
