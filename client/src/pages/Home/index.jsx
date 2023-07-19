@@ -76,4 +76,5 @@ function HomeContent() {
     </Container>
   );
 }
+
 export default HomeContent;
