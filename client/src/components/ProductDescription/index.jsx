@@ -109,7 +109,6 @@ function ProductDescription() {
           <Grid
             container
             margin="25px auto"
-            backgroundColor="#FCF9F6"
             borderRadius="20px"
             maxWidth={theme.breakpoints.values.xl}>
             <Grid
@@ -253,7 +252,7 @@ function ProductDescription() {
                     onClick={() => {
                       clickToBasket();
                     }}>
-                    Add to basket
+                    Add to cart
                   </Button>
                 </Grid>
               </Grid>

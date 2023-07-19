@@ -32,7 +32,7 @@ const StyledSearch = styled(Container)(({ theme }) => ({
 }));
 
 const StyledSearchWrapper = styled(Container)({
-  width: 300,
+  maxWidth: 300,
   padding: '0!important',
 });
 
@@ -51,14 +51,15 @@ const StyledInput = styled(Input)({
 });
 
 const StyledList = styled(List)(({ theme }) => ({
-  width: 300,
+  maxWidth: 270,
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: 'rgba(255, 255, 255, 0.7)',
   zIndex: 999,
-  maxHeight: 350,
-  overflow: 'auto',
+  maxHeight: 400,
+  overflowY: 'auto',
+  overflowX: 'hidden',
   '&.MuiList-root::-webkit-scrollbar': {
     width: 10,
   },
@@ -78,8 +79,20 @@ const StyledList = styled(List)(({ theme }) => ({
 const StyledListItem = styled(RouterLink)(({ theme }) => ({
   color: `${theme.palette.primary.dark}`,
   textDecoration: 'none',
-  padding: '0 10px',
+  padding: '5px 0',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 10,
 }));
+
+const StyledListItemText = styled('span')({
+  fontSize: '0.8rem',
+  display: '-webkit-box',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  '-webkit-box-orient': 'vertical',
+  '-webkit-line-clamp': '2',
+});
 
 export {
   StyledSearch,
@@ -88,4 +101,5 @@ export {
   StyledSearchWrapper,
   StyledList,
   StyledListItem,
+  StyledListItemText,
 };

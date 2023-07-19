@@ -6,7 +6,7 @@ export const selectCart = (state) => state.basket;
 export const modaInProductSlice = (state) => state.modalInProduct;
 export const allProductsInBase = (state) => state.allProducts.allProds;
 export const allProductsIsFetching = (state) => state.allProducts.isFetching;
-export const homePageProducts = (state) => state.allProdsHomePage.allProds;
+export const saleProds = (state) => state.allProducts.saleProds;
 export const totalNumberProducts = (state) => state.products.total;
 export const productsList = (state) => state.products.products;
 export const categoriesFilter = (state) => state.filters.categories;
@@ -14,5 +14,3 @@ export const minimalPrice = (state) => state.filters.minPrice;
 export const maximalPrice = (state) => state.filters.maxPrice;
 export const isFetchingProductsList = (state) => state.products.isFetching;
 export const isBurgerOpen = (state) => state.burgerMenu.openBurger;
-export const isFetchingAllProducts = (state) =>
-  state.allProdsHomePage.isFetching;

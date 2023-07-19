@@ -29,22 +29,11 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
     fontSize: '2.3rem',
   },
 }));
-
 const AllProductsBtn = styled(RadiusButton)(() => ({
-  fontFamily: theme.typography.fontFamily.primary,
-  fontWeight: '700',
-  letterSpacing: '0rem',
-  color: theme.palette.primary,
-  margin: '5% auto',
-  [theme.breakpoints.between('xs', 'md')]: {
-    fontSize: '1.063rem',
-  },
-  [theme.breakpoints.between('md', 'lg')]: {
-    fontSize: '1.75rem',
-  },
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '2.8rem',
-  },
+  minWidth: '128px',
+  minHeight: '32px',
+  maxWidth: '218px',
+  maxHeight: '54px',
 }));
 
 function HomeContent() {

@@ -174,7 +174,7 @@ function FilterSection() {
           }}
           padding={3}
           spacing={{ xs: 1, sm: 2 }}>
-          <FormGroup label="Product Category" sx={{ maxWidth: 250 }}>
+          <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>
             <FormLabel
               sx={{ fontWeight: '550', color: '#000', marginBottom: '10px' }}>
               Product Category
