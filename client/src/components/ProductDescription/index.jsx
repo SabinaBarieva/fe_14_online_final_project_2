@@ -239,16 +239,6 @@ function ProductDescription() {
                       color: { xs: '#616467', md: '#fff' },
                       borderRadius: '7px',
                       border: '1px solid #211F1C',
-                      width: {
-                        xs: '5rem',
-                        sm: '7rem',
-                        md: '9rem',
-                      },
-                      height: {
-                        xs: '2rem',
-                        sm: '2.5rem',
-                        md: '3rem',
-                      },
                       '&:hover': {
                         backgroundColor: { xs: '#211F1C', md: '#fff' },
                         color: { xs: '#F5F7FB', md: '#211F1C' },
