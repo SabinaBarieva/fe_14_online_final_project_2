@@ -10,7 +10,6 @@ import { getProduct } from '../../redux/slices/productSlice';
 export default function Item(props) {
   const dispatch = useDispatch();
   const { item } = props;
-  console.log(item);
 
   const handleIconClick = () => {
     dispatch(classChange());
