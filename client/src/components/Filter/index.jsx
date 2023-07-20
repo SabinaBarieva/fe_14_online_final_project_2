@@ -187,7 +187,7 @@ function FilterSection() {
                 <FormControlLabel
                   key={id}
                   control={<Checkbox />}
-                  label={`${categoryName}`}
+                  label={categoryName}
                   name={id}
                   checked={selectedCategories.includes(id)}
                   labelPlacement="start"
