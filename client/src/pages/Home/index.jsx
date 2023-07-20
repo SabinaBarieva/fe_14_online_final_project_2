@@ -10,6 +10,8 @@ import Category from '../../components/Category';
 import ModalBasket from '../../components/ModalForBasket';
 import Slider from '../../components/Slider';
 import { SectionTitle, AllProductsBtn } from '../../themes/themeHomePage';
+import Login from '../../components/Login';
+import Registration from '../../components/Registration';
 
 function HomeContent() {
   const theme = useTheme();
@@ -20,6 +22,8 @@ function HomeContent() {
         justifyContent: 'center',
         flexDirection: 'column',
       }}>
+      <Login />
+      <Registration />
       <Category />
       <ModalBasket />
       <SectionTitle variant="h2">Daily Sale</SectionTitle>

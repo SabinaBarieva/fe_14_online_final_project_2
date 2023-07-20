@@ -16,7 +16,7 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   minHeight: 75,
   height: 'auto',
   fontSize: '1.5rem',
-  borderRadius: 10,
+  borderRadius: 7,
   boxShadow: `0px 10px 20px -10px ${theme.palette.primary.main}`,
   '& .MuiBreadcrumbs-ol': {
     flexWrap: 'nowrap',
