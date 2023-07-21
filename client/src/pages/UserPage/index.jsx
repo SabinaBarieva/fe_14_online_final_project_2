@@ -13,17 +13,20 @@ import UserProfileInfo from '../../components/UserProfileInfo';
 
 function UserPage() {
   return (
-    <Grid container>
-      <Grid item xs={6}>
+    <Grid
+      container
+      sx={{
+        textAlign: 'center',
+      }}>
+      <Grid item xs={12} md={6}>
         <UserProfileInfo />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <Box my={2}>
           <Typography variant="h6" gutterBottom>
             Recent Orders
           </Typography>
           <List>
-            {/* Здесь вы можете отобразить список последних заказов пользователя */}
             <ListItem>
               <ListItemAvatar>
                 <Avatar>1</Avatar>
