@@ -45,7 +45,13 @@ function UserProfileInfo() {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        position: 'relative',
+        // display: 'flex',
+        // flexDirection: 'column',
+        // alignItems: 'center',
+      }}>
       <Typography variant="h4" gutterBottom>
         Your Profile
       </Typography>
@@ -96,7 +102,10 @@ function UserProfileInfo() {
               </DataBoxesBorder>
             </DataBoxes>
           </Box>
-          <Buttons variant="outlined" onClick={handleEdit}>
+          <Buttons
+            sx={{ position: 'absolute', bottom: '-65px', right: '27px' }}
+            variant="outlined"
+            onClick={handleEdit}>
             Edit
           </Buttons>
         </>
@@ -174,7 +183,7 @@ function UserProfileInfo() {
           </Box>
         </>
       )}
-    </>
+    </Box>
   );
 }
 
