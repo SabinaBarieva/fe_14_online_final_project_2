@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Hidden,
-  Button,
-  Container,
-  InputAdornment,
-  FormControlLabel,
-  FormControl,
-  Checkbox,
-} from '@mui/material';
+import { Hidden, Button, Container, InputAdornment } from '@mui/material';
 import { Close, VisibilityOff, Visibility } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import { PatternFormat } from 'react-number-format';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import validationSchema from './validation';
 import {
   StyledFormBackground,
   StyledTypography,
@@ -27,10 +20,6 @@ function Registration() {
   const [showPasswordSecond, setShowPasswordSecond] = useState(false);
   const formRegistrationRef = useRef(null);
 
-  const closedLOginForm = () => {
-    setOpenRegistration(false);
-  };
-
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -40,30 +29,19 @@ function Registration() {
       passwordFirst: '',
       passwordSecond: '',
       telephone: '',
-      gender: '',
-      avatarUrl: '',
     },
-    // validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      closedLOginForm();
+    validationSchema,
+    onSubmit: () => {
+      setOpenRegistration(false);
     },
   });
-
-  const handleGenderChange = (event) => {
-    formik.setFieldValue('gender', event.target.value);
-  };
-
-  const handleFileInputClick = (event) => {
-    event.stopPropagation();
-  };
 
   const handleClickOutside = (event) => {
     if (
       formRegistrationRef.current &&
       !formRegistrationRef.current.contains(event.target)
     ) {
-      closedLOginForm();
+      setOpenRegistration(false);
     }
   };
 
@@ -120,7 +98,7 @@ function Registration() {
               <StyledTypography component="h5" variant="h5">
                 Registration
               </StyledTypography>
-              <StyledIconButton onClick={closedLOginForm}>
+              <StyledIconButton onClick={() => setOpenRegistration(false)}>
                 <Close />
               </StyledIconButton>
             </Container>
@@ -187,6 +165,26 @@ function Registration() {
               </StyledForm>
               <StyledForm>
                 <StyledInputBase
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                />
+                {formik.touched.email && formik.errors.email ? (
+                  <StyledTypography variant="paragraph" component="p">
+                    {formik.errors.email}
+                  </StyledTypography>
+                ) : (
+                  <StyledTypography variant="paragraph" component="p">
+                    {' '}
+                  </StyledTypography>
+                )}
+              </StyledForm>
+              <StyledForm>
+                <StyledInputBase
                   type={showPasswordFirst ? 'text' : 'password'}
                   id="passwordFirst"
                   name="passwordFirst"
@@ -225,7 +223,7 @@ function Registration() {
                   type={showPasswordSecond ? 'text' : 'password'}
                   id="passwordSecond"
                   name="passwordSecond"
-                  placeholder="Password"
+                  placeholder="Repeat password"
                   onBlur={formik.handleBlur}
                   value={formik.values.passwordSecond}
                   onChange={formik.handleChange}
@@ -256,10 +254,10 @@ function Registration() {
                   </StyledTypography>
                 )}
               </StyledForm>
-              <StyledForm style={{ padding: '10px 5px' }}>
+              <StyledForm style={{ padding: '0 5px', textAlign: 'center' }}>
                 <PatternFormat
                   style={{
-                    width: '95%',
+                    width: '92%',
                     border: 'none',
                     minHeight: 45,
                     padding: '0 20px',
@@ -268,15 +266,15 @@ function Registration() {
                   format="+380 (##) ## ## ###"
                   allowEmptyFormatting
                   mask="_"
-                  id="phone"
-                  name="phone"
+                  id="telephone"
+                  name="telephone"
                   onBlur={formik.handleBlur}
-                  value={formik.values.phone}
+                  value={formik.values.telephone}
                   onChange={formik.handleChange}
                 />
-                {formik.touched.phone && formik.errors.phone ? (
+                {formik.touched.telephone && formik.errors.telephone ? (
                   <StyledTypography variant="paragraph" component="p">
-                    {formik.errors.phone}
+                    {formik.errors.telephone}
                   </StyledTypography>
                 ) : (
                   <StyledTypography variant="paragraph" component="p">
@@ -284,61 +282,6 @@ function Registration() {
                   </StyledTypography>
                 )}
               </StyledForm>
-              <StyledForm>
-                <Container>
-                  <StyledTypography
-                    component="span"
-                    variant="span"
-                    style={{ paddingRight: 10 }}>
-                    Gender
-                  </StyledTypography>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={formik.values.gender === 'Male'}
-                        onChange={handleGenderChange}
-                        name="gender"
-                        value="Male"
-                        color="primary"
-                      />
-                    }
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={formik.values.gender === 'Female'}
-                        onChange={handleGenderChange}
-                        name="gender"
-                        value="Female"
-                        color="primary"
-                      />
-                    }
-                    label="Female"
-                  />
-                  {formik.touched.gender && formik.errors.gender && (
-                    <StyledTypography variant="paragraph" component="p">
-                      {formik.errors.gender}
-                    </StyledTypography>
-                  )}
-                </Container>
-              </StyledForm>
-              <FormControl fullWidth>
-                <StyledInputBase
-                  type="file"
-                  accept="image/*"
-                  onChange={(event) => {
-                    formik.setFieldValue(
-                      'avatarUrl',
-                      event.currentTarget.files[0]
-                    );
-                  }}
-                  onClick={handleFileInputClick}
-                  style={{ display: 'none' }}
-                  id="image-upload-input"
-                />
-                <StyledButton variant="contained">Add avatar</StyledButton>
-              </FormControl>
               <StyledButton
                 variant="contained"
                 color="primary"

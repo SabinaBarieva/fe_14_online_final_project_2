@@ -6,7 +6,7 @@ const validationSchema = Yup.object({
     .max(15, 'Max 15 letters allowed')
     .matches(
       /^[a-zA-Z0-9]*$/,
-      'Login must contain Latin letters and numbers only'
+      'Login must contain Latin letters and numbers only, without spaces'
     )
     .required('This field is required!'),
   password: Yup.string()
@@ -19,6 +19,10 @@ const validationSchema = Yup.object({
     .matches(
       /[!@#$%^&*(),.?":{}|<>]/,
       'Password must contain at least one special character'
+    )
+    .matches(
+      /^[a-zA-Z\d!@#$%^&*(),.?":{}|<>]*$/,
+      'Password must not contain spaces'
     )
     .required('This field is required!'),
 });

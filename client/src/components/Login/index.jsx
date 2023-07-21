@@ -18,25 +18,20 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const formLoginRef = useRef(null);
 
-  const closedLOginForm = () => {
-    setOpenLogin(false);
-  };
-
   const formik = useFormik({
     initialValues: {
       loginOrEmail: '',
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      closedLOginForm();
+    onSubmit: () => {
+      setOpenLogin(false);
     },
   });
 
   const handleClickOutside = (event) => {
     if (formLoginRef.current && !formLoginRef.current.contains(event.target)) {
-      closedLOginForm();
+      setOpenLogin(false);
     }
   };
 
@@ -93,7 +88,7 @@ function Login() {
               <StyledTypography component="h5" variant="h5">
                 Login
               </StyledTypography>
-              <StyledIconButton onClick={closedLOginForm}>
+              <StyledIconButton onClick={() => setOpenLogin(false)}>
                 <Close />
               </StyledIconButton>
             </Container>
@@ -159,7 +154,7 @@ function Login() {
               color="primary"
               disableElevation
               type="submit">
-              Order
+              Login
             </StyledButton>
           </form>
         </StyledFormBackground>

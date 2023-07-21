@@ -100,6 +100,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',
+    [theme.breakpoints.between('xs', 'sm')]: {
+      fontSize: '1.3rem',
+    },
   },
 }));
 

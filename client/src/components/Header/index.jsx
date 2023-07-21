@@ -32,6 +32,7 @@ import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
+import LoginButtons from '../Login/loginButtons';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -217,7 +218,8 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
-            <Hidden lgDown>
+            <LoginButtons />
+            {/* <Hidden lgDown>
               <Button
                 variant="contained"
                 endIcon={<LoginOutlinedIcon />}
@@ -230,7 +232,7 @@ function Header() {
                 }}>
                 Login
               </Button>
-            </Hidden>
+            </Hidden> */}
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
