@@ -32,14 +32,14 @@ const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
     textOverflow: 'ellipsis',
   },
   [theme.breakpoints.between('sm', 'lg')]: {
-    margin: '40px 50px',
+    margin: '90px 50px 40px',
     padding: 20,
   },
   [theme.breakpoints.between('xs', 'sm')]: {
     borderRadius: 0,
     minHeight: 50,
     height: 'auto',
-    margin: '30px 10px',
+    margin: '80px 10px 10px',
     padding: 10,
     fontSize: '1.2rem',
   },
