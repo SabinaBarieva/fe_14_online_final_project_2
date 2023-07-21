@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProductApi from '../../api/getProduct';
 
+const stateName = 'product'
 export const getProduct = createAsyncThunk(
   'product/getProduct',
   async (itemNo) => getProductApi(itemNo)
@@ -8,28 +9,14 @@ export const getProduct = createAsyncThunk(
 
 export const productSlice = createSlice({
   name: 'product',
-  initialState: {
-    product: {},
-    isLoading: null,
-    error: null,
-  },
+  initialState: initialStateCreator(stateName),
   reducers: {
     setProduct: (state, action) => {
       state.product = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getProduct.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getProduct.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.product = action.payload;
-    });
-    builder.addCase(getProduct.rejected, (state, action) => {
-      state.isLoading = false;
-      state.error = action.error;
-    });
+    extraReducerCreator(builder)(getProduct, stateName);
   },
 });
 
