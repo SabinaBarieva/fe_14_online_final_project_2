@@ -100,7 +100,7 @@ function Header() {
     <AllContent>
       <CssBaseline />
       <AppBar
-        position="sticky"
+        position="fixed"
         sx={{
           background: '#F8F8F8',
           boxShadow: 'none',
@@ -203,6 +203,7 @@ function Header() {
               }}>
               <Search />
             </Container>
+            <NavLink to="/user">USER PAGE TEST</NavLink>
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>

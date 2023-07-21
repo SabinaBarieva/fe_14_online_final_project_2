@@ -8,3 +8,4 @@ export const orderEP = `${API_URL}orders`;
 export const searchEP = `${API_URL}products/search`;
 export const loginEP = `${API_URL}customers/login`;
 export const userInfoEP = `${API_URL}customers/customer`;
+export const ordersEP = `${API_URL}orders/`;

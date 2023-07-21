@@ -12,6 +12,7 @@ import store, { persistor } from './redux/store';
 import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Header />}>
                 <Route path="/about" element={<About />} />
+                <Route path="/user" element={<UserPage />} />
                 <Route index element={<HomeContent />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
