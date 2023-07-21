@@ -12,11 +12,12 @@ const animationLoading = keyframes`
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
   padding: '20px 10px',
-  margin: '50px 100px',
+  margin: '140px 100px 50px',
   minHeight: 75,
   height: 'auto',
   fontSize: '1.5rem',
   borderRadius: 10,
+
   boxShadow: `0px 10px 20px -10px ${theme.palette.primary.main}`,
   '& .MuiBreadcrumbs-ol': {
     flexWrap: 'nowrap',
