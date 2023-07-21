@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Avatar,
-  Typography,
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Button,
-  TextField,
-} from '@mui/material';
+import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 
 function UserProfileInfo() {
   const initialUser = {
-    firstName: 'John',
-    lastName: 'Doe',
+    name: 'John',
     email: 'john.doe@example.com',
     phone: '+1234567890',
     address: '123 Main Street, City',
     cardNumber: '**** **** **** 1234',
-    photoUrl: 'https://example.com/user-photo.jpg',
   };
 
   // State to track the user data in edit mode
@@ -30,8 +17,8 @@ function UserProfileInfo() {
   // Function to handle user data changes during edit mode
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
+    setUser((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
@@ -57,35 +44,19 @@ function UserProfileInfo() {
       <Divider />
 
       <Box my={2}>
-        {editMode ? (
-          <TextField
-            label="First Name"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleUserDataChange}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-          />
-        ) : (
-          <Avatar
-            src={
-              user.photoUrl
-            }>{`${user.firstName[0]}${user.lastName[0]}`}</Avatar>
-        )}
         <Typography variant="h6" gutterBottom>
           {editMode ? (
             <TextField
-              label="Last Name"
-              name="lastName"
-              value={user.lastName}
+              label="Name"
+              name="name"
+              value={user.name}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
           ) : (
-            `${user.firstName} ${user.lastName}`
+            `Name: ${user.name}`
           )}
         </Typography>
         <Typography variant="subtitle1">
@@ -100,7 +71,7 @@ function UserProfileInfo() {
               variant="outlined"
             />
           ) : (
-            user.email
+            `E-mail: ${user.email}`
           )}
         </Typography>
         <Typography variant="body1">
@@ -115,7 +86,7 @@ function UserProfileInfo() {
               variant="outlined"
             />
           ) : (
-            user.phone
+            `Phone number: ${user.phone}`
           )}
         </Typography>
         <Typography variant="body1">
@@ -130,7 +101,7 @@ function UserProfileInfo() {
               variant="outlined"
             />
           ) : (
-            user.address
+            `Address: ${user.address}`
           )}
         </Typography>
         <Typography variant="body1">
