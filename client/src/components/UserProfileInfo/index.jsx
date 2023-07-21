@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
+import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import {
-  Avatar,
-  Typography,
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Button,
-  TextField,
-} from '@mui/material';
+  DataBoxes,
+  DataBoxesBorder,
+  BoxUserData,
+  BoxTitle,
+  Buttons,
+} from '../../themes/themeUserProfileInfo.js';
 
 function UserProfileInfo() {
   const initialUser = {
-    firstName: 'John',
-    lastName: 'Doe',
+    name: 'John',
     email: 'john.doe@example.com',
     phone: '+1234567890',
     address: '123 Main Street, City',
     cardNumber: '**** **** **** 1234',
-    photoUrl: 'https://example.com/user-photo.jpg',
   };
 
   // State to track the user data in edit mode
@@ -30,8 +24,8 @@ function UserProfileInfo() {
   // Function to handle user data changes during edit mode
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
+    setUser((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
@@ -50,46 +44,71 @@ function UserProfileInfo() {
   };
 
   return (
-    <Box p={3}>
+    <>
       <Typography variant="h4" gutterBottom>
         Your Profile
       </Typography>
       <Divider />
-
-      <Box my={2}>
-        {editMode ? (
-          <TextField
-            label="First Name"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleUserDataChange}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-          />
-        ) : (
-          <Avatar
-            src={
-              user.photoUrl
-            }>{`${user.firstName[0]}${user.lastName[0]}`}</Avatar>
-        )}
-        <Typography variant="h6" gutterBottom>
-          {editMode ? (
+      {!editMode && (
+        <>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '90%',
+              margin: '25px auto',
+            }}>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Name:</BoxTitle>
+                <BoxUserData>{user.name}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>E-mail:</BoxTitle>
+                <BoxUserData>{user.email}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Phone number:</BoxTitle>
+                <BoxUserData>{user.phone}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Address:</BoxTitle>
+                <BoxUserData>{user.address}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Card Number:</BoxTitle>
+                <BoxUserData>{user.cardNumber}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+          </Box>
+          <Buttons variant="outlined" onClick={handleEdit}>
+            Edit
+          </Buttons>
+        </>
+      )}
+      {editMode && (
+        <>
+          <Box
+            sx={{
+              margin: '10px 20px',
+            }}>
             <TextField
-              label="Last Name"
-              name="lastName"
-              value={user.lastName}
+              label="Name"
+              name="name"
+              value={user.name}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `${user.firstName} ${user.lastName}`
-          )}
-        </Typography>
-        <Typography variant="subtitle1">
-          {editMode ? (
             <TextField
               label="Email"
               name="email"
@@ -99,12 +118,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.email
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Phone"
               name="phone"
@@ -114,12 +127,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.phone
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Address"
               name="address"
@@ -129,12 +136,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.address
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Card Number"
               name="cardNumber"
@@ -144,27 +145,20 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Card Number: ${user.cardNumber}`
-          )}
-        </Typography>
-      </Box>
-
-      {editMode ? (
-        <Box>
-          <Button variant="outlined" color="primary" onClick={handleSave}>
-            Save
-          </Button>
-          <Button variant="outlined" color="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Box>
-      ) : (
-        <Button variant="outlined" color="primary" onClick={handleEdit}>
-          Edit
-        </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+            }}>
+            <Buttons onClick={handleSave}>Save</Buttons>
+            <Button variant="outlined" color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </Box>
+        </>
       )}
-    </Box>
+    </>
   );
 }
 
