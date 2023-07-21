@@ -10,7 +10,8 @@ import {
 
 function UserProfileInfo() {
   const initialUser = {
-    name: 'John',
+    firstName: 'John',
+    lastName: 'Doe',
     email: 'john.doe@example.com',
     phone: '+1234567890',
     address: '123 Main Street, City',
@@ -61,7 +62,13 @@ function UserProfileInfo() {
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Name:</BoxTitle>
-                <BoxUserData>{user.name}</BoxUserData>
+                <BoxUserData>{user.firstName}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Surname:</BoxTitle>
+                <BoxUserData>{user.lastName}</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
@@ -101,9 +108,18 @@ function UserProfileInfo() {
               margin: '10px 20px',
             }}>
             <TextField
-              label="Name"
-              name="name"
-              value={user.name}
+              label="First name"
+              name="firstName"
+              value={user.firstName}
+              onChange={handleUserDataChange}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Last name"
+              name="lastName"
+              value={user.lastName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"

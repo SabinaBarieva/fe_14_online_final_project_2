@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { Box, Button } from '@mui/material';
 
 export const DataBoxes = styled(Box)(() => ({
-  padding: '4px 6px',
+  padding: '4px 8px',
   display: 'flex',
   justifyContent: 'space-between',
   border: '1px solid rgba(161, 161, 161, 1)',
