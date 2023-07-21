@@ -99,7 +99,7 @@ function Header() {
     <AllContent>
       <CssBaseline />
       <AppBar
-        position="sticky"
+        position="fixed"
         sx={{
           background: '#F8F8F8',
           boxShadow: 'none',
