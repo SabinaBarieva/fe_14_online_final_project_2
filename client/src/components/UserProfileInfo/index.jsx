@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
+import {
+  DataBoxes,
+  DataBoxesBorder,
+  BoxUserData,
+  BoxTitle,
+  Buttons,
+} from '../../themes/themeUserProfileInfo.js';
 
 function UserProfileInfo() {
   const initialUser = {
@@ -37,15 +44,62 @@ function UserProfileInfo() {
   };
 
   return (
-    <Box p={3}>
+    <>
       <Typography variant="h4" gutterBottom>
         Your Profile
       </Typography>
       <Divider />
-
-      <Box my={2}>
-        <Typography variant="h6" gutterBottom>
-          {editMode ? (
+      {!editMode && (
+        <>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '90%',
+              margin: '25px auto',
+            }}>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Name:</BoxTitle>
+                <BoxUserData>{user.name}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>E-mail:</BoxTitle>
+                <BoxUserData>{user.email}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Phone number:</BoxTitle>
+                <BoxUserData>{user.phone}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Address:</BoxTitle>
+                <BoxUserData>{user.address}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Card Number:</BoxTitle>
+                <BoxUserData>{user.cardNumber}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+          </Box>
+          <Buttons variant="outlined" onClick={handleEdit}>
+            Edit
+          </Buttons>
+        </>
+      )}
+      {editMode && (
+        <>
+          <Box
+            sx={{
+              margin: '10px 20px',
+            }}>
             <TextField
               label="Name"
               name="name"
@@ -55,12 +109,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Name: ${user.name}`
-          )}
-        </Typography>
-        <Typography variant="subtitle1">
-          {editMode ? (
             <TextField
               label="Email"
               name="email"
@@ -70,12 +118,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `E-mail: ${user.email}`
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Phone"
               name="phone"
@@ -85,12 +127,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Phone number: ${user.phone}`
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Address"
               name="address"
@@ -100,12 +136,6 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Address: ${user.address}`
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Card Number"
               name="cardNumber"
@@ -115,27 +145,20 @@ function UserProfileInfo() {
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Card Number: ${user.cardNumber}`
-          )}
-        </Typography>
-      </Box>
-
-      {editMode ? (
-        <Box>
-          <Button variant="outlined" color="primary" onClick={handleSave}>
-            Save
-          </Button>
-          <Button variant="outlined" color="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Box>
-      ) : (
-        <Button variant="outlined" color="primary" onClick={handleEdit}>
-          Edit
-        </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+            }}>
+            <Buttons onClick={handleSave}>Save</Buttons>
+            <Button variant="outlined" color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </Box>
+        </>
       )}
-    </Box>
+    </>
   );
 }
 
