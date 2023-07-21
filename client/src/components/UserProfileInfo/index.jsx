@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import {
   DataBoxes,
   DataBoxesBorder,
@@ -9,6 +10,8 @@ import {
 } from '../../themes/themeUserProfileInfo.js';
 
 function UserProfileInfo() {
+  const navigate = useNavigate();
+
   const initialUser = {
     firstName: 'John',
     lastName: 'Doe',
@@ -45,13 +48,7 @@ function UserProfileInfo() {
   };
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        // display: 'flex',
-        // flexDirection: 'column',
-        // alignItems: 'center',
-      }}>
+    <Box>
       <Typography variant="h4" gutterBottom>
         Your Profile
       </Typography>
@@ -62,7 +59,6 @@ function UserProfileInfo() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              width: '90%',
               margin: '25px auto',
             }}>
             <DataBoxes>
@@ -102,12 +98,20 @@ function UserProfileInfo() {
               </DataBoxesBorder>
             </DataBoxes>
           </Box>
-          <Buttons
-            sx={{ position: 'absolute', bottom: '-65px', right: '27px' }}
-            variant="outlined"
-            onClick={handleEdit}>
-            Edit
-          </Buttons>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Buttons variant="outlined" onClick={handleEdit}>
+              Edit
+            </Buttons>
+            <Buttons
+              style={{ backgroundColor: 'white', color: 'black' }}
+              variant="outlined"
+              onClick={() => {
+                alert('Token should be deleted');
+                navigate('/');
+              }}>
+              Logout
+            </Buttons>
+          </Box>
         </>
       )}
       {editMode && (
