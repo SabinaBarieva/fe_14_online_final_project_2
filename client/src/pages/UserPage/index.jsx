@@ -10,6 +10,7 @@ function UserPage() {
       sx={{
         display: 'flex',
         justifyContent: 'space-evenly',
+        marginBottom: '20px',
       }}>
       <Grid item xs={12} md={5}>
         <UserProfileInfo />
