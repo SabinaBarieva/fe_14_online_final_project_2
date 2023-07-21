@@ -55,7 +55,7 @@ const StyledList = styled(List)(({ theme }) => ({
   position: 'absolute',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  backgroundColor: 'white',
   zIndex: 999,
   maxHeight: 400,
   overflowY: 'auto',
@@ -68,7 +68,7 @@ const StyledList = styled(List)(({ theme }) => ({
   },
   '&.MuiList-root::-webkit-scrollbar-thumb': {
     background: `${theme.palette.primary.light}`,
-    borderRadius: 5,
+    borderRadius: 7,
     width: 10,
   },
   '&.MuiList-root::-webkit-scrollbar-thumb:hover': {
@@ -83,6 +83,9 @@ const StyledListItem = styled(RouterLink)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: 10,
+  '&:hover': {
+    backgroundColor: theme.palette.primary.buttonhover,
+  },
 }));
 
 const StyledListItemText = styled('span')({
