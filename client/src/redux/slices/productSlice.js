@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProductApi from '../../api/getProduct';
+import extraReducerCreator, {
+  initialStateCreator,
+} from './extraReducerCreator';
 
-const stateName = 'product'
+const stateName = 'product';
+
 export const getProduct = createAsyncThunk(
   'product/getProduct',
   async (itemNo) => getProductApi(itemNo)
