@@ -1,10 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProductApi from '../../api/getProduct';
-import extraReducerCreator, {
-  initialStateCreator,
-} from './extraReducerCreator';
-
-const stateName = 'product';
+import extraReducerCreator from './extraReducerCreator';
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
@@ -13,17 +9,24 @@ export const getProduct = createAsyncThunk(
 
 export const productSlice = createSlice({
   name: 'product',
-  initialState: initialStateCreator(stateName),
+  initialState: {
+    product: {},
+    isLoading: null,
+    error: null,
+  },
   reducers: {
     setProduct: (state, action) => {
       state.product = action.payload;
     },
+    clearProduct: (state) => {
+      state.product = null;
+    },
   },
   extraReducers: (builder) => {
-    extraReducerCreator(builder)(getProduct, stateName);
+    extraReducerCreator(builder)(getProduct, 'product');
   },
 });
 
-export const { setProduct } = productSlice.actions;
+export const { setProduct, clearProduct } = productSlice.actions;
 
 export default productSlice.reducer;
