@@ -23,9 +23,9 @@ const userSlice = createSlice({
   initialState: initialStateCreator(stateName),
   reducers: {
     resetUserInfo: (state) => {
-      state.isFetching = false;
-      state.isFetched = false;
+      state.isLoading = false;
       state.user = null;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {

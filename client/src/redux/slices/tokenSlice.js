@@ -3,6 +3,7 @@ import { setToken } from '../../api/fetchApi';
 import { login, logout } from './loginSlice';
 
 const initialState = { token: null };
+
 const tokenSlice = createSlice({
   name: 'token',
   initialState,
