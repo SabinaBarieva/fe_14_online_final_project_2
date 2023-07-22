@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Hidden, Button, Container, InputAdornment } from '@mui/material';
 import { Close, VisibilityOff, Visibility } from '@mui/icons-material';
 import { useFormik } from 'formik';
@@ -12,8 +13,10 @@ import {
   StyledInputBase,
   StyledButton,
 } from '../../themes/themeOrder';
+import { login } from '../../redux/slices/loginSlice';
 
 function Login() {
+  const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const formLoginRef = useRef(null);
@@ -24,7 +27,8 @@ function Login() {
       password: '',
     },
     validationSchema,
-    onSubmit: () => {
+    onSubmit: ({ loginOrEmail, password }) => {
+      dispatch(login({ loginOrEmail, password }));
       setOpenLogin(false);
     },
   });

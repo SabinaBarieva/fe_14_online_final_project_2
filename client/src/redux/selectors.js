@@ -25,3 +25,5 @@ export const isFetchingAllProducts = (state) =>
 export const homePageProducts = (state) => state.allProdsHomePage.allProds;
 // User
 export const userData = () => (state) => state.user.user;
+// Login
+export const isLoggedIn = () => (state) => state.login.login;

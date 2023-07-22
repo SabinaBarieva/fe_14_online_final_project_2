@@ -252,7 +252,7 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        <SwipeableDrawer
+        {/* <SwipeableDrawer
           anchor="top"
           open={open}
           onOpen={() => setOpen(true)}
@@ -316,7 +316,7 @@ function Header() {
               </NavLink>
             </ListItem>
           </List>
-        </SwipeableDrawer>
+        </SwipeableDrawer> */}
       </AppBar>
       <BreadCrumbs />
       <Outlet />

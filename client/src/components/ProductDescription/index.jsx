@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Button, LinearProgress, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { getProduct, clearProduct } from '../../redux/slices/productSlice';
+import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
