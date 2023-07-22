@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 // import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
@@ -10,9 +10,12 @@ import {
   BoxTitle,
   Buttons,
 } from '../../themes/themeUserProfileInfo';
+import { resetUserInfo } from '../../redux/slices/userSlice';
+import { logout } from '../../redux/slices/loginSlice';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user.user);
 
   // State to track the user data in edit mode
@@ -46,7 +49,7 @@ function UserProfileInfo() {
         Your Profile
       </Typography>
       <Divider />
-      {!editMode && (
+      {!editMode && dataUser && (
         <>
           <Box
             sx={{
@@ -99,7 +102,8 @@ function UserProfileInfo() {
               style={{ backgroundColor: 'white', color: 'black' }}
               variant="outlined"
               onClick={() => {
-                alert('Token should be deleted');
+                dispatch(resetUserInfo());
+                dispatch(logout());
                 navigate('/');
               }}>
               Logout
@@ -107,7 +111,7 @@ function UserProfileInfo() {
           </Box>
         </>
       )}
-      {editMode && (
+      {editMode && dataUser && (
         <>
           <Box
             sx={{
