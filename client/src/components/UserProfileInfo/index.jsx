@@ -46,7 +46,7 @@ function UserProfileInfo() {
         Your Profile
       </Typography>
       <Divider />
-      {!editMode && (
+      {!editMode && dataUser && (
         <>
           <Box
             sx={{
@@ -107,7 +107,7 @@ function UserProfileInfo() {
           </Box>
         </>
       )}
-      {editMode && (
+      {editMode && dataUser && (
         <>
           <Box
             sx={{
