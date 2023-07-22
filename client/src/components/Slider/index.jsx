@@ -32,7 +32,7 @@ function Slider() {
           }}
         />
       ) : (
-        <Carousel>
+        <Carousel swipe={false} navButtonsAlwaysVisible>
           {products.map((product) => (
             <Link
               to={`/product/${product.itemNo}`}
