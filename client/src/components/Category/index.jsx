@@ -37,6 +37,8 @@ function Category() {
             )
             .map(({ name: categoryName, id }) => (
               <Grid
+                item
+                key={categoryName}
                 sx={{ display: 'flex', justifyContent: 'center' }}
                 lg={1}
                 md={4}
