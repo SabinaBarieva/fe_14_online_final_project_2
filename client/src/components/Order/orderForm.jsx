@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
-import { openApp, closeForm } from '../../redux/slices/formSlice';
+import { openApp } from '../../redux/slices/formSlice';
 import {
   StyledForm,
   StyledButton,
@@ -42,7 +42,6 @@ export default function OrderForm() {
       secondAdress: number,
       restAdress: rest,
     };
-    console.log('hello');
     dispatch(createOrder(itemsBasket));
     dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
   };
@@ -95,7 +94,7 @@ export default function OrderForm() {
             top: '10%',
             margin: 'auto',
             position: 'relative',
-            borderRadius: 20,
+            borderRadius: 7,
             maxWidth: 660,
             backgroundColor: 'white',
             boxShadow: '0 0 30px 6px #42445a',
@@ -173,9 +172,9 @@ export default function OrderForm() {
                       border: 'none',
                       minHeight: 45,
                       padding: '0 20px',
-                      borderRadius: 50,
+                      borderRadius: 7,
                     }}
-                    format="+3 (80#) #### ####"
+                    format="+380 (##) ## ## ###"
                     allowEmptyFormatting
                     mask="_"
                     id="phone"
@@ -213,7 +212,7 @@ export default function OrderForm() {
                       border: 'none',
                       minHeight: 40,
                       padding: '0 20px',
-                      borderRadius: 50,
+                      borderRadius: 7,
                     }}
                     label="Card Number"
                     placeholder="#### #### #### ####"
@@ -243,7 +242,7 @@ export default function OrderForm() {
                         border: 'none',
                         minHeight: 40,
                         padding: '0 20px',
-                        borderRadius: 50,
+                        borderRadius: 7,
                       }}
                       label="Expiration Month"
                       placeholder="MM"
@@ -279,7 +278,7 @@ export default function OrderForm() {
                         border: 'none',
                         minHeight: 40,
                         padding: '0 20px',
-                        borderRadius: 50,
+                        borderRadius: 7,
                       }}
                       label="Expiration Year"
                       placeholder="YY"
@@ -315,7 +314,7 @@ export default function OrderForm() {
                         border: 'none',
                         minHeight: 40,
                         padding: '0 20px',
-                        borderRadius: 50,
+                        borderRadius: 7,
                       }}
                       label="CVV"
                       placeholder="CVV"

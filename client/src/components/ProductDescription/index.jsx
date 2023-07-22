@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Button, LinearProgress, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { getProduct } from '../../redux/slices/productSlice';
+import { getProduct, clearProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
@@ -29,6 +29,7 @@ import {
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
 import theme from '../../themes/theme';
+// eslint-disable-next-line import/no-duplicates
 
 function ProductDescription() {
   const dispatch = useDispatch();

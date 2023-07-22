@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import getUserInformation from '../../api/getUserInformation';
-import { getUserInformation } from '../../api/customer';
+import getUserInformation from '../../api/getUserInformation';
 import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
