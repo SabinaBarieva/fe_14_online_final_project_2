@@ -25,6 +25,10 @@ import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
 import headerSlice from './slices/headerSlice';
+import loginSlice from './slices/loginSlice';
+import userSlice from './slices/userSlice';
+import tokenSlice from './slices/tokenSlice';
+import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
 
 const rootReducer = combineReducers({
@@ -41,17 +45,21 @@ const rootReducer = combineReducers({
   searchList: searchResultsSlice,
   order: orderSlice,
   burgerMenu: headerSlice,
+  login: loginSlice,
+  user: userSlice,
+  token: tokenSlice,
+  orders: ordersSlice,
+  devTools: process.env.NODE_ENV !== 'production',
   allProdsHomePage: allProdsHomeSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['basket'],
+  whitelist: ['basket', 'login', 'user', 'token'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

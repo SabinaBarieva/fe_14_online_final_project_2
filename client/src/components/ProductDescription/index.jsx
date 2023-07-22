@@ -29,6 +29,7 @@ import {
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
 import theme from '../../themes/theme';
+// eslint-disable-next-line import/no-duplicates
 
 function ProductDescription() {
   const dispatch = useDispatch();

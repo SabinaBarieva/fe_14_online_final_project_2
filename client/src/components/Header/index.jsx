@@ -32,6 +32,7 @@ import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
+import LoginButtons from '../Login/loginButtons';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -99,7 +100,7 @@ function Header() {
     <AllContent>
       <CssBaseline />
       <AppBar
-        position="sticky"
+        position="fixed"
         sx={{
           background: '#F8F8F8',
           boxShadow: 'none',
@@ -202,6 +203,7 @@ function Header() {
               }}>
               <Search />
             </Container>
+            <NavLink to="/user">USER PAGE TEST</NavLink>
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
@@ -217,7 +219,8 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
-            <Hidden lgDown>
+            <LoginButtons />
+            {/* <Hidden lgDown>
               <Button
                 variant="contained"
                 endIcon={<LoginOutlinedIcon />}
@@ -230,7 +233,7 @@ function Header() {
                 }}>
                 Login
               </Button>
-            </Hidden>
+            </Hidden> */}
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
@@ -249,7 +252,7 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        <SwipeableDrawer
+        {/* <SwipeableDrawer
           anchor="top"
           open={open}
           onOpen={() => setOpen(true)}
@@ -313,7 +316,7 @@ function Header() {
               </NavLink>
             </ListItem>
           </List>
-        </SwipeableDrawer>
+        </SwipeableDrawer> */}
       </AppBar>
       <BreadCrumbs />
       <Outlet />
