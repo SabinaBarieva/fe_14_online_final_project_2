@@ -22,7 +22,11 @@ export const login = createAsyncThunk(
 const loginSlice = createSlice({
   name: stateName,
   initialState: initialStateCreator(stateName),
-  reducers: { logout: () => {} },
+  reducers: {
+    logout: (state) => {
+      state.login = null;
+    },
+  },
   extraReducers: (builder) => {
     extraReducerCreator(builder)(login, stateName);
   },

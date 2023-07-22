@@ -11,6 +11,7 @@ import {
   Buttons,
 } from '../../themes/themeUserProfileInfo';
 import { resetUserInfo } from '../../redux/slices/userSlice';
+import { logout } from '../../redux/slices/loginSlice';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
@@ -102,6 +103,7 @@ function UserProfileInfo() {
               variant="outlined"
               onClick={() => {
                 dispatch(resetUserInfo());
+                dispatch(logout());
                 navigate('/');
               }}>
               Logout
