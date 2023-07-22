@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+// import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
 import {
   DataBoxes,
   DataBoxesBorder,
   BoxUserData,
   BoxTitle,
   Buttons,
-} from '../../themes/themeUserProfileInfo.js';
+} from '../../themes/themeUserProfileInfo';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
-
+  const dataUser = useSelector((state) => state.user.user);
   const initialUser = {
     firstName: 'John',
     lastName: 'Doe',
@@ -23,15 +25,14 @@ function UserProfileInfo() {
 
   // State to track the user data in edit mode
   const [editMode, setEditMode] = useState(false);
-  const [user, setUser] = useState(initialUser);
 
   // Function to handle user data changes during edit mode
   const handleUserDataChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    // const { name, value } = event.target;
+    // setUser((prevData) => ({
+    //   ...prevData,
+    //   [name]: value,
+    // }));
   };
 
   const handleSave = () => {
@@ -39,7 +40,7 @@ function UserProfileInfo() {
   };
 
   const handleCancel = () => {
-    setUser(initialUser);
+    // setUser(initialUser);
     setEditMode(false);
   };
 
@@ -64,37 +65,37 @@ function UserProfileInfo() {
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Name:</BoxTitle>
-                <BoxUserData>{user.firstName}</BoxUserData>
+                <BoxUserData>{dataUser.firstName}</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Surname:</BoxTitle>
-                <BoxUserData>{user.lastName}</BoxUserData>
+                <BoxUserData>{dataUser.lastName}</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>E-mail:</BoxTitle>
-                <BoxUserData>{user.email}</BoxUserData>
+                <BoxUserData>{dataUser.email}</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Phone number:</BoxTitle>
-                <BoxUserData>{user.phone}</BoxUserData>
+                <BoxUserData>{dataUser.telephone}</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Address:</BoxTitle>
-                <BoxUserData>{user.address}</BoxUserData>
+                <BoxUserData>ЗАГЛУШКА</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
             <DataBoxes>
               <DataBoxesBorder>
                 <BoxTitle>Card Number:</BoxTitle>
-                <BoxUserData>{user.cardNumber}</BoxUserData>
+                <BoxUserData>ЗАГЛУШКА</BoxUserData>
               </DataBoxesBorder>
             </DataBoxes>
           </Box>
@@ -123,7 +124,7 @@ function UserProfileInfo() {
             <TextField
               label="First name"
               name="firstName"
-              value={user.firstName}
+              value={dataUser.firstName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -132,7 +133,7 @@ function UserProfileInfo() {
             <TextField
               label="Last name"
               name="lastName"
-              value={user.lastName}
+              value={dataUser.lastName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -141,7 +142,7 @@ function UserProfileInfo() {
             <TextField
               label="Email"
               name="email"
-              value={user.email}
+              value={dataUser.email}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -150,7 +151,7 @@ function UserProfileInfo() {
             <TextField
               label="Phone"
               name="phone"
-              value={user.phone}
+              value={dataUser.telephone}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -159,7 +160,7 @@ function UserProfileInfo() {
             <TextField
               label="Address"
               name="address"
-              value={user.address}
+              value="ЗАГЛУШКА"
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -168,7 +169,7 @@ function UserProfileInfo() {
             <TextField
               label="Card Number"
               name="cardNumber"
-              value={user.cardNumber}
+              value="ЗАГЛУШКА"
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
