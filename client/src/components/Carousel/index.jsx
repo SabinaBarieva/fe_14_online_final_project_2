@@ -3,11 +3,15 @@ import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useSelector, useDispatch } from 'react-redux';
-import { LinearProgress } from '@mui/material';
-import { useTheme } from '@mui/system';
-// eslint-disable-next-line import/named
-import { getAllProducts } from '../../redux/slices/allProdsSlice';
-import ProductCard from '../ProductCard';
+import { Link } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+import { AdvancedImage } from '@cloudinary/react';
+import { getAllSaleProducts } from '../../redux/slices/allProdsSlice';
+import getImg from '../../cloudinary';
+import {
+  allProductsInBase,
+  allProductsIsFetching,
+} from '../../redux/selectors';
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
@@ -15,27 +19,19 @@ import 'swiper/scss/pagination';
 import './styles.scss';
 
 function Carousel() {
-  const theme = useTheme();
-  const products = useSelector((state) => state.allProducts.allProds);
-  const isFetching = useSelector((state) => state.allProducts.isFetching);
+  const products = useSelector(allProductsInBase);
+  const isFetching = useSelector(allProductsIsFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProducts({}));
+    dispatch(getAllSaleProducts());
   }, [dispatch]);
   return (
     <div>
       {isFetching ? (
-        <LinearProgress
-          sx={{
-            backgroundColor: `${theme.palette.primary.light}`,
-            width: '80%',
-            mx: 'auto',
-          }}
-        />
+        <CircularProgress color="success" style={{ marginLeft: '50%' }} />
       ) : (
         <Swiper
           slidesPerView={1}
-          spaceBetween={10}
           autoplay={{ delay: 5000 }}
           loop
           pagination={{
@@ -43,27 +39,23 @@ function Carousel() {
           }}
           navigation
           modules={[Pagination, Navigation, Autoplay]}
-          className="saleCarousel"
-          // key={product.itemNo}
-          breakpoints={{
-            440: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            980: {
-              slidesPerView: 4,
-            },
-          }}>
-          {products
-            .filter((el) => el.sale === true)
-            .map((product) => (
-              <SwiperSlide>
-                <ProductCard product={product} />
-              </SwiperSlide>
-            ))}
+          className="saleCarousel">
+          {products.map((product) => (
+            <SwiperSlide>
+              <Link
+                key={product.itemNo}
+                to={`/product/${product.itemNo}`}
+                style={{ marginRight: '7%' }}>
+                <AdvancedImage
+                  key={product.itemNo}
+                  className="main-photo"
+                  width="100%"
+                  cldImg={getImg.image(product.saleImg)}
+                  alt="our-photo"
+                />
+              </Link>
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
     </div>
