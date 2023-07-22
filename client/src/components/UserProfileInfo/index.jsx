@@ -14,14 +14,6 @@ import {
 function UserProfileInfo() {
   const navigate = useNavigate();
   const dataUser = useSelector((state) => state.user.user);
-  const initialUser = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1234567890',
-    address: '123 Main Street, City',
-    cardNumber: '**** **** **** 1234',
-  };
 
   // State to track the user data in edit mode
   const [editMode, setEditMode] = useState(false);
