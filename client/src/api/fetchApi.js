@@ -27,6 +27,10 @@ const fetchApi = async (url, options) => {
       throw new AppError(notAuthorizedErrorMessage, {
         context: { url, options, status: 401 },
       });
+    if (/^Error happened on server/.test(result))
+      throw new AppError('Error happened on server', {
+        context: { ...result, url, options, status: response.status },
+      });
     throw new AppError(requestErrorMessage, {
       context: { ...result, url, options, status: response.status },
     });
