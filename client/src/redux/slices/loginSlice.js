@@ -8,9 +8,9 @@ import extraReducerCreator, {
 const stateName = 'login';
 export const login = createAsyncThunk(
   `${stateName}/fetch`,
-  async ({ log, pass }, { dispatch }) => {
+  async ({ loginOrEmail, password }, { dispatch }) => {
     try {
-      const { token } = await getToken(log, pass);
+      const { token } = await getToken(loginOrEmail, password);
       return { token };
     } catch (error) {
       dispatch(setErrorMessage({ error: error.message }));

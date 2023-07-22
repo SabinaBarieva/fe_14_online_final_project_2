@@ -27,10 +27,8 @@ function Login() {
       password: '',
     },
     validationSchema,
-    onSubmit: (values) => {
-      const log = values.loginOrEmail;
-      const pass = values.password;
-      dispatch(login({ log, pass }));
+    onSubmit: ({ loginOrEmail, password }) => {
+      dispatch(login({ loginOrEmail, password }));
       setOpenLogin(false);
     },
   });
