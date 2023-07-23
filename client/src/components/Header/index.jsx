@@ -17,6 +17,7 @@ import {
   ListItem,
   CssBaseline,
   Badge,
+  Avatar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,6 +32,7 @@ import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 import LoginButtons from '../Login/loginButtons';
+import { fetchUserInfo } from '../../redux/slices/userSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -75,6 +77,28 @@ function Header() {
       dispatch(resetFilters());
     }
   };
+  const token = useSelector((state) => state.login.login);
+  const dataUser = useSelector((state) => state.user.user);
+
+  const getUserInfo = () => {
+    if (token) {
+      dispatch(fetchUserInfo());
+    }
+  };
+
+  const getLoginButton = () => {
+    if (token && dataUser) {
+      return (
+        <NavLink to="/user" style={{ textDecoration: 'none' }}>
+          <Avatar variant="rounded">
+            {dataUser.firstName.split(' ')[0][0]}{' '}
+            {dataUser.lastName.split(' ')[0][0]}
+          </Avatar>
+        </NavLink>
+      );
+    }
+    return <LoginButtons />;
+  };
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
@@ -92,7 +116,8 @@ function Header() {
     totalBasketItems();
     locationDispatch();
     openBurgerMenu();
-  }, [itemsBasket, location, open]);
+    getUserInfo();
+  }, [itemsBasket, location, open, token]);
 
   return (
     <AllContent>
@@ -217,11 +242,7 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
-            <Hidden lgDown>
-              <div>
-                <LoginButtons />
-              </div>
-            </Hidden>
+            <Hidden lgDown>{getLoginButton()}</Hidden>
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
@@ -256,9 +277,7 @@ function Header() {
                 <CloseIcon />
               </IconButton>
             </div>
-            <div>
-              <LoginButtons />
-            </div>
+            {getLoginButton()}
           </Grid>
           <Divider />
           <List>
