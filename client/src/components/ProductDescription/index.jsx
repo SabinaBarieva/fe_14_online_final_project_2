@@ -10,6 +10,7 @@ import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
+  basketProductCreator,
 } from '../../redux/slices/basketSlice';
 import {
   currentProduct,
@@ -36,6 +37,7 @@ function ProductDescription() {
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const isError = useSelector(errorInProduct);
+  const product = useSelector(currentProduct);
   const {
     quantity,
     name,
@@ -49,7 +51,7 @@ function ProductDescription() {
     description,
     guarantee,
     sale,
-  } = useSelector(currentProduct);
+  } = product;
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -81,7 +83,11 @@ function ProductDescription() {
       quantity,
       count: countToBasket,
     };
-    dispatch(addSeveraltoBasket(item));
+    dispatch(
+      addSeveraltoBasket(
+        basketProductCreator({ product, cartQuantity: countToBasket })
+      )
+    );
   };
 
   const [mainImage, setMainImage] = useState('');

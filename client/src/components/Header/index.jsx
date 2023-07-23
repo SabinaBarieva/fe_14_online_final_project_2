@@ -79,7 +79,7 @@ function Header() {
   };
 
   const totalBasketItems = () => {
-    const total = itemsBasket.reduce((sum, item) => item.count + sum, 0);
+    const total = itemsBasket.reduce((sum, item) => item.cartQuantity + sum, 0);
     setTotalInBasket(total);
   };
 

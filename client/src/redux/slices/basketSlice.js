@@ -1,12 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const basketProductCreator = ({ product, cartQuantity }) => ({
+  product,
+  cartQuantity,
+});
+
 const calcBasketPriceSum = (productsInBasket) =>
   productsInBasket.reduce(
-    (sum, product) => product.currentPrice * product.count + sum,
+    (sum, { product, cartQuantity }) =>
+      product.currentPrice * cartQuantity + sum,
     0
   );
 const findProductInBasket = (productToFind, productsInBasket) =>
-  productsInBasket.find((product) => product.itemNo === productToFind.itemNo);
+  productsInBasket.find(
+    ({ product }) => product.itemNo === productToFind.product.itemNo
+  );
 
 const initialState = {
   priceAll: 0,
@@ -20,20 +28,16 @@ const basketSlice = createSlice({
   reducers: {
     addToBasket: (state, { payload: currentProduct }) => {
       const { itemsBasket: basket } = state;
-      console.log(basket);
       const product = findProductInBasket(currentProduct, basket);
       if (product) {
-        if (product.count !== product.quantity) {
-          product.count += 1;
+        if (product.cartQuantity !== product.product.quantity) {
+          product.cartQuantity += 1;
         } else {
           state.modal = true;
           state.modalText = `Sorry, there are only ${product.quantity} units of this product in stock`;
         }
       } else {
-        basket.push({
-          ...currentProduct,
-          count: 1,
-        });
+        basket.push({ ...currentProduct, cartQuantity: 1 });
       }
       state.priceAll = calcBasketPriceSum(basket);
     },
@@ -41,14 +45,14 @@ const basketSlice = createSlice({
       const { itemsBasket: basket } = state;
       const product = findProductInBasket(currentProduct, basket);
       if (product) {
-        product.count -= 1;
+        product.cartQuantity -= 1;
       }
       state.priceAll = calcBasketPriceSum(basket);
     },
-    deleteBasket: (state, { payload: currentProduct }) => {
-      let { basket } = state;
+    deleteBasket: (state, { payload: { product: productToDelete } }) => {
+      let { itemsBasket: basket } = state;
       basket = basket.filter(
-        (product) => product.itemNo !== currentProduct.itemNo
+        ({ product }) => product.itemNo !== productToDelete.itemNo
       );
       state.priceAll = calcBasketPriceSum(basket);
     },
@@ -60,17 +64,18 @@ const basketSlice = createSlice({
       const { itemsBasket: basket } = state;
       const product = findProductInBasket(currentProduct, basket);
       if (product) {
-        const totalProductToBasket = currentProduct.count + product.count;
+        const totalProductToBasket =
+          currentProduct.cartQuantity + product.cartQuantity;
         if (
-          totalProductToBasket > product.quantity &&
-          product.quantity - product.count !== 0
+          totalProductToBasket > product.product.quantity &&
+          product.product.quantity - product.cartQuantity !== 0
         ) {
           state.modalText = `You can't add more than ${
             product.quantity - product.count
           }`;
           state.modal = true;
-        } else if (product.count !== product.quantity) {
-          product.count += currentProduct.count;
+        } else if (product.cartQuantity !== product.product.quantity) {
+          product.cartQuantity += currentProduct.cartQuantity;
         } else {
           state.modal = true;
           state.modalText = `Sorry, there are only ${product.quantity} units of this product in stock`;
@@ -78,7 +83,7 @@ const basketSlice = createSlice({
       } else {
         basket.push({
           ...currentProduct,
-          count: currentProduct.count,
+          cartQuantity: currentProduct.cartQuantity,
         });
       }
       state.priceAll = calcBasketPriceSum(basket);
@@ -87,7 +92,6 @@ const basketSlice = createSlice({
       state.modal = false;
       state.modalText = '';
     },
-    // mergeBasket:() {},
   },
 });
 export const {
