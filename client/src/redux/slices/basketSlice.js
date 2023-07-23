@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const calcBasketPriceSum = (productsInBasket) =>
+  productsInBasket.reduce(
+    (sum, product) => product.currentPrice * product.count + sum,
+    0
+  );
+const findProductInBasket = (productToFind, productsInBasket) =>
+  productsInBasket.find((product) => product.itemNo === productToFind.itemNo);
+
 const initialState = {
   priceAll: 0,
   itemsBasket: [],
@@ -10,90 +18,76 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    addToBasket: (state, action) => {
-      const seachItem = state.itemsBasket.find(
-        (item) => item.itemNo === action.payload.itemNo
-      );
-      if (seachItem) {
-        if (seachItem.count !== seachItem.quantity) {
-          seachItem.count += 1;
+    addToBasket: (state, { payload: currentProduct }) => {
+      const { itemsBasket: basket } = state;
+      console.log(basket);
+      const product = findProductInBasket(currentProduct, basket);
+      if (product) {
+        if (product.count !== product.quantity) {
+          product.count += 1;
         } else {
           state.modal = true;
-          state.modalText = `Sorry, there are only ${seachItem.quantity} units of this product in stock`;
+          state.modalText = `Sorry, there are only ${product.quantity} units of this product in stock`;
         }
       } else {
-        state.itemsBasket.push({
-          ...action.payload,
+        basket.push({
+          ...currentProduct,
           count: 1,
         });
       }
-      state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.currentPrice * item.count + sum,
-        0
-      );
+      state.priceAll = calcBasketPriceSum(basket);
     },
-    minusItem: (state, action) => {
-      const findItem = state.itemsBasket.find(
-        (obj) => obj.itemNo === action.payload.itemNo
-      );
-      if (findItem) {
-        findItem.count -= 1;
+    minusItem: (state, { payload: currentProduct }) => {
+      const { itemsBasket: basket } = state;
+      const product = findProductInBasket(currentProduct, basket);
+      if (product) {
+        product.count -= 1;
       }
-      state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.currentPrice * item.count + sum,
-        0
-      );
+      state.priceAll = calcBasketPriceSum(basket);
     },
-    deleteBasket: (state, action) => {
-      state.itemsBasket = state.itemsBasket.filter(
-        (item) => item.itemNo !== action.payload.itemNo
+    deleteBasket: (state, { payload: currentProduct }) => {
+      let { basket } = state;
+      basket = basket.filter(
+        (product) => product.itemNo !== currentProduct.itemNo
       );
-      state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.currentPrice * item.count + sum,
-        0
-      );
+      state.priceAll = calcBasketPriceSum(basket);
     },
-    clearBasket(state) {
+    clearBasket: (state) => {
       state.itemsBasket = [];
       state.priceAll = 0;
     },
-    // eslint-disable-next-line consistent-return
-    addSeveraltoBasket: (state, action) => {
-      const seachItem = state.itemsBasket.find(
-        (item) => item.itemNo === action.payload.itemNo
-      );
-      if (seachItem) {
+    addSeveraltoBasket: (state, { payload: currentProduct }) => {
+      const { itemsBasket: basket } = state;
+      const product = findProductInBasket(currentProduct, basket);
+      if (product) {
+        const totalProductToBasket = currentProduct.count + product.count;
         if (
-          action.payload.count + seachItem.count > seachItem.quantity &&
-          seachItem.quantity - seachItem.count !== 0
+          totalProductToBasket > product.quantity &&
+          product.quantity - product.count !== 0
         ) {
           state.modalText = `You can't add more than ${
-            seachItem.quantity - seachItem.count
+            product.quantity - product.count
           }`;
           state.modal = true;
-          return;
-        }
-        if (seachItem.count !== seachItem.quantity) {
-          seachItem.count += action.payload.count;
+        } else if (product.count !== product.quantity) {
+          product.count += currentProduct.count;
         } else {
           state.modal = true;
-          state.modalText = `Sorry, there are only ${seachItem.quantity} units of this product in stock`;
+          state.modalText = `Sorry, there are only ${product.quantity} units of this product in stock`;
         }
       } else {
-        state.itemsBasket.push({
-          ...action.payload,
-          count: action.payload.count,
+        basket.push({
+          ...currentProduct,
+          count: currentProduct.count,
         });
       }
-      state.priceAll = state.itemsBasket.reduce(
-        (sum, item) => item.currentPrice * item.count + sum,
-        0
-      );
+      state.priceAll = calcBasketPriceSum(basket);
     },
-    closeModalBasket(state) {
+    closeModalBasket: (state) => {
       state.modal = false;
       state.modalText = '';
     },
+    // mergeBasket:() {},
   },
 });
 export const {
