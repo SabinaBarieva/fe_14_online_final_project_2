@@ -17,10 +17,8 @@ import {
   ListItem,
   CssBaseline,
   Badge,
-  Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { styled } from '@mui/material/styles';
@@ -203,7 +201,7 @@ function Header() {
               }}>
               <Search />
             </Container>
-            <NavLink to="/user">USER PAGE TEST</NavLink>
+            {/* <NavLink to="/user">USER PAGE TEST</NavLink> */}
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
@@ -219,21 +217,11 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
-            <LoginButtons />
-            {/* <Hidden lgDown>
-              <Button
-                variant="contained"
-                endIcon={<LoginOutlinedIcon />}
-                sx={{
-                  background: '#211F1C',
-                  width: '113px',
-                  height: '40px',
-                  padding: '0',
-                  margin: '0',
-                }}>
-                Login
-              </Button>
-            </Hidden> */}
+            <Hidden lgDown>
+              <div>
+                <LoginButtons />
+              </div>
+            </Hidden>
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
@@ -252,7 +240,7 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        {/* <SwipeableDrawer
+        <SwipeableDrawer
           anchor="top"
           open={open}
           onOpen={() => setOpen(true)}
@@ -268,20 +256,9 @@ function Header() {
                 <CloseIcon />
               </IconButton>
             </div>
-
-            <Button
-              variant="contained"
-              endIcon={<LoginOutlinedIcon />}
-              sx={{
-                background: '#211F1C',
-                width: '113px',
-                height: '40px',
-                margin: '0',
-                padding: '0',
-              }}
-              onClick={() => setOpen(false)}>
-              Login
-            </Button>
+            <div>
+              <LoginButtons />
+            </div>
           </Grid>
           <Divider />
           <List>
@@ -316,7 +293,7 @@ function Header() {
               </NavLink>
             </ListItem>
           </List>
-        </SwipeableDrawer> */}
+        </SwipeableDrawer>
       </AppBar>
       <BreadCrumbs />
       <Outlet />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { Hidden, Button, Container, InputAdornment } from '@mui/material';
+import { Button, Container, InputAdornment } from '@mui/material';
 import { Close, VisibilityOff, Visibility } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
@@ -48,24 +48,22 @@ function Login() {
 
   return (
     <>
-      <Hidden lgDown>
-        <Button
-          variant="contained"
-          endIcon={<LoginOutlinedIcon />}
-          onClick={() => {
-            setOpenLogin(true);
-            formik.resetForm();
-          }}
-          sx={{
-            background: '#211F1C',
-            width: '113px',
-            height: '40px',
-            padding: '0',
-            margin: '0',
-          }}>
-          Login
-        </Button>
-      </Hidden>
+      <Button
+        variant="contained"
+        endIcon={<LoginOutlinedIcon />}
+        onClick={() => {
+          setOpenLogin(true);
+          formik.resetForm();
+        }}
+        sx={{
+          background: '#211F1C',
+          width: '113px',
+          height: '40px',
+          padding: '0',
+          margin: '0',
+        }}>
+        Login
+      </Button>
       {openLogin && (
         <StyledFormBackground component="div">
           <form

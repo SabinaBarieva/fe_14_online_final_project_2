@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Hidden, Button, Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import Login from '.';
 import Registration from '../Registration';
@@ -24,23 +24,21 @@ function LoginButtons() {
 
   return (
     <>
-      <Hidden lgDown>
-        <Button
-          variant="contained"
-          endIcon={<LoginOutlinedIcon />}
-          onClick={() => {
-            setOpenButtons(true);
-          }}
-          sx={{
-            background: '#211F1C',
-            width: '113px',
-            height: '40px',
-            padding: '0',
-            margin: '0',
-          }}>
-          Login
-        </Button>
-      </Hidden>
+      <Button
+        variant="contained"
+        endIcon={<LoginOutlinedIcon />}
+        onClick={() => {
+          setOpenButtons(true);
+        }}
+        sx={{
+          background: '#211F1C',
+          width: '113px',
+          height: '40px',
+          padding: '0',
+          margin: '0',
+        }}>
+        Login
+      </Button>
       {openButtons && (
         <StyledFormBackground>
           <Container
