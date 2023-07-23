@@ -75,6 +75,7 @@ const basketSlice = createSlice({
           state.modal = true;
         } else if (product.cartQuantity !== product.product.quantity) {
           product.cartQuantity += currentProduct.cartQuantity;
+
         } else {
           state.modal = true;
           state.modalText = `Sorry, there are only ${product.quantity} units of this product in stock`;
@@ -91,6 +92,7 @@ const basketSlice = createSlice({
       state.modal = false;
       state.modalText = '';
     },
+    // mergeBasket:() {},
   },
 });
 export const {
