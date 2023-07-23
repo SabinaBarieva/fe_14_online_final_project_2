@@ -152,6 +152,7 @@ function ProductDescription() {
                   <Grid
                     key={photo}
                     item
+                    sm={2}
                     sx={{
                       display: 'flex',
                       justifyContent: 'center',
