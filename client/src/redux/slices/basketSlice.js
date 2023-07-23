@@ -50,11 +50,10 @@ const basketSlice = createSlice({
       state.priceAll = calcBasketPriceSum(basket);
     },
     deleteBasket: (state, { payload: { product: productToDelete } }) => {
-      let { itemsBasket: basket } = state;
-      basket = basket.filter(
+      state.itemsBasket = state.itemsBasket.filter(
         ({ product }) => product.itemNo !== productToDelete.itemNo
       );
-      state.priceAll = calcBasketPriceSum(basket);
+      state.priceAll = calcBasketPriceSum(state.itemsBasket);
     },
     clearBasket: (state) => {
       state.itemsBasket = [];
