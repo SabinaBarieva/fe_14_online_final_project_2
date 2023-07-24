@@ -18,9 +18,11 @@ import {
   CssBaseline,
   Badge,
   Avatar,
+  Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { styled } from '@mui/material/styles';
 import getImg from '../../cloudinary';
@@ -32,7 +34,6 @@ import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 import { fetchUserInfo } from '../../redux/slices/userSlice';
-import Login from '../Login';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -115,7 +116,27 @@ function Header() {
         </NavLink>
       );
     }
-    return <Login />;
+    return (
+      <NavLink to="/login" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          endIcon={<LoginOutlinedIcon />}
+          onClick={() => {
+            if (burgerState) {
+              openBurgerMenu();
+            }
+          }}
+          sx={{
+            background: '#211F1C',
+            width: '113px',
+            height: '40px',
+            padding: '0',
+            margin: '0',
+          }}>
+          Login
+        </Button>
+      </NavLink>
+    );
   };
 
   useEffect(() => {

@@ -13,6 +13,7 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/" element={<Header />}>
                 <Route path="/about" element={<About />} />
                 <Route path="/user" element={<UserPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route index element={<HomeContent />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
