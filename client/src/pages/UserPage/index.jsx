@@ -16,14 +16,15 @@ function UserPage() {
     <Grid
       container
       sx={{
+        maxWidth: '1440px',
+        margin: '0 auto',
         display: 'flex',
         justifyContent: 'space-evenly',
-        marginBottom: '20px',
       }}>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={11} md={5}>
         <UserProfileInfo />
       </Grid>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={11} md={5}>
         <OrdersList />
       </Grid>
     </Grid>

@@ -1,77 +1,89 @@
 import React, { useState } from 'react';
-import { List, Box, Divider } from '@mui/material';
+import { List, Box, Divider, Typography, Grid } from '@mui/material';
 
 function OrdersList() {
   const [orders, setOrders] = useState([
     {
-      _id: {
-        $oid: '648dfd1ee01e091d8de69395',
-      },
-      enabled: true,
+      itemNo: 1,
       name: 'iPhone 11',
-      sale: false,
       currentPrice: 462,
-      previousPrice: 512,
-      categories: 'cellphone',
-      imageUrls: [
-        'phones/xl7h98p6m84ilxrvqg5y.jpg',
-        'phones/oxlgcb4vg7ygn15mo3ob.jpg',
-        'phones/rvtsebqxxh4wuukknzgb.jpg',
-        'phones/egfscwofa6ocvvcmyzda.jpg',
-      ],
-      quantity: 8,
       color: 'Black',
       brand: 'Apple',
       storage: '64gb',
-      itemNo: '77552',
-      description:
-        'The iPhone 11 cannot be replaced by a new smartphone, it is a direct fit for the iPhone XR. The smartphone has halved, the dimensions with the front edge are smoothed. The main innovations are innovations in color solutions, even the same and earlier than the best iPhone. I clicked one snake and another modulation of the camera was detected, now the ultra-wide-angle lens has reached the wide-angle one. This allows you to create group portraits and beautiful panoramas. Like the process that will now win, the faster and more energy efficient Apple 13 Bionic. What is worth an hour of autonomous robots, here the company has built a crock forward and the smartphone is obliged to work for at least a year in the new XR model.',
-      guarantee: '3 months',
-      date: {
-        $date: '2019-10-14T12:46:29.042Z',
-      },
+      date: '16-04-2023',
+      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
     },
     {
-      _id: {
-        $oid: '648dfd1ee01e091d8de69396',
-      },
-      enabled: true,
-      name: 'iPhone 13',
-      sale: true,
-      currentPrice: 717,
-      previousPrice: 767,
-      categories: 'cellphone',
-      imageUrls: [
-        'phones/fwd6fpjujgtt8cclohli.jpg',
-        'phones/leedxcxbnpdownfeaurt.png',
-        'phones/zrcebawfimlzhww2y0vf.jpg',
-      ],
-      quantity: 10,
-      color: 'Blue',
+      itemNo: 2,
+      name: 'iPhone 12',
+      currentPrice: 662,
+      color: 'Yellow',
       brand: 'Apple',
       storage: '128gb',
-      itemNo: '80465',
-      description:
-        'The smartphone of the new generation combines technological trends from the previous models with new solutions. The iPhone 13 processor has become thinner, and the cameras are better. Before that, the retailers added a full 5G chip for complete signal transmission, updated the color palette and software security. New over-wide-angle camera for more detail in dark areas of the image. You get 47% more light for more photos and videos. New optical stabilization for damaged matrices to ensure clear shots in an unstable position.',
-      guarantee: '3 months',
-      date: {
-        $date: '2019-10-14T12:46:30.042Z',
-      },
+      date: '20-04-2023',
+      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
+    },
+    {
+      itemNo: 3,
+      name: 'iPhone 13',
+      currentPrice: 800,
+      color: 'White',
+      brand: 'Apple',
+      storage: '256gb',
+      date: '24-04-2023',
+      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
     },
   ]);
 
   return (
-    <List>
-      {orders.map((product) => (
-        <div key={product.itemNo}>
-          <Box>date</Box>
-          <Box>products</Box>
-          <Box>totalSum</Box>
-          <Box>deliveryAddress</Box>
-          <Divider />
-        </div>
-      ))}
-    </List>
+    <Box sx={{ marginTop: { xs: '35px', md: 0 } }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: { xs: 'center', md: 'right' } }}>
+        Your Orders
+      </Typography>
+      <Divider />
+      <List>
+        {orders.map((product) => (
+          <Grid
+            container
+            sx={{
+              border: '1px solid rgb(180, 180 ,180)',
+              borderRadius: '7px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              padding: '10px 10px',
+              marginTop: '10px',
+            }}
+            key={product.itemNo}>
+            <Grid
+              item
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                fontSize: '1.3rem',
+                color: '#fff',
+                backgroundColor: 'rgb(43, 46, 53)',
+                borderRadius: '12px',
+                padding: '0 10px',
+              }}>
+              <Box>
+                {product.name} {product.storage} {product.color}
+              </Box>
+              <Box>{product.currentPrice}$</Box>
+              <Box sx={{ textAlign: 'right' }}>{product.date}</Box>
+            </Grid>
+            <Grid item>
+              <Box>
+                <img height="120px" width="120px" src={product.img} alt="?" />
+              </Box>
+            </Grid>
+          </Grid>
+        ))}
+      </List>
+    </Box>
   );
 }
 

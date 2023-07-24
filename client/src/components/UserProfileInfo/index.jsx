@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 // import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
 import {
   DataBoxes,
-  DataBoxesBorder,
   BoxUserData,
   BoxTitle,
   Buttons,
@@ -45,7 +44,10 @@ function UserProfileInfo() {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ textAlign: { xs: 'center', md: 'left' } }}>
         Your Profile
       </Typography>
       <Divider />
@@ -55,43 +57,27 @@ function UserProfileInfo() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              margin: '25px auto',
+              margin: '20px auto',
             }}>
             <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>Name:</BoxTitle>
-                <BoxUserData>{dataUser.firstName}</BoxUserData>
-              </DataBoxesBorder>
+              <BoxTitle>Name:</BoxTitle>
+              <BoxUserData>{dataUser.firstName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>Surname:</BoxTitle>
-                <BoxUserData>{dataUser.lastName}</BoxUserData>
-              </DataBoxesBorder>
+              <BoxTitle>Surname:</BoxTitle>
+              <BoxUserData>{dataUser.lastName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>E-mail:</BoxTitle>
-                <BoxUserData>{dataUser.email}</BoxUserData>
-              </DataBoxesBorder>
+              <BoxTitle>E-mail:</BoxTitle>
+              <BoxUserData>{dataUser.email}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>Phone number:</BoxTitle>
-                <BoxUserData>{dataUser.telephone}</BoxUserData>
-              </DataBoxesBorder>
+              <BoxTitle>Phone number:</BoxTitle>
+              <BoxUserData>{dataUser.telephone}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>Address:</BoxTitle>
-                <BoxUserData>ЗАГЛУШКА</BoxUserData>
-              </DataBoxesBorder>
-            </DataBoxes>
-            <DataBoxes>
-              <DataBoxesBorder>
-                <BoxTitle>Card Number:</BoxTitle>
-                <BoxUserData>ЗАГЛУШКА</BoxUserData>
-              </DataBoxesBorder>
+              <BoxTitle>Address:</BoxTitle>
+              <BoxUserData>ЗАГЛУШКА</BoxUserData>
             </DataBoxes>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -156,15 +142,6 @@ function UserProfileInfo() {
             <TextField
               label="Address"
               name="address"
-              value="ЗАГЛУШКА"
-              onChange={handleUserDataChange}
-              fullWidth
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              label="Card Number"
-              name="cardNumber"
               value="ЗАГЛУШКА"
               onChange={handleUserDataChange}
               fullWidth
