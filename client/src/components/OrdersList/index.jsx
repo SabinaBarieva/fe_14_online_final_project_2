@@ -70,14 +70,15 @@ function OrdersList() {
                 padding: '0 10px',
               }}>
               <Box>
-                {product.name} {product.storage} {product.color}
+                {product.name} {product.color}
               </Box>
+              <Box>{product.storage} </Box>
               <Box>{product.currentPrice}$</Box>
               <Box sx={{ textAlign: 'right' }}>{product.date}</Box>
             </Grid>
             <Grid item>
               <Box>
-                <img height="120px" width="120px" src={product.img} alt="?" />
+                <img height="100px" width="100px" src={product.img} alt="?" />
               </Box>
             </Grid>
           </Grid>
