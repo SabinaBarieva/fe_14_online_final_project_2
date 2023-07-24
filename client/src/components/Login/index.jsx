@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, InputAdornment } from '@mui/material';
 import { Close, VisibilityOff, Visibility } from '@mui/icons-material';
 import { useFormik } from 'formik';
@@ -14,12 +14,15 @@ import {
   StyledButton,
 } from '../../themes/themeOrder';
 import { login } from '../../redux/slices/loginSlice';
+import Registration from '../Registration';
+import { burgerClose } from '../../redux/slices/headerSlice';
 
 function Login() {
   const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const formLoginRef = useRef(null);
+  const burgerState = useSelector((state) => state.burgerMenu.openBurger);
 
   const formik = useFormik({
     initialValues: {
@@ -45,6 +48,12 @@ function Login() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const loginButtonFunc = () => {
+    if (burgerState) {
+      dispatch(burgerClose());
+    }
+  };
 
   return (
     <>
@@ -151,13 +160,23 @@ function Login() {
                 )}
               </StyledForm>
             </Container>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              disableElevation
-              type="submit">
-              Login
-            </StyledButton>
+            <Container
+              ref={formLoginRef}
+              style={{ display: 'flex', justifyContent: 'center' }}>
+              <StyledButton
+                style={{ margin: '0' }}
+                variant="contained"
+                color="primary"
+                disableElevation
+                type="submit"
+                onClick={() => {
+                  loginButtonFunc();
+                }}>
+                Login
+              </StyledButton>
+              <span style={{ color: 'black', margin: 10 }}> OR </span>
+              <Registration />
+            </Container>
           </form>
         </StyledFormBackground>
       )}
