@@ -13,7 +13,6 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
-import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
