@@ -17,7 +17,10 @@ import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { setProduct } from '../../redux/slices/productSlice';
-import { addToBasket } from '../../redux/slices/basketSlice';
+import {
+  addToBasket,
+  basketProductCreator,
+} from '../../redux/slices/basketSlice';
 import {
   CardContainer,
   DetailButton,
@@ -81,15 +84,7 @@ function ProductCard({ product }) {
   };
 
   const onClickAdd = () => {
-    const item = {
-      name: product.name,
-      itemNo: product.itemNo,
-      imageUrls: product.imageUrls,
-      currentPrice: product.currentPrice,
-      quantity: product.quantity,
-      count: 0,
-    };
-    dispatch(addToBasket(item));
+    dispatch(addToBasket(basketProductCreator({ product, cartQuantity: 0 })));
   };
   return (
     <CardContainer
