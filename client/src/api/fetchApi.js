@@ -6,6 +6,7 @@ import {
 } from '../errors/errors';
 
 let userToken = null;
+export const getToken = () => localStorage.getItem('token') || null;
 export const setToken = (token) => {
   userToken = token;
 };
@@ -15,7 +16,7 @@ const fetchApi = async (url, options) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: userToken,
+        Authorization: getToken(),
       },
       ...options,
     });
