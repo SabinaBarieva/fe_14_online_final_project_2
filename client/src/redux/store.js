@@ -30,6 +30,7 @@ import userSlice from './slices/userSlice';
 import tokenSlice from './slices/tokenSlice';
 import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
+import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -67,7 +68,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(asyncDispatchMiddleware),
 });
 export const persistor = persistStore(store);
 export default store;
