@@ -9,13 +9,15 @@ const tokenSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(logout, (state) => {
-      state.token = null;
-      setToken(null);
+      // state.token = null;
+      // setToken(null);
+      localStorage.setItem('token', null);
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       const { token } = payload;
-      state.token = token;
-      setToken(token);
+      // state.token = token;
+      // setToken(token);
+      localStorage.setItem('token', token);
     });
   },
 });

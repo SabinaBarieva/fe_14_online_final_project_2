@@ -17,11 +17,12 @@ import {
   ListItem,
   CssBaseline,
   Badge,
+  Avatar,
   Button,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { styled } from '@mui/material/styles';
 import getImg from '../../cloudinary';
@@ -32,7 +33,7 @@ import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-import LoginButtons from '../Login/loginButtons';
+import { fetchUserInfo } from '../../redux/slices/userSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -68,7 +69,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function Header() {
   const [totalInBasket, setTotalInBasket] = useState('0');
   const { itemsBasket } = useSelector(selectCart);
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -77,24 +77,73 @@ function Header() {
       dispatch(resetFilters());
     }
   };
+  const token = useSelector((state) => state.login.login);
+  const dataUser = useSelector((state) => state.user.user);
+
+  const getUserInfo = () => {
+    if (token) {
+      dispatch(fetchUserInfo());
+    }
+  };
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.cartQuantity + sum, 0);
     setTotalInBasket(total);
   };
 
+  const burgerState = useSelector((state) => state.burgerMenu.openBurger);
   const openBurgerMenu = () => {
-    if (open === true) {
+    if (!burgerState) {
       return dispatch(burgerOpen());
     }
     return dispatch(burgerClose());
   };
 
+  const getLoginButton = () => {
+    if (token && dataUser) {
+      return (
+        <NavLink to="/user" style={{ textDecoration: 'none' }}>
+          <Avatar
+            variant="rounded"
+            onClick={() => {
+              if (burgerState) {
+                openBurgerMenu();
+              }
+            }}>
+            {dataUser.firstName.split(' ')[0][0]}{' '}
+            {dataUser.lastName.split(' ')[0][0]}
+          </Avatar>
+        </NavLink>
+      );
+    }
+    return (
+      <NavLink to="/login" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          endIcon={<LoginOutlinedIcon />}
+          onClick={() => {
+            if (burgerState) {
+              openBurgerMenu();
+            }
+          }}
+          sx={{
+            background: '#211F1C',
+            width: '113px',
+            height: '40px',
+            padding: '0',
+            margin: '0',
+          }}>
+          Login
+        </Button>
+      </NavLink>
+    );
+  };
+
   useEffect(() => {
     totalBasketItems();
     locationDispatch();
-    openBurgerMenu();
-  }, [itemsBasket, location, open]);
+    getUserInfo();
+  }, [itemsBasket, location, token]);
 
   return (
     <AllContent>
@@ -203,7 +252,6 @@ function Header() {
               }}>
               <Search />
             </Container>
-            <NavLink to="/user">USER PAGE TEST</NavLink>
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
@@ -219,28 +267,13 @@ function Header() {
                 </StyledBadge>
               </IconButton>
             </NavLink>
-            <LoginButtons />
-            {/* <Hidden lgDown>
-              <Button
-                variant="contained"
-                endIcon={<LoginOutlinedIcon />}
-                sx={{
-                  background: '#211F1C',
-                  width: '113px',
-                  height: '40px',
-                  padding: '0',
-                  margin: '0',
-                }}>
-                Login
-              </Button>
-            </Hidden> */}
+            <Hidden lgDown>{getLoginButton()}</Hidden>
             <Hidden lgUp>
               <IconButton
                 style={{ padding: '0' }}
-                onClick={() => setOpen(true)}>
+                onClick={() => openBurgerMenu()}>
                 <MenuIcon
                   sx={{
-                    backgroundColor: '#F4F4F4',
                     color: '#393D45',
                     width: '100%',
                     height: '100%',
@@ -252,11 +285,11 @@ function Header() {
             </Hidden>
           </Toolbar>
         </Container>
-        {/* <SwipeableDrawer
+        <SwipeableDrawer
           anchor="top"
-          open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}>
+          open={burgerState}
+          onOpen={() => openBurgerMenu()}
+          onClose={() => openBurgerMenu()}>
           <Grid
             container
             direction="row"
@@ -264,30 +297,17 @@ function Header() {
             alignItems="center"
             sx={{ padding: '0.5rem' }}>
             <div>
-              <IconButton onClick={() => setOpen(false)}>
+              <IconButton onClick={() => openBurgerMenu()}>
                 <CloseIcon />
               </IconButton>
             </div>
-
-            <Button
-              variant="contained"
-              endIcon={<LoginOutlinedIcon />}
-              sx={{
-                background: '#211F1C',
-                width: '113px',
-                height: '40px',
-                margin: '0',
-                padding: '0',
-              }}
-              onClick={() => setOpen(false)}>
-              Login
-            </Button>
+            {getLoginButton()}
           </Grid>
           <Divider />
           <List>
             <ListItem
               sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
+              onClick={() => openBurgerMenu()}>
               <NavLink
                 to="/"
                 style={activeLinkDecoration}
@@ -297,7 +317,7 @@ function Header() {
             </ListItem>
             <ListItem
               sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
+              onClick={() => openBurgerMenu()}>
               <NavLink
                 to="/product"
                 style={activeLinkDecoration}
@@ -307,7 +327,7 @@ function Header() {
             </ListItem>
             <ListItem
               sx={{ justifyContent: 'center' }}
-              onClick={() => setOpen(false)}>
+              onClick={() => openBurgerMenu()}>
               <NavLink
                 to="/about"
                 style={activeLinkDecoration}
@@ -316,7 +336,7 @@ function Header() {
               </NavLink>
             </ListItem>
           </List>
-        </SwipeableDrawer> */}
+        </SwipeableDrawer>
       </AppBar>
       <BreadCrumbs />
       <Outlet />
