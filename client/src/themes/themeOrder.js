@@ -1,3 +1,4 @@
+import { AdvancedImage } from '@cloudinary/react';
 import {
   Button,
   FormControl,
@@ -13,6 +14,7 @@ import { styled } from '@mui/system';
 const StyledForm = styled(FormControl)({
   gap: 5,
   width: '100%',
+  alignItems: 'center',
 });
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -65,6 +67,31 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     minHeight: 40,
     borderRadius: 7,
   },
+  '& .login': {
+    backgroundColor: 'red',
+    border: 'none',
+  },
+}));
+
+const StyledInputBaseLogin = styled(InputBase)(({ theme }) => ({
+  margin: 5,
+  width: '90%',
+  boxSizing: 'border-box',
+  backgroundColor: theme.palette.secondary.inputBackground,
+  borderRadius: 7,
+  minHeight: 40,
+  '& .MuiInputBase-input': {
+    padding: '10px 15px!important',
+    borderRadius: 7,
+    '& ::placeholder': {
+      opacity: 0.5,
+    },
+  },
+  '& .MuiOutlinedInput-input': {
+    outline: 'none',
+    minHeight: 40,
+    borderRadius: 7,
+  },
 }));
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
@@ -83,7 +110,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   '&.MuiTypography-paragraph': {
     margin: 0,
     fontSize: '0.6rem',
-    color: `${theme.palette.secondary.main}`,
+    color: theme.palette.secondary.main,
     height: 12,
   },
 
@@ -93,10 +120,10 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
   '&.MuiTypography-h5': {
     margin: '10px auto',
-    color: `${theme.palette.primary.main}`,
-    fontFamily: `${theme.typography.fontFamily.primary}`,
+    color: theme.palette.primary.main,
+    fontFamily: theme.typography.fontFamily.primary,
     fontSize: '2rem',
-    fontWeight: 700,
+    fontWeight: theme.typography.const.fontWeight.bold,
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',
@@ -140,6 +167,15 @@ const StyledFormBackground = styled(Container)({
   maxWidth: '100%!Important',
 });
 
+const StyleAdvancedImage = styled(AdvancedImage)(({ theme }) => ({
+  width: 500,
+  header: 500,
+  margin: '10px',
+  [theme.breakpoints.down('lg')]: {
+    display: 'none',
+  },
+}));
+
 export {
   StyledForm,
   StyledButton,
@@ -150,4 +186,6 @@ export {
   StyledModal,
   StyledModalContainer,
   StyledFormBackground,
+  StyledInputBaseLogin,
+  StyleAdvancedImage,
 };
