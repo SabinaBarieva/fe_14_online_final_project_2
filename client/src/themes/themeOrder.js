@@ -35,9 +35,6 @@ const StyledButton = styled(Button)(({ theme }) => ({
       sm: '2.5rem',
       md: '3rem',
     },
-    '&:hover': {
-      backgroundColor: theme.palette.primary.light,
-    },
   },
 }));
 
