@@ -25,6 +25,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     border: '1px solid #211F1C',
     margin: '10px auto',
     display: 'block',
+    minHeight: 40,
     width: {
       xs: '5rem',
       sm: '7rem',
