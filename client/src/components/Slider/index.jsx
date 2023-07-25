@@ -35,6 +35,7 @@ function Slider() {
         <Carousel>
           {products.map((product) => (
             <Link
+              key={product.itemNo}
               to={`/product/${product.itemNo}`}
               style={{ marginRight: '7%' }}>
               <AdvancedImage

@@ -13,10 +13,12 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
+import Init from './components/Init';
 
 function App() {
   return (
     <Provider store={store}>
+      <Init />
       <PersistGate loading="LDNG" persistor={persistor}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>

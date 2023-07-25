@@ -1,39 +1,33 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Typography, Box, Divider, Button, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+// import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
 import {
-  Avatar,
-  Typography,
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Button,
-  TextField,
-} from '@mui/material';
+  DataBoxes,
+  DataBoxesBorder,
+  BoxUserData,
+  BoxTitle,
+  Buttons,
+} from '../../themes/themeUserProfileInfo';
+import { resetUserInfo } from '../../redux/slices/userSlice';
+import { logout } from '../../redux/slices/loginSlice';
 
 function UserProfileInfo() {
-  const initialUser = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1234567890',
-    address: '123 Main Street, City',
-    cardNumber: '**** **** **** 1234',
-    photoUrl: 'https://example.com/user-photo.jpg',
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.user.user);
 
   // State to track the user data in edit mode
   const [editMode, setEditMode] = useState(false);
-  const [user, setUser] = useState(initialUser);
 
   // Function to handle user data changes during edit mode
   const handleUserDataChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    // const { name, value } = event.target;
+    // setUser((prevData) => ({
+    //   ...prevData,
+    //   [name]: value,
+    // }));
   };
 
   const handleSave = () => {
@@ -41,7 +35,7 @@ function UserProfileInfo() {
   };
 
   const handleCancel = () => {
-    setUser(initialUser);
+    // setUser(initialUser);
     setEditMode(false);
   };
 
@@ -50,119 +44,145 @@ function UserProfileInfo() {
   };
 
   return (
-    <Box p={3}>
+    <Box>
       <Typography variant="h4" gutterBottom>
         Your Profile
       </Typography>
       <Divider />
-
-      <Box my={2}>
-        {editMode ? (
-          <TextField
-            label="First Name"
-            name="firstName"
-            value={user.firstName}
-            onChange={handleUserDataChange}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-          />
-        ) : (
-          <Avatar
-            src={
-              user.photoUrl
-            }>{`${user.firstName[0]}${user.lastName[0]}`}</Avatar>
-        )}
-        <Typography variant="h6" gutterBottom>
-          {editMode ? (
+      {!editMode && dataUser && (
+        <>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '25px auto',
+            }}>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Name:</BoxTitle>
+                <BoxUserData>{dataUser.firstName}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Surname:</BoxTitle>
+                <BoxUserData>{dataUser.lastName}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>E-mail:</BoxTitle>
+                <BoxUserData>{dataUser.email}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Phone number:</BoxTitle>
+                <BoxUserData>{dataUser.telephone}</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Address:</BoxTitle>
+                <BoxUserData>ЗАГЛУШКА</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+            <DataBoxes>
+              <DataBoxesBorder>
+                <BoxTitle>Card Number:</BoxTitle>
+                <BoxUserData>ЗАГЛУШКА</BoxUserData>
+              </DataBoxesBorder>
+            </DataBoxes>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Buttons variant="outlined" onClick={handleEdit}>
+              Edit
+            </Buttons>
+            <Buttons
+              style={{ backgroundColor: 'white', color: 'black' }}
+              variant="outlined"
+              onClick={() => {
+                dispatch(resetUserInfo());
+                dispatch(logout());
+                navigate('/');
+              }}>
+              Logout
+            </Buttons>
+          </Box>
+        </>
+      )}
+      {editMode && dataUser && (
+        <>
+          <Box
+            sx={{
+              margin: '10px 20px',
+            }}>
             <TextField
-              label="Last Name"
-              name="lastName"
-              value={user.lastName}
+              label="First name"
+              name="firstName"
+              value={dataUser.firstName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `${user.firstName} ${user.lastName}`
-          )}
-        </Typography>
-        <Typography variant="subtitle1">
-          {editMode ? (
+            <TextField
+              label="Last name"
+              name="lastName"
+              value={dataUser.lastName}
+              onChange={handleUserDataChange}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
             <TextField
               label="Email"
               name="email"
-              value={user.email}
+              value={dataUser.email}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.email
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Phone"
               name="phone"
-              value={user.phone}
+              value={dataUser.telephone}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.phone
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Address"
               name="address"
-              value={user.address}
+              value="ЗАГЛУШКА"
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            user.address
-          )}
-        </Typography>
-        <Typography variant="body1">
-          {editMode ? (
             <TextField
               label="Card Number"
               name="cardNumber"
-              value={user.cardNumber}
+              value="ЗАГЛУШКА"
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
               variant="outlined"
             />
-          ) : (
-            `Card Number: ${user.cardNumber}`
-          )}
-        </Typography>
-      </Box>
-
-      {editMode ? (
-        <Box>
-          <Button variant="outlined" color="primary" onClick={handleSave}>
-            Save
-          </Button>
-          <Button variant="outlined" color="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Box>
-      ) : (
-        <Button variant="outlined" color="primary" onClick={handleEdit}>
-          Edit
-        </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+            }}>
+            <Buttons onClick={handleSave}>Save</Buttons>
+            <Button variant="outlined" color="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </Box>
+        </>
       )}
     </Box>
   );

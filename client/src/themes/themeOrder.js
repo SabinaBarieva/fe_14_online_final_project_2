@@ -19,7 +19,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
     backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
     color: { xs: '#616467', md: '#fff' },
-    borderRadius: '7px',
+    borderRadius: 7,
     border: '1px solid #211F1C',
     margin: '10px auto',
     display: 'block',
@@ -51,11 +51,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: '90%',
   boxSizing: 'border-box',
   border: `1px solid ${theme.palette.primary.dark}`,
-  borderRadius: 50,
+  borderRadius: 7,
   minHeight: 40,
   '& .MuiInputBase-input': {
     padding: '10px 15px!important',
-    borderRadius: 50,
+    borderRadius: 7,
     '& ::placeholder': {
       opacity: 0.5,
     },
@@ -63,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiOutlinedInput-input': {
     outline: 'none',
     minHeight: 40,
-    borderRadius: 50,
+    borderRadius: 7,
   },
 }));
 
@@ -71,7 +71,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
   margin: 0,
   maxWidth: 250,
   paddingLeft: 10,
-  borderRadius: 20,
+  borderRadius: 7,
   minWidth: 50,
   [theme.breakpoints.down(330)]: {
     paddingLeft: 0,
@@ -100,6 +100,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
     lineHeight: '132%',
     letterSpacing: '0.015rem',
     textTransform: 'uppercase',
+    [theme.breakpoints.between('xs', 'sm')]: {
+      fontSize: '1.3rem',
+    },
   },
 }));
 
@@ -119,7 +122,7 @@ const StyledModalContainer = styled(Container)(({ theme }) => ({
   padding: 20,
   backgroundColor: 'white',
   lineHeight: 1.5,
-  borderRadius: 20,
+  borderRadius: 7,
   boxShadow: `0 0 30px 6px ${theme.palette.primary.header}`,
   textAlign: 'center',
 }));
@@ -127,7 +130,7 @@ const StyledModalContainer = styled(Container)(({ theme }) => ({
 const StyledFormBackground = styled(Container)({
   backgroundColor: 'rgba(128, 128, 128, 0.5)',
   position: 'fixed',
-  zIndex: 1500,
+  zIndex: 1300,
   right: 0,
   bottom: 0,
   top: 0,

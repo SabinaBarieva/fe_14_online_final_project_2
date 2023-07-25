@@ -7,7 +7,10 @@ import { useTheme } from '@mui/system';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
-import { addToBasket } from '../../redux/slices/basketSlice';
+import {
+  addToBasket,
+  basketProductCreator,
+} from '../../redux/slices/basketSlice';
 import {
   AddToCartBtn,
   CardInfo,
@@ -84,15 +87,7 @@ function ProductCard({ product }) {
   };
 
   const onClickAdd = () => {
-    const item = {
-      name: product.name,
-      itemNo: product.itemNo,
-      imageUrls: product.imageUrls,
-      currentPrice: product.currentPrice,
-      quantity: product.quantity,
-      count: 0,
-    };
-    dispatch(addToBasket(item));
+    dispatch(addToBasket(basketProductCreator({ product, cartQuantity: 0 })));
   };
 
   const imageUrl = (publicId) => {

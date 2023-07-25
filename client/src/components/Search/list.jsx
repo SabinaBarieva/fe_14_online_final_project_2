@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import cld from '../../cloudinary';
 import { StyledList } from '../../themes/themeSearch';
 import Item from './item';
 

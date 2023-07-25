@@ -2,15 +2,6 @@ import { styled } from '@mui/system';
 import { Card, CardContent, Typography } from '@mui/material';
 import { RadiusButton } from '../components/Buttons';
 
-/*
-export const CardContainer = styled(Card)(() => ({
-  outline: `solid 1px transparent`,
-  borderRadius: '15px',
-  marginBottom: '5%',
-  height: '100%',
-}));
-*/
-
 export const DetailButton = styled(RadiusButton)(({ theme }) => ({
   lineHeight: '0.8rem',
   fontSize: '0.7rem',
