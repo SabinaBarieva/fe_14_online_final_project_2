@@ -1,46 +1,30 @@
-import React from 'react';
-import {
-  Avatar,
-  Grid,
-  Typography,
-  Box,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-} from '@mui/material';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Grid } from '@mui/material';
+import { fetchUserInfo } from '../../redux/slices/userSlice';
 import UserProfileInfo from '../../components/UserProfileInfo';
+import OrdersList from '../../components/OrdersList';
 
 function UserPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
+
   return (
     <Grid
       container
       sx={{
-        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        marginBottom: '20px',
       }}>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <UserProfileInfo />
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Box my={2}>
-          <Typography variant="h6" gutterBottom>
-            Recent Orders
-          </Typography>
-          <List>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>1</Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Order #1" secondary="July 20, 2023" />
-            </ListItem>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>2</Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Order #2" secondary="July 19, 2023" />
-            </ListItem>
-          </List>
-        </Box>
+      <Grid item xs={12} md={5}>
+        <OrdersList />
       </Grid>
     </Grid>
   );

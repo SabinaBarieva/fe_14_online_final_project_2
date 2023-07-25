@@ -21,12 +21,12 @@ function Category() {
       <Box
         sx={{
           width: '90%',
-          padding: { xs: '0', md: '1rem', lg: '1rem' },
-          margin: '20px auto',
+          margin: { xs: '0 auto', lg: '45px auto' },
         }}>
         <Grid
           container
           sx={{
+            padding: '0 auto',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'space-between',
@@ -37,11 +37,11 @@ function Category() {
             )
             .map(({ name: categoryName, id }) => (
               <Grid
+                item
+                key={categoryName}
                 sx={{ display: 'flex', justifyContent: 'center' }}
-                lg={1}
-                md={4}
-                sm={4}
-                xs={6}>
+                lg={2}
+                xs={4}>
                 <Link
                   onClick={() => dispatch(addCategory(id))}
                   to="./product"
@@ -54,8 +54,8 @@ function Category() {
                   }}>
                   <Typography
                     sx={{
+                      fontSize: { xs: '1rem', sm: '1.3rem' },
                       fontWeight: '800',
-                      fontSize: '25px',
                       '&:hover': {
                         color: theme.palette.primary.light,
                       },

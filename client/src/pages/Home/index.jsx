@@ -16,6 +16,7 @@ function HomeContent() {
   return (
     <div
       style={{
+        marginTop: '85px',
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',

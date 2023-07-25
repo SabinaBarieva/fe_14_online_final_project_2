@@ -105,7 +105,7 @@ function BasketContent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {itemsBasket.map((el) => (
+          {itemsBasket.map(({ product, cartQuantity }) => (
             <TableRow key={Math.random()} style={{ marginBottom: '1 rem' }}>
               <TableCell
                 key={Math.random()}
@@ -121,10 +121,10 @@ function BasketContent() {
                 <Tooltip title="Detail">
                   <Link
                     style={{ textDecoration: 'none', color: '#000000' }}
-                    to={`/product/${el.itemNo}`}>
+                    to={`/product/${product.itemNo}`}>
                     <AdvancedImage
                       key={Math.random()}
-                      cldImg={cld.image(el.imageUrls[0])}
+                      cldImg={cld.image(product.imageUrls[0])}
                       width="65%"
                       height="60%"
                     />
@@ -145,8 +145,8 @@ function BasketContent() {
                 <Tooltip title="Detail">
                   <Link
                     style={{ textDecoration: 'none', color: '#000000' }}
-                    to={`/product/${el.itemNo}`}>
-                    {el.name}
+                    to={`/product/${product.itemNo}`}>
+                    {product.name}
                   </Link>
                 </Tooltip>
               </TableCell>
@@ -160,7 +160,7 @@ function BasketContent() {
                     md: '1.5rem',
                   },
                 }}>
-                $ {el.currentPrice * el.count}
+                $ {product.currentPrice * cartQuantity}
               </TableCell>
               <TableCell
                 key={Math.random()}
@@ -174,13 +174,12 @@ function BasketContent() {
                   fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
                 }}>
                 <IconButton
-                  disabled={el.count === 1}
-                  onClick={() => dispatch(minusItem({ itemNo: el.itemNo }))}>
+                  disabled={cartQuantity === 1}
+                  onClick={() => dispatch(minusItem({ product }))}>
                   <BiMinus fontSize="15" />
                 </IconButton>
-                {el.count}
-                <IconButton
-                  onClick={() => dispatch(addToBasket({ itemNo: el.itemNo }))}>
+                {cartQuantity}
+                <IconButton onClick={() => dispatch(addToBasket({ product }))}>
                   <BiPlus fontSize="15" />
                 </IconButton>
               </TableCell>
@@ -195,9 +194,7 @@ function BasketContent() {
                 }}>
                 <Tooltip title="Delete">
                   <IconButton
-                    onClick={() =>
-                      dispatch(deleteBasket({ itemNo: el.itemNo }))
-                    }
+                    onClick={() => dispatch(deleteBasket({ product }))}
                     sx={{
                       fontSize: {
                         xs: '15px',

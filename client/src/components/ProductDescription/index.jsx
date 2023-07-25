@@ -10,6 +10,7 @@ import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
+  basketProductCreator,
 } from '../../redux/slices/basketSlice';
 import {
   currentProduct,
@@ -29,12 +30,14 @@ import {
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
 import theme from '../../themes/theme';
+// eslint-disable-next-line import/no-duplicates
 
 function ProductDescription() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const isError = useSelector(errorInProduct);
+  const product = useSelector(currentProduct);
   const {
     quantity,
     name,
@@ -48,7 +51,7 @@ function ProductDescription() {
     description,
     guarantee,
     sale,
-  } = useSelector(currentProduct);
+  } = product;
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -80,7 +83,11 @@ function ProductDescription() {
       quantity,
       count: countToBasket,
     };
-    dispatch(addSeveraltoBasket(item));
+    dispatch(
+      addSeveraltoBasket(
+        basketProductCreator({ product, cartQuantity: countToBasket })
+      )
+    );
   };
 
   const [mainImage, setMainImage] = useState('');
@@ -151,6 +158,7 @@ function ProductDescription() {
                   <Grid
                     key={photo}
                     item
+                    sm={2}
                     sx={{
                       display: 'flex',
                       justifyContent: 'center',
