@@ -4,6 +4,7 @@ import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
+import { login } from './loginSlice';
 
 const stateName = 'user';
 export const fetchUserInfo = createAsyncThunk(
@@ -30,6 +31,9 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     extraReducerCreator(builder)(fetchUserInfo, stateName);
+    builder.addCase(login.fulfilled, (_, action) => {
+      action.asyncDispatch(fetchUserInfo());
+    });
   },
 });
 export const { resetUserInfo } = userSlice.actions;

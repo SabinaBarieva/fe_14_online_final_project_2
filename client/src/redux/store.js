@@ -27,9 +27,9 @@ import orderSlice from './slices/orderSlice';
 import headerSlice from './slices/headerSlice';
 import loginSlice from './slices/loginSlice';
 import userSlice from './slices/userSlice';
-import tokenSlice from './slices/tokenSlice';
 import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
+import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -47,7 +47,6 @@ const rootReducer = combineReducers({
   burgerMenu: headerSlice,
   login: loginSlice,
   user: userSlice,
-  token: tokenSlice,
   orders: ordersSlice,
   devTools: process.env.NODE_ENV !== 'production',
   allProdsHomePage: allProdsHomeSlice,
@@ -56,7 +55,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['basket', 'login', 'user', 'token'],
+  whitelist: ['basket', 'login', 'user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -67,7 +66,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(asyncDispatchMiddleware),
 });
 export const persistor = persistStore(store);
 export default store;
