@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object({
   loginOrEmail: Yup.string()
     .min(4, 'Min 4 letters required')
-    .max(30, 'Max 15 letters allowed')
+    .max(30, 'Max 30 letters allowed')
     // .matches(
     //   /^[a-zA-Z0-9]*$/,
     //   'Login must contain Latin letters and numbers only, without spaces'
