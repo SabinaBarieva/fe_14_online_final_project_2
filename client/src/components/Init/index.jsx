@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getToken } from '../../locastorage/localstorage';
+import { getToken } from '../../localstorage/localstorage';
 import { fetchUserInfo } from '../../redux/slices/userSlice';
 import { fetchOrders } from '../../redux/slices/ordersSlice';
 

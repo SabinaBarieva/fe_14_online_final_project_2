@@ -4,7 +4,7 @@ import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
-import { setToken } from '../../locastorage/localstorage';
+import { setToken } from '../../localstorage/localstorage';
 
 const stateName = 'login';
 export const login = createAsyncThunk(

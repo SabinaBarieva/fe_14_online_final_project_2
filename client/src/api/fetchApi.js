@@ -4,7 +4,7 @@ import {
   notAuthorizedErrorMessage,
   requestErrorMessage,
 } from '../errors/errors';
-import { getToken } from '../locastorage/localstorage';
+import { getToken } from '../localstorage/localstorage';
 
 const fetchApi = async (url, options) => {
   try {
@@ -19,11 +19,11 @@ const fetchApi = async (url, options) => {
     if (response.ok && response.status === 200) {
       return await response.json();
     }
-    const result = await response.json();
-    if (result === 'Unauthorized')
+    if (response.status === 401)
       throw new AppError(notAuthorizedErrorMessage, {
-        context: { url, options, status: 401 },
+        context: { url, options, status: response.status },
       });
+    const result = await response.json();
     if (/^Error happened on server/.test(result))
       throw new AppError('Error happened on server', {
         context: { ...result, url, options, status: response.status },
