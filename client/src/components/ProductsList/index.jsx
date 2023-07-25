@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Grid, Box, Pagination, LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
-import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
   categoriesFilter,
-  homePageProducts,
   isFetchingAllProducts,
   isFetchingProductsList,
   maximalPrice,
@@ -16,15 +14,13 @@ import {
   productsList,
   totalNumberProducts,
 } from '../../redux/selectors';
-import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
 import StyledGrid from '../../themes/themeProductsList';
 
-function ProductsList({ perPage }) {
+function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
-  const productsForProducts = useSelector(productsList);
-  const productsForHomePage = useSelector(homePageProducts);
+  const products = useSelector(productsList);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
@@ -35,11 +31,11 @@ function ProductsList({ perPage }) {
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useDispatch();
+  // Fetching products
   useEffect(() => {
     dispatch(
       fetchProducts({
         categories,
-        perPage,
         startPage: currentPage,
         minPrice: formattedMinPrice,
         maxPrice: formattedMaxPrice,
@@ -47,11 +43,72 @@ function ProductsList({ perPage }) {
     );
   }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
 
-  useEffect(() => {
-    dispatch(getAllHomeProducts());
-  }, [dispatch]);
+  // Pagination and showing products
+  const productsPerPage = 12;
+  const countPagination = total ? Math.round(total / productsPerPage) : 0;
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = currentPage * productsPerPage;
+  const productsSliced = products.slice(startIndex, endIndex);
+  function groupProductsByCategory(productsBycategory) {
+    const groupedProducts = {};
+    productsBycategory.forEach((product) => {
+      const categoriesToShuffle = product.categories;
+      if (!groupedProducts[categoriesToShuffle]) {
+        groupedProducts[categoriesToShuffle] = [];
+      }
+      groupedProducts[categoriesToShuffle].push(product);
+    });
 
-  const countPagination = total ? Math.round(total / perPage) : 0;
+    return groupedProducts;
+  }
+
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = shuffledArray[i];
+      shuffledArray[i] = shuffledArray[j];
+      shuffledArray[j] = temp;
+    }
+    return shuffledArray;
+  }
+
+  function combinateArrays(arrays) {
+    const maxLength = Math.max(...arrays.map((arr) => arr.length));
+    const result = [];
+
+    for (let i = 0; i < maxLength; i += 1) {
+      arrays.forEach((arr) => {
+        if (arr[i]) {
+          result.push(arr[i]);
+        }
+      });
+    }
+    return result;
+  }
+  const filterProdsNewArrival = (productsForFilter) =>
+    productsForFilter.filter(
+      (product) => product.newArrival === true && product.quantity !== 0
+    );
+  // Products page
+  const groupedAllProds = groupProductsByCategory(productsSliced);
+  const shuffledAllProds = shuffleArray(Object.keys(groupedAllProds));
+  const productsToShow = combinateArrays(
+    shuffledAllProds.map(
+      (categoriesToShuffle) => groupedAllProds[categoriesToShuffle]
+    )
+  );
+  // Home page
+  const groupedNewArrivals = groupProductsByCategory(
+    filterProdsNewArrival(products)
+  );
+  const shuffledNewArrivals = shuffleArray(Object.keys(groupedNewArrivals));
+  const newArrivalsToShow = combinateArrays(
+    shuffledNewArrivals.map(
+      (categoriesToShuffle) => groupedNewArrivals[categoriesToShuffle]
+    )
+  );
+  // Grid spacing
   const spacingHomePage = {
     xs: 1.5,
     sm: 2,
@@ -68,8 +125,6 @@ function ProductsList({ perPage }) {
     currentPath === '/' ? spacingHomePage : spacingProductsPage;
   const isFetching =
     currentPath === '/' ? isFetchingHomeProds : isFetchingProducts;
-  const filterProductsForHomePage = (productsForFilter) =>
-    productsForFilter.filter((product) => product.quantity !== 0);
   return (
     <div style={{ width: '100%' }}>
       {isFetching ? (
@@ -86,21 +141,19 @@ function ProductsList({ perPage }) {
             spacing={gridSpacing}
             sx={{ padding: '0 1%', margin: '0 auto', width: '90%' }}>
             {currentPath === '/'
-              ? filterProductsForHomePage(productsForHomePage).map(
-                  (product) => (
-                    <StyledGrid
-                      item
-                      xs={6}
-                      sm={6}
-                      md={4}
-                      lg={3}
-                      key={product.itemNo}
-                      sx={{ alignItems: 'baseline' }}>
-                      <ProductCard product={product} />
-                    </StyledGrid>
-                  )
-                )
-              : productsForProducts.map((product) => (
+              ? newArrivalsToShow.map((product) => (
+                  <StyledGrid
+                    item
+                    xs={6}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                    key={product.itemNo}
+                    sx={{ alignItems: 'baseline' }}>
+                    <ProductCard product={product} />
+                  </StyledGrid>
+                ))
+              : productsToShow.map((product) => (
                   <Grid
                     display="flex"
                     justifyContent="center"
@@ -145,11 +198,3 @@ function ProductsList({ perPage }) {
 }
 
 export default ProductsList;
-
-ProductsList.propTypes = {
-  perPage: PropTypes.number,
-};
-
-ProductsList.defaultProps = {
-  perPage: 10,
-};

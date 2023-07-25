@@ -5,7 +5,7 @@ import Filter from '../../components/Filter';
 
 function ProductsContent() {
   return (
-    <Box sx={{ maxWidth: 'xl' }}>
+    <Box>
       <Stack
         sx={{ width: '90%', margin: '0 auto' }}
         direction={{ md: 'row', sm: 'column' }}>

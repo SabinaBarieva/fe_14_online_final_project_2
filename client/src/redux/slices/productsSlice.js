@@ -11,14 +11,13 @@ const initialState = {
 export const fetchProducts = createAsyncThunk(
   'products/fetch',
   async (
-    { categories = [], perPage = 10, startPage = 1, minPrice, maxPrice, sort },
+    { categories = [], startPage = 1, minPrice, maxPrice, sort },
     { dispatch }
   ) => {
     try {
       return await getProducts({
         categories,
         startPage,
-        perPage,
         minPrice,
         maxPrice,
         sort,
