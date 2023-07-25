@@ -19,9 +19,9 @@ function DropdownMenu() {
         onChange={(e) => {
           dispatch(sortBy(e.target.value));
         }}>
-        <MenuItem value="-currenPrice">Highest price</MenuItem>
-        <MenuItem value="currenPrice">Lowest price</MenuItem>
-        <MenuItem value={false}>Random</MenuItem>
+        <MenuItem value="-currentPrice">Highest price</MenuItem>
+        <MenuItem value="currentPrice">Lowest price</MenuItem>
+        <MenuItem value="false">Random</MenuItem>
       </Select>
     </FormControl>
   );

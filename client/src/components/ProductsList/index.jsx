@@ -20,7 +20,6 @@ import StyledGrid from '../../themes/themeProductsList';
 function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
-
   const total = useSelector(totalNumberProducts);
   const products = useSelector(productsList);
   const sortBy = useSelector(productsSort);
@@ -42,9 +41,17 @@ function ProductsList() {
         startPage: currentPage,
         minPrice: formattedMinPrice,
         maxPrice: formattedMaxPrice,
+        sort: sortBy,
       })
     );
-  }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
+  }, [
+    dispatch,
+    currentPage,
+    categories,
+    formattedMinPrice,
+    formattedMaxPrice,
+    sortBy,
+  ]);
 
   // Pagination and showing products
   const productsPerPage = 12;
