@@ -4,12 +4,8 @@ import {
   notAuthorizedErrorMessage,
   requestErrorMessage,
 } from '../errors/errors';
+import { getToken } from '../locastorage/localstorage';
 
-let userToken = null;
-export const getToken = () => localStorage.getItem('token') || null;
-export const setToken = (token) => {
-  userToken = token;
-};
 const fetchApi = async (url, options) => {
   try {
     const response = await fetch(url, {
