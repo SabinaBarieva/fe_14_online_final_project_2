@@ -1,4 +1,4 @@
 export const setToken = (token) => {
-  localStorage.setItem('token', token);
+  localStorage.setItem('token', JSON.stringify(token));
 };
-export const getToken = () => localStorage.getItem('token') || null;
+export const getToken = () => JSON.parse(localStorage.getItem('token')) || null;
