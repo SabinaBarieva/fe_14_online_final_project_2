@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Hidden, Button, Container, InputAdornment } from '@mui/material';
+import { Button, Container, InputAdornment } from '@mui/material';
 import { Close, VisibilityOff, Visibility } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import { PatternFormat } from 'react-number-format';
@@ -54,24 +54,22 @@ function Registration() {
 
   return (
     <>
-      <Hidden lgDown>
-        <Button
-          variant="contained"
-          endIcon={<PersonAddIcon />}
-          onClick={() => {
-            setOpenRegistration(true);
-            formik.resetForm();
-          }}
-          sx={{
-            background: '#211F1C',
-            width: '150px',
-            height: '40px',
-            padding: '0',
-            margin: '0',
-          }}>
-          Registration
-        </Button>
-      </Hidden>
+      <Button
+        variant="contained"
+        endIcon={<PersonAddIcon />}
+        onClick={() => {
+          setOpenRegistration(true);
+          formik.resetForm();
+        }}
+        sx={{
+          background: '#211F1C',
+          width: '150px',
+          height: '40px',
+          padding: '0',
+          margin: '0',
+        }}>
+        Registration
+      </Button>
       {openRegistration && (
         <StyledFormBackground component="div">
           <form
