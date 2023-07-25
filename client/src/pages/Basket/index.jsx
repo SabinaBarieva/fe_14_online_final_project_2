@@ -29,6 +29,8 @@ import {
   addToBasket,
   clearBasket,
   deleteBasket,
+  increaseProductQuantity,
+  increaseQuantity,
   minusItem,
 } from '../../redux/slices/basketSlice';
 import cld from '../../cloudinary';
@@ -179,7 +181,10 @@ function BasketContent() {
                   <BiMinus fontSize="15" />
                 </IconButton>
                 {cartQuantity}
-                <IconButton onClick={() => dispatch(addToBasket({ product }))}>
+                <IconButton
+                  onClick={() =>
+                    dispatch(increaseQuantity({ product, cartQuantity: 1 }))
+                  }>
                   <BiPlus fontSize="15" />
                 </IconButton>
               </TableCell>

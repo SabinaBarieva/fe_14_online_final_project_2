@@ -8,6 +8,7 @@ import { closeModalBasket } from '../../redux/slices/basketSlice';
 
 function ModalBasket() {
   const { modal, modalText } = useSelector(selectCart);
+  console.log(modal, modalText);
 
   const dispatch = useDispatch();
 

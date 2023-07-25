@@ -75,8 +75,7 @@ const validationSchema = Yup.object({
       /^[a-zA-Z\d!@#$%^&*(),.?":{}|<>]*$/.test(value)
     )
     .test('password-match', 'Passwords must match', (value) => {
-      const passwordFirst = this.resolve(Yup.ref('passwordFirst'));
-      return value === passwordFirst;
+      return value.string().oneOf([Yup.ref('passwordFirst')]);
     })
     .required('This field is required!'),
   telephone: Yup.string()

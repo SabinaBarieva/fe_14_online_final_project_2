@@ -18,7 +18,8 @@ import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { setProduct } from '../../redux/slices/productSlice';
 import {
-  addToBasket,
+  //   addToBasket,
+  increaseQuantity,
   basketProductCreator,
 } from '../../redux/slices/basketSlice';
 import {
@@ -84,7 +85,9 @@ function ProductCard({ product }) {
   };
 
   const onClickAdd = () => {
-    dispatch(addToBasket(basketProductCreator({ product, cartQuantity: 0 })));
+    dispatch(
+      increaseQuantity(basketProductCreator({ product, cartQuantity: 1 }))
+    );
   };
   return (
     <CardContainer

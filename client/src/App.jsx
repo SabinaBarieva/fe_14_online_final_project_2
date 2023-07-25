@@ -13,7 +13,9 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
-import Init from './components/Init';
+import TestSignUp from './components/TestSignUp';
+import TestLogin from './components/TestLogin';
+import Init from './components/Init/Init';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
+          {/* <TestSignUp /> */}
+          <TestLogin />
         </ThemeProvider>
       </PersistGate>
     </Provider>
