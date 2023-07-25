@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -112,7 +112,6 @@ function ProductCard({ product }) {
       },
     });
   };
-
   const handleMouseEnter = () => {
     api.start({
       from: {
@@ -123,6 +122,14 @@ function ProductCard({ product }) {
       },
     });
   };
+  /*  const [isFlipped, setIsFlipped] = useState(false);
+  const handleCardFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
+  const cardAnimation = useSpring({
+    transform: `perspective(600px) rotateY(${isFlipped ? 180 : 0}deg)`, // Поворот карточки по оси Y
+    config: { mass: 5, tension: 500, friction: 80 },
+  }); */
   return (
     <animated.div
       onMouseEnter={handleFocus}
