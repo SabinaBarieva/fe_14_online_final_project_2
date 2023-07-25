@@ -29,6 +29,7 @@ function App() {
                 <Route index element={<HomeContent />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
+                {/* <Route path="/product/:filter" element={<ProductsContent />} /> */}
                 <Route path="/product/:id" element={<ProductDescription />} />
                 <Route path="/product/not-found" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />
