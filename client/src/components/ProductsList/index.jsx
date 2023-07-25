@@ -13,14 +13,17 @@ import {
   minimalPrice,
   productsList,
   totalNumberProducts,
+  productsSort,
 } from '../../redux/selectors';
 import StyledGrid from '../../themes/themeProductsList';
 
 function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
+
   const total = useSelector(totalNumberProducts);
   const products = useSelector(productsList);
+  const sortBy = useSelector(productsSort);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
