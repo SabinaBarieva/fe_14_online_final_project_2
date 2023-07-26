@@ -4,6 +4,7 @@ import ProductsList from '../../components/ProductsList';
 import Filter from '../../components/Filter';
 import ModalBasket from '../../components/ModalForBasket';
 import DropdownMenu from '../../components/DropdownMenu';
+
 function ProductsContent() {
   return (
     <Box sx={{ maxWidth: 'xl' }}>
