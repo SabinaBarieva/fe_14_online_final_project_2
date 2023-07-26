@@ -4,7 +4,7 @@ import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { closeModal } from '../../redux/slices/modalSlice';
 import { sendOrder } from '../../redux/slices/orderSlice';
-import { clearBasket } from '../../redux/slices/basketSlice';
+import { clearBasket } from '../../redux/slices/basketSlice/basketSlice';
 import {
   StyledTypography,
   StyledButton,
