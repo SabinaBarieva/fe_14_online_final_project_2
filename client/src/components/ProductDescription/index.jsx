@@ -7,11 +7,8 @@ import { Button, LinearProgress, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import {
-  addSeveraltoBasket,
-  closeModalBasket,
-} from '../../redux/slices/basketSlice/basketSlice';
-import basketProductCreator from '../../redux/slices/basketSlice/basketProductCreator';
+import { closeModalBasket } from '../../redux/slices/basketSlice/basketSlice';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
 import {
   currentProduct,
   currentProductIsLoading,
@@ -75,19 +72,7 @@ function ProductDescription() {
     }
   };
   const clickToBasket = () => {
-    const item = {
-      itemNo,
-      imageUrls,
-      name,
-      currentPrice,
-      quantity,
-      count: countToBasket,
-    };
-    dispatch(
-      addSeveraltoBasket(
-        basketProductCreator({ product, cartQuantity: countToBasket })
-      )
-    );
+    dispatch(changeQuantityInBasketActionCreator(product, countToBasket));
   };
 
   const [mainImage, setMainImage] = useState('');

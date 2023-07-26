@@ -18,13 +18,12 @@ const changeQuantityInBasket = createAsyncThunk(
       : 0;
     const availableQuantity = product.quantity;
     let newQuantityInBasket = productQuantityInBasket + addToBasketQuantity;
-    if (newQuantityInBasket > availableQuantity)
-      rejectWithValue(
-        new AppError(
-          `Sorry, there are only ${availableQuantity} units of this product in stock`,
-          { context: { type: 'quantityError' } }
-        )
-      );
+    if (newQuantityInBasket > availableQuantity) {
+      return rejectWithValue({
+        message: `Sorry, there are only ${availableQuantity} units of this product in stock`,
+        type: 'quantityError',
+      });
+    }
     if (newQuantityInBasket < 0) newQuantityInBasket = 0;
     if (isLoggedIn) {
       const remoteCart =
@@ -45,4 +44,14 @@ const changeQuantityInBasket = createAsyncThunk(
     return cart;
   }
 );
+
+export const changeQuantityInBasketActionCreator = (
+  product,
+  addToBasketQuantity
+) =>
+  changeQuantityInBasket({
+    ...basketProductCreator({ product, cartQuantity: 1 }),
+    addToBasketQuantity,
+  });
+
 export default changeQuantityInBasket;

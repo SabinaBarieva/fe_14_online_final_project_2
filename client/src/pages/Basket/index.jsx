@@ -25,13 +25,8 @@ import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import ButtonOrder from '../../components/Order/ButtonOrder';
 import { selectCart } from '../../redux/selectors';
-import {
-  addToBasket,
-  clearBasket,
-  deleteBasket,
-  minusItem,
-} from '../../redux/slices/basketSlice/basketSlice';
-import increaseQuantity from '../../redux/slices/basketSlice/increaseQuantity';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
+import { deleteFromBasketActionCreator } from '../../redux/slices/basketSlice/deleteFromBasket';
 import cld from '../../cloudinary';
 import theme from '../../themes/theme';
 import BasketEmpty from '../../components/BasketEmpty';
@@ -176,13 +171,15 @@ function BasketContent() {
                 }}>
                 <IconButton
                   disabled={cartQuantity === 1}
-                  onClick={() => dispatch(minusItem({ product }))}>
+                  onClick={() =>
+                    dispatch(changeQuantityInBasketActionCreator(product, -1))
+                  }>
                   <BiMinus fontSize="15" />
                 </IconButton>
                 {cartQuantity}
                 <IconButton
                   onClick={() =>
-                    dispatch(increaseQuantity({ product, cartQuantity: 1 }))
+                    dispatch(changeQuantityInBasketActionCreator(product, 1))
                   }>
                   <BiPlus fontSize="15" />
                 </IconButton>
@@ -198,7 +195,9 @@ function BasketContent() {
                 }}>
                 <Tooltip title="Delete">
                   <IconButton
-                    onClick={() => dispatch(deleteBasket({ product }))}
+                    onClick={() =>
+                      dispatch(deleteFromBasketActionCreator(product))
+                    }
                     sx={{
                       fontSize: {
                         xs: '15px',
