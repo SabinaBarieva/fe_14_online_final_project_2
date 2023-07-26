@@ -4,6 +4,7 @@ import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
+import { setToken } from '../../localstorage/localstorage';
 
 const stateName = 'login';
 export const login = createAsyncThunk(
@@ -11,7 +12,8 @@ export const login = createAsyncThunk(
   async ({ loginOrEmail, password }, { dispatch }) => {
     try {
       const { token } = await getToken(loginOrEmail, password);
-      return { token };
+      setToken(token);
+      return true;
     } catch (error) {
       dispatch(setErrorMessage({ error: error.message }));
       throw error;
@@ -25,6 +27,7 @@ const loginSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.login = null;
+      setToken(null);
     },
   },
   extraReducers: (builder) => {

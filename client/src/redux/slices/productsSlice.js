@@ -7,13 +7,11 @@ const initialState = {
   total: undefined,
   isFetching: false,
   isFetched: false,
+  sort: false,
 };
 export const fetchProducts = createAsyncThunk(
   'products/fetch',
-  async (
-    { categories = [], startPage = 1, minPrice, maxPrice, sort },
-    { dispatch }
-  ) => {
+  async ({ categories, startPage, minPrice, maxPrice, sort }, { dispatch }) => {
     try {
       return await getProducts({
         categories,
@@ -35,7 +33,11 @@ export const fetchProducts = createAsyncThunk(
 const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    sortBy: (state, action) => {
+      state.sort = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.isFetching = true;
@@ -53,5 +55,7 @@ const productsSlice = createSlice({
     });
   },
 });
+
+export const { sortBy } = productsSlice.actions;
 
 export default productsSlice.reducer;

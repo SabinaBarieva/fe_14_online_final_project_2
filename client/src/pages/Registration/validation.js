@@ -41,43 +41,7 @@ const validationSchema = Yup.object({
     )
     .required('This field is required!'),
   passwordSecond: Yup.string()
-    .test(
-      'password-format',
-      'Password must contain valid characters',
-      (value) => /^[a-zA-Z\d!@#$%^&*(),.?":{}|<>]+$/.test(value)
-    )
-    .test('min-length', 'Min 4 letters required', (value) => value.length >= 4)
-    .test('max-length', 'Max 15 letters allowed', (value) => value.length <= 15)
-    .test(
-      'latin-letters',
-      'Password must contain Latin letters only',
-      (value) => /[a-zA-Z]/.test(value)
-    )
-    .test('number', 'Password must contain at least one number', (value) =>
-      /\d/.test(value)
-    )
-    .test(
-      'lowercase',
-      'Password must contain at least one lowercase letter',
-      (value) => /[a-z]/.test(value)
-    )
-    .test(
-      'uppercase',
-      'Password must contain at least one uppercase letter',
-      (value) => /[A-Z]/.test(value)
-    )
-    .test(
-      'special-character',
-      'Password must contain at least one special character',
-      (value) => /[!@#$%^&*(),.?":{}|<>]/.test(value)
-    )
-    .test('spaces', 'Password must not contain spaces', (value) =>
-      /^[a-zA-Z\d!@#$%^&*(),.?":{}|<>]*$/.test(value)
-    )
-    .test('password-match', 'Passwords must match', (value) => {
-      const passwordFirst = this.resolve(Yup.ref('passwordFirst'));
-      return value === passwordFirst;
-    })
+    .oneOf([Yup.ref('passwordFirst'), null], 'Passwords must match')
     .required('This field is required!'),
   telephone: Yup.string()
     .matches(

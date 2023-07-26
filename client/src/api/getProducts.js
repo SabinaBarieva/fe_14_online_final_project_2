@@ -6,8 +6,9 @@ const getProducts = async ({
   startPage = 1,
   minPrice = null,
   maxPrice = null,
-  sort = 'currentPrice',
+  sort,
 }) => {
+  console.log(sort);
   const categoryQuery =
     categories.length > 0 ? `&categories=${categories.join(',')}` : '';
   let priceFilter = '';

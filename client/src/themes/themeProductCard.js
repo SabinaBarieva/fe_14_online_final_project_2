@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Card, CardContent, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import { RadiusButton } from '../components/Buttons';
 
 export const DetailButton = styled(RadiusButton)(({ theme }) => ({
@@ -76,12 +76,6 @@ export const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   },
 }));
 
-export const Label = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.dark,
-  fontSize: '0.625rem',
-  lineHeight: '0.75rem',
-}));
-
 export const CardInfo = styled(CardContent)(({ theme }) => ({
   color: theme.palette.primary.light,
   display: 'flex',
@@ -113,9 +107,3 @@ export const ProductInfo = styled(Typography)(({ theme }) => ({
     fontSize: '1rem',
   },
 }));
-
-/* export const ProductPrice = styled(Typography)(() => ({
-  // fontWeight: '400',
-  fontSize: '.875rem',
-  lineHeight: '1rem',
-})); */

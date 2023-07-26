@@ -7,10 +7,7 @@ import { useTheme } from '@mui/system';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
-import {
-  addToBasket,
-  basketProductCreator,
-} from '../../redux/slices/basketSlice';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
 import {
   AddToCartBtn,
   CardInfo,
@@ -21,6 +18,7 @@ import CartIcon from '../Icons/cartIcon/cartIcon';
 import PulseAnimation from '../Animations';
 
 const Card = styled.div`
+  box-shadow: 5px 5px 5px #acacac;
   align-items: baseline;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -121,7 +119,7 @@ function ProductCard({ product }) {
   };
 
   const onClickAdd = () => {
-    dispatch(addToBasket(basketProductCreator({ product, cartQuantity: 0 })));
+    dispatch(changeQuantityInBasketActionCreator(product, 1));
   };
 
   const imageUrl = (publicId) => {

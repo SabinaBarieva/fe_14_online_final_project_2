@@ -10,6 +10,7 @@ import Category from '../../components/Category';
 import ModalBasket from '../../components/ModalForBasket';
 import Slider from '../../components/Slider';
 import { SectionTitle, AllProductsBtn } from '../../themes/themeHomePage';
+import ModalAdd from '../../components/ModalAdd';
 
 function HomeContent() {
   const theme = useTheme();
@@ -23,6 +24,7 @@ function HomeContent() {
       }}>
       <Category />
       <ModalBasket />
+      <ModalAdd />
       <SectionTitle variant="h2">Daily Sale</SectionTitle>
       <Slider />
       <div

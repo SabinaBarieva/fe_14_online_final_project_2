@@ -14,6 +14,7 @@ import {
   minimalPrice,
   productsList,
   totalNumberProducts,
+  productsSort,
 } from '../../redux/selectors';
 import StyledGrid from '../../themes/themeProductsList';
 import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
@@ -22,8 +23,9 @@ function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
-  const prodsForProdsPage = useSelector(productsList);
+  const filteredProds = useSelector(productsList);
   const prodsForHomePage = useSelector(homePageProducts);
+  const sortBy = useSelector(productsSort);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
@@ -36,25 +38,32 @@ function ProductsList() {
   const dispatch = useDispatch();
   // Fetching products
   useEffect(() => {
+    dispatch(getAllHomeProducts());
     dispatch(
       fetchProducts({
         categories,
         startPage: currentPage,
         minPrice: formattedMinPrice,
         maxPrice: formattedMaxPrice,
+        sort: sortBy,
       })
     );
-  }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
-  useEffect(() => {
-    dispatch(getAllHomeProducts());
-  }, [dispatch]);
+  }, [
+    dispatch,
+    currentPage,
+    categories,
+    formattedMinPrice,
+    formattedMaxPrice,
+    sortBy,
+  ]);
 
   // Pagination and showing products
   const productsPerPage = 12;
   const countPagination = total ? Math.round(total / productsPerPage) : 0;
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = currentPage * productsPerPage;
-  const productsSliced = prodsForProdsPage.slice(startIndex, endIndex);
+  // Products page
+  const productsSliced = filteredProds.slice(startIndex, endIndex);
   function groupProductsByCategory(productsBycategory) {
     const groupedProducts = {};
     productsBycategory.forEach((product) => {
@@ -96,17 +105,10 @@ function ProductsList() {
     productsForFilter.filter(
       (product) => product.newArrival === true && product.quantity !== 0
     );
-  // Products page
-  const groupedAllProds = groupProductsByCategory(productsSliced);
-  const shuffledAllProds = shuffleArray(Object.keys(groupedAllProds));
-  const productsToShow = combinateArrays(
-    shuffledAllProds.map(
-      (categoriesToShuffle) => groupedAllProds[categoriesToShuffle]
-    )
-  );
+
   // Home page
   const groupedNewArrivals = groupProductsByCategory(
-    filterProdsNewArrival(prodsForHomePage)
+    filterProdsNewArrival(prodsForHomePage) // треба усі продукти
   );
   const shuffledNewArrivals = shuffleArray(Object.keys(groupedNewArrivals));
   const newArrivalsToShow = combinateArrays(
@@ -148,37 +150,37 @@ function ProductsList() {
             sx={{ padding: '0 1%', margin: '0 auto', width: '90%' }}>
             {currentPath === '/'
               ? newArrivalsToShow.map((product) => (
-                  <StyledGrid
-                    item
-                    xs={6}
-                    sm={6}
-                    md={4}
-                    lg={4}
-                    xl={3}
-                    key={product.itemNo}
-                    sx={{ alignItems: 'baseline' }}>
-                    <ProductCard product={product} />
-                  </StyledGrid>
-                ))
-              : productsToShow.map((product) => (
-                  <Grid
-                    display="flex"
-                    justifyContent="center"
-                    item
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={4}
-                    xl={3}
-                    key={product.itemNo}
-                    height="auto"
-                    sx={{
-                      alignItems: 'baseline',
-                      paddingTop: '5%',
-                    }}>
-                    <ProductCard product={product} />
-                  </Grid>
-                ))}
+                <StyledGrid
+                  item
+                  xs={6}
+                  sm={6}
+                  md={4}
+                  lg={4}
+                  xl={3}
+                  key={product.itemNo}
+                  sx={{ alignItems: 'baseline' }}>
+                  <ProductCard product={product} />
+                </StyledGrid>
+              ))
+              : productsSliced.map((product) => (
+                <Grid
+                  display="flex"
+                  justifyContent="center"
+                  item
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  key={product.itemNo}
+                  height="auto"
+                  sx={{
+                    alignItems: 'baseline',
+                    paddingTop: '5%',
+                  }}>
+                  <ProductCard product={product} />
+                </Grid>
+              ))}
           </Grid>
           {currentPath === '/' ? null : (
             <Box
