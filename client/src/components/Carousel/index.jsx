@@ -41,13 +41,11 @@ function Carousel() {
           modules={[Pagination, Navigation, Autoplay]}
           className="saleCarousel">
           {products.map((product) => (
-            <SwiperSlide>
+            <SwiperSlide key={product.itemNo}>
               <Link
-                key={product.itemNo}
                 to={`/product/${product.itemNo}`}
                 style={{ marginRight: '7%' }}>
                 <AdvancedImage
-                  key={product.itemNo}
                   className="main-photo"
                   width="100%"
                   cldImg={getImg.image(product.saleImg)}

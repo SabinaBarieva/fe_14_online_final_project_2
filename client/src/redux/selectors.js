@@ -3,7 +3,7 @@ export const currentProduct = (state) => state.product.product;
 export const errorInProduct = (state) => state.product.error;
 export const currentProductIsLoading = (state) => state.product.isLoading;
 //
-
+export const selectWishlist = (state) => state.wishlist;
 export const selectCart = (state) => state.basket;
 export const modaInProductSlice = (state) => state.modalInProduct;
 // All Products in Base

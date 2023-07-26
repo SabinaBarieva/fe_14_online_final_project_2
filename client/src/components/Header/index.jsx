@@ -23,16 +23,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { styled } from '@mui/material/styles';
 import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
-import { selectCart } from '../../redux/selectors';
+import { selectCart, selectWishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 import LoginButtons from '../Login/loginButtons';
+import { getWishlist } from '../../redux/slices/wishlistSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -71,6 +74,8 @@ function Header() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
+  const { itemsWishlist } = useSelector(selectWishlist);
+  // const [totalInWishlist, setTotalInWishlist] = useState('0');
 
   const locationDispatch = () => {
     if (location.pathname !== '/product') {
@@ -83,6 +88,11 @@ function Header() {
     setTotalInBasket(total);
   };
 
+  // const totalWishlistItems = () => {
+  //   const total = itemsWishlist.reduce((sum, item) => item.count + sum, 0);
+  //   setTotalInWishlist(total);
+  // };
+
   const openBurgerMenu = () => {
     if (open === true) {
       return dispatch(burgerOpen());
@@ -94,7 +104,9 @@ function Header() {
     totalBasketItems();
     locationDispatch();
     openBurgerMenu();
-  }, [itemsBasket, location, open]);
+    dispatch(getWishlist());
+    // totalWishlistItems();
+  }, [itemsBasket, location, open, itemsWishlist]);
 
   return (
     <AllContent>
@@ -204,6 +216,26 @@ function Header() {
               <Search />
             </Container>
             <NavLink to="/user">USER PAGE TEST</NavLink>
+            {itemsWishlist.length > 0 ? (
+              <StyledBadge
+                badgeContent={
+                  itemsWishlist.length > 0 ? itemsWishlist.length : ''
+                }>
+                <FavoriteIcon
+                  sx={{
+                    color: 'black',
+                  }}
+                />
+              </StyledBadge>
+            ) : (
+              <StyledBadge badgeContent={itemsWishlist.length === 0}>
+                <FavoriteBorderIcon
+                  sx={{
+                    color: 'black',
+                  }}
+                />
+              </StyledBadge>
+            )}
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>

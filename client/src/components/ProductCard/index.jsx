@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import { styled, useTheme } from '@mui/system';
 import SvgIcon from '@mui/material/SvgIcon';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { AdvancedImage } from '@cloudinary/react';
 import { minimumPad } from '@cloudinary/url-gen/actions/resize';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
@@ -18,6 +20,8 @@ import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { setProduct } from '../../redux/slices/productSlice';
 import { addToBasket } from '../../redux/slices/basketSlice';
+import { handleWishlist } from '../../redux/slices/wishlistSlice';
+import { selectWishlist } from '../../redux/selectors';
 import {
   CardContainer,
   DetailButton,
@@ -36,6 +40,10 @@ function ProductCard({ product }) {
   const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'md'));
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
+  const [addedWishlist, setAddedWishlist] = useState(false);
+  const { itemsWishlist } = useSelector(selectWishlist);
+  console.log('item', itemsWishlist);
+  let wishlist = [];
 
   const getImageSize = () => {
     const currentBreakpoints = {
@@ -91,10 +99,59 @@ function ProductCard({ product }) {
     };
     dispatch(addToBasket(item));
   };
+
+  useEffect(() => {
+    if (itemsWishlist.length) {
+      if (itemsWishlist.includes(product.itemNo)) {
+        setAddedWishlist(true);
+      }
+    }
+  }, [itemsWishlist, product.itemNo]);
+
+  const updateWishlist = (e) => {
+    e.preventDefault();
+    setAddedWishlist((prev) => !prev);
+    if (!addedWishlist) {
+      if (itemsWishlist.length) {
+        if (!itemsWishlist.includes(product.itemNo)) {
+          wishlist = [...itemsWishlist, product.itemNo];
+        }
+      } else {
+        wishlist = [...itemsWishlist, product.itemNo];
+      }
+    } else if (itemsWishlist.length) {
+      wishlist = itemsWishlist.filter((item) => item !== product.itemNo);
+    }
+    console.log('w', itemsWishlist);
+    console.log('wish', wishlist);
+    dispatch(handleWishlist(wishlist));
+  };
+
   return (
     <CardContainer
       sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>
       <Box sx={{ position: 'relative', padding: '10% 0' }}>
+        {addedWishlist ? (
+          <FavoriteIcon
+            onClick={updateWishlist}
+            sx={{
+              position: 'absolute',
+              top: '2px',
+              right: '5px',
+              color: 'black',
+            }}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            onClick={updateWishlist}
+            sx={{
+              position: 'absolute',
+              top: '2px',
+              right: '5px',
+              color: 'black',
+            }}
+          />
+        )}
         <AdvancedImage
           width="100%"
           cldImg={getImg
