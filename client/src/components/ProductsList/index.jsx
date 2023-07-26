@@ -62,6 +62,7 @@ function ProductsList() {
   const countPagination = total ? Math.round(total / productsPerPage) : 0;
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = currentPage * productsPerPage;
+  // Products page
   const productsSliced = filteredProds.slice(startIndex, endIndex);
   function groupProductsByCategory(productsBycategory) {
     const groupedProducts = {};
@@ -104,14 +105,7 @@ function ProductsList() {
     productsForFilter.filter(
       (product) => product.newArrival === true && product.quantity !== 0
     );
-  // Products page
-  const groupedAllProds = groupProductsByCategory(productsSliced);
-  const shuffledAllProds = shuffleArray(Object.keys(groupedAllProds));
-  const productsToShow = combinateArrays(
-    shuffledAllProds.map(
-      (categoriesToShuffle) => groupedAllProds[categoriesToShuffle]
-    )
-  );
+
   // Home page
   const groupedNewArrivals = groupProductsByCategory(
     filterProdsNewArrival(prodsForHomePage) // треба усі продукти
@@ -167,7 +161,7 @@ function ProductsList() {
                     <ProductCard product={product} />
                   </StyledGrid>
                 ))
-              : productsToShow.map((product) => (
+              : productsSliced.map((product) => (
                   <Grid
                     display="flex"
                     justifyContent="center"
