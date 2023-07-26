@@ -11,6 +11,7 @@ import {
 } from '../../themes/themeUserProfileInfo';
 import { resetUserInfo } from '../../redux/slices/userSlice';
 import { logout } from '../../redux/slices/loginSlice';
+import { clearBasket } from '../../redux/slices/basketSlice/basketSlice';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
@@ -89,6 +90,7 @@ function UserProfileInfo() {
               variant="outlined"
               onClick={() => {
                 dispatch(resetUserInfo());
+                dispatch(clearBasket());
                 dispatch(logout());
                 navigate('/');
               }}>

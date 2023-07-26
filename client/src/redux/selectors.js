@@ -22,9 +22,9 @@ export const productsSort = (state) => state.products.sort;
 export const isBurgerOpen = (state) => state.burgerMenu.openBurger;
 export const isFetchingAllProducts = (state) =>
   state.allProdsHomePage.isFetching;
+//
 export const homePageProducts = (state) => state.allProdsHomePage.allProds;
 // User
-export const userData = () => (state) => state.user.user;
-// Login
 export const isLoggedIn = () => (state) => state.login.login;
-//
+export const userData = () => (state) => state.user.user;
+export const userOrders = (state) => state.orders.orders;

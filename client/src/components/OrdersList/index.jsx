@@ -1,40 +1,43 @@
 import React, { useState } from 'react';
 import { List, Box, Divider, Typography, Grid } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { userOrders } from '../../redux/selectors';
 
 function OrdersList() {
-  const [orders, setOrders] = useState([
-    {
-      itemNo: 1,
-      name: 'iPhone 11',
-      currentPrice: 462,
-      color: 'Black',
-      brand: 'Apple',
-      storage: '64gb',
-      date: '16-04-2023',
-      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
-    },
-    {
-      itemNo: 2,
-      name: 'iPhone 12',
-      currentPrice: 662,
-      color: 'Yellow',
-      brand: 'Apple',
-      storage: '128gb',
-      date: '20-04-2023',
-      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
-    },
-    {
-      itemNo: 3,
-      name: 'iPhone 13',
-      currentPrice: 800,
-      color: 'White',
-      brand: 'Apple',
-      storage: '256gb',
-      date: '24-04-2023',
-      img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
-    },
-  ]);
-
+  // const [orders, setOrders] = useState([
+  //   {
+  //     itemNo: 1,
+  //     name: 'iPhone 11',
+  //     currentPrice: 462,
+  //     color: 'Black',
+  //     brand: 'Apple',
+  //     storage: '64gb',
+  //     date: '16-04-2023',
+  //     img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
+  //   },
+  //   {
+  //     itemNo: 2,
+  //     name: 'iPhone 12',
+  //     currentPrice: 662,
+  //     color: 'Yellow',
+  //     brand: 'Apple',
+  //     storage: '128gb',
+  //     date: '20-04-2023',
+  //     img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
+  //   },
+  //   {
+  //     itemNo: 3,
+  //     name: 'iPhone 13',
+  //     currentPrice: 800,
+  //     color: 'White',
+  //     brand: 'Apple',
+  //     storage: '256gb',
+  //     date: '24-04-2023',
+  //     img: 'https://res.cloudinary.com/dtvbxgclg/image/upload/c_mpad,h_200,w_129/r_15:15/v1/phones/fwd6fpjujgtt8cclohli.jpg',
+  //   },
+  // ]);
+  const orders = useSelector(userOrders);
+  console.log(orders);
   return (
     <Box sx={{ marginTop: { xs: '35px', md: 0 } }}>
       <Typography
@@ -44,7 +47,7 @@ function OrdersList() {
         Your Orders
       </Typography>
       <Divider />
-      <List>
+      {/* <List>
         {orders.map((product) => (
           <Grid
             container
@@ -83,7 +86,7 @@ function OrdersList() {
             </Grid>
           </Grid>
         ))}
-      </List>
+      </List> */}
     </Box>
   );
 }
