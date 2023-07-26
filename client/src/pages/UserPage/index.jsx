@@ -6,11 +6,11 @@ import UserProfileInfo from '../../components/UserProfileInfo';
 import OrdersList from '../../components/OrdersList';
 
 function UserPage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUserInfo());
+  // }, [dispatch]);
 
   return (
     <Grid
