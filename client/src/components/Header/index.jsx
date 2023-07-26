@@ -76,7 +76,6 @@ function Header() {
       dispatch(resetFilters());
     }
   };
-
   const [token, setToken] = useState(false);
   const getToken = () => {
     const t = localStorage.getItem('token');

@@ -27,6 +27,9 @@ const basketSlice = createSlice({
       state.modalText = '';
       state.modalAdd = false;
     },
+    clearBasket: (state) => {
+      state.itemsBasket = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
