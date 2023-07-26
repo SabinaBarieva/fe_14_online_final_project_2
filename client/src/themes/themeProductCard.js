@@ -14,17 +14,18 @@ export const DetailButton = styled(RadiusButton)(({ theme }) => ({
     height: '1.3rem',
   },
   [theme.breakpoints.between('sm', 'md')]: {
-    width: '5rem',
-    height: '1.5rem',
+    fontSize: '1rem',
+    width: '6.7rem',
+    height: '2rem',
   },
   [theme.breakpoints.between('md', 'lg')]: {
     fontSize: '1rem',
-    width: '7.5rem',
+    width: '6.7rem',
     height: '2rem',
   },
   [theme.breakpoints.up('lg')]: {
     fontSize: '1rem',
-    width: '8.5rem',
+    width: '8rem',
     height: '2.5rem',
   },
 }));
@@ -50,11 +51,11 @@ export const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
     },
   },
   [theme.breakpoints.between('sm', 'md')]: {
-    width: '1.9rem',
-    height: '1.5rem',
+    width: '3rem',
+    height: '2rem',
     '& svg': {
       width: '1.3rem',
-      height: '1.5rem',
+      height: '1.4rem',
     },
   },
   [theme.breakpoints.between('md', 'lg')]: {
@@ -83,42 +84,38 @@ export const Label = styled(Typography)(({ theme }) => ({
 
 export const CardInfo = styled(CardContent)(({ theme }) => ({
   color: theme.palette.primary.light,
-  //   fontFamily: theme.typography.const.fontFamily.secondary,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'baseline',
   padding: '0',
-  paddingLeft: '8%',
-  marginTop: '3%',
-  width: '93%',
-  [theme.breakpoints.between('xs', 'sm')]: {
-    display: 'block',
-    textAlign: 'left',
-    paddingLeft: '5%',
-  },
+  paddingLeft: '7px',
+  paddingRight: '7px',
+  marginTop: '5%',
   '&:last-child': {
     paddingBottom: '0',
   },
 }));
 
-export const ProductName = styled(Typography)(({ theme }) => ({
-  fontWeight: '700',
-  width: '70%',
+export const ProductInfo = styled(Typography)(({ theme }) => ({
   textOverflow: 'ellipsis',
   overflow: 'hidden',
   [theme.breakpoints.between('xs', 'sm')]: {
-    fontSize: '.9rem',
-    lineHeight: '1rem',
+    fontSize: '.7rem',
     marginBottom: '2%',
   },
+  [theme.breakpoints.between('sm', 'md')]: {
+    fontSize: '.9rem',
+  },
+  [theme.breakpoints.between('md', 'lg')]: {
+    fontSize: '1rem',
+  },
   [theme.breakpoints.up('xl')]: {
-    fontSize: '.875rem',
-    lineHeight: '1rem',
+    fontSize: '1rem',
   },
 }));
 
-export const ProductPrice = styled(Typography)(() => ({
+/* export const ProductPrice = styled(Typography)(() => ({
   // fontWeight: '400',
   fontSize: '.875rem',
   lineHeight: '1rem',
-}));
+})); */

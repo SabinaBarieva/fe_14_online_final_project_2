@@ -7,7 +7,7 @@ function ProductsContent() {
   return (
     <Box>
       <Stack
-        sx={{ width: '90%', margin: '0 auto' }}
+        sx={{ width: '90%', margin: '15px auto' }}
         direction={{ md: 'row', sm: 'column' }}>
         <Filter />
         <Container>
