@@ -15,15 +15,34 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
     fontSize: '1.5rem',
   },
   [theme.breakpoints.between('md', 'lg')]: {
-    fontSize: '1.9rem',
+    fontSize: '2rem',
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '2.3rem',
+    fontSize: '3.2rem',
   },
 }));
-export const AllProductsBtn = styled(RadiusButton)(() => ({
-  minWidth: '128px',
-  minHeight: '32px',
-  maxWidth: '218px',
-  maxHeight: '54px',
+export const AllProductsBtn = styled(RadiusButton)(({ theme }) => ({
+  width: '9rem',
+  height: '2.3rem',
+  fontSize: '0.8rem',
+  [theme.breakpoints.between('xs', 'sm')]: {
+    width: '9rem',
+    height: '2.3rem',
+    fontSize: '0.8rem',
+  },
+  [theme.breakpoints.between('sm', 'md')]: {
+    width: '9rem',
+    height: '2.3rem',
+    fontSize: '1.3rem',
+  },
+  [theme.breakpoints.between('md', 'lg')]: {
+    width: '12.8rem',
+    height: '3.3rem',
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '15.6rem',
+    height: '3.9rem',
+    fontSize: '1.8rem',
+  },
 }));

@@ -20,17 +20,17 @@ import productSlice from './slices/productSlice';
 // eslint-disable-next-line import/no-named-as-default
 import allProductSlice from './slices/allProdsSlice';
 import filtersSlice from './slices/filtersSlice';
-import basketSlice from './slices/basketSlice';
+import basketSlice from './slices/basketSlice/basketSlice';
 import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
 import headerSlice from './slices/headerSlice';
 import loginSlice from './slices/loginSlice';
 import userSlice from './slices/userSlice';
-import tokenSlice from './slices/tokenSlice';
 import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
 import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
+import modalAddToBasketSlice from './slices/modalAddToBasket';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -48,16 +48,16 @@ const rootReducer = combineReducers({
   burgerMenu: headerSlice,
   login: loginSlice,
   user: userSlice,
-  token: tokenSlice,
   orders: ordersSlice,
   devTools: process.env.NODE_ENV !== 'production',
   allProdsHomePage: allProdsHomeSlice,
+  modalBasket: modalAddToBasketSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['basket', 'login', 'user', 'token'],
+  whitelist: ['basket', 'login', 'user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

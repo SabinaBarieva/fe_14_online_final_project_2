@@ -33,7 +33,6 @@ import { selectCart } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-import { fetchUserInfo } from '../../redux/slices/userSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -77,14 +76,15 @@ function Header() {
       dispatch(resetFilters());
     }
   };
-  const token = useSelector((state) => state.login.login);
-  const dataUser = useSelector((state) => state.user.user);
-
-  const getUserInfo = () => {
-    if (token) {
-      dispatch(fetchUserInfo());
+  const [token, setToken] = useState(false);
+  const getToken = () => {
+    const t = localStorage.getItem('token');
+    if (t !== null) {
+      return setToken(true);
     }
+    return setToken(false);
   };
+  const dataUser = useSelector((state) => state.user.user);
 
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.cartQuantity + sum, 0);
@@ -142,7 +142,7 @@ function Header() {
   useEffect(() => {
     totalBasketItems();
     locationDispatch();
-    getUserInfo();
+    getToken();
   }, [itemsBasket, location, token]);
 
   return (
