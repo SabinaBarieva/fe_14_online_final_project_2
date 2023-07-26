@@ -28,6 +28,7 @@ import {
   ProductName,
   ProductPrice,
 } from '../../themes/themeProductCard';
+import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ function ProductCard({ product }) {
 
   const onClickAdd = () => {
     dispatch(changeQuantityInBasketActionCreator(product, 1));
+    dispatch(modalAddBasket(product));
   };
   return (
     <CardContainer
