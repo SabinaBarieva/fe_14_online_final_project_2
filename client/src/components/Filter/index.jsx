@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 
 import {
   Button,
@@ -68,6 +69,7 @@ function Filter() {
 
 function FilterSection() {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const minPrice = useSelector(({ filters }) => filters.minPrice);
   const maxPrice = useSelector(({ filters }) => filters.maxPrice);
   const [cachedMinValue, setCachedMinValue] = useState(minPrice);
@@ -95,11 +97,31 @@ function FilterSection() {
     number !== undefined &&
     number !== '' &&
     !Number.isNaN(number);
+  // const categoryCheckboxCallback = ({ target }) => {
+  //   const { checked, name } = target;
+  //   if (checked) dispatch(addCategory(name));
+  //   else dispatch(removeCategory(name));
+  // };
+  // This function will be called whenever the text input changes
+  const searchHandler = (id) => {
+    let search;
+    if (id) {
+      search = {
+        categories: id,
+      };
+    } else {
+      search = undefined;
+    }
+    setSearchParams(search, { replace: true });
+  };
   const categoryCheckboxCallback = ({ target }) => {
     const { checked, name } = target;
-    if (checked) dispatch(addCategory(name));
-    else dispatch(removeCategory(name));
+    if (checked) {
+      dispatch(addCategory(name));
+      searchHandler(name);
+    } else dispatch(removeCategory(name));
   };
+  console.log(searchParams);
   const minPriceCallback = ({ target }) => {
     const { value } = target;
     // if (isNumber(value) && value < 0) setCachedMinValue(0);
@@ -169,12 +191,12 @@ function FilterSection() {
         </Typography>
         <Stack
           sx={{
-            width: '300px',
+            width: '250px',
             //   fontFamily: 'Roboto'
           }}
           padding={3}
           spacing={{ xs: 1, sm: 2 }}>
-          <FormGroup label="Product Category" sx={{ maxWidth: 300 }}>
+          <FormGroup label="Product Category" sx={{ maxWidth: 250 }}>
             <FormLabel
               sx={{ fontWeight: '550', color: '#000', marginBottom: '10px' }}>
               Product Category

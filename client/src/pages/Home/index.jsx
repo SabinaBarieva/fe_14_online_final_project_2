@@ -36,14 +36,13 @@ function HomeContent() {
         }}>
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box sx={{ width: '90%', margin: '0 auto' }}>
-          <ProductsList perPage={8} />
+          <ProductsList />
         </Box>
         <Box sx={{ margin: '10% auto 5%' }}>
           <Link to="/product">
             <AllProductsBtn sx={{ alignItems: 'center' }}>
               <Typography
                 sx={{
-                  fontSize: '0.75rem',
                   textTransform: 'capitalize',
                   marginRight: '5%',
                 }}>
