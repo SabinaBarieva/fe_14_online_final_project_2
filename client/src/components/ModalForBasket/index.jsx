@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCart } from '../../redux/selectors';
-import { closeModalBasket } from '../../redux/slices/basketSlice';
+import { closeModalBasket } from '../../redux/slices/basketSlice/basketSlice';
 
 function ModalBasket() {
   const { modal, modalText } = useSelector(selectCart);

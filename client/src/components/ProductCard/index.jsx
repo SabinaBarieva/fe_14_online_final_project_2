@@ -17,11 +17,9 @@ import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import getImg from '../../cloudinary';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import { setProduct } from '../../redux/slices/productSlice';
-import {
-  //   addToBasket,
-  increaseQuantity,
-  basketProductCreator,
-} from '../../redux/slices/basketSlice';
+import increaseQuantity from '../../redux/slices/basketSlice/increaseQuantity';
+import basketProductCreator from '../../redux/slices/basketSlice/basketProductCreator';
+
 import {
   CardContainer,
   DetailButton,

@@ -10,8 +10,8 @@ import { getProduct } from '../../redux/slices/productSlice';
 import {
   addSeveraltoBasket,
   closeModalBasket,
-  basketProductCreator,
-} from '../../redux/slices/basketSlice';
+} from '../../redux/slices/basketSlice/basketSlice';
+import basketProductCreator from '../../redux/slices/basketSlice/basketProductCreator';
 import {
   currentProduct,
   currentProductIsLoading,

@@ -29,10 +29,9 @@ import {
   addToBasket,
   clearBasket,
   deleteBasket,
-  increaseProductQuantity,
-  increaseQuantity,
   minusItem,
-} from '../../redux/slices/basketSlice';
+} from '../../redux/slices/basketSlice/basketSlice';
+import increaseQuantity from '../../redux/slices/basketSlice/increaseQuantity';
 import cld from '../../cloudinary';
 import theme from '../../themes/theme';
 import BasketEmpty from '../../components/BasketEmpty';
