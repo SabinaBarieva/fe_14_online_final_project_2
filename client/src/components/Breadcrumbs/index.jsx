@@ -72,7 +72,11 @@ export default function BreadCrumbs() {
     }
   });
 
-  if (crumbs.length === 0) {
+  if (
+    crumbs.length === 0 ||
+    location.pathname === '/login' ||
+    location.pathname === '/registration'
+  ) {
     return null;
   }
 
