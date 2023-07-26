@@ -15,9 +15,9 @@ import theme from './themes/theme';
 import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
-import TestSignUp from './components/TestSignUp';
-import TestLogin from './components/TestLogin';
-import Init from './components/Init/Init';
+// import TestSignUp from './components/TestSignUp';
+// import TestLogin from './components/TestLogin';
+import Init from './components/Init';
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
             </Routes>
           </BrowserRouter>
           {/* <TestSignUp /> */}
-          <TestLogin />
+          {/* <TestLogin /> */}
         </ThemeProvider>
       </PersistGate>
     </Provider>
