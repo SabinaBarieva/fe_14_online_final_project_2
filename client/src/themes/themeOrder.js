@@ -78,11 +78,21 @@ const StyledInputBaseLogin = styled(InputBase)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.inputBackground,
   borderRadius: 7,
   minHeight: 40,
+  position: 'relative',
   '& .MuiInputBase-input': {
     padding: '10px 15px!important',
     borderRadius: 7,
-    '& ::placeholder': {
+    '&:focus::placeholder': {
+      position: 'absolute',
+      opacity: 1,
+      zIndex: 2000,
+      transform: 'translateY(-20px)',
+      transition: 'opacity 0.2s, transform 0.5s',
+    },
+    '&:not(:placeholder-shown)::placeholder': {
       opacity: 0.5,
+      transform: 'translateY(0)',
+      transition: 'opacity 0.2s, transform 0.5s',
     },
   },
   '& .MuiOutlinedInput-input': {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
@@ -281,6 +281,9 @@ function Registration() {
             sx={{ width: '90%' }}>
             Registration
           </StyledButton>
+          <Container sx={{ textAlign: 'center' }}>
+            Back to <Link to="/login">Login</Link>
+          </Container>
         </Container>
       </form>
     </Container>

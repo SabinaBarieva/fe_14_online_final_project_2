@@ -29,6 +29,7 @@ const basketSlice = createSlice({
     },
     clearBasket: (state) => {
       state.itemsBasket = [];
+      state.priceAll = 0;
     },
   },
   extraReducers: (builder) => {

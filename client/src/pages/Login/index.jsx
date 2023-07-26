@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container, InputAdornment } from '@mui/material';
+import { Container, InputAdornment, TextField } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { useFormik } from 'formik';
 import LockIcon from '@mui/icons-material/Lock';
@@ -75,8 +75,10 @@ function Login() {
           <StyledForm>
             <StyledInputBaseLogin
               type="text"
+              variant="filled"
               id="loginOrEmail"
               name="loginOrEmail"
+              placeholder="Login Or Email"
               onBlur={formik.handleBlur}
               value={formik.values.loginOrEmail}
               onChange={formik.handleChange}
@@ -104,6 +106,7 @@ function Login() {
               onBlur={formik.handleBlur}
               value={formik.values.password}
               onChange={formik.handleChange}
+              placeholder="Password"
               startAdornment={
                 <InputAdornment position="end">
                   {showPassword ? (
