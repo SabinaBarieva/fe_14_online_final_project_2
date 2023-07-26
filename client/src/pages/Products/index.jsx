@@ -7,10 +7,10 @@ import DropdownMenu from '../../components/DropdownMenu';
 
 function ProductsContent() {
   return (
-    <Box sx={{ maxWidth: 'xl' }}>
+    <Box>
       <ModalBasket />
       <Stack
-        sx={{ width: '90%', margin: '0 auto' }}
+        sx={{ width: '90%', margin: '15px auto' }}
         direction={{ md: 'row', sm: 'column' }}>
         <Filter />
         <Container>
