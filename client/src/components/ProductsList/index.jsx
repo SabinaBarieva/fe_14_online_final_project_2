@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Grid, Box, Pagination, LinearProgress } from '@mui/material';
 import { useTheme } from '@mui/system';
+import PropTypes from 'prop-types';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
@@ -14,18 +15,16 @@ import {
   minimalPrice,
   productsList,
   totalNumberProducts,
-  productsSort,
 } from '../../redux/selectors';
-import StyledGrid from '../../themes/themeProductsList';
 import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
+import StyledGrid from '../../themes/themeProductsList';
 
-function ProductsList() {
+function ProductsList({ perPage }) {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
-  const filteredProds = useSelector(productsList);
-  const prodsForHomePage = useSelector(homePageProducts);
-  const sortBy = useSelector(productsSort);
+  const productsForProducts = useSelector(productsList);
+  const productsForHomePage = useSelector(homePageProducts);
   const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
@@ -36,87 +35,23 @@ function ProductsList() {
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useDispatch();
-  // Fetching products
   useEffect(() => {
-    dispatch(getAllHomeProducts());
     dispatch(
       fetchProducts({
         categories,
+        perPage,
         startPage: currentPage,
         minPrice: formattedMinPrice,
         maxPrice: formattedMaxPrice,
-        sort: sortBy,
       })
     );
-  }, [
-    dispatch,
-    currentPage,
-    categories,
-    formattedMinPrice,
-    formattedMaxPrice,
-    sortBy,
-  ]);
+  }, [dispatch, currentPage, categories, formattedMinPrice, formattedMaxPrice]);
 
-  // Pagination and showing products
-  const productsPerPage = 12;
-  const countPagination = total ? Math.round(total / productsPerPage) : 0;
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = currentPage * productsPerPage;
-  // Products page
-  const productsSliced = filteredProds.slice(startIndex, endIndex);
-  function groupProductsByCategory(productsBycategory) {
-    const groupedProducts = {};
-    productsBycategory.forEach((product) => {
-      const categoriesToShuffle = product.categories;
-      if (!groupedProducts[categoriesToShuffle]) {
-        groupedProducts[categoriesToShuffle] = [];
-      }
-      groupedProducts[categoriesToShuffle].push(product);
-    });
+  useEffect(() => {
+    dispatch(getAllHomeProducts());
+  }, [dispatch]);
 
-    return groupedProducts;
-  }
-
-  function shuffleArray(array) {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = shuffledArray[i];
-      shuffledArray[i] = shuffledArray[j];
-      shuffledArray[j] = temp;
-    }
-    return shuffledArray;
-  }
-
-  function combinateArrays(arrays) {
-    const maxLength = Math.max(...arrays.map((arr) => arr.length));
-    const result = [];
-
-    for (let i = 0; i < maxLength; i += 1) {
-      arrays.forEach((arr) => {
-        if (arr[i]) {
-          result.push(arr[i]);
-        }
-      });
-    }
-    return result;
-  }
-  const filterProdsNewArrival = (productsForFilter) =>
-    productsForFilter.filter(
-      (product) => product.newArrival === true && product.quantity !== 0
-    );
-
-  // Home page
-  const groupedNewArrivals = groupProductsByCategory(
-    filterProdsNewArrival(prodsForHomePage) // треба усі продукти
-  );
-  const shuffledNewArrivals = shuffleArray(Object.keys(groupedNewArrivals));
-  const newArrivalsToShow = combinateArrays(
-    shuffledNewArrivals.map(
-      (categoriesToShuffle) => groupedNewArrivals[categoriesToShuffle]
-    )
-  );
-  // Grid spacing
+  const countPagination = total ? Math.round(total / perPage) : 0;
   const spacingHomePage = {
     xs: 1.5,
     sm: 2,
@@ -133,6 +68,8 @@ function ProductsList() {
     currentPath === '/' ? spacingHomePage : spacingProductsPage;
   const isFetching =
     currentPath === '/' ? isFetchingHomeProds : isFetchingProducts;
+  const filterProductsForHomePage = (productsForFilter) =>
+    productsForFilter.filter((product) => product.quantity !== 0);
   return (
     <div style={{ width: '100%' }}>
       {isFetching ? (
@@ -149,19 +86,21 @@ function ProductsList() {
             spacing={gridSpacing}
             sx={{ padding: '0 1%', margin: '0 auto', width: '90%' }}>
             {currentPath === '/'
-              ? newArrivalsToShow.map((product) => (
-                  <StyledGrid
-                    item
-                    xs={6}
-                    sm={6}
-                    md={4}
-                    lg={3}
-                    key={product.itemNo}
-                    sx={{ alignItems: 'baseline' }}>
-                    <ProductCard product={product} />
-                  </StyledGrid>
-                ))
-              : productsSliced.map((product) => (
+              ? filterProductsForHomePage(productsForHomePage).map(
+                  (product) => (
+                    <StyledGrid
+                      item
+                      xs={6}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      key={product.itemNo}
+                      sx={{ alignItems: 'baseline' }}>
+                      <ProductCard product={product} />
+                    </StyledGrid>
+                  )
+                )
+              : productsForProducts.map((product) => (
                   <Grid
                     display="flex"
                     justifyContent="center"
@@ -206,3 +145,11 @@ function ProductsList() {
 }
 
 export default ProductsList;
+
+ProductsList.propTypes = {
+  perPage: PropTypes.number,
+};
+
+ProductsList.defaultProps = {
+  perPage: 10,
+};
