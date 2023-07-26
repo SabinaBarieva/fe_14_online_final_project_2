@@ -150,37 +150,37 @@ function ProductsList() {
             sx={{ padding: '0 1%', margin: '0 auto', width: '90%' }}>
             {currentPath === '/'
               ? newArrivalsToShow.map((product) => (
-                <StyledGrid
-                  item
-                  xs={6}
-                  sm={6}
-                  md={4}
-                  lg={4}
-                  xl={3}
-                  key={product.itemNo}
-                  sx={{ alignItems: 'baseline' }}>
-                  <ProductCard product={product} />
-                </StyledGrid>
-              ))
+                  <StyledGrid
+                    item
+                    xs={6}
+                    sm={6}
+                    md={4}
+                    lg={4}
+                    xl={3}
+                    key={product.itemNo}
+                    sx={{ alignItems: 'baseline' }}>
+                    <ProductCard product={product} />
+                  </StyledGrid>
+                ))
               : productsSliced.map((product) => (
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  item
-                  xs={6}
-                  sm={6}
-                  md={6}
-                  lg={4}
-                  xl={3}
-                  key={product.itemNo}
-                  height="auto"
-                  sx={{
-                    alignItems: 'baseline',
-                    paddingTop: '5%',
-                  }}>
-                  <ProductCard product={product} />
-                </Grid>
-              ))}
+                  <Grid
+                    display="flex"
+                    justifyContent="center"
+                    item
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={4}
+                    xl={3}
+                    key={product.itemNo}
+                    height="auto"
+                    sx={{
+                      alignItems: 'baseline',
+                      paddingTop: '5%',
+                    }}>
+                    <ProductCard product={product} />
+                  </Grid>
+                ))}
           </Grid>
           {currentPath === '/' ? null : (
             <Box

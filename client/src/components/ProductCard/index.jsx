@@ -179,7 +179,7 @@ function ProductCard({ product }) {
           imageurl={getImageUrl(product)}
           alt={product.name + product.color}
           size={backgroundSize}
-          sale={product.sale}>
+          sale={product.sale.toString()}>
           <Box
             width={getImageSize().width}
             sx={{
