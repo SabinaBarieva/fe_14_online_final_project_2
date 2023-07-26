@@ -34,7 +34,7 @@ import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
 import { fetchUserInfo } from '../../redux/slices/userSlice';
-import useToken from '../../custom-hooks/useToken';
+// import useToken from '../../custom-hooks/useToken';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -78,13 +78,19 @@ function Header() {
       dispatch(resetFilters());
     }
   };
-  // const token = useSelector((state) => state.login.login);
-  const token = useToken();
-  console.log(token);
+  // const token = useToken();
+  const [token, setToken] = useState(false);
+  const getToken = () => {
+    const t = localStorage.getItem('token');
+    if (t !== null) {
+      return setToken(true);
+    }
+    return setToken(false);
+  };
   const dataUser = useSelector((state) => state.user.user);
 
   const getUserInfo = () => {
-    if (token) {
+    if (token === true) {
       dispatch(fetchUserInfo());
     }
   };
@@ -145,6 +151,7 @@ function Header() {
   useEffect(() => {
     totalBasketItems();
     locationDispatch();
+    getToken();
     getUserInfo();
   }, [itemsBasket, location, token]);
 
