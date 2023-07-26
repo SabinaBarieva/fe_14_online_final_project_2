@@ -2,75 +2,88 @@ import { styled } from '@mui/system';
 import { Card, CardContent, Typography } from '@mui/material';
 import { RadiusButton } from '../components/Buttons';
 
+export const CardContainer = styled(Card)(() => ({
+  outline: `solid 1px transparent`,
+  borderRadius: '15px',
+  marginBottom: '5%',
+  height: '100%',
+}));
+
 export const DetailButton = styled(RadiusButton)(({ theme }) => ({
-  lineHeight: '0.8rem',
-  fontSize: '0.7rem',
-  minWidth: '4.5rem',
-  fontWeight: theme.typography.const.fontWeight.normal,
-  fontFamily: theme.typography.const.fontFamily.secondary,
+  fontSize: '0.625rem',
+  lineHeight: '0.75rem',
   [theme.breakpoints.between('xs', 'sm')]: {
     textTransform: 'capitalize',
-    width: '4.5rem',
-    height: '1.3rem',
+    width: '77px',
+    height: '20px',
   },
   [theme.breakpoints.between('sm', 'md')]: {
-    width: '5rem',
-    height: '1.5rem',
+    fontSize: '0.7rem',
+    width: '100px',
+    height: '30px',
   },
   [theme.breakpoints.between('md', 'lg')]: {
-    fontSize: '1rem',
-    width: '7.5rem',
-    height: '2rem',
+    fontSize: '0.75rem',
+    minWidth: '104px',
+    minHeight: '29px',
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '1rem',
-    width: '8.5rem',
-    height: '2.5rem',
+    fontSize: '0.785rem',
+    minWidth: '85px',
+    minHeight: '25px',
   },
 }));
 
 export const AddToCartBtn = styled(RadiusButton)(({ theme }) => ({
   backgroundColor: 'white',
   outline: `1px solid ${theme.palette.primary.buttonhover}`,
+  width: '30%',
+  height: '90%',
+  maxWidth: '40px',
+  maxHeight: '30px',
   position: 'relative',
-  minWidth: '1.8rem',
   '&:hover': {
     backgroundColor: theme.palette.primary.buttonhover,
     outline: `1px solid transparent`,
   },
   '& svg': {
     marginTop: '5%',
+    minWidth: '13px',
+    minHeight: '12px',
+    maxWidth: '18px',
+    maxHeight: '20px',
   },
+
   [theme.breakpoints.between('xs', 'sm')]: {
-    width: '1.8rem',
-    height: '1.3rem',
+    minWidth: '29px',
+    minHeight: '20px',
     '& svg': {
-      width: '1rem',
-      height: '0.85rem',
+      width: '17px',
+      height: '16px',
     },
   },
   [theme.breakpoints.between('sm', 'md')]: {
-    width: '1.9rem',
-    height: '1.5rem',
+    width: '36px',
+    height: '30px',
     '& svg': {
-      width: '1.3rem',
-      height: '1.5rem',
+      width: '18px',
+      height: '20px',
     },
   },
   [theme.breakpoints.between('md', 'lg')]: {
-    width: '3rem',
-    height: '2rem',
+    minWidth: '42px',
+    minHeight: '29px',
     '& svg': {
-      width: '1.3rem',
-      height: '1.4rem',
+      width: '18px',
+      height: '20px',
     },
   },
   [theme.breakpoints.up('lg')]: {
-    width: '2.5rem',
-    height: '2.5rem',
+    minWidth: '28px',
+    minHeight: '25px',
     '& svg': {
-      width: '1.4rem',
-      height: '1.4rem',
+      width: '17px',
+      height: '20px',
     },
   },
 }));

@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { Button } from '@mui/material';
 
 export const RadiusButton = styled(Button)(({ theme }) => ({
-  borderRadius: '7px',
+  borderRadius: '10px',
   border: 'none',
   padding: '0',
   color: 'white',
