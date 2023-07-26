@@ -17,12 +17,13 @@ import {
   productsSort,
 } from '../../redux/selectors';
 import StyledGrid from '../../themes/themeProductsList';
+import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
 
 function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
-  const prodsForProdsPage = useSelector(productsList);
+  const filteredProds = useSelector(productsList);
   const prodsForHomePage = useSelector(homePageProducts);
   const sortBy = useSelector(productsSort);
   const categories = useSelector(categoriesFilter);
@@ -37,6 +38,7 @@ function ProductsList() {
   const dispatch = useDispatch();
   // Fetching products
   useEffect(() => {
+    dispatch(getAllHomeProducts());
     dispatch(
       fetchProducts({
         categories,
@@ -60,7 +62,7 @@ function ProductsList() {
   const countPagination = total ? Math.round(total / productsPerPage) : 0;
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = currentPage * productsPerPage;
-  const productsSliced = prodsForProdsPage.slice(startIndex, endIndex);
+  const productsSliced = filteredProds.slice(startIndex, endIndex);
   function groupProductsByCategory(productsBycategory) {
     const groupedProducts = {};
     productsBycategory.forEach((product) => {
@@ -112,7 +114,7 @@ function ProductsList() {
   );
   // Home page
   const groupedNewArrivals = groupProductsByCategory(
-    filterProdsNewArrival(prodsForProdsPage)
+    filterProdsNewArrival(prodsForHomePage) // треба усі продукти
   );
   const shuffledNewArrivals = shuffleArray(Object.keys(groupedNewArrivals));
   const newArrivalsToShow = combinateArrays(
