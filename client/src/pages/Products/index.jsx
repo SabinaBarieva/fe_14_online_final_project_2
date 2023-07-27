@@ -17,8 +17,8 @@ function ProductsContent() {
   const sort = useSelector((state) => state.products.sort);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
-  const [urlFilter, setUrlFilter] = useState();
-
+  const [urlFilter, setUrlFilter] = useState('');
+  console.log(urlFilter);
   const filterLinkConstructor = () => {
     // categories;
     const categoryFilter =
@@ -59,6 +59,7 @@ function ProductsContent() {
         <Filter
           priceMinBoundary={priceMinBoundary}
           priceMaxBoundary={priceMaxBoundary}
+          urlFilter={urlFilter}
         />
         <Container>
           <DropdownMenu />

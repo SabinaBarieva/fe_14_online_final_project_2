@@ -6,12 +6,9 @@ import { useTheme } from '@mui/system';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
-  categoriesFilter,
   homePageProducts,
   isFetchingAllProducts,
   isFetchingProductsList,
-  maximalPrice,
-  minimalPrice,
   productsList,
   totalNumberProducts,
   productsSort,

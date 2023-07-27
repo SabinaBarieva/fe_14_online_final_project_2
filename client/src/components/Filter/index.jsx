@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
@@ -29,7 +29,8 @@ import {
 import theme from '../../themes/theme';
 import FilterStyles from '../../themes/themeFilter';
 
-function Filter() {
+// eslint-disable-next-line react/prop-types
+function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
   const [filterOpen, setFilterOpen] = useState(false);
   const closeCallback = () => {
     setFilterOpen(false);
@@ -38,7 +39,11 @@ function Filter() {
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return !smallScreen ? (
-    <FilterSection />
+    <FilterSection
+      priceMinBoundary={priceMinBoundary}
+      priceMaxBoundary={priceMaxBoundary}
+      urlFilter={urlFilter}
+    />
   ) : (
     <>
       <IconButton
@@ -60,15 +65,20 @@ function Filter() {
           />
         </IconButton>
 
-        <FilterSection />
+        <FilterSection
+          priceMinBoundary={priceMinBoundary}
+          priceMaxBoundary={priceMaxBoundary}
+          urlFilter={urlFilter}
+        />
       </Dialog>
     </>
   );
 }
 
 // eslint-disable-next-line react/prop-types
-function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
+function FilterSection({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
   const dispatch = useDispatch();
+  console.log(urlFilter);
   const [searchParams, setSearchParams] = useSearchParams();
   const minPrice = useSelector(({ filters }) => filters.minPrice);
   const maxPrice = useSelector(({ filters }) => filters.maxPrice);
@@ -86,32 +96,12 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
     number !== '' &&
     !Number.isNaN(number);
 
-  // const categoryCheckboxCallback = ({ target }) => {
-  //   const { checked, name } = target;
-  //   if (checked) dispatch(addCategory(name));
-  //   else dispatch(removeCategory(name));
-  // };
-  // This function will be called whenever the text input changes
-  // const searchHandler = (id) => {
-  //   let search;
-  //   if (id) {
-  //     search = {
-  //       categories: id,
-  //     };
-  //   } else {
-  //     search = undefined;
-  //   }
-  //   setSearchParams(search, { replace: true });
-  // };
-
   const categoryCheckboxCallback = ({ target }) => {
     const { checked, name } = target;
-    if (checked) {
-      dispatch(addCategory(name));
-      // searchHandler(name);
-    } else dispatch(removeCategory(name));
+    if (checked) dispatch(addCategory(name));
+    else dispatch(removeCategory(name));
   };
-  // console.log(searchParams);
+
   const minPriceCallback = ({ target }) => {
     const { value } = target;
     // if (isNumber(value) && value < 0) setCachedMinValue(0);
