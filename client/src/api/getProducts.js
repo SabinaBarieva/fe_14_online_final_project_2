@@ -24,3 +24,7 @@ export default getProducts;
 // const categoryQuery =
 //   categories.length > 0 ? `&categories=${categories.join(',')}` : '';
 // console.log(categoryQuery);
+
+// &categories=accessories&sort=-currentPrice
+
+// /?categories=accessories&sort=-currentPrice

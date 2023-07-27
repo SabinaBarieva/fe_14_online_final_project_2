@@ -86,16 +86,14 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
 
   const filterLinkConstructor = () => {
     // Categories;
-    const categoryQuery =
+    const categoryFilter =
       selectedCategories.length > 0
-        ? `&categories=${selectedCategories.join(',')}`
+        ? `categories=${selectedCategories.join(',')}`
         : '';
-    console.log(categoryQuery);
     // Price
     let priceFilter = '';
     if (minPrice !== null) priceFilter += `&minPrice=${minPrice}`;
     if (maxPrice !== null) priceFilter += `&maxPrice=${maxPrice}`;
-    console.log(priceFilter);
     // sort
     let sortOrder;
     if (sort === 'currentPrice') {
@@ -103,7 +101,7 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
     } else if (sort === '-currentPrice') {
       sortOrder = '&sort=currentPrice';
     } else sortOrder = '';
-    console.log(sortOrder);
+    console.log(categoryFilter + priceFilter + sortOrder);
   };
 
   useEffect(() => {
