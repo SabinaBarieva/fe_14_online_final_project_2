@@ -17,25 +17,28 @@ function ProductsContent() {
   const sort = useSelector((state) => state.products.sort);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
+  const [urlFilter, setUrlFilter] = useState();
 
   const filterLinkConstructor = () => {
-    // Categories;
+    // categories;
     const categoryFilter =
       selectedCategories.length > 0
         ? `categories=${selectedCategories.join(',')}`
         : '';
-    // Price
+    // price
     let priceFilter = '';
     if (minPrice !== null) priceFilter += `&minPrice=${minPrice}`;
     if (maxPrice !== null) priceFilter += `&maxPrice=${maxPrice}`;
     // sort
     let sortOrder;
     if (sort === 'currentPrice') {
-      sortOrder = '&sort=-currentPrice';
-    } else if (sort === '-currentPrice') {
       sortOrder = '&sort=currentPrice';
+    } else if (sort === '-currentPrice') {
+      sortOrder = '&sort=-currentPrice';
     } else sortOrder = '';
-    console.log(categoryFilter + priceFilter + sortOrder);
+    // full link
+    const fullFilterURL = categoryFilter + priceFilter + sortOrder;
+    setUrlFilter(fullFilterURL);
   };
 
   useEffect(() => {
@@ -59,7 +62,7 @@ function ProductsContent() {
         />
         <Container>
           <DropdownMenu />
-          <ProductsList />
+          <ProductsList urlFilter={urlFilter} />
         </Container>
       </Stack>
     </Box>
