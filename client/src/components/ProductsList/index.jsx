@@ -138,7 +138,7 @@ function ProductsList() {
       {isFetching ? (
         <LinearProgress
           sx={{
-            backgroundColor: `${theme.palette.primary.light}`,
+            backgroundColor: `${theme.palette.primary.section}`,
             mx: '0 auto',
           }}
         />
