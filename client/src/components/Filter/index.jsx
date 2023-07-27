@@ -76,7 +76,9 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const [cachedMinValue, setCachedMinValue] = useState(minPrice);
   const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   let keyOnePressed = false;
-  const { categories } = useSelector(({ filters }) => filters.availableFilters);
+  const { categories, price } = useSelector(
+    ({ filters }) => filters.availableFilters
+  );
   const selectedCategories = useSelector(({ filters }) => filters.categories);
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
@@ -88,6 +90,11 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
         ? `&categories=${selectedCategories.join(',')}`
         : '';
     console.log(categoryQuery);
+    // Price
+    let priceFilter = '';
+    if (minPrice !== null) priceFilter += `&minPrice=${minPrice}`;
+    if (maxPrice !== null) priceFilter += `&maxPrice=${maxPrice}`;
+    console.log(priceFilter);
   };
 
   useEffect(() => {
