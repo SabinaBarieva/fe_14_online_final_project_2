@@ -30,7 +30,7 @@ function Login() {
     validationSchema,
     onSubmit: ({ loginOrEmail, password }) => {
       dispatch(login({ loginOrEmail, password }));
-      navigate('/');
+      navigate(-1);
     },
   });
 

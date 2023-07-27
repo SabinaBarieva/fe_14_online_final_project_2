@@ -16,6 +16,7 @@ import {
 } from '../../themes/themeProductCard';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import PulseAnimation from '../Animations';
+import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
 
 const Card = styled.div`
   box-shadow: 5px 5px 5px #acacac;
@@ -120,6 +121,7 @@ function ProductCard({ product }) {
 
   const onClickAdd = () => {
     dispatch(changeQuantityInBasketActionCreator(product, 1));
+    dispatch(modalAddBasket(product));
   };
 
   const imageUrl = (publicId) => {
