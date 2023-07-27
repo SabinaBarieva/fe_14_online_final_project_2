@@ -21,7 +21,7 @@ function DropdownMenu() {
         }}>
         <MenuItem value="-currentPrice">Highest price</MenuItem>
         <MenuItem value="currentPrice">Lowest price</MenuItem>
-        <MenuItem value="false">Default</MenuItem>
+        <MenuItem value="false">Random</MenuItem>
       </Select>
     </FormControl>
   );
