@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { Button, LinearProgress, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
-import { useTheme } from '@emotion/react';
 import { getProduct } from '../../redux/slices/productSlice';
 import { closeModalBasket } from '../../redux/slices/basketSlice/basketSlice';
 import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
@@ -27,11 +26,10 @@ import {
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
-
+import theme from '../../themes/theme';
 // eslint-disable-next-line import/no-duplicates
 
 function ProductDescription() {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
@@ -88,13 +86,7 @@ function ProductDescription() {
   }, [imageUrls]);
 
   if (isLoading) {
-    return (
-      <LinearProgress
-        sx={{
-          backgroundColor: `${theme.palette.primary.section}`,
-        }}
-      />
-    );
+    return <LinearProgress />;
   }
 
   if (isError) {
@@ -144,7 +136,7 @@ function ProductDescription() {
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-around',
-                  margin: { md: '35px 0 0 0' },
+                  margin: '15px 0',
                   order: { xs: '0', md: '1' },
                 }}>
                 {imageUrls.map((photo) => (

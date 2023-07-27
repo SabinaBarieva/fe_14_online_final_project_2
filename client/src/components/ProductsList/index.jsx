@@ -6,9 +6,12 @@ import { useTheme } from '@mui/system';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
 import {
+  categoriesFilter,
   homePageProducts,
   isFetchingAllProducts,
   isFetchingProductsList,
+  maximalPrice,
+  minimalPrice,
   productsList,
   totalNumberProducts,
   productsSort,
@@ -16,30 +19,43 @@ import {
 import StyledGrid from '../../themes/themeProductsList';
 import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
 
-// eslint-disable-next-line react/prop-types
-function ProductsList({ urlFilter }) {
+function ProductsList() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
   const filteredProds = useSelector(productsList);
   const prodsForHomePage = useSelector(homePageProducts);
   const sortBy = useSelector(productsSort);
+  const categories = useSelector(categoriesFilter);
+  const minFilterPrice = useSelector(minimalPrice);
+  const maxFilterPrice = useSelector(maximalPrice);
+  const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
+  const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
   const isFetchingProducts = useSelector(isFetchingProductsList);
   const isFetchingHomeProds = useSelector(isFetchingAllProducts);
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useDispatch();
-
   // Fetching products
   useEffect(() => {
     dispatch(getAllHomeProducts());
     dispatch(
       fetchProducts({
+        categories,
         startPage: currentPage,
-        urlFilter,
+        minPrice: formattedMinPrice,
+        maxPrice: formattedMaxPrice,
+        sort: sortBy,
       })
     );
-  }, [dispatch, currentPage, sortBy, urlFilter]);
+  }, [
+    dispatch,
+    currentPage,
+    categories,
+    formattedMinPrice,
+    formattedMaxPrice,
+    sortBy,
+  ]);
 
   // Pagination and showing products
   const productsPerPage = 12;
@@ -122,7 +138,7 @@ function ProductsList({ urlFilter }) {
       {isFetching ? (
         <LinearProgress
           sx={{
-            backgroundColor: `${theme.palette.primary.section}`,
+            backgroundColor: `${theme.palette.primary.light}`,
             mx: '0 auto',
           }}
         />
