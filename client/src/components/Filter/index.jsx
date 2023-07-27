@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
@@ -21,7 +21,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import {
   addCategory,
-  // fetchFilters,
   removeCategory,
   resetFilters,
   setMaxPrice,
@@ -76,37 +75,10 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const [cachedMinValue, setCachedMinValue] = useState(minPrice);
   const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
   let keyOnePressed = false;
-  const { categories, price } = useSelector(
-    ({ filters }) => filters.availableFilters
-  );
+  const { categories } = useSelector(({ filters }) => filters.availableFilters);
   const selectedCategories = useSelector(({ filters }) => filters.categories);
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
-  const sort = useSelector((state) => state.products.sort);
-
-  const filterLinkConstructor = () => {
-    // Categories;
-    const categoryFilter =
-      selectedCategories.length > 0
-        ? `categories=${selectedCategories.join(',')}`
-        : '';
-    // Price
-    let priceFilter = '';
-    if (minPrice !== null) priceFilter += `&minPrice=${minPrice}`;
-    if (maxPrice !== null) priceFilter += `&maxPrice=${maxPrice}`;
-    // sort
-    let sortOrder;
-    if (sort === 'currentPrice') {
-      sortOrder = '&sort=-currentPrice';
-    } else if (sort === '-currentPrice') {
-      sortOrder = '&sort=currentPrice';
-    } else sortOrder = '';
-    console.log(categoryFilter + priceFilter + sortOrder);
-  };
-
-  useEffect(() => {
-    filterLinkConstructor();
-  });
 
   const isNumber = (number) =>
     number !== null &&

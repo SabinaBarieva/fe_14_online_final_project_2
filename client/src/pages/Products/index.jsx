@@ -11,8 +11,33 @@ function ProductsContent() {
   const dispatch = useDispatch();
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const { price } = useSelector(({ filters }) => filters.availableFilters);
+  const selectedCategories = useSelector(({ filters }) => filters.categories);
+  const minPrice = useSelector(({ filters }) => filters.minPrice);
+  const maxPrice = useSelector(({ filters }) => filters.maxPrice);
+  const sort = useSelector((state) => state.products.sort);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
+
+  const filterLinkConstructor = () => {
+    // Categories;
+    const categoryFilter =
+      selectedCategories.length > 0
+        ? `categories=${selectedCategories.join(',')}`
+        : '';
+    // Price
+    let priceFilter = '';
+    if (minPrice !== null) priceFilter += `&minPrice=${minPrice}`;
+    if (maxPrice !== null) priceFilter += `&maxPrice=${maxPrice}`;
+    // sort
+    let sortOrder;
+    if (sort === 'currentPrice') {
+      sortOrder = '&sort=-currentPrice';
+    } else if (sort === '-currentPrice') {
+      sortOrder = '&sort=currentPrice';
+    } else sortOrder = '';
+    console.log(categoryFilter + priceFilter + sortOrder);
+  };
+
   useEffect(() => {
     if (!isLoadedFilters) dispatch(fetchFilters());
     else {
@@ -20,7 +45,8 @@ function ProductsContent() {
       setPriceMinBoundary(priceMin);
       setPriceMaxBoundary(priceMax);
     }
-  }, [isLoadedFilters]);
+    filterLinkConstructor();
+  }, [isLoadedFilters, selectedCategories, minPrice, maxPrice, sort]);
   return (
     <Box>
       <ModalBasket />
