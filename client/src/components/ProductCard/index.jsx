@@ -8,8 +8,7 @@ import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
 import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
-import { handleWishlist } from '../../redux/slices/wishlistSlice';
-import { selectWishlist } from '../../redux/selectors';
+import Wishlist from '../Wishlist';
 import {
   AddToCartBtn,
   CardInfo,
@@ -76,10 +75,6 @@ function ProductCard({ product }) {
   const smBreakpoint = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
-  const [addedWishlist, setAddedWishlist] = useState(false);
-  const { itemsWishlist } = useSelector(selectWishlist);
-  console.log('item', itemsWishlist);
-  let wishlist = [];
 
   const getImageSize = () => {
     const currentBreakpoints = {
@@ -170,34 +165,6 @@ function ProductCard({ product }) {
     });
   };
 
-
-  useEffect(() => {
-    if (itemsWishlist.length) {
-      if (itemsWishlist.includes(product.itemNo)) {
-        setAddedWishlist(true);
-      }
-    }
-  }, [itemsWishlist, product.itemNo]);
-
-  const updateWishlist = (e) => {
-    e.preventDefault();
-    setAddedWishlist((prev) => !prev);
-    if (!addedWishlist) {
-      if (itemsWishlist.length) {
-        if (!itemsWishlist.includes(product.itemNo)) {
-          wishlist = [...itemsWishlist, product.itemNo];
-        }
-      } else {
-        wishlist = [...itemsWishlist, product.itemNo];
-      }
-    } else if (itemsWishlist.length) {
-      wishlist = itemsWishlist.filter((item) => item !== product.itemNo);
-    }
-    console.log('w', itemsWishlist);
-    console.log('wish', wishlist);
-    dispatch(handleWishlist(wishlist));
-  };
-
   return (
     <Box width={getImageSize().width}>
       <animated.div
@@ -246,6 +213,7 @@ function ProductCard({ product }) {
                     <CartIcon />
                   </SvgIcon>
                 </AddToCartBtn>
+                <Wishlist product={product} />
               </PulseAnimation>
             )}
             {product.quantity === 0 && (

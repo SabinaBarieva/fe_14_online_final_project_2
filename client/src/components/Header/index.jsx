@@ -35,7 +35,7 @@ import { selectCart, selectWishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-import LoginButtons from '../Login/loginButtons';
+// import LoginButtons from '../Login/loginButtons';
 import { getWishlist } from '../../redux/slices/wishlistSlice';
 
 const activeLinkDecoration = ({ isActive }) => ({
