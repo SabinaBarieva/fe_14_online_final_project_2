@@ -124,9 +124,9 @@ function ProductsList() {
     lg: 6,
   };
   const spacingProductsPage = {
-    xs: 1,
-    sm: 1.5,
-    md: 2,
+    xs: 5,
+    sm: 2,
+    md: 3,
     lg: 3,
   };
   const gridSpacing =
@@ -155,7 +155,8 @@ function ProductsList() {
                     xs={6}
                     sm={6}
                     md={4}
-                    lg={3}
+                    lg={4}
+                    xl={3}
                     key={product.itemNo}
                     sx={{ alignItems: 'baseline' }}>
                     <ProductCard product={product} />
@@ -169,11 +170,13 @@ function ProductsList() {
                     xs={6}
                     sm={6}
                     md={6}
-                    lg={3}
+                    lg={4}
+                    xl={3}
                     key={product.itemNo}
                     height="auto"
                     sx={{
                       alignItems: 'baseline',
+                      paddingTop: '5%',
                     }}>
                     <ProductCard product={product} />
                   </Grid>

@@ -35,7 +35,7 @@ function Registration() {
     },
     validationSchema,
     onSubmit: () => {
-      navigate('/');
+      navigate(-1);
     },
   });
 
