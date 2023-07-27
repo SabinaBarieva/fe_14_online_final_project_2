@@ -28,12 +28,12 @@ export default function ButtonOrder() {
             variant="contained"
             sx={{
               width: {
-                xs: '5rem',
+                xs: '7rem',
                 sm: '7rem',
                 md: '9rem',
               },
               height: {
-                xs: '2rem',
+                xs: '2.4rem',
                 sm: '2.5rem',
                 md: '3rem',
               },
