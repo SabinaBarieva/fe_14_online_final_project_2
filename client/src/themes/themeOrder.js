@@ -8,13 +8,13 @@ import {
   Typography,
   Modal,
   Container,
+  TextField,
 } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledForm = styled(FormControl)({
-  gap: 5,
   width: '100%',
-  alignItems: 'center',
+  alignItems: 'flex-start',
 });
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -23,7 +23,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     color: { xs: '#616467', md: '#fff' },
     borderRadius: 7,
     border: '1px solid #211F1C',
-    margin: '10px auto',
+    margin: '10px 0',
     display: 'block',
     minHeight: 40,
     width: {
@@ -71,33 +71,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StyledInputBaseLogin = styled(InputBase)(({ theme }) => ({
+const StyledInputBaseLogin = styled(TextField)(({ theme }) => ({
   margin: 5,
   width: '90%',
   boxSizing: 'border-box',
   backgroundColor: theme.palette.secondary.inputBackground,
-  borderRadius: 7,
   minHeight: 40,
   position: 'relative',
-  '& .MuiInputBase-input': {
-    padding: '10px 15px!important',
+  '& .MuiInputBase-root': {
     borderRadius: 7,
-    '&:focus::placeholder': {
-      position: 'absolute',
-      opacity: 1,
-      zIndex: 2000,
-      transform: 'translateY(-20px)',
-      transition: 'opacity 0.2s, transform 0.5s',
-    },
-    '&:not(:placeholder-shown)::placeholder': {
-      opacity: 0.5,
-      transform: 'translateY(0)',
-      transition: 'opacity 0.2s, transform 0.5s',
-    },
+  },
+  '& .MuiInputBase-input': {
+    padding: '12px 15px!important',
   },
   '& .MuiOutlinedInput-input': {
-    outline: 'none',
-    minHeight: 40,
     borderRadius: 7,
   },
 }));

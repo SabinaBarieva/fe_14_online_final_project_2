@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PatternFormat } from 'react-number-format';
 import { useFormik } from 'formik';
-import { Container } from '@mui/material';
+import { Container, InputAdornment } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import HomeIcon from '@mui/icons-material/Home';
+import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
@@ -10,7 +14,7 @@ import { openApp } from '../../redux/slices/formSlice';
 import {
   StyledForm,
   StyledButton,
-  StyledInputBase,
+  StyledInputBaseLogin,
   StyledIconButton,
   StyledGrid,
   StyledTypography,
@@ -144,14 +148,24 @@ export default function OrderForm() {
               }}>
               <Container component="div" style={{ maxWidth: 300, padding: 0 }}>
                 <StyledForm>
-                  <StyledInputBase
+                  <StyledInputBaseLogin
+                    variant="outlined"
                     type="text"
                     id="firstName"
                     name="firstName"
-                    placeholder="FirstName"
+                    label="First Name"
                     onBlur={formik.handleBlur}
                     value={formik.values.firstName}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <PersonIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {formik.touched.firstName && formik.errors.firstName ? (
                     <StyledTypography variant="paragraph" component="p">
@@ -164,14 +178,24 @@ export default function OrderForm() {
                   )}
                 </StyledForm>
                 <StyledForm>
-                  <StyledInputBase
+                  <StyledInputBaseLogin
+                    variant="outlined"
                     type="text"
                     id="lastName"
                     name="lastName"
-                    placeholder="LastName"
+                    label="Last Name"
                     onBlur={formik.handleBlur}
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <PersonIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {formik.touched.lastName && formik.errors.lastName ? (
                     <StyledTypography variant="paragraph" component="p">
@@ -187,10 +211,11 @@ export default function OrderForm() {
                   <PatternFormat
                     style={{
                       width: '95%',
-                      border: 'none',
-                      minHeight: 45,
+                      border: '0.5px solid rgb(0 0 0 / 32%)',
+                      minHeight: 48,
                       padding: '0 20px',
                       borderRadius: 7,
+                      backgroundColor: '#F3F6FF',
                     }}
                     format="+380 (##) ## ## ###"
                     allowEmptyFormatting
@@ -200,6 +225,15 @@ export default function OrderForm() {
                     onBlur={formik.handleBlur}
                     value={formik.values.phone}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <PhoneEnabledIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {formik.touched.phone && formik.errors.phone ? (
                     <StyledTypography variant="paragraph" component="p">
@@ -362,15 +396,25 @@ export default function OrderForm() {
                 </StyledGrid>
               </StyledGrid>
               <StyledForm>
-                <StyledInputBase
-                  type="email"
+                <StyledInputBaseLogin
+                  variant="outlined"
+                  type="text"
                   id="email"
                   name="email"
-                  placeholder="Email"
-                  style={{ width: '100%' }}
+                  label="Email"
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   onChange={formik.handleChange}
+                  sx={{ width: '100%' }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <AlternateEmailIcon
+                          style={{ paddingRight: 5, cursor: 'pointer' }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <StyledTypography variant="paragraph" component="p">
@@ -383,15 +427,25 @@ export default function OrderForm() {
                 )}
               </StyledForm>
               <StyledForm>
-                <StyledInputBase
+                <StyledInputBaseLogin
+                  variant="outlined"
                   type="text"
                   id="address"
                   name="address"
-                  placeholder="Address"
+                  label="Address"
                   style={{ width: '100%' }}
                   onBlur={formik.handleBlur}
                   value={formik.values.address}
                   onChange={formik.handleChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <HomeIcon
+                          style={{ paddingRight: 5, cursor: 'pointer' }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 {formik.touched.address && formik.errors.address ? (
                   <StyledTypography variant="paragraph" component="p">

@@ -30,7 +30,7 @@ function Login() {
     validationSchema,
     onSubmit: ({ loginOrEmail, password }) => {
       dispatch(login({ loginOrEmail, password }));
-      navigate('/');
+      // navigate('/');
     },
   });
 
@@ -75,18 +75,22 @@ function Login() {
           <StyledForm>
             <StyledInputBaseLogin
               type="text"
-              variant="filled"
+              variant="outlined"
               id="loginOrEmail"
               name="loginOrEmail"
-              placeholder="Login Or Email"
+              label="Login Or Email"
               onBlur={formik.handleBlur}
               value={formik.values.loginOrEmail}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <PersonIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
-                </InputAdornment>
-              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <PersonIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.loginOrEmail && formik.errors.loginOrEmail ? (
               <StyledTypography variant="paragraph" component="p">
@@ -103,25 +107,28 @@ function Login() {
               type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
+              variant="outlined"
               onBlur={formik.handleBlur}
               value={formik.values.password}
               onChange={formik.handleChange}
-              placeholder="Password"
-              startAdornment={
-                <InputAdornment position="end">
-                  {showPassword ? (
-                    <LockOpenIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPassword(false)}
-                    />
-                  ) : (
-                    <LockIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPassword(true)}
-                    />
-                  )}
-                </InputAdornment>
-              }
+              label="Password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {showPassword ? (
+                      <LockOpenIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPassword(false)}
+                      />
+                    ) : (
+                      <LockIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPassword(true)}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.password && formik.errors.password ? (
               <StyledTypography variant="paragraph" component="p">
