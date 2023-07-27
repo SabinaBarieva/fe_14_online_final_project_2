@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Container, Stack } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import ProductsList from '../../components/ProductsList';
 import Filter from '../../components/Filter';
 import ModalBasket from '../../components/ModalForBasket';
@@ -9,6 +10,7 @@ import { fetchFilters } from '../../redux/slices/filtersSlice';
 
 function ProductsContent() {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const { price } = useSelector(({ filters }) => filters.availableFilters);
   const selectedCategories = useSelector(({ filters }) => filters.categories);
@@ -18,6 +20,7 @@ function ProductsContent() {
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
   const [urlFilter, setUrlFilter] = useState('');
+
   const filterLinkConstructor = () => {
     // categories;
     const categoryFilter =
@@ -38,6 +41,7 @@ function ProductsContent() {
     // full link
     const fullFilterURL = categoryFilter + priceFilter + sortOrder;
     setUrlFilter(fullFilterURL);
+    setSearchParams(fullFilterURL);
   };
 
   useEffect(() => {
@@ -48,7 +52,14 @@ function ProductsContent() {
       setPriceMaxBoundary(priceMax);
     }
     filterLinkConstructor();
-  }, [isLoadedFilters, selectedCategories, minPrice, maxPrice, sort]);
+  }, [
+    isLoadedFilters,
+    selectedCategories,
+    minPrice,
+    maxPrice,
+    sort,
+    searchParams,
+  ]);
   return (
     <Box>
       <ModalBasket />
@@ -62,7 +73,7 @@ function ProductsContent() {
         />
         <Container>
           <DropdownMenu />
-          <ProductsList urlFilter={urlFilter} />
+          <ProductsList urlFilter={searchParams} />
         </Container>
       </Stack>
     </Box>
