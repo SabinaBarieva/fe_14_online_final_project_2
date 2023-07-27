@@ -75,29 +75,18 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const maxPrice = useSelector(({ filters }) => filters.maxPrice);
   const [cachedMinValue, setCachedMinValue] = useState(minPrice);
   const [cachedMaxValue, setCachedMaxValue] = useState(maxPrice);
-  // const [priceMinBoundary, setPriceMinBoundary] = useState();
-  // const [priceMaxBoundary, setPriceMaxBoundary] = useState();
   let keyOnePressed = false;
-  const { categories, price } = useSelector(
-    ({ filters }) => filters.availableFilters
-  );
+  const { categories } = useSelector(({ filters }) => filters.availableFilters);
   const selectedCategories = useSelector(({ filters }) => filters.categories);
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
 
-  // useEffect(() => {
-  //   if (!isLoadedFilters) dispatch(fetchFilters());
-  //   else {
-  //     const { min: priceMin, max: priceMax } = price;
-  //     setPriceMinBoundary(priceMin);
-  //     setPriceMaxBoundary(priceMax);
-  //   }
-  // }, [isLoadedFilters]);
   const isNumber = (number) =>
     number !== null &&
     number !== undefined &&
     number !== '' &&
     !Number.isNaN(number);
+
   // const categoryCheckboxCallback = ({ target }) => {
   //   const { checked, name } = target;
   //   if (checked) dispatch(addCategory(name));
@@ -115,6 +104,7 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   //   }
   //   setSearchParams(search, { replace: true });
   // };
+
   const categoryCheckboxCallback = ({ target }) => {
     const { checked, name } = target;
     if (checked) {
@@ -236,7 +226,7 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
                   <TextField
                     size="small"
                     value={isNumber(cachedMinValue) ? cachedMinValue : ''}
-                    placeholder={`${priceMinBoundary} $`}
+                    label="Min"
                     type="tel"
                     min={priceMinBoundary}
                     onBlur={() => {
@@ -255,7 +245,7 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
                   <TextField
                     size="small"
                     value={isNumber(cachedMaxValue) ? cachedMaxValue : ''}
-                    placeholder={`${priceMaxBoundary} $`}
+                    label="Max"
                     type="tel"
                     onBlur={() => {
                       setCorrectMaxValue();
