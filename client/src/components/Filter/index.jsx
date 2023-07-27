@@ -30,7 +30,7 @@ import theme from '../../themes/theme';
 import FilterStyles from '../../themes/themeFilter';
 
 // eslint-disable-next-line react/prop-types
-function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
+function Filter({ priceMinBoundary, priceMaxBoundary }) {
   const [filterOpen, setFilterOpen] = useState(false);
   const closeCallback = () => {
     setFilterOpen(false);
@@ -42,7 +42,6 @@ function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
     <FilterSection
       priceMinBoundary={priceMinBoundary}
       priceMaxBoundary={priceMaxBoundary}
-      urlFilter={urlFilter}
     />
   ) : (
     <>
@@ -68,7 +67,6 @@ function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
         <FilterSection
           priceMinBoundary={priceMinBoundary}
           priceMaxBoundary={priceMaxBoundary}
-          urlFilter={urlFilter}
         />
       </Dialog>
     </>
@@ -76,7 +74,7 @@ function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
 }
 
 // eslint-disable-next-line react/prop-types
-function FilterSection({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
+function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const minPrice = useSelector(({ filters }) => filters.minPrice);

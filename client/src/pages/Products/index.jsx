@@ -69,7 +69,6 @@ function ProductsContent() {
         <Filter
           priceMinBoundary={priceMinBoundary}
           priceMaxBoundary={priceMaxBoundary}
-          urlFilter={urlFilter}
         />
         <Container>
           <DropdownMenu />
