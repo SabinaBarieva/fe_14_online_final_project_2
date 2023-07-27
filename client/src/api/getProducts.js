@@ -8,7 +8,7 @@ const getProducts = async ({
   maxPrice = null,
   sort,
 }) => {
-  console.log(sort);
+  // console.log(sort);
   const categoryQuery =
     categories.length > 0 ? `&categories=${categories.join(',')}` : '';
   let priceFilter = '';
@@ -19,3 +19,8 @@ const getProducts = async ({
 };
 
 export default getProducts;
+
+// Categories
+// const categoryQuery =
+//   categories.length > 0 ? `&categories=${categories.join(',')}` : '';
+// console.log(categoryQuery);
