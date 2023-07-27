@@ -99,10 +99,10 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
     // sort
     let sortOrder;
     if (sort === 'currentPrice') {
-      sortOrder = '-currentPrice';
+      sortOrder = '&sort=-currentPrice';
     } else if (sort === '-currentPrice') {
-      sortOrder = 'currentPrice';
-    } else sortOrder = 'false';
+      sortOrder = '&sort=currentPrice';
+    } else sortOrder = '';
     console.log(sortOrder);
   };
 
