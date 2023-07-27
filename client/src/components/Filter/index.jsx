@@ -78,7 +78,6 @@ function Filter({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
 // eslint-disable-next-line react/prop-types
 function FilterSection({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
   const dispatch = useDispatch();
-  console.log(urlFilter);
   const [searchParams, setSearchParams] = useSearchParams();
   const minPrice = useSelector(({ filters }) => filters.minPrice);
   const maxPrice = useSelector(({ filters }) => filters.maxPrice);
@@ -96,10 +95,32 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary, urlFilter }) {
     number !== '' &&
     !Number.isNaN(number);
 
+  // useSearchParams
+  const categoriesFromUrl = searchParams.getAll('categories');
+
+  const changeCategory = (category) => {
+    const categoriesFromUrlCopy = [...categoriesFromUrl];
+
+    if (categoriesFromUrlCopy.includes(category)) {
+      const index = categoriesFromUrlCopy.indexOf(category);
+      if (index !== -1) {
+        categoriesFromUrlCopy.splice(index, 1);
+      }
+    } else {
+      categoriesFromUrlCopy.push(category);
+    }
+    setSearchParams({ ...searchParams, categories: categoriesFromUrlCopy });
+  };
+
   const categoryCheckboxCallback = ({ target }) => {
     const { checked, name } = target;
-    if (checked) dispatch(addCategory(name));
-    else dispatch(removeCategory(name));
+    if (checked) {
+      dispatch(addCategory(name));
+      changeCategory(name);
+    } else {
+      dispatch(removeCategory(name));
+      changeCategory(name);
+    }
   };
 
   const minPriceCallback = ({ target }) => {

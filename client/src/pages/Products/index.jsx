@@ -18,7 +18,6 @@ function ProductsContent() {
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
   const [urlFilter, setUrlFilter] = useState('');
-  console.log(urlFilter);
   const filterLinkConstructor = () => {
     // categories;
     const categoryFilter =
