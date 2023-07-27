@@ -7,10 +7,8 @@ import { Button, LinearProgress, Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { getProduct } from '../../redux/slices/productSlice';
-import {
-  addSeveraltoBasket,
-  closeModalBasket,
-} from '../../redux/slices/basketSlice';
+import { closeModalBasket } from '../../redux/slices/basketSlice/basketSlice';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
 import {
   currentProduct,
   currentProductIsLoading,
@@ -36,6 +34,7 @@ function ProductDescription() {
   const { id } = useParams();
   const isLoading = useSelector(currentProductIsLoading);
   const isError = useSelector(errorInProduct);
+  const product = useSelector(currentProduct);
   const {
     quantity,
     name,
@@ -49,7 +48,7 @@ function ProductDescription() {
     description,
     guarantee,
     sale,
-  } = useSelector(currentProduct);
+  } = product;
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -73,15 +72,7 @@ function ProductDescription() {
     }
   };
   const clickToBasket = () => {
-    const item = {
-      itemNo,
-      imageUrls,
-      name,
-      currentPrice,
-      quantity,
-      count: countToBasket,
-    };
-    dispatch(addSeveraltoBasket(item));
+    dispatch(changeQuantityInBasketActionCreator(product, countToBasket));
   };
 
   const [mainImage, setMainImage] = useState('');
@@ -152,6 +143,7 @@ function ProductDescription() {
                   <Grid
                     key={photo}
                     item
+                    sm={2}
                     sx={{
                       display: 'flex',
                       justifyContent: 'center',

@@ -6,24 +6,25 @@ import UserProfileInfo from '../../components/UserProfileInfo';
 import OrdersList from '../../components/OrdersList';
 
 function UserPage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUserInfo());
+  // }, [dispatch]);
 
   return (
     <Grid
       container
       sx={{
+        maxWidth: '1440px',
+        margin: '0 auto',
         display: 'flex',
         justifyContent: 'space-evenly',
-        marginBottom: '20px',
       }}>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={11} md={5}>
         <UserProfileInfo />
       </Grid>
-      <Grid item xs={12} md={5}>
+      <Grid item xs={11} md={5}>
         <OrdersList />
       </Grid>
     </Grid>

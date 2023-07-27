@@ -1,43 +1,79 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  useMediaQuery,
-} from '@mui/material';
-import { styled, useTheme } from '@mui/system';
-import SvgIcon from '@mui/material/SvgIcon';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { AdvancedImage } from '@cloudinary/react';
-import { minimumPad } from '@cloudinary/url-gen/actions/resize';
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import getImg from '../../cloudinary';
-import CartIcon from '../Icons/cartIcon/cartIcon';
+import { useDispatch } from 'react-redux';
+import { Box, SvgIcon, Tooltip, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/system';
+import styled from 'styled-components';
+import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
-import { addToBasket } from '../../redux/slices/basketSlice';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
 import { handleWishlist } from '../../redux/slices/wishlistSlice';
 import { selectWishlist } from '../../redux/selectors';
 import {
-  CardContainer,
-  DetailButton,
   AddToCartBtn,
-  Label,
   CardInfo,
-  ProductName,
-  ProductPrice,
+  DetailButton,
+  ProductInfo,
 } from '../../themes/themeProductCard';
+import CartIcon from '../Icons/cartIcon/cartIcon';
+import PulseAnimation from '../Animations';
+import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
+
+const Card = styled.div`
+  box-shadow: 5px 5px 5px #acacac;
+  align-items: baseline;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  background-image: url(${(props) => props.imageurl});
+  background-size: ${(props) => props.size};
+  background-position: center;
+  transition: box-shadow 0.5s, scale 0.5s;
+  border-radius: 15px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-color: white;
+  overflow: hidden;
+  ${(props) =>
+    props.sale === true
+      ? `
+        &::after {
+         content: 'Sale';
+         color: white;
+         text-align: center;
+         padding-top: 27px;
+         background-color: #7ba158;
+         height: 65px;
+         width: 65px;
+         position: absolute;
+         top: -15px;
+         right: -18px;
+         border-radius: 50%;
+         transform: rotateZ(45deg);
+         animation: pulsate 2s ease-in-out infinite;
+    }
+        `
+      : ''};
+  @keyframes pulsate {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+`;
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
   const theme = useTheme();
-  const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const xsBreakpoint = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const smBreakpoint = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
   const [addedWishlist, setAddedWishlist] = useState(false);
@@ -48,21 +84,22 @@ function ProductCard({ product }) {
   const getImageSize = () => {
     const currentBreakpoints = {
       xs: xsBreakpoint,
+      sm: smBreakpoint,
       md: mdBreakpoint,
       lg: lgBreakpoint,
     };
     const imgSizesProductsPage = {
-      xs: { width: 150, height: 200 },
-      sm: { width: 150, height: 200 },
-      md: { width: 183, height: 289 },
-      lg: { width: 183, height: 289 },
+      xs: { width: '130px', height: '200px' },
+      sm: { width: '183px', height: '289px' },
+      md: { width: '183px', height: '289px' },
+      lg: { width: '203px', height: '296px' },
     };
 
     const imageSizesHomePage = {
-      xs: { width: 129, height: 200 },
-      sm: { width: 129, height: 200 },
-      md: { width: 196, height: 322 },
-      lg: { width: 269, height: 418 },
+      xs: { width: '129px', height: '200px' },
+      sm: { width: '180px', height: '300px' },
+      md: { width: '196px', height: '322px' },
+      lg: { width: '269px', height: '418px' },
     };
     const currentBreakpoint = Object.keys(currentBreakpoints).find(
       (breakpoint) => currentBreakpoints[breakpoint]
@@ -81,7 +118,7 @@ function ProductCard({ product }) {
     ) {
       return imageSizesHomePage[currentBreakpoint];
     }
-    return { width: 150, height: 200 };
+    return { width: '150px', height: '200px' };
   };
 
   const handleDetailClick = () => {
@@ -89,16 +126,50 @@ function ProductCard({ product }) {
   };
 
   const onClickAdd = () => {
-    const item = {
-      name: product.name,
-      itemNo: product.itemNo,
-      imageUrls: product.imageUrls,
-      currentPrice: product.currentPrice,
-      quantity: product.quantity,
-      count: 0,
-    };
-    dispatch(addToBasket(item));
+    dispatch(changeQuantityInBasketActionCreator(product, 1));
+    dispatch(modalAddBasket(product));
   };
+
+  const imageUrl = (publicId) => {
+    return `https://res.cloudinary.com/dtvbxgclg/image/upload/${publicId}`;
+  };
+  const getImageUrl = (productItem) =>
+    currentPath === '/'
+      ? imageUrl(productItem.arrivalPhoto)
+      : imageUrl(productItem.imageUrls[0]);
+  const backgroundSize = currentPath === '/' ? 'cover' : 'contain';
+
+  const [springs, api] = useSpring(() => ({
+    from: {
+      scale: 1,
+      boxShadow: '0px 10px 20px -5px rgba(0, 0, 0, 0.4)',
+    },
+  }));
+  const handleFocus = () => {
+    api.start({
+      from: {
+        boxShadow: '0px 10px 20px -5px rgba(0, 0, 0, 0.4)',
+        scale: 1,
+      },
+      to: {
+        boxShadow: '0px 20px 40px -5px rgba(0, 0, 0, 0.3)',
+        scale: 1.1,
+      },
+    });
+  };
+  const handleMouseEnter = () => {
+    api.start({
+      from: {
+        boxShadow: '0px 20px 40px -5px rgba(0, 0, 0, 0.4)',
+        scale: 1.1,
+      },
+      to: {
+        boxShadow: '0px 10px 20px -5px rgba(0, 0, 0, 0.3)',
+        scale: 1,
+      },
+    });
+  };
+
 
   useEffect(() => {
     if (itemsWishlist.length) {
@@ -128,100 +199,99 @@ function ProductCard({ product }) {
   };
 
   return (
-    <CardContainer
-      sx={{ boxShadow: `5px 5px 5px #ACACAC`, alignItems: 'baseline' }}>
-      <Box sx={{ position: 'relative', padding: '10% 0' }}>
-        {addedWishlist ? (
-          <FavoriteIcon
-            onClick={updateWishlist}
-            sx={{
-              position: 'absolute',
-              top: '2px',
-              right: '5px',
-              color: 'black',
-            }}
-          />
-        ) : (
-          <FavoriteBorderIcon
-            onClick={updateWishlist}
-            sx={{
-              position: 'absolute',
-              top: '2px',
-              right: '5px',
-              color: 'black',
-            }}
-          />
-        )}
-        <AdvancedImage
-          width="100%"
-          cldImg={getImg
-            .image(product.imageUrls[0])
-            .resize(
-              minimumPad()
-                .width(getImageSize().width)
-                .height(getImageSize().height)
-            )
-            .roundCorners(byRadius(15, 15))}
+    <Box width={getImageSize().width}>
+      <animated.div
+        onMouseEnter={handleFocus}
+        onMouseLeave={handleMouseEnter}
+        style={{
+          width: `${getImageSize().width}`,
+          height: `${getImageSize().height}`,
+          borderRadius: '15px',
+          ...springs,
+        }}>
+        <Card
+          width={getImageSize().width}
+          height={getImageSize().height}
+          imageurl={getImageUrl(product)}
           alt={product.name + product.color}
-        />
-        <Box
-          sx={{
-            bottom: '2%',
-            left: '50%',
-            width: '100%',
-            position: 'absolute',
-            display: 'flex',
-            justifyContent: 'center',
-            transform: 'translate(-50%, -50%)',
-            alignItems: 'end',
-          }}>
-          <Link to={`/product/${product.itemNo}`} style={{ marginRight: '7%' }}>
-            <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
-          </Link>
-          {product.quantity !== 0 ? (
-            <AddToCartBtn onClick={onClickAdd} variant="solid">
-              <SvgIcon
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '51%',
-                  transform: 'translate(-50%, -50%)',
-                }}>
-                <CartIcon />
-              </SvgIcon>
-            </AddToCartBtn>
-          ) : (
-            <Box
-              sx={{
-                borderRadius: '10px',
-                border: '1px solid #ACACAC',
-                padding: '3% 4%',
-                backgroundColor: 'white',
-              }}>
-              <Label>Out of stock</Label>
-            </Box>
-          )}
-        </Box>
-      </Box>
-      {currentPath !== '/' ? (
+          size={backgroundSize}
+          sale={product.sale.toString()}>
+          <Box
+            width={getImageSize().width}
+            sx={{
+              bottom: '-2%',
+              left: '50%',
+              position: 'absolute',
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              transform: 'translate(-50%, -50%)',
+              alignItems: 'end',
+            }}>
+            <Link
+              to={`/product/${product.itemNo}`}
+              style={{ marginRight: '7%' }}>
+              <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
+            </Link>
+
+            {product.quantity !== 0 && (
+              <PulseAnimation scaleTo={1.1} config={{ duration: 1000 }} loop>
+                <AddToCartBtn onClick={onClickAdd} variant="solid">
+                  <SvgIcon
+                    sx={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '51%',
+                      transform: 'translate(-50%, -50%)',
+                    }}>
+                    <CartIcon />
+                  </SvgIcon>
+                </AddToCartBtn>
+              </PulseAnimation>
+            )}
+            {product.quantity === 0 && (
+              <Tooltip title="Out of stock">
+                <span>
+                  <AddToCartBtn
+                    onClick={onClickAdd}
+                    variant="solid"
+                    disabled
+                    sx={{
+                      backgroundColor: 'rgba(241, 136, 147, 0.57)',
+                      outline: '1 px solid rgba(241, 136, 147, 0.57)',
+                    }}>
+                    <SvgIcon
+                      sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '51%',
+                        transform: 'translate(-50%, -50%)',
+                      }}>
+                      <CartIcon />
+                    </SvgIcon>
+                  </AddToCartBtn>
+                </span>
+              </Tooltip>
+            )}
+          </Box>
+        </Card>
+      </animated.div>
+      {currentPath !== '/' && (
         <CardInfo>
-          <ProductName
+          <ProductInfo
             variant="h2"
             sx={{
-              fontSize: {
-                sm: '1rem',
-                lg: '0.875rem',
-              },
+              fontWeight: '700',
+              width: '70%',
             }}>
             {product.name}
-          </ProductName>
-          <ProductPrice>
+          </ProductInfo>
+          <ProductInfo>
             {`\u0024`}
             {product.currentPrice}
-          </ProductPrice>
+          </ProductInfo>
         </CardInfo>
-      ) : null}
-    </CardContainer>
+      )}
+    </Box>
   );
 }
 
@@ -229,6 +299,7 @@ ProductCard.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     currentPrice: PropTypes.number.isRequired,
+    sale: PropTypes.bool,
     categories: PropTypes.string.isRequired,
     imageUrls: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     quantity: PropTypes.number.isRequired,
@@ -238,6 +309,7 @@ ProductCard.propTypes = {
     itemNo: PropTypes.string,
     description: PropTypes.string,
     guarantee: PropTypes.string,
+    arrivalPhoto: PropTypes.string,
   }).isRequired,
 };
 

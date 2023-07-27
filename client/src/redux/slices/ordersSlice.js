@@ -4,6 +4,7 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setErrorMessage } from './errorsSlice';
+import { login } from './loginSlice';
 
 const sliceName = 'orders';
 export const fetchOrders = createAsyncThunk(`${sliceName}/fetch`, () => {
@@ -20,6 +21,9 @@ const ordersSlice = createSlice({
   initialState: initialStateCreator(sliceName),
   extraReducers: (builder) => {
     extraReducerCreator(builder)(fetchOrders, sliceName);
+    builder.addCase(login.fulfilled, (_, action) => {
+      action.asyncDispatch(fetchOrders());
+    });
   },
 });
 export default ordersSlice.reducer;

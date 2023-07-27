@@ -11,6 +11,7 @@ import ModalBasket from '../../components/ModalForBasket';
 import Carousel from '../../components/Carousel';
 // import Slider from '../../components/Slider';
 import { SectionTitle, AllProductsBtn } from '../../themes/themeHomePage';
+import ModalAdd from '../../components/ModalAdd';
 
 function HomeContent() {
   const theme = useTheme();
@@ -24,6 +25,7 @@ function HomeContent() {
       }}>
       <Category />
       <ModalBasket />
+      <ModalAdd />
       <SectionTitle variant="h2">Daily Sale</SectionTitle>
       <Carousel />
       <div
@@ -37,14 +39,13 @@ function HomeContent() {
         }}>
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box sx={{ width: '90%', margin: '0 auto' }}>
-          <ProductsList perPage={8} />
+          <ProductsList />
         </Box>
         <Box sx={{ margin: '10% auto 5%' }}>
           <Link to="/product">
             <AllProductsBtn sx={{ alignItems: 'center' }}>
               <Typography
                 sx={{
-                  fontSize: '0.75rem',
                   textTransform: 'capitalize',
                   marginRight: '5%',
                 }}>

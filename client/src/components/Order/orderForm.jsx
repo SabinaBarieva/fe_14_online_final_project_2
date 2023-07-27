@@ -23,6 +23,7 @@ export default function OrderForm() {
   const itemsBasket = useSelector((state) => state.basket.itemsBasket);
   const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
+  const dataUser = useSelector((state) => state.user.user);
 
   const elem = (values) => {
     const name = `${values.firstName} ${values.lastName}`;
@@ -63,8 +64,21 @@ export default function OrderForm() {
     };
   }, []);
 
-  const formik = useFormik({
-    initialValues: {
+  const getInitialValues = () => {
+    if (dataUser) {
+      return {
+        firstName: dataUser.firstName,
+        lastName: dataUser.lastName,
+        email: dataUser.email,
+        address: '',
+        phone: dataUser.telephone,
+        cardNumber: '',
+        expirationMonth: '',
+        expirationYear: '',
+        cvv: '',
+      };
+    }
+    return {
       firstName: '',
       lastName: '',
       email: '',
@@ -74,7 +88,11 @@ export default function OrderForm() {
       expirationMonth: '',
       expirationYear: '',
       cvv: '',
-    },
+    };
+  };
+
+  const formik = useFormik({
+    initialValues: getInitialValues(),
     validationSchema,
     onSubmit: (values) => {
       elem(values);

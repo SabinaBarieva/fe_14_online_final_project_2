@@ -1,4 +1,5 @@
 import { styled } from '@mui/system';
+import { Box } from '@mui/material';
 
 export const Title = styled('div')({
   fontSize: '35px',

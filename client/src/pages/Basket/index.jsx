@@ -25,12 +25,8 @@ import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
 import ButtonOrder from '../../components/Order/ButtonOrder';
 import { selectCart } from '../../redux/selectors';
-import {
-  addToBasket,
-  clearBasket,
-  deleteBasket,
-  minusItem,
-} from '../../redux/slices/basketSlice';
+import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
+import { deleteFromBasketActionCreator } from '../../redux/slices/basketSlice/deleteFromBasket';
 import cld from '../../cloudinary';
 import theme from '../../themes/theme';
 import BasketEmpty from '../../components/BasketEmpty';
@@ -69,17 +65,12 @@ function BasketContent() {
     return <BasketEmpty />;
   }
   return (
-    <Container sx={{ padding: '0 3%', maxWidth: 'xl' }}>
+    <Container sx={{ width: '100%' }}>
       <ModalBasket />
       <Table
         key={Math.random()}
         sx={{
-          margin: {
-            xs: '0',
-            sm: '1rem',
-            md: '2rem',
-            lg: '3.5rem',
-          },
+          margin: '0 auto',
         }}>
         <TableHead key={Math.random()}>
           <TableRow key={Math.random()}>
@@ -105,8 +96,17 @@ function BasketContent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {itemsBasket.map((el) => (
-            <TableRow key={Math.random()} style={{ marginBottom: '1 rem' }}>
+          {itemsBasket.map(({ product, cartQuantity }) => (
+            <TableRow
+              key={Math.random()}
+              sx={{
+                marginBottom: '1rem',
+                boxShadow: '5px 5px 5px #acacac',
+                borderRadius: '15px',
+                '&:hover': {
+                  transition: 'scale 0.5s',
+                },
+              }}>
               <TableCell
                 key={Math.random()}
                 sx={{
@@ -117,14 +117,15 @@ function BasketContent() {
                     xs: '0.5rem',
                     md: '1.5rem 1.5rem 1.5rem 0',
                   },
+                  borderBottom: '0',
                 }}>
                 <Tooltip title="Detail">
                   <Link
                     style={{ textDecoration: 'none', color: '#000000' }}
-                    to={`/product/${el.itemNo}`}>
+                    to={`/product/${product.itemNo}`}>
                     <AdvancedImage
                       key={Math.random()}
-                      cldImg={cld.image(el.imageUrls[0])}
+                      cldImg={cld.image(product.imageUrls[0])}
                       width="65%"
                       height="60%"
                     />
@@ -140,13 +141,14 @@ function BasketContent() {
                     xs: '0.5rem',
                     md: '1.5rem',
                   },
-                  fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
+                  borderBottom: '0',
+                  fontSize: { xs: '0.7rem', sm: '1rem', md: '1.2rem' },
                 }}>
                 <Tooltip title="Detail">
                   <Link
                     style={{ textDecoration: 'none', color: '#000000' }}
-                    to={`/product/${el.itemNo}`}>
-                    {el.name}
+                    to={`/product/${product.itemNo}`}>
+                    {product.name}
                   </Link>
                 </Tooltip>
               </TableCell>
@@ -154,13 +156,14 @@ function BasketContent() {
                 key={Math.random()}
                 sx={{
                   //   fontFamily: theme.typography.const.fontFamily.primary,
-                  fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
+                  fontSize: { xs: '0.7rem', sm: '1rem', md: '1.2rem' },
                   padding: {
                     xs: '0.5rem',
                     md: '1.5rem',
                   },
+                  borderBottom: '0',
                 }}>
-                $ {el.currentPrice * el.count}
+                $ {product.currentPrice * cartQuantity}
               </TableCell>
               <TableCell
                 key={Math.random()}
@@ -171,16 +174,21 @@ function BasketContent() {
                     sm: '0.4rem',
                     md: '1,5rem',
                   },
-                  fontSize: { xs: '0.7rem', sm: '1.2rem', md: '1.5rem' },
+                  fontSize: { xs: '0.7rem', sm: '1rem', md: '1.2rem' },
+                  borderBottom: '0',
                 }}>
                 <IconButton
-                  disabled={el.count === 1}
-                  onClick={() => dispatch(minusItem({ itemNo: el.itemNo }))}>
+                  disabled={cartQuantity === 1}
+                  onClick={() =>
+                    dispatch(changeQuantityInBasketActionCreator(product, -1))
+                  }>
                   <BiMinus fontSize="15" />
                 </IconButton>
-                {el.count}
+                {cartQuantity}
                 <IconButton
-                  onClick={() => dispatch(addToBasket({ itemNo: el.itemNo }))}>
+                  onClick={() =>
+                    dispatch(changeQuantityInBasketActionCreator(product, 1))
+                  }>
                   <BiPlus fontSize="15" />
                 </IconButton>
               </TableCell>
@@ -192,18 +200,19 @@ function BasketContent() {
                     sm: '1rem',
                     md: '1.5rem',
                   },
+                  borderBottom: '0',
                 }}>
                 <Tooltip title="Delete">
                   <IconButton
                     onClick={() =>
-                      dispatch(deleteBasket({ itemNo: el.itemNo }))
+                      dispatch(deleteFromBasketActionCreator(product))
                     }
                     sx={{
                       fontSize: {
                         xs: '15px',
-                        sm: '30px',
-                        md: '40px',
-                        lg: '50px',
+                        sm: '25px',
+                        md: '30px',
+                        lg: '40px',
                       },
                     }}
                     key={Math.random()}
@@ -263,12 +272,12 @@ function BasketContent() {
                   borderRadius: '7px',
                   border: '1px solid #211F1C',
                   width: {
-                    xs: '5rem',
+                    xs: '7rem',
                     sm: '7rem',
                     md: '9rem',
                   },
                   height: {
-                    xs: '2rem',
+                    xs: '2.4rem',
                     sm: '2.5rem',
                     md: '3rem',
                   },
