@@ -81,6 +81,19 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const isLoadedFilters = useSelector((state) => state.filters.isLoaded);
   const isLoadingFilters = useSelector((state) => state.filters.isLoading);
 
+  const filterLinkConstructor = () => {
+    // Categories;
+    const categoryQuery =
+      selectedCategories.length > 0
+        ? `&categories=${selectedCategories.join(',')}`
+        : '';
+    console.log(categoryQuery);
+  };
+
+  useEffect(() => {
+    filterLinkConstructor();
+  });
+
   const isNumber = (number) =>
     number !== null &&
     number !== undefined &&
