@@ -11,7 +11,7 @@ import {
 } from '../../themes/themeUserProfileInfo';
 import { resetUserInfo } from '../../redux/slices/userSlice';
 import { logout } from '../../redux/slices/loginSlice';
-import { clearBasket } from '../../redux/slices/basketSlice/basketSlice';
+import clearBasket from '../../redux/slices/basketSlice/clearBasket';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
