@@ -7,7 +7,7 @@ import createRemoteCartProduct from './createRemoteCartProduct';
 import basketProductCreator from './basketProductCreator';
 
 const changeQuantityInBasket = createAsyncThunk(
-  'decrease-quantity-in-basket',
+  'change-quantity-in-basket',
   async ({ product, addToBasketQuantity }, { getState, rejectWithValue }) => {
     const idKey = '_id';
     const isLoggedIn = getToken() && true;
@@ -25,22 +25,21 @@ const changeQuantityInBasket = createAsyncThunk(
       });
     }
     if (newQuantityInBasket < 0) newQuantityInBasket = 0;
-    if (isLoggedIn) {
-      const remoteCart =
-        newQuantityInBasket === 0
-          ? await deleteFromCart(product[idKey])
-          : await updateCart(
-              createRemoteCartProduct(product, newQuantityInBasket)
-            );
-      return remoteCart;
-    }
     if (currentProductInBasket)
       currentProductInBasket.cartQuantity = newQuantityInBasket;
     else
       cart.push(
         basketProductCreator({ product, cartQuantity: newQuantityInBasket })
       );
-
+    if (isLoggedIn) {
+      const remoteCart = cart.map(({ product: currentProduct, cartQuantity }) =>
+        createRemoteCartProduct(currentProduct, cartQuantity)
+      );
+      //   console.log(remoteCart);
+      const newCart = await updateCart(remoteCart);
+      //   console.log(newCart);
+      return newCart;
+    }
     return cart;
   }
 );
