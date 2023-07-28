@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { useFormik } from 'formik';
@@ -20,7 +20,19 @@ import { login } from '../../redux/slices/loginSlice';
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
+  const auth = useSelector((state) => state.user.user);
+  const fromPage = location.state?.from?.pathname;
+  // console.log(fromPage);
+
+  useEffect(() => {
+    if (auth && fromPage === '/user') {
+      navigate('/');
+    } else if (auth && fromPage !== '/user') {
+      navigate(-1);
+    }
+  }, [auth]);
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +42,6 @@ function Login() {
     validationSchema,
     onSubmit: ({ loginOrEmail, password }) => {
       dispatch(login({ loginOrEmail, password }));
-      navigate(-1);
     },
   });
 
