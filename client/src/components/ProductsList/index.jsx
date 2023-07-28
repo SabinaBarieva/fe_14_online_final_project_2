@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Grid, Box, Pagination } from '@mui/material';
 import { AdvancedImage } from '@cloudinary/react';
 import getImg from '../../cloudinary';
@@ -35,11 +36,11 @@ function ProductsList({ urlFilter }) {
   const filteredProds = useSelector(productsList);
   const prodsForHomePage = useSelector(homePageProducts);
   const sortBy = useSelector(productsSort);
-  const categories = useSelector(categoriesFilter);
+  /*  const categories = useSelector(categoriesFilter);
   const minFilterPrice = useSelector(minimalPrice);
   const maxFilterPrice = useSelector(maximalPrice);
   const formattedMinPrice = minFilterPrice !== null ? minFilterPrice : 7;
-  const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000;
+  const formattedMaxPrice = maxFilterPrice !== null ? maxFilterPrice : 100000; */
   const isFetchingProducts = useSelector(isFetchingProductsList);
   const isFetchingHomeProds = useSelector(isFetchingAllProducts);
   const location = useLocation();
@@ -61,8 +62,7 @@ function ProductsList({ urlFilter }) {
   }, [dispatch]);
   useEffect(() => {
     setCurrentPage(1);
-  }, [categories, formattedMinPrice, formattedMaxPrice, sortBy]);
-
+  }, [urlFilter, sortBy]);
   // Pagination and showing products
   const productsPerPage = 12;
   const countPagination = total ? Math.ceil(total / productsPerPage) : 0;
@@ -170,5 +170,9 @@ function ProductsList({ urlFilter }) {
     </div>
   );
 }
+
+ProductsList.propTypes = {
+  urlFilter: PropTypes.string.isRequired,
+};
 
 export default ProductsList;
