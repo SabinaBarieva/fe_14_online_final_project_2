@@ -17,7 +17,7 @@ import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
 import TestSignUp from './components/TestSignUp';
 import TestLogin from './components/TestLogin';
-import Init from './components/Init/Init';
+import Init from './components/Init';
 
 function App() {
   return (
