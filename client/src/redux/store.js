@@ -31,6 +31,7 @@ import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
 import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 import modalAddToBasketSlice from './slices/modalAddToBasket';
+import wishlistSlice from './slices/wishlistSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -52,6 +53,7 @@ const rootReducer = combineReducers({
   devTools: process.env.NODE_ENV !== 'production',
   allProdsHomePage: allProdsHomeSlice,
   modalBasket: modalAddToBasketSlice,
+  wishlist: wishlistSlice,
 });
 
 const persistConfig = {

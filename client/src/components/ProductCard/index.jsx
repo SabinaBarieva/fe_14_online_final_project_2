@@ -17,6 +17,7 @@ import CartIcon from '../Icons/cartIcon/cartIcon';
 import PulseAnimation from '../Animations';
 import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
 import CardContainer from '../../themes/themeProductCardSCSS';
+import Wishlist from '../Wishlist';
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -135,6 +136,7 @@ function ProductCard({ product }) {
           alt={product.name + product.color}
           size={backgroundSize}
           sale={saleProduct}>
+          <Wishlist product={product} />
           <Box
             width={getImageSize().width}
             sx={{
