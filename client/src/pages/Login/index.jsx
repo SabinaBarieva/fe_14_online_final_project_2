@@ -24,7 +24,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const auth = useSelector((state) => state.user.user);
   const fromPage = location.state?.from?.pathname;
-  // console.log(fromPage);
 
   useEffect(() => {
     if (auth && fromPage === '/user') {
