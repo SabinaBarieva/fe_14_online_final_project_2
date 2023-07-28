@@ -8,7 +8,7 @@ import ProductsList from '../../components/ProductsList';
 import ArrowIcon from '../../components/Icons/arrowIcon/index';
 import Category from '../../components/Category';
 import ModalBasket from '../../components/ModalForBasket';
-import Slider from '../../components/Slider';
+import Carousel from '../../components/Carousel';
 import { SectionTitle, AllProductsBtn } from '../../themes/themeHomePage';
 import ModalAdd from '../../components/ModalAdd';
 
@@ -26,7 +26,7 @@ function HomeContent() {
       <ModalBasket />
       <ModalAdd />
       <SectionTitle variant="h2">Daily Sale</SectionTitle>
-      <Slider />
+      <Carousel />
       <div
         style={{
           width: '100%',
