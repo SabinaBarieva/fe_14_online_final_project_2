@@ -1,8 +1,13 @@
 import { Close } from '@mui/icons-material';
-import { Dialog, DialogContentText, DialogTitle } from '@mui/material';
+import {
+  Backdrop,
+  Dialog,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { Spring } from '@react-spring/web';
 import { selectCart } from '../../redux/selectors';
 import { closeModalBasket } from '../../redux/slices/basketSlice/basketSlice';
 
@@ -15,8 +20,21 @@ function ModalBasket() {
   return (
     <Dialog
       open={modal}
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      closeAfterTransition
+      onClose={() => {
+        dispatch(dispatch(closeModalBasket()));
+      }}
+      slots={{ backdrop: Backdrop }}
+      slotProps={{
+        backdrop: {
+          timeout: 2000,
+        },
+      }}
       sx={{
         textAlign: 'center',
+        transition: '1s',
       }}>
       <Close
         sx={{

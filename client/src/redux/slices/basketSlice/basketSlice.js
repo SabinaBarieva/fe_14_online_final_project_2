@@ -25,6 +25,10 @@ const basketSlice = createSlice({
     closeModalBasket: (state) => {
       state.modal = false;
       state.modalText = '';
+      state.modalAdd = false;
+    },
+    clearBasket: (state) => {
+      state.itemsBasket = [];
     },
   },
   extraReducers: (builder) => {
