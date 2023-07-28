@@ -15,7 +15,12 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
       display: 'none',
     },
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.between('lg', 'xl')]: {
+    '&:nth-of-type(n+7)': {
+      display: 'none',
+    },
+  },
+  [theme.breakpoints.up('xl')]: {
     '&:nth-of-type(n+9)': {
       display: 'none',
     },

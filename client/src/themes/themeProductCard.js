@@ -103,7 +103,7 @@ export const ProductInfo = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.between('md', 'lg')]: {
     fontSize: '1rem',
   },
-  [theme.breakpoints.up('xl')]: {
+  [theme.breakpoints.up('lg')]: {
     fontSize: '1rem',
   },
 }));
