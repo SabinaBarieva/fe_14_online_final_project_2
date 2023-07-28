@@ -92,7 +92,7 @@ function UserProfileInfo() {
                 dispatch(resetUserInfo());
                 dispatch(clearBasket());
                 dispatch(logout());
-                navigate('/');
+                navigate(-1);
               }}>
               Logout
             </Buttons>

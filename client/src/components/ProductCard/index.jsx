@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Box, SvgIcon, Tooltip, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
-import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
 import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
@@ -16,53 +15,8 @@ import {
 } from '../../themes/themeProductCard';
 import CartIcon from '../Icons/cartIcon/cartIcon';
 import PulseAnimation from '../Animations';
-
-const Card = styled.div`
-  box-shadow: 5px 5px 5px #acacac;
-  align-items: baseline;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  background-image: url(${(props) => props.imageurl});
-  background-size: ${(props) => props.size};
-  background-position: center;
-  transition: box-shadow 0.5s, scale 0.5s;
-  border-radius: 15px;
-  position: relative;
-  background-repeat: no-repeat;
-  background-color: white;
-  overflow: hidden;
-  ${(props) =>
-    props.sale === true
-      ? `
-        &::after {
-         content: 'Sale';
-         color: white;
-         text-align: center;
-         padding-top: 27px;
-         background-color: #7ba158;
-         height: 65px;
-         width: 65px;
-         position: absolute;
-         top: -15px;
-         right: -18px;
-         border-radius: 50%;
-         transform: rotateZ(45deg);
-         animation: pulsate 2s ease-in-out infinite;
-    }
-        `
-      : ''};
-  @keyframes pulsate {
-    0% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.3;
-    }
-  }
-`;
+import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
+import CardContainer from '../../themes/themeProductCardSCSS';
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -73,7 +27,7 @@ function ProductCard({ product }) {
   const smBreakpoint = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const mdBreakpoint = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const lgBreakpoint = useMediaQuery(theme.breakpoints.up('lg'));
-
+  const saleProduct = product.sale.toString();
   const getImageSize = () => {
     const currentBreakpoints = {
       xs: xsBreakpoint,
@@ -120,6 +74,7 @@ function ProductCard({ product }) {
 
   const onClickAdd = () => {
     dispatch(changeQuantityInBasketActionCreator(product, 1));
+    dispatch(modalAddBasket(product));
   };
 
   const imageUrl = (publicId) => {
@@ -173,13 +128,13 @@ function ProductCard({ product }) {
           borderRadius: '15px',
           ...springs,
         }}>
-        <Card
+        <CardContainer
           width={getImageSize().width}
           height={getImageSize().height}
           imageurl={getImageUrl(product)}
           alt={product.name + product.color}
           size={backgroundSize}
-          sale={product.sale.toString()}>
+          sale={saleProduct}>
           <Box
             width={getImageSize().width}
             sx={{
@@ -220,8 +175,8 @@ function ProductCard({ product }) {
                     variant="solid"
                     disabled
                     sx={{
-                      backgroundColor: 'rgba(241, 136, 147, 0.57)',
-                      outline: '1 px solid rgba(241, 136, 147, 0.57)',
+                      backgroundColor: 'rgb(235 185 190)',
+                      outline: '1px solid #b06f6f',
                     }}>
                     <SvgIcon
                       sx={{
@@ -237,7 +192,7 @@ function ProductCard({ product }) {
               </Tooltip>
             )}
           </Box>
-        </Card>
+        </CardContainer>
       </animated.div>
       {currentPath !== '/' && (
         <CardInfo>

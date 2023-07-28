@@ -20,7 +20,18 @@ import { login } from '../../redux/slices/loginSlice';
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
+  const auth = useSelector((state) => state.user.user);
+  const fromPage = location.state?.from?.pathname;
+
+  useEffect(() => {
+    if (auth && fromPage === '/user') {
+      navigate('/');
+    } else if (auth && fromPage !== '/user') {
+      navigate(-1);
+    }
+  }, [auth]);
 
   const formik = useFormik({
     initialValues: {
