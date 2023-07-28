@@ -6,7 +6,7 @@ import { AdvancedImage } from '@cloudinary/react';
 import getImg from '../../cloudinary';
 import { fetchProducts } from '../../redux/slices/productsSlice';
 import ProductCard from '../ProductCard';
-import {
+/* import {
   categoriesFilter,
   homePageProducts,
   isFetchingAllProducts,
@@ -16,12 +16,20 @@ import {
   productsList,
   totalNumberProducts,
   productsSort,
-} from '../../redux/selectors';
+} from '../../redux/selectors'; */
 import StyledGrid from '../../themes/themeProductsList';
 import { getAllHomeProducts } from '../../redux/slices/allProdsHomeSlice';
 import LoadingAnimation from '../Loading';
+import {
+  homePageProducts,
+  isFetchingAllProducts,
+  isFetchingProductsList,
+  productsList,
+  totalNumberProducts,
+  productsSort,
+} from '../../redux/selectors';
 
-function ProductsList() {
+function ProductsList({ urlFilter }) {
   const [currentPage, setCurrentPage] = useState(1);
   const total = useSelector(totalNumberProducts);
   const filteredProds = useSelector(productsList);
@@ -37,25 +45,17 @@ function ProductsList() {
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useDispatch();
+
   // Fetching products
   useEffect(() => {
     dispatch(
       fetchProducts({
-        categories,
         startPage: currentPage,
-        minPrice: formattedMinPrice,
-        maxPrice: formattedMaxPrice,
-        sort: sortBy,
+        urlFilter,
       })
     );
-  }, [
-    dispatch,
-    currentPage,
-    categories,
-    formattedMinPrice,
-    formattedMaxPrice,
-    sortBy,
-  ]);
+  }, [dispatch, currentPage, sortBy, urlFilter]);
+
   useEffect(() => {
     dispatch(getAllHomeProducts());
   }, [dispatch]);
