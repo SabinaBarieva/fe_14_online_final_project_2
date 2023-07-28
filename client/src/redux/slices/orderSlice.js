@@ -1,6 +1,4 @@
-/* eslint-disable no-underscore-dangle */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getProduct from '../../api/getProduct';
 import postOrder from '../../api/postOrder';
 
 const orderSlice = createSlice({
@@ -16,19 +14,10 @@ const orderSlice = createSlice({
     isFetched: false,
   },
   reducers: {
-    startGetProduct: (state) => {
-      state.isFetching = true;
-    },
-    finishGetProduct: (state) => {
-      state.isFetching = false;
-      state.isFetched = true;
-    },
-    errorGetProduct: (state) => {
-      state.isFetching = false;
-    },
     addProduct: (state, action) => {
       const { item, quantity } = action.payload;
       state.productsBasket.push({
+        // eslint-disable-next-line no-underscore-dangle
         _id: item._id,
         product: item,
         cartQuantity: quantity,
@@ -70,30 +59,11 @@ export const {
 
 export default orderSlice.reducer;
 
-export const getProductsBasket = createAsyncThunk(
-  'order/getProductsBasket',
-  async ({ itemNo, quantity }, { dispatch }) => {
-    dispatch(startGetProduct());
-
-    try {
-      const resultArray = await getProduct(itemNo);
-      return dispatch(addProduct({ item: resultArray, quantity }));
-    } catch (error) {
-      dispatch(
-        errorGetProduct({
-          error: error.message,
-        })
-      );
-      throw error;
-    }
-  }
-);
-
 export const createOrder = createAsyncThunk(
   'order/createOrder',
   async (cards, { dispatch }) => {
     const promises = cards.map((elem) =>
-      dispatch(getProductsBasket({ itemNo: elem.itemNo, quantity: elem.count }))
+      dispatch(addProduct({ item: elem.product, quantity: elem.cartQuantity }))
     );
     await Promise.all(promises);
   }

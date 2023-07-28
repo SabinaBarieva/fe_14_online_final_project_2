@@ -4,6 +4,7 @@ import { Container, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useFormik } from 'formik';
 import { PatternFormat } from 'react-number-format';
 import LockIcon from '@mui/icons-material/Lock';
@@ -55,7 +56,6 @@ function Registration() {
       <form
         onSubmit={formik.handleSubmit}
         style={{
-          padding: '10px 0',
           height: 620,
           margin: 'auto',
           maxWidth: 400,
@@ -83,7 +83,7 @@ function Registration() {
               value={formik.values.firstName}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     <PersonIcon
                       style={{ paddingRight: 5, cursor: 'pointer' }}
@@ -113,7 +113,7 @@ function Registration() {
               value={formik.values.lastName}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     <PersonIcon
                       style={{ paddingRight: 5, cursor: 'pointer' }}
@@ -143,7 +143,7 @@ function Registration() {
               value={formik.values.login}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     <LoginIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
                   </InputAdornment>
@@ -171,7 +171,7 @@ function Registration() {
               value={formik.values.email}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     <AlternateEmailIcon
                       style={{ paddingRight: 5, cursor: 'pointer' }}
@@ -201,7 +201,7 @@ function Registration() {
               value={formik.values.passwordFirst}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     {showPasswordFirst ? (
                       <LockOpenIcon
@@ -239,7 +239,7 @@ function Registration() {
               value={formik.values.passwordSecond}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     {showPasswordSecond ? (
                       <LockOpenIcon
@@ -269,21 +269,27 @@ function Registration() {
           <StyledForm style={{ padding: '0 5px', textAlign: 'center' }}>
             <PatternFormat
               style={{
-                width: '92%',
-                border: '0.5px solid rgb(0 0 0 / 32%)',
-                minHeight: 48,
-                padding: '0 20px',
-                borderRadius: 7,
-                backgroundColor: '#F3F6FF',
+                width: '93%',
               }}
+              label="Phone"
               format="+380 (##) ## ## ###"
               allowEmptyFormatting
+              customInput={StyledInputBaseLogin}
               mask="_"
               id="telephone"
               name="telephone"
               onBlur={formik.handleBlur}
               value={formik.values.telephone}
               onChange={formik.handleChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <LocalPhoneIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.telephone && formik.errors.telephone ? (
               <StyledTypography variant="paragraph" component="p">

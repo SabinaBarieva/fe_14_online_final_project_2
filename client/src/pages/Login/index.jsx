@@ -83,7 +83,7 @@ function Login() {
               value={formik.values.loginOrEmail}
               onChange={formik.handleChange}
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     <PersonIcon
                       style={{ paddingRight: 5, cursor: 'pointer' }}
@@ -113,7 +113,7 @@ function Login() {
               onChange={formik.handleChange}
               label="Password"
               InputProps={{
-                endAdornment: (
+                startAdornment: (
                   <InputAdornment position="end">
                     {showPassword ? (
                       <LockOpenIcon
@@ -149,7 +149,7 @@ function Login() {
           sx={{ width: '80%' }}>
           Login
         </StyledButton>
-        <Container sx={{ textAlign: 'center' }}>
+        <Container sx={{ textAlign: 'center', padding: '0!important' }}>
           Don&apos;t have an account yet?{' '}
           <Link to="/registration">Register Now</Link>
         </Container>

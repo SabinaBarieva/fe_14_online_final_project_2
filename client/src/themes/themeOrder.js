@@ -23,7 +23,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
     color: { xs: '#616467', md: '#fff' },
     borderRadius: 7,
     border: '1px solid #211F1C',
-    margin: '10px 0',
+    margin: '10px auto',
     display: 'block',
     minHeight: 40,
     width: {
@@ -47,8 +47,8 @@ const StyledIconButton = styled(IconButton)({
 });
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  margin: 5,
-  width: '90%',
+  margin: '5px 0',
+  width: '100%',
   boxSizing: 'border-box',
   border: `1px solid ${theme.palette.primary.dark}`,
   borderRadius: 7,
@@ -72,7 +72,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const StyledInputBaseLogin = styled(TextField)(({ theme }) => ({
-  margin: 5,
+  margin: '5px auto',
   width: '90%',
   boxSizing: 'border-box',
   backgroundColor: theme.palette.secondary.inputBackground,
@@ -80,6 +80,7 @@ const StyledInputBaseLogin = styled(TextField)(({ theme }) => ({
   position: 'relative',
   '& .MuiInputBase-root': {
     borderRadius: 7,
+    paddingLeft: 5,
   },
   '& .MuiInputBase-input': {
     padding: '12px 15px!important',
@@ -103,7 +104,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   '&.MuiTypography-paragraph': {
-    margin: 0,
+    margin: 'auto',
     fontSize: '0.6rem',
     color: theme.palette.secondary.main,
     height: 12,

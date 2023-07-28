@@ -23,29 +23,33 @@ export default function ButtonOrder() {
   return (
     <>
       {buttons && (
-        <Container>
-          <StyledButton
-            variant="contained"
-            sx={{
-              width: {
-                xs: '5rem',
-                sm: '7rem',
-                md: '9rem',
-              },
-              height: {
-                xs: '2rem',
-                sm: '2.5rem',
-                md: '3rem',
-              },
-              backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-              color: { xs: '#616467', md: '#fff' },
-              padding: 0,
-            }}
-            color="primary"
-            onClick={showForm}>
-            Check Out
-          </StyledButton>
-        </Container>
+        <StyledButton
+          variant="contained"
+          sx={{
+            width: {
+              xs: '7rem',
+              sm: '7rem',
+              md: '9rem',
+            },
+            height: {
+              xs: '2rem',
+              sm: '2.5rem',
+              md: '3rem',
+            },
+            minHeight: '5px !important',
+            backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+            color: { xs: '#616467', md: '#fff' },
+            padding: 0,
+            marginRight: '10px !important',
+            '&:hover': {
+              backgroundColor: '#616467',
+              color: '#F5F7FB',
+            },
+          }}
+          color="primary"
+          onClick={showForm}>
+          Check Out
+        </StyledButton>
       )}
       {form()}
       {modal()}

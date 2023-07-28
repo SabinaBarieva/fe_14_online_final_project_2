@@ -274,6 +274,7 @@ function BasketContent() {
                   },
                   '&:hover': {
                     backgroundColor: theme.palette.primary.light,
+                    color: '#F5F7FB',
                   },
                 }}>
                 Close
