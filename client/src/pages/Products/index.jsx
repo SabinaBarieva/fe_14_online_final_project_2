@@ -6,8 +6,14 @@ import ProductsList from '../../components/ProductsList';
 import Filter from '../../components/Filter';
 import ModalBasket from '../../components/ModalForBasket';
 import DropdownMenu from '../../components/DropdownMenu';
-import { fetchFilters } from '../../redux/slices/filtersSlice';
+import {
+  fetchFilters,
+  addCategory,
+  setMinPrice,
+  setMaxPrice,
+} from '../../redux/slices/filtersSlice';
 import ModalAdd from '../../components/ModalAdd';
+import { sortBy } from '../../redux/slices/productsSlice';
 
 function ProductsContent() {
   const dispatch = useDispatch();
@@ -44,6 +50,35 @@ function ProductsContent() {
     setUrlFilter(fullFilterURL);
     setSearchParams(fullFilterURL);
   };
+
+  const setFiltersByUrl = () => {
+    const categoiesInUrl = searchParams.get('categories');
+    if (categoiesInUrl !== null) {
+      const arrFromFilters = categoiesInUrl.split(',');
+      arrFromFilters.forEach((category) => {
+        dispatch(addCategory(category));
+      });
+    }
+    //
+    const minPriceInUrl = searchParams.get('minPrice');
+    if (minPriceInUrl) {
+      dispatch(setMinPrice(+minPriceInUrl));
+    }
+    //
+    const maxPriceInUrl = searchParams.get('maxPrice');
+    if (maxPriceInUrl) {
+      dispatch(setMaxPrice(+maxPriceInUrl));
+    }
+    //
+    const sortInUrl = searchParams.get('sort');
+    if (sortInUrl) {
+      dispatch(sortBy(sortInUrl));
+    }
+  };
+
+  useEffect(() => {
+    setFiltersByUrl();
+  }, []);
 
   useEffect(() => {
     if (!isLoadedFilters) dispatch(fetchFilters());
