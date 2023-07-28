@@ -196,7 +196,7 @@ function ModalAdd() {
                 alignItems: 'center',
                 // width: '100%',
               }}>
-              <Link to="./basket">
+              <Link to="/basket">
                 <Button
                   onClick={() => {
                     dispatch(closeModalAddBasket());

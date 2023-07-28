@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -16,6 +17,7 @@ import ProductsContent from './pages/Products';
 import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
 import Init from './components/Init';
+import RequireAuth from './private/RequireAuth';
 
 function App() {
   return (
@@ -27,13 +29,19 @@ function App() {
             <Routes>
               <Route path="/" element={<Header />}>
                 <Route path="/about" element={<About />} />
-                <Route path="/user" element={<UserPage />} />
+                <Route
+                  path="/user"
+                  element={
+                    <RequireAuth>
+                      <UserPage />
+                    </RequireAuth>
+                  }
+                />
                 <Route index element={<HomeContent />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
-                {/* <Route path="/product/:filter" element={<ProductsContent />} /> */}
                 <Route path="/product/:id" element={<ProductDescription />} />
                 <Route path="/product/not-found" element={<PageNotFound />} />
                 <Route path="*" element={<PageNotFound />} />

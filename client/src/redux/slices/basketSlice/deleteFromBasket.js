@@ -10,7 +10,7 @@ const deleteFromBasket = createAsyncThunk(
     const isLoggedIn = getToken() && true;
     if (isLoggedIn) {
       const remoteBasket = await deleteFromCart(productToDelete[idKey]);
-      return remoteBasket;
+      return remoteBasket.products;
     }
     return cart.filter(
       ({ product }) => product.itemNo !== productToDelete.itemNo
