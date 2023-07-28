@@ -31,8 +31,8 @@ const theme = createTheme({
       sm: 480,
       md: 768,
       lg: 1024,
-      xl: 1366,
-      // xxl: 1920,
+      /* xl: 1366, */
+      xl: 1536,
     },
   },
   typography: {
