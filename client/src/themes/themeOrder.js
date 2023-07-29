@@ -10,7 +10,7 @@ import {
   Container,
   TextField,
 } from '@mui/material';
-import { styled } from '@mui/system';
+import { styled, keyframes } from '@mui/system';
 
 const StyledForm = styled(FormControl)({
   width: '100%',
@@ -178,6 +178,28 @@ const StyleAdvancedImage = styled(AdvancedImage)(({ theme }) => ({
   },
 }));
 
+const animationLoading = keyframes`
+0%, 100% {
+  transform: translateY(0);
+}
+50% {
+  transform: translateY(-20px);
+}
+`;
+
+const StyledAnimationText = styled('span')(({ theme }) => ({
+  color: theme.palette.primary.dark,
+  fontSize: '2.5rem',
+  position: 'relative',
+  margin: 'auto',
+  top: '50%',
+  left: '30%',
+  '&.loading span': {
+    display: 'inline-block',
+    animation: `${animationLoading} 1s linear infinite`,
+  },
+}));
+
 export {
   StyledForm,
   StyledButton,
@@ -190,4 +212,5 @@ export {
   StyledFormBackground,
   StyledInputBaseLogin,
   StyleAdvancedImage,
+  StyledAnimationText,
 };
