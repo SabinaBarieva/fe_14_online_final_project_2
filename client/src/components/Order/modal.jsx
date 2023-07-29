@@ -22,8 +22,8 @@ export default function ModalOrdered() {
 
   const closed = () => {
     dispatch(closeModal());
-    dispatch(sendOrder());
-    dispatch(clearBasket());
+    // dispatch(sendOrder());
+    // dispatch(clearBasket());
   };
 
   const handleClickOutside = (event) => {

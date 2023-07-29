@@ -20,7 +20,7 @@ import {
   StyledTypography,
   StyledFormBackground,
 } from '../../themes/themeOrder';
-import { createOrder, saveOrder } from '../../redux/slices/orderSlice';
+import { sendOrder, saveOrder } from '../../redux/slices/orderSlice';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -47,8 +47,11 @@ export default function OrderForm() {
       secondAdress: number,
       restAdress: rest,
     };
-    dispatch(createOrder(itemsBasket));
-    dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
+
+    dispatch(
+      sendOrder({ email: emailAdress, phone, name, bodyMail, addressObj })
+    );
+    // dispatch(sendOrder(itemsBasket));
   };
 
   const closed = () => {
