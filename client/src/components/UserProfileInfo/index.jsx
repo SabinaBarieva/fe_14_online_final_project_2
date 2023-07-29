@@ -94,8 +94,8 @@ function UserProfileInfo() {
               variant="outlined"
               onClick={() => {
                 dispatch(resetUserInfo());
-                dispatch(clearBasket());
                 dispatch(logout());
+                dispatch(clearBasket());
                 navigate(-1);
               }}>
               Logout
