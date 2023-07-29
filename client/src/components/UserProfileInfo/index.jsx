@@ -35,7 +35,6 @@ function UserProfileInfo() {
   };
 
   const handleSave = () => {
-    // PUT request to backend
     updateCustomer({ login, telephone, email, firstName, lastName });
     setEditMode(false);
   };
