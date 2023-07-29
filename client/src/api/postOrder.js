@@ -9,6 +9,8 @@ const postOrder = async ({
   letterSubject,
   letterHtml,
   deliveryAddress,
+  customerId,
+  ...rest
 }) => {
   const response = await fetchApi(orderEP, {
     method: 'POST',
@@ -19,6 +21,8 @@ const postOrder = async ({
       letterSubject,
       letterHtml,
       deliveryAddress,
+      customerId,
+      ...rest,
     }),
   });
   if (response.message) {

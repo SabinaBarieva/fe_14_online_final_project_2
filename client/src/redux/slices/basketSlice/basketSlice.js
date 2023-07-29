@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login } from '../loginSlice';
+import { login, logout } from '../loginSlice';
 import mergeBasket from './mergeBasket';
 import changeQuantityInBasket from './changeQuantity';
 import deleteFromBasket from './deleteFromBasket';
@@ -94,6 +94,7 @@ const basketSlice = createSlice({
     builder.addCase(clearBasket.rejected, (state) => {
       state.isLoading = false;
     });
+    builder.addCase(logout.fulfilled, () => initialState);
   },
 });
 
