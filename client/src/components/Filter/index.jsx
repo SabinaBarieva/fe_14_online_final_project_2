@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
 
 import {
   Button,
@@ -76,7 +75,6 @@ function Filter({ priceMinBoundary, priceMaxBoundary }) {
 // eslint-disable-next-line react/prop-types
 function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
   const minPrice = useSelector(({ filters }) => filters.minPrice);
   const maxPrice = useSelector(({ filters }) => filters.maxPrice);
   const [cachedMinValue, setCachedMinValue] = useState(minPrice);
@@ -104,7 +102,6 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
 
   const minPriceCallback = ({ target }) => {
     const { value } = target;
-    // if (isNumber(value) && value < 0) setCachedMinValue(0);
     if (value === '') setCachedMinValue(null);
     else if (
       !keyOnePressed &&
@@ -116,7 +113,6 @@ function FilterSection({ priceMinBoundary, priceMaxBoundary }) {
   };
   const maxPriceCallback = ({ target }) => {
     const { value } = target;
-    // if (value < 0) setCachedMaxValue(0);
     if (value === '') setCachedMaxValue(null);
     else if (
       !keyOnePressed &&
