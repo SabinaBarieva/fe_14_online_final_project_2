@@ -17,12 +17,11 @@ function UserProfileInfo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user.user);
-  //
+
   const [cachedDataOfUser, setCachedDataOfUser] = useState(dataUser);
-  //
+
   const [editMode, setEditMode] = useState(false);
 
-  // Function to handle user data changes during edit mode
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
     setCachedDataOfUser((prevData) => ({
