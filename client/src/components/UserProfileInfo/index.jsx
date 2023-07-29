@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +12,17 @@ import {
 import { resetUserInfo } from '../../redux/slices/userSlice';
 import { logout } from '../../redux/slices/loginSlice';
 import clearBasket from '../../redux/slices/basketSlice/clearBasket';
+import { updateCustomer } from '../../api/customer';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user.user);
 
-  const [cachedDataOfUser, setCachedDataOfUser] = useState(dataUser);
+  const [
+    { login, telephone, email, firstName, lastName },
+    setCachedDataOfUser,
+  ] = useState(dataUser);
 
   const [editMode, setEditMode] = useState(false);
 
@@ -31,6 +35,8 @@ function UserProfileInfo() {
   };
 
   const handleSave = () => {
+    // PUT request to backend
+    updateCustomer({ login, telephone, email, firstName, lastName });
     setEditMode(false);
   };
 
@@ -107,7 +113,7 @@ function UserProfileInfo() {
             <TextField
               label="First name"
               name="firstName"
-              value={cachedDataOfUser.firstName}
+              value={firstName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -116,7 +122,7 @@ function UserProfileInfo() {
             <TextField
               label="Last name"
               name="lastName"
-              value={cachedDataOfUser.lastName}
+              value={lastName}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -125,7 +131,7 @@ function UserProfileInfo() {
             <TextField
               label="Email"
               name="email"
-              value={cachedDataOfUser.email}
+              value={email}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -134,7 +140,7 @@ function UserProfileInfo() {
             <TextField
               label="Phone"
               name="telephone"
-              value={cachedDataOfUser.telephone}
+              value={telephone}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
@@ -143,7 +149,7 @@ function UserProfileInfo() {
             <TextField
               label="Login"
               name="login"
-              value={cachedDataOfUser.login}
+              value={login}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
