@@ -12,7 +12,6 @@ import {
 import { logout } from '../../redux/slices/loginSlice';
 import { updateCustomer } from '../../api/customer';
 
-
 function UserProfileInfo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
