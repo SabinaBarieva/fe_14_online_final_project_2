@@ -8,13 +8,13 @@ import {
   Typography,
   Modal,
   Container,
+  TextField,
 } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledForm = styled(FormControl)({
-  gap: 5,
   width: '100%',
-  alignItems: 'center',
+  alignItems: 'flex-start',
 });
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -47,8 +47,8 @@ const StyledIconButton = styled(IconButton)({
 });
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  margin: 5,
-  width: '90%',
+  margin: '5px 0',
+  width: '100%',
   boxSizing: 'border-box',
   border: `1px solid ${theme.palette.primary.dark}`,
   borderRadius: 7,
@@ -71,23 +71,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StyledInputBaseLogin = styled(InputBase)(({ theme }) => ({
-  margin: 5,
+const StyledInputBaseLogin = styled(TextField)(({ theme }) => ({
+  margin: '5px auto',
   width: '90%',
   boxSizing: 'border-box',
   backgroundColor: theme.palette.secondary.inputBackground,
-  borderRadius: 7,
   minHeight: 40,
-  '& .MuiInputBase-input': {
-    padding: '10px 15px!important',
+  position: 'relative',
+  '& .MuiInputBase-root': {
     borderRadius: 7,
-    '& ::placeholder': {
-      opacity: 0.5,
-    },
+    paddingLeft: 5,
+  },
+  '& .MuiInputBase-input': {
+    padding: '12px 15px!important',
   },
   '& .MuiOutlinedInput-input': {
-    outline: 'none',
-    minHeight: 40,
     borderRadius: 7,
   },
 }));
@@ -106,7 +104,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 const StyledTypography = styled(Typography)(({ theme }) => ({
   textAlign: 'center',
   '&.MuiTypography-paragraph': {
-    margin: 0,
+    margin: 'auto',
     fontSize: '0.6rem',
     color: theme.palette.secondary.main,
     height: 12,

@@ -3,17 +3,17 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object({
   firstName: Yup.string()
     .min(2, 'Min 2 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .max(25, 'Max 25 letters allowed')
     .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
     .required('This field is required!'),
   lastName: Yup.string()
     .min(2, 'Min 2 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .max(25, 'Max 25 letters allowed')
     .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
     .required('This field is required!'),
   login: Yup.string()
     .min(4, 'Min 4 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .max(10, 'Max 10 letters allowed')
     .matches(
       /^[a-zA-Z0-9]*$/,
       'Login must contain Latin letters and numbers only, without spaces'
@@ -25,8 +25,8 @@ const validationSchema = Yup.object({
     .max(30, 'Max 30 letters required')
     .required('This field is required!'),
   passwordFirst: Yup.string()
-    .min(4, 'Min 4 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .min(7, 'Min 7 letters required')
+    .max(30, 'Max 30 letters allowed')
     .matches(/^[a-zA-Z]/, 'Password must contain Latin letters only')
     .matches(/\d/, 'Password must contain at least one number')
     .matches(/[a-z]/, 'Password must contain at least one lowercase letter')

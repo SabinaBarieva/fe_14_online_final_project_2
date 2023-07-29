@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { useFormik } from 'formik';
 import { PatternFormat } from 'react-number-format';
 import LockIcon from '@mui/icons-material/Lock';
@@ -55,7 +56,6 @@ function Registration() {
       <form
         onSubmit={formik.handleSubmit}
         style={{
-          padding: '10px 0',
           height: 620,
           margin: 'auto',
           maxWidth: 400,
@@ -74,18 +74,23 @@ function Registration() {
         <Container>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="First Name"
+              label="First Name"
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <PersonIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <PersonIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.firstName && formik.errors.firstName ? (
               <StyledTypography variant="paragraph" component="p">
@@ -99,18 +104,23 @@ function Registration() {
           </StyledForm>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type="text"
               id="lastName"
               name="lastName"
-              placeholder="Last Name"
+              label="Last Name"
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <PersonIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <PersonIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.lastName && formik.errors.lastName ? (
               <StyledTypography variant="paragraph" component="p">
@@ -124,18 +134,21 @@ function Registration() {
           </StyledForm>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type="text"
               id="login"
               name="login"
-              placeholder="Login"
+              label="Login"
               onBlur={formik.handleBlur}
               value={formik.values.login}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <LoginIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <LoginIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.login && formik.errors.login ? (
               <StyledTypography variant="paragraph" component="p">
@@ -149,20 +162,23 @@ function Registration() {
           </StyledForm>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type="text"
               id="email"
               name="email"
-              placeholder="Email"
+              label="Email"
               onBlur={formik.handleBlur}
               value={formik.values.email}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <AlternateEmailIcon
-                    style={{ paddingRight: 5, cursor: 'pointer' }}
-                  />
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <AlternateEmailIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.email && formik.errors.email ? (
               <StyledTypography variant="paragraph" component="p">
@@ -176,28 +192,31 @@ function Registration() {
           </StyledForm>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type={showPasswordFirst ? 'text' : 'password'}
               id="passwordFirst"
               name="passwordFirst"
-              placeholder="Password"
+              label="Password"
               onBlur={formik.handleBlur}
               value={formik.values.passwordFirst}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  {showPasswordFirst ? (
-                    <LockOpenIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPasswordFirst(false)}
-                    />
-                  ) : (
-                    <LockIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPasswordFirst(true)}
-                    />
-                  )}
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    {showPasswordFirst ? (
+                      <LockOpenIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPasswordFirst(false)}
+                      />
+                    ) : (
+                      <LockIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPasswordFirst(true)}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.passwordFirst && formik.errors.passwordFirst ? (
               <StyledTypography variant="paragraph" component="p">
@@ -211,28 +230,31 @@ function Registration() {
           </StyledForm>
           <StyledForm>
             <StyledInputBaseLogin
+              variant="outlined"
               type={showPasswordSecond ? 'text' : 'password'}
               id="passwordSecond"
               name="passwordSecond"
-              placeholder="Repeat password"
+              label="Repeat password"
               onBlur={formik.handleBlur}
               value={formik.values.passwordSecond}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  {showPasswordSecond ? (
-                    <LockOpenIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPasswordSecond(false)}
-                    />
-                  ) : (
-                    <LockIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPasswordSecond(true)}
-                    />
-                  )}
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    {showPasswordSecond ? (
+                      <LockOpenIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPasswordSecond(false)}
+                      />
+                    ) : (
+                      <LockIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPasswordSecond(true)}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.passwordSecond && formik.errors.passwordSecond ? (
               <StyledTypography variant="paragraph" component="p">
@@ -247,21 +269,27 @@ function Registration() {
           <StyledForm style={{ padding: '0 5px', textAlign: 'center' }}>
             <PatternFormat
               style={{
-                width: '92%',
-                border: 'none',
-                minHeight: 45,
-                padding: '0 20px',
-                borderRadius: 7,
-                backgroundColor: '#F3F6FF',
+                width: '93%',
               }}
+              label="Phone"
               format="+380 (##) ## ## ###"
               allowEmptyFormatting
+              customInput={StyledInputBaseLogin}
               mask="_"
               id="telephone"
               name="telephone"
               onBlur={formik.handleBlur}
               value={formik.values.telephone}
               onChange={formik.handleChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <LocalPhoneIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.telephone && formik.errors.telephone ? (
               <StyledTypography variant="paragraph" component="p">
@@ -281,6 +309,9 @@ function Registration() {
             sx={{ width: '90%' }}>
             Registration
           </StyledButton>
+          <Container sx={{ textAlign: 'center' }}>
+            Back to <Link to="/login">Login</Link>
+          </Container>
         </Container>
       </form>
     </Container>
