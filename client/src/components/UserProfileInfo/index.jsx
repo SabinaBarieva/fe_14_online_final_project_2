@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ function UserProfileInfo() {
   ] = useState(dataUser);
 
   const [editMode, setEditMode] = useState(false);
-
+  useEffect(() => {}, [editMode]);
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
     setCachedDataOfUser((prevData) => ({
@@ -66,23 +66,23 @@ function UserProfileInfo() {
             }}>
             <DataBoxes>
               <BoxTitle>Name:</BoxTitle>
-              <BoxUserData>{dataUser.firstName}</BoxUserData>
+              <BoxUserData>{firstName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Surname:</BoxTitle>
-              <BoxUserData>{dataUser.lastName}</BoxUserData>
+              <BoxUserData>{lastName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>E-mail:</BoxTitle>
-              <BoxUserData>{dataUser.email}</BoxUserData>
+              <BoxUserData>{email}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Phone number:</BoxTitle>
-              <BoxUserData>{dataUser.telephone}</BoxUserData>
+              <BoxUserData>{telephone}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Login:</BoxTitle>
-              <BoxUserData>{dataUser.login}</BoxUserData>
+              <BoxUserData>{login}</BoxUserData>
             </DataBoxes>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
