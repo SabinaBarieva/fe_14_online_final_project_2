@@ -25,6 +25,7 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
   `${stateName}/logout`,
   (_, { getState }) => {
+    setToken(null);
     let state = getState()[stateName];
     state = initialState;
   }
