@@ -9,9 +9,9 @@ import {
   BoxTitle,
   Buttons,
 } from '../../themes/themeUserProfileInfo';
-import { resetUserInfo } from '../../redux/slices/userSlice';
+// import { resetUserInfo } from '../../redux/slices/userSlice';
 import { logout } from '../../redux/slices/loginSlice';
-import clearBasket from '../../redux/slices/basketSlice/clearBasket';
+// import clearBasket from '../../redux/slices/basketSlice/clearBasket';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
@@ -89,8 +89,8 @@ function UserProfileInfo() {
               style={{ backgroundColor: 'white', color: 'black' }}
               variant="outlined"
               onClick={() => {
-                dispatch(resetUserInfo());
-                dispatch(clearBasket());
+                // dispatch(resetUserInfo());
+                // dispatch(clearBasket());
                 dispatch(logout());
                 navigate(-1);
               }}>
