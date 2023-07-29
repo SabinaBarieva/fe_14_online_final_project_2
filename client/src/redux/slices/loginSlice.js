@@ -5,8 +5,10 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setToken } from '../../localstorage/localstorage';
+// import clearBasket from './basketSlice/clearBasket';
 
 const stateName = 'login';
+const initialState = initialStateCreator(stateName);
 export const login = createAsyncThunk(
   `${stateName}/fetch`,
   async ({ loginOrEmail, password }, { dispatch }) => {
@@ -20,19 +22,18 @@ export const login = createAsyncThunk(
     }
   }
 );
-
+export const logout = createAsyncThunk(
+  `${stateName}/logout`,
+  (_, { getState }) => {
+    let state = getState()[stateName];
+    state = initialState;
+  }
+);
 const loginSlice = createSlice({
   name: stateName,
-  initialState: initialStateCreator(stateName),
-  reducers: {
-    logout: (state) => {
-      state.login = null;
-      setToken(null);
-    },
-  },
+  initialState,
   extraReducers: (builder) => {
     extraReducerCreator(builder)(login, stateName);
   },
 });
-export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;

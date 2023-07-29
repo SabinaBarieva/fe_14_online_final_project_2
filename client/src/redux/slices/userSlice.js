@@ -4,9 +4,10 @@ import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
-import { login } from './loginSlice';
+import { login, logout } from './loginSlice';
 
 const stateName = 'user';
+const initialState = initialStateCreator(stateName);
 export const fetchUserInfo = createAsyncThunk(
   'user-info/fetch',
   async (_, { dispatch }) => {
@@ -21,20 +22,13 @@ export const fetchUserInfo = createAsyncThunk(
 
 const userSlice = createSlice({
   name: stateName,
-  initialState: initialStateCreator(stateName),
-  reducers: {
-    resetUserInfo: (state) => {
-      state.isLoading = false;
-      state.user = null;
-      state.error = null;
-    },
-  },
+  initialState,
   extraReducers: (builder) => {
     extraReducerCreator(builder)(fetchUserInfo, stateName);
     builder.addCase(login.fulfilled, (_, action) => {
       action.asyncDispatch(fetchUserInfo());
     });
+    builder.addCase(logout.fulfilled, () => initialState);
   },
 });
-export const { resetUserInfo } = userSlice.actions;
 export default userSlice.reducer;
