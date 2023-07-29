@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { Container, InputAdornment, TextField } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Container, InputAdornment } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import { useFormik } from 'formik';
 import LockIcon from '@mui/icons-material/Lock';
@@ -41,7 +41,6 @@ function Login() {
     validationSchema,
     onSubmit: ({ loginOrEmail, password }) => {
       dispatch(login({ loginOrEmail, password }));
-      // navigate('/');
     },
   });
 
