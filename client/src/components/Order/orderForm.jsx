@@ -70,6 +70,8 @@ export default function OrderForm() {
 
   const getInitialValues = () => {
     if (dataUser) {
+      const phone = dataUser.telephone.replace(4);
+      console.log(phone);
       return {
         firstName: dataUser.firstName,
         lastName: dataUser.lastName,

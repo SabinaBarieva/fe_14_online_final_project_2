@@ -19,10 +19,16 @@ const StyledForm = styled(FormControl)({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   '&.MuiButton-root': {
-    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-    color: { xs: '#616467', md: '#fff' },
+    backgroundColor: {
+      xs: theme.palette.secondary.contrastText,
+      md: theme.palette.primary.dark,
+    },
+    color: {
+      xs: theme.palette.primary.light,
+      md: theme.palette.primary.section,
+    },
     borderRadius: 7,
-    border: '1px solid #211F1C',
+    border: `1px solid ${theme.palette.primary.dark}`,
     margin: '10px auto',
     display: 'block',
     minHeight: 40,
