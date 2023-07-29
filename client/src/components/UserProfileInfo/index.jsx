@@ -76,8 +76,8 @@ function UserProfileInfo() {
               <BoxUserData>{dataUser.telephone}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
-              <BoxTitle>Address:</BoxTitle>
-              <BoxUserData>ЗАГЛУШКА</BoxUserData>
+              <BoxTitle>Login:</BoxTitle>
+              <BoxUserData>{dataUser.login}</BoxUserData>
             </DataBoxes>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -141,9 +141,9 @@ function UserProfileInfo() {
               variant="outlined"
             />
             <TextField
-              label="Address"
-              name="address"
-              value="ЗАГЛУШКА"
+              label="Login"
+              name="login"
+              value={cachedDataOfUser.login}
               onChange={handleUserDataChange}
               fullWidth
               margin="normal"
