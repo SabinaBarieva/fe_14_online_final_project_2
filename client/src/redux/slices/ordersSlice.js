@@ -7,7 +7,7 @@ import { setErrorMessage } from './errorsSlice';
 import { login, logout } from './loginSlice';
 
 const sliceName = 'orders';
-const initialState = initialStateCreator(sliceName);
+const initialState = initialStateCreator(sliceName, []);
 export const fetchOrders = createAsyncThunk(`${sliceName}/fetch`, () => {
   try {
     return getOrders();
