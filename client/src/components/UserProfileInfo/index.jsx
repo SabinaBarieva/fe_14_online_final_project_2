@@ -11,6 +11,7 @@ import {
 } from '../../themes/themeUserProfileInfo';
 import { logout } from '../../redux/slices/loginSlice';
 import { updateCustomer } from '../../api/customer';
+import { fetchUserInfo } from '../../redux/slices/userSlice';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
@@ -23,7 +24,11 @@ function UserProfileInfo() {
   ] = useState(dataUser);
 
   const [editMode, setEditMode] = useState(false);
-  useEffect(() => {}, [editMode]);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch, editMode, dataUser]);
+
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
     setCachedDataOfUser((prevData) => ({
