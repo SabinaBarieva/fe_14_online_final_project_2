@@ -20,11 +20,10 @@ import {
   StyledTypography,
   StyledFormBackground,
 } from '../../themes/themeOrder';
-import { createOrder, saveOrder } from '../../redux/slices/orderSlice';
+import { sendOrder } from '../../redux/slices/orderSlice';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
-  const itemsBasket = useSelector((state) => state.basket.itemsBasket);
   const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
   const dataUser = useSelector((state) => state.user.user);
@@ -47,8 +46,9 @@ export default function OrderForm() {
       secondAdress: number,
       restAdress: rest,
     };
-    dispatch(createOrder(itemsBasket));
-    dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
+    dispatch(
+      sendOrder({ email: emailAdress, phone, name, bodyMail, addressObj })
+    );
   };
 
   const closed = () => {
@@ -75,7 +75,7 @@ export default function OrderForm() {
         lastName: dataUser.lastName,
         email: dataUser.email,
         address: '',
-        telephone: dataUser.telephone,
+        telephone: '',
         cardNumber: '',
         expirationMonth: '',
         expirationYear: '',

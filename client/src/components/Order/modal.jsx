@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 import { Close } from '@mui/icons-material';
 import { closeModal } from '../../redux/slices/modalSlice';
-import { sendOrder } from '../../redux/slices/orderSlice';
 import clearBasket from '../../redux/slices/basketSlice/clearBasket';
+import AnimatedText from './animation';
 import {
   StyledTypography,
   StyledButton,
@@ -19,10 +19,10 @@ export default function ModalOrdered() {
   const textModal = useSelector((state) => state.modal.text);
   const textHeader = useSelector((state) => state.modal.statusOrder);
   const modalRef = useRef(null);
+  const isLoading = useSelector((state) => state.order.isLoading);
 
   const closed = () => {
     dispatch(closeModal());
-    dispatch(sendOrder());
     dispatch(clearBasket());
   };
 
@@ -39,7 +39,21 @@ export default function ModalOrdered() {
     };
   }, []);
 
-  return (
+  return isLoading ? (
+    <Container
+      sx={{
+        backgroundColor: 'rgba(128, 128, 128, 0.5)',
+        height: '100%',
+        maxWidth: '100%!important',
+        zIndex: 1800,
+        position: 'fixed',
+        margin: 'auto',
+        top: 0,
+        left: 0,
+      }}>
+      <AnimatedText text="We collect your order" />
+    </Container>
+  ) : (
     <StyledModal ref={modalRef} open={modal} onClose={closed}>
       <StyledModalContainer>
         <Container
