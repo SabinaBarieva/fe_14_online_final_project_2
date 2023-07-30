@@ -26,7 +26,6 @@ function ProductsContent() {
   const sort = useSelector((state) => state.products.sort);
   const [priceMinBoundary, setPriceMinBoundary] = useState();
   const [priceMaxBoundary, setPriceMaxBoundary] = useState();
-  const [urlFilter, setUrlFilter] = useState('');
 
   const filterLinkConstructor = () => {
     // categories;
@@ -47,7 +46,6 @@ function ProductsContent() {
     } else sortOrder = '';
     // full link
     const fullFilterURL = categoryFilter + priceFilter + sortOrder;
-    setUrlFilter(fullFilterURL);
     setSearchParams(fullFilterURL);
   };
 
