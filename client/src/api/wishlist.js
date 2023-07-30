@@ -10,4 +10,7 @@ export const deleteFromWishList = (id) =>
   fetchApi(wishlistEP(id), { method: 'DELETE' });
 
 export const updateWishList = (wishlist) =>
-  fetchApi(wishlistEP(), { method: 'PUT', body: { products: wishlist } });
+  fetchApi(wishlistEP(), {
+    method: 'PUT',
+    body: JSON.stringify({ products: wishlist }),
+  });
