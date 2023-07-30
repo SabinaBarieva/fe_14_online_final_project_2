@@ -14,9 +14,12 @@ const extraReducerCreator =
       state.error = error;
     });
   };
-export const initialStateCreator = (resultKeyName = 'result') => ({
+export const initialStateCreator = (
+  resultKeyName = 'result',
+  defaultValue = null
+) => ({
   isLoading: false,
-  [resultKeyName]: null,
+  [resultKeyName]: defaultValue,
   error: null,
 });
 export default extraReducerCreator;
