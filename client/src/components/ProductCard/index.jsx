@@ -17,6 +17,7 @@ import CartIcon from '../Icons/cartIcon/cartIcon';
 import PulseAnimation from '../Animations';
 import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
 import CardContainer from '../../themes/themeProductCardSCSS';
+import ProductWishlist from '../ProductWishlist';
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -151,6 +152,7 @@ function ProductCard({ product }) {
               style={{ marginRight: '7%' }}>
               <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
             </Link>
+            <ProductWishlist productId={product._id} />
 
             {product.quantity !== 0 && (
               <PulseAnimation scaleTo={1.1} config={{ duration: 1000 }} loop>
@@ -229,6 +231,7 @@ ProductCard.propTypes = {
     description: PropTypes.string,
     guarantee: PropTypes.string,
     arrivalPhoto: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 

@@ -4,12 +4,15 @@ import toggleProductInWishlist, {
   toggleProductInWishlistActionCreator,
 } from '../../redux/slices/wishlistSlice/toggleProductInWishlist';
 
-function productWishlist({ productId }) {
+function ProductWishlist(productId) {
+  //   console.log(productId);
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const dispatch = useDispatch();
-  const isProductInWishlist = wishlist.includes(productId);
+  const isProductInWishlist = wishlist.includes(productId.productId);
   const toggleProductInWishListCallBack = () => {
-    dispatch(toggleProductInWishlistActionCreator({ productId }));
+    dispatch(
+      toggleProductInWishlistActionCreator({ productId: productId.productId })
+    );
   };
   return isProductInWishlist ? (
     <button type="submit" onClick={toggleProductInWishListCallBack}>
@@ -21,4 +24,4 @@ function productWishlist({ productId }) {
     </button>
   );
 }
-export default productWishlist;
+export default ProductWishlist;
