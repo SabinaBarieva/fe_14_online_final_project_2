@@ -11,6 +11,7 @@ import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
 import { openApp } from '../../redux/slices/formSlice';
+import { userData } from '../../redux/selectors';
 import {
   StyledForm,
   StyledButton,
@@ -26,7 +27,7 @@ export default function OrderForm() {
   const dispatch = useDispatch();
   const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
-  const dataUser = useSelector((state) => state.user.user);
+  const dataUser = useSelector(userData);
 
   const elem = (values) => {
     const name = `${values.firstName} ${values.lastName}`;

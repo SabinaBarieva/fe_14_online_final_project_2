@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledAnimationText } from '../../themes/themeOrder';
 
 function AnimatedText({ text }) {
@@ -21,5 +21,9 @@ function AnimatedText({ text }) {
     </StyledAnimationText>
   );
 }
+
+AnimatedText.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default AnimatedText;

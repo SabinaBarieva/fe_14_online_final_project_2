@@ -11,6 +11,9 @@ export const allProductsIsFetching = (state) => state.allProducts.isFetching;
 export const saleProds = (state) => state.allProducts.saleProds;
 // Filters
 export const categoriesFilter = (state) => state.filters.categories;
+export const categoriesavailableFilters = (state) =>
+  state.filters.availableFilters.categories;
+export const isLoadingFilters = (state) => state.filters.isLoading;
 export const minimalPrice = (state) => state.filters.minPrice;
 export const maximalPrice = (state) => state.filters.maxPrice;
 // Products

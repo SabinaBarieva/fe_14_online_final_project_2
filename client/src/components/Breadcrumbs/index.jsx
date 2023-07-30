@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { currentProductIsLoading } from '../../redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  currentProductIsLoading,
+  currentProduct,
+  categoriesavailableFilters,
+  isLoadingFilters,
+} from '../../redux/selectors';
+import { fetchFilters, addCategory } from '../../redux/slices/filtersSlice';
 import {
   StyledRouterLink,
   StyledBreadcrumbs,
@@ -10,9 +16,12 @@ import {
 
 export default function BreadCrumbs() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const params = useParams();
-  const product = useSelector((state) => state.product.product);
+  const product = useSelector(currentProduct);
   const isLoading = useSelector(currentProductIsLoading);
+  const isLoadingFilter = useSelector(isLoadingFilters);
+  const categories = useSelector(categoriesavailableFilters);
   const path = location.pathname.split('/').filter((crumb) => crumb);
   const crumbs = [];
   let crumbPath = '';
@@ -28,6 +37,13 @@ export default function BreadCrumbs() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (params.id && product && !categories) {
+      dispatch(fetchFilters());
+    }
+  }, []);
+
   const separator = showSeparator ? '>' : '/';
   if (location.pathname !== '/') {
     crumbs.push(
@@ -46,13 +62,31 @@ export default function BreadCrumbs() {
 
       if (isLastCrumb) {
         if (params.id && product) {
-          if (isLoading) {
+          if (isLoading && isLoadingFilter) {
             crumbs.push(
               <StyledSpan key="paramsId" className="loading">
                 . . . . . . . . . . .
               </StyledSpan>
             );
-          } else {
+          }
+          if (categories) {
+            let categoriesName;
+            let categoriesId;
+            categories.forEach((elem) => {
+              if (elem.id === product.categories) {
+                categoriesId = elem.id;
+                categoriesName = elem.name;
+              }
+            });
+            crumbs.push(
+              <StyledRouterLink
+                key={categoriesName}
+                color="inherit"
+                onClick={dispatch(addCategory(categoriesId))}
+                to="/product">
+                {categoriesName}
+              </StyledRouterLink>
+            );
             crumbs.push(<StyledSpan key="paramsId">{product.name}</StyledSpan>);
           }
         } else {
