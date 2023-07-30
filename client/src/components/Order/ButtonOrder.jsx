@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container } from '@mui/material';
 import OrderForm from './orderForm';
 import ModalOrdered from './modal';
 import { openForm } from '../../redux/slices/formSlice';
@@ -36,7 +35,7 @@ export default function ButtonOrder() {
               sm: '2.5rem',
               md: '3rem',
             },
-            minHeight: '5px !important',
+            minHeight: 20,
             backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
             color: { xs: '#616467', md: '#fff' },
             padding: 0,

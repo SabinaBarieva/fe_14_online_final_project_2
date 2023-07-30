@@ -11,6 +11,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import getImg from '../../cloudinary';
 import validationSchema from './validation';
+import { addCustomer } from '../../api/customer';
 import {
   StyleAdvancedImage,
   StyledTypography,
@@ -21,7 +22,7 @@ import {
 
 function Registration() {
   const navigate = useNavigate();
-  const [showPasswordFirst, setShowPasswordFirst] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [showPasswordSecond, setShowPasswordSecond] = useState(false);
 
   const formik = useFormik({
@@ -30,12 +31,16 @@ function Registration() {
       lastName: '',
       login: '',
       email: '',
-      passwordFirst: '',
+      password: '',
       passwordSecond: '',
       telephone: '',
     },
     validationSchema,
-    onSubmit: () => {
+    onSubmit: (values) => {
+      addCustomer({
+        ...values,
+        telephone: values.telephone.replace(/[^\d+]/g, ''),
+      });
       navigate(-1);
     },
   });
@@ -193,34 +198,34 @@ function Registration() {
           <StyledForm>
             <StyledInputBaseLogin
               variant="outlined"
-              type={showPasswordFirst ? 'text' : 'password'}
-              id="passwordFirst"
-              name="passwordFirst"
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              name="password"
               label="Password"
               onBlur={formik.handleBlur}
-              value={formik.values.passwordFirst}
+              value={formik.values.password}
               onChange={formik.handleChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="end">
-                    {showPasswordFirst ? (
+                    {showPassword ? (
                       <LockOpenIcon
                         style={{ paddingRight: 5, cursor: 'pointer' }}
-                        onClick={() => setShowPasswordFirst(false)}
+                        onClick={() => setShowPassword(false)}
                       />
                     ) : (
                       <LockIcon
                         style={{ paddingRight: 5, cursor: 'pointer' }}
-                        onClick={() => setShowPasswordFirst(true)}
+                        onClick={() => setShowPassword(true)}
                       />
                     )}
                   </InputAdornment>
                 ),
               }}
             />
-            {formik.touched.passwordFirst && formik.errors.passwordFirst ? (
+            {formik.touched.password && formik.errors.password ? (
               <StyledTypography variant="paragraph" component="p">
-                {formik.errors.passwordFirst}
+                {formik.errors.password}
               </StyledTypography>
             ) : (
               <StyledTypography variant="paragraph" component="p">
