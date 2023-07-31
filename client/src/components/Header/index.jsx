@@ -24,15 +24,18 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { styled } from '@mui/material/styles';
 import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
-import { selectCart } from '../../redux/selectors';
+import { selectCart, wishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
+import Wishlist from '../ProductWishlist';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -70,6 +73,7 @@ function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const dispatch = useDispatch();
   const location = useLocation();
+  const { itemsWishlist } = useSelector(wishlist);
 
   const locationDispatch = () => {
     if (location.pathname !== '/product') {
@@ -252,6 +256,28 @@ function Header() {
               }}>
               <Search />
             </Container>
+            {totalInBasket > 0 ? (
+              <StyledBadge
+                badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+                <FavoriteIcon
+                  sx={{
+                    color: 'red',
+                  }}
+                />
+              </StyledBadge>
+            ) : (
+              <StyledBadge badgeContent={totalInBasket === 0}>
+                <FavoriteBorderIcon
+                  sx={{
+                    color: 'red',
+                  }}
+                />
+              </StyledBadge>
+            )}
+            {/* <StyledBadge
+              badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
+              <Wishlist />
+            </StyledBadge> */}
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>

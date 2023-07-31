@@ -31,7 +31,7 @@ import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
 import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 import modalAddToBasketSlice from './slices/modalAddToBasket';
-import wishlistSlice from './slices/wishlistSlice';
+import wishlistSlice from './slices/wishlistSlice/wishlistSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -59,7 +59,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['basket', 'login', 'user'],
+  whitelist: ['basket', 'login', 'user', 'wishlist'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
