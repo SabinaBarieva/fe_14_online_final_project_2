@@ -20,7 +20,6 @@ import CardContainer from '../../themes/themeProductCardSCSS';
 import ProductWishlist from '../ProductWishlist';
 
 function ProductCard({ product }) {
-  console.log(product);
   const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
