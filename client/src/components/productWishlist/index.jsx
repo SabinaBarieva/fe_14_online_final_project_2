@@ -1,20 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import toggleProductInWishlist, {
-  toggleProductInWishlistActionCreator,
-} from '../../redux/slices/wishlistSlice/toggleProductInWishlist';
+import { toggleProductInWishlistActionCreator } from '../../redux/slices/wishlistSlice/toggleProductInWishlist';
+import isProductInWishlist from '../../redux/slices/wishlistSlice/isProductInWishlist';
 
-function ProductWishlist(productId) {
-  //   console.log(productId);
-  const wishlist = useSelector((state) => state.wishlist.wishlist);
+function ProductWishlist({ product }) {
+  const wishlist = useSelector(
+    ({ wishlist: stateWishlist }) => stateWishlist.wishlist
+  );
   const dispatch = useDispatch();
-  const isProductInWishlist = wishlist.includes(productId.productId);
   const toggleProductInWishListCallBack = () => {
-    dispatch(
-      toggleProductInWishlistActionCreator({ productId: productId.productId })
-    );
+    dispatch(toggleProductInWishlistActionCreator(product));
   };
-  return isProductInWishlist ? (
+  return isProductInWishlist(wishlist, product) ? (
     <button type="submit" onClick={toggleProductInWishListCallBack}>
       remove from wishlist
     </button>
@@ -24,4 +22,9 @@ function ProductWishlist(productId) {
     </button>
   );
 }
+
+ProductWishlist.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  product: PropTypes.object.isRequired,
+};
 export default ProductWishlist;
