@@ -27,9 +27,9 @@ function UserProfileInfo() {
 
   const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch, editMode, dataUser]);
+  // useEffect(() => {
+  //   dispatch(fetchUserInfo());
+  // }, [dispatch, editMode, dataUser]);
 
   // const handleUserDataChange = (event) => {
   //   const { name, value } = event.target;
@@ -88,7 +88,9 @@ function UserProfileInfo() {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    updateCustomer(values);
+    dispatch(fetchUserInfo());
+    setEditMode(false);
   };
 
   const formik = useFormik({
