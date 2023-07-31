@@ -20,6 +20,7 @@ import CardContainer from '../../themes/themeProductCardSCSS';
 import ProductWishlist from '../ProductWishlist';
 
 function ProductCard({ product }) {
+  console.log(product);
   const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -152,7 +153,7 @@ function ProductCard({ product }) {
               style={{ marginRight: '7%' }}>
               <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
             </Link>
-            <ProductWishlist productId={product._id} />
+            <ProductWishlist product={product} />
 
             {product.quantity !== 0 && (
               <PulseAnimation scaleTo={1.1} config={{ duration: 1000 }} loop>
