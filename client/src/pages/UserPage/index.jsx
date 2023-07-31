@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { Grid } from '@mui/material';
-import { fetchUserInfo } from '../../redux/slices/userSlice';
 import UserProfileInfo from '../../components/UserProfileInfo';
 import OrdersList from '../../components/OrdersList';
 
 function UserPage() {
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo());
-  // }, [dispatch]);
-
   return (
     <Grid
       container

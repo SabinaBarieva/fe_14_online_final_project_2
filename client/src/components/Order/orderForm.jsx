@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PatternFormat } from 'react-number-format';
 import { useFormik } from 'formik';
-import { Container } from '@mui/material';
+import { Container, InputAdornment } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import HomeIcon from '@mui/icons-material/Home';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { Close } from '@mui/icons-material';
 import validationSchema from './validation';
 import { orderBasket } from '../../redux/slices/modalSlice';
@@ -10,24 +14,23 @@ import { openApp } from '../../redux/slices/formSlice';
 import {
   StyledForm,
   StyledButton,
-  StyledInputBase,
+  StyledInputBaseLogin,
   StyledIconButton,
   StyledGrid,
   StyledTypography,
   StyledFormBackground,
 } from '../../themes/themeOrder';
-import { createOrder, saveOrder } from '../../redux/slices/orderSlice';
+import { sendOrder } from '../../redux/slices/orderSlice';
 
 export default function OrderForm() {
   const dispatch = useDispatch();
-  const itemsBasket = useSelector((state) => state.basket.itemsBasket);
   const isOpenForm = useSelector((state) => state.form.statusForm);
   const formRef = useRef(null);
   const dataUser = useSelector((state) => state.user.user);
 
   const elem = (values) => {
     const name = `${values.firstName} ${values.lastName}`;
-    const phone = values.phone.replace(/\D/g, '');
+    const phone = values.telephone.replace(/\D/g, '');
     const emailAdress = values.email;
     const bodyMail = `
       <div>
@@ -43,8 +46,9 @@ export default function OrderForm() {
       secondAdress: number,
       restAdress: rest,
     };
-    dispatch(createOrder(itemsBasket));
-    dispatch(saveOrder({ emailAdress, phone, name, bodyMail, addressObj }));
+    dispatch(
+      sendOrder({ email: emailAdress, phone, name, bodyMail, addressObj })
+    );
   };
 
   const closed = () => {
@@ -71,7 +75,7 @@ export default function OrderForm() {
         lastName: dataUser.lastName,
         email: dataUser.email,
         address: '',
-        phone: dataUser.telephone,
+        telephone: '',
         cardNumber: '',
         expirationMonth: '',
         expirationYear: '',
@@ -83,7 +87,7 @@ export default function OrderForm() {
       lastName: '',
       email: '',
       address: '',
-      phone: '',
+      telephone: '',
       cardNumber: '',
       expirationMonth: '',
       expirationYear: '',
@@ -137,6 +141,7 @@ export default function OrderForm() {
               component="div"
               style={{
                 display: 'flex',
+                gap: 10,
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexWrap: 'wrap',
@@ -144,14 +149,25 @@ export default function OrderForm() {
               }}>
               <Container component="div" style={{ maxWidth: 300, padding: 0 }}>
                 <StyledForm>
-                  <StyledInputBase
+                  <StyledInputBaseLogin
+                    style={{ width: '100%' }}
+                    variant="outlined"
                     type="text"
                     id="firstName"
                     name="firstName"
-                    placeholder="FirstName"
+                    label="First Name"
                     onBlur={formik.handleBlur}
                     value={formik.values.firstName}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="end">
+                          <PersonIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {formik.touched.firstName && formik.errors.firstName ? (
                     <StyledTypography variant="paragraph" component="p">
@@ -164,14 +180,25 @@ export default function OrderForm() {
                   )}
                 </StyledForm>
                 <StyledForm>
-                  <StyledInputBase
+                  <StyledInputBaseLogin
+                    style={{ width: '100%' }}
+                    variant="outlined"
                     type="text"
                     id="lastName"
                     name="lastName"
-                    placeholder="LastName"
+                    label="Last Name"
                     onBlur={formik.handleBlur}
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="end">
+                          <PersonIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {formik.touched.lastName && formik.errors.lastName ? (
                     <StyledTypography variant="paragraph" component="p">
@@ -183,27 +210,32 @@ export default function OrderForm() {
                     </StyledTypography>
                   )}
                 </StyledForm>
-                <StyledForm style={{ padding: '10px 5px' }}>
+                <StyledForm style={{ textAlign: 'center' }}>
                   <PatternFormat
-                    style={{
-                      width: '95%',
-                      border: 'none',
-                      minHeight: 45,
-                      padding: '0 20px',
-                      borderRadius: 7,
-                    }}
+                    style={{ width: '100%' }}
+                    label="Phone"
                     format="+380 (##) ## ## ###"
                     allowEmptyFormatting
+                    customInput={StyledInputBaseLogin}
                     mask="_"
-                    id="phone"
-                    name="phone"
+                    id="telephone"
+                    name="telephone"
                     onBlur={formik.handleBlur}
-                    value={formik.values.phone}
+                    value={formik.values.telephone}
                     onChange={formik.handleChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="end">
+                          <LocalPhoneIcon
+                            style={{ paddingRight: 5, cursor: 'pointer' }}
+                          />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
-                  {formik.touched.phone && formik.errors.phone ? (
+                  {formik.touched.telephone && formik.errors.telephone ? (
                     <StyledTypography variant="paragraph" component="p">
-                      {formik.errors.phone}
+                      {formik.errors.telephone}
                     </StyledTypography>
                   ) : (
                     <StyledTypography variant="paragraph" component="p">
@@ -217,7 +249,6 @@ export default function OrderForm() {
                 spacing={2}
                 style={{
                   backgroundColor: '#C4C4C4',
-                  marginBottom: 10,
                 }}>
                 <StyledTypography variant="h6">
                   Card for payment
@@ -362,15 +393,25 @@ export default function OrderForm() {
                 </StyledGrid>
               </StyledGrid>
               <StyledForm>
-                <StyledInputBase
-                  type="email"
+                <StyledInputBaseLogin
+                  variant="outlined"
+                  type="text"
                   id="email"
                   name="email"
-                  placeholder="Email"
-                  style={{ width: '100%' }}
+                  label="Email"
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   onChange={formik.handleChange}
+                  sx={{ width: '100%' }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <AlternateEmailIcon
+                          style={{ paddingRight: 5, cursor: 'pointer' }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 {formik.touched.email && formik.errors.email ? (
                   <StyledTypography variant="paragraph" component="p">
@@ -383,15 +424,25 @@ export default function OrderForm() {
                 )}
               </StyledForm>
               <StyledForm>
-                <StyledInputBase
+                <StyledInputBaseLogin
+                  variant="outlined"
                   type="text"
                   id="address"
                   name="address"
-                  placeholder="Address"
+                  label="Address"
                   style={{ width: '100%' }}
                   onBlur={formik.handleBlur}
                   value={formik.values.address}
                   onChange={formik.handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <HomeIcon
+                          style={{ paddingRight: 5, cursor: 'pointer' }}
+                        />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 {formik.touched.address && formik.errors.address ? (
                   <StyledTypography variant="paragraph" component="p">
@@ -404,11 +455,7 @@ export default function OrderForm() {
                 )}
               </StyledForm>
             </Container>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              disableElevation
-              type="submit">
+            <StyledButton variant="contained" color="primary" type="submit">
               Order
             </StyledButton>
           </Container>

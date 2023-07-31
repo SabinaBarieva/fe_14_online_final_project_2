@@ -1,100 +1,40 @@
-/* eslint-disable no-underscore-dangle */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getProduct from '../../api/getProduct';
 import postOrder from '../../api/postOrder';
+import { getToken } from '../../localstorage/localstorage';
+import extraReducerCreator from './extraReducerCreator';
+
+export const sendOrder = createAsyncThunk(
+  'order/createOrder',
+  async (customerInformation, { dispatch, getState }) => {
+    const { user, basket } = getState();
+
+    const isLoggedIn = getToken() && true;
+    const orderInformation = {
+      email: customerInformation.email,
+      mobile: customerInformation.phone,
+      letterSubject: customerInformation.name,
+      letterHtml: customerInformation.bodyMail,
+      deliveryAddress: customerInformation.addressObj,
+    };
+    const idKey = '_id';
+    if (isLoggedIn) orderInformation.customerId = user.user[idKey];
+    else orderInformation.products = basket.itemsBasket;
+
+    await postOrder(orderInformation);
+  }
+);
 
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
-    productsBasket: [],
-    email: '',
-    phone: '',
-    name: '',
-    bodyMail: '',
-    adress: '',
-    isFetching: false,
-    isFetched: false,
+    error: null,
+    isLoading: null,
   },
-  reducers: {
-    startGetProduct: (state) => {
-      state.isFetching = true;
-    },
-    finishGetProduct: (state) => {
-      state.isFetching = false;
-      state.isFetched = true;
-    },
-    errorGetProduct: (state) => {
-      state.isFetching = false;
-    },
-    addProduct: (state, action) => {
-      const { item, quantity } = action.payload;
-      state.productsBasket.push({
-        _id: item._id,
-        product: item,
-        cartQuantity: quantity,
-      });
-    },
-    saveOrder: (state, action) => {
-      state.email = action.payload.emailAdress;
-      state.phone = action.payload.phone;
-      state.name = action.payload.name;
-      state.bodyMail = action.payload.bodyMail;
-      state.adress = action.payload.addressObj;
-    },
-    sendOrder: (state) => {
-      postOrder({
-        products: state.productsBasket,
-        email: state.email,
-        mobile: state.phone,
-        letterSubject: state.name,
-        letterHtml: state.bodyMail,
-        deliveryAddress: state.adress,
-      });
-      state.productsBasket = '';
-      state.email = '';
-      state.phone = '';
-      state.name = '';
-      state.bodyMail = '';
-      state.adress = '';
-    },
+  extraReducers: (builder) => {
+    extraReducerCreator(builder)(sendOrder, 'order');
   },
 });
 
-export const {
-  startGetProduct,
-  errorGetProduct,
-  addProduct,
-  saveOrder,
-  sendOrder,
-} = orderSlice.actions;
+export const { saveOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;
-
-export const getProductsBasket = createAsyncThunk(
-  'order/getProductsBasket',
-  async ({ itemNo, quantity }, { dispatch }) => {
-    dispatch(startGetProduct());
-
-    try {
-      const resultArray = await getProduct(itemNo);
-      return dispatch(addProduct({ item: resultArray, quantity }));
-    } catch (error) {
-      dispatch(
-        errorGetProduct({
-          error: error.message,
-        })
-      );
-      throw error;
-    }
-  }
-);
-
-export const createOrder = createAsyncThunk(
-  'order/createOrder',
-  async (cards, { dispatch }) => {
-    const promises = cards.map((elem) =>
-      dispatch(getProductsBasket({ itemNo: elem.itemNo, quantity: elem.count }))
-    );
-    await Promise.all(promises);
-  }
-);

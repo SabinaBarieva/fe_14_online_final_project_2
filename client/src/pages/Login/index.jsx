@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Container, InputAdornment } from '@mui/material';
@@ -85,16 +85,22 @@ function Login() {
           <StyledForm>
             <StyledInputBaseLogin
               type="text"
+              variant="outlined"
               id="loginOrEmail"
               name="loginOrEmail"
+              label="Login Or Email"
               onBlur={formik.handleBlur}
               value={formik.values.loginOrEmail}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  <PersonIcon style={{ paddingRight: 5, cursor: 'pointer' }} />
-                </InputAdornment>
-              }
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    <PersonIcon
+                      style={{ paddingRight: 5, cursor: 'pointer' }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.loginOrEmail && formik.errors.loginOrEmail ? (
               <StyledTypography variant="paragraph" component="p">
@@ -111,24 +117,28 @@ function Login() {
               type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
+              variant="outlined"
               onBlur={formik.handleBlur}
               value={formik.values.password}
               onChange={formik.handleChange}
-              startAdornment={
-                <InputAdornment position="end">
-                  {showPassword ? (
-                    <LockOpenIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPassword(false)}
-                    />
-                  ) : (
-                    <LockIcon
-                      style={{ paddingRight: 5, cursor: 'pointer' }}
-                      onClick={() => setShowPassword(true)}
-                    />
-                  )}
-                </InputAdornment>
-              }
+              label="Password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">
+                    {showPassword ? (
+                      <LockOpenIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPassword(false)}
+                      />
+                    ) : (
+                      <LockIcon
+                        style={{ paddingRight: 5, cursor: 'pointer' }}
+                        onClick={() => setShowPassword(true)}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }}
             />
             {formik.touched.password && formik.errors.password ? (
               <StyledTypography variant="paragraph" component="p">
@@ -149,7 +159,7 @@ function Login() {
           sx={{ width: '80%' }}>
           Login
         </StyledButton>
-        <Container sx={{ textAlign: 'center' }}>
+        <Container sx={{ textAlign: 'center', padding: '0!important' }}>
           Don&apos;t have an account yet?{' '}
           <Link to="/registration">Register Now</Link>
         </Container>

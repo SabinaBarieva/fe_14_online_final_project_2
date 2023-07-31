@@ -17,8 +17,6 @@ const theme = createTheme({
       main: '#ff6565',
       contrastText: '#f5f7fb',
       inputBackground: '#F3F6FF',
-      green: '#1b7a0f',
-      greenTransparent: '#1b7a0f47',
     },
     text: {
       primary: '#393D45',
@@ -31,8 +29,8 @@ const theme = createTheme({
       sm: 480,
       md: 768,
       lg: 1024,
-      xl: 1366,
-      // xxl: 1920,
+      /* xl: 1366, */
+      xl: 1536,
     },
   },
   typography: {
