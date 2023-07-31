@@ -13,7 +13,7 @@ const wishlistSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.wishlist = action.asyncDispatch(mergeWishlist());
+      action.asyncDispatch(mergeWishlist());
     });
     builder.addCase(logout.fulfilled, () => initialState);
     extraReducerCreator(builder)(mergeWishlist, sliceName);
