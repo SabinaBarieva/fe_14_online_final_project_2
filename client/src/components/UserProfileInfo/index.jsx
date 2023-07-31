@@ -27,7 +27,7 @@ function UserProfileInfo() {
 
   useEffect(() => {
     dispatch(fetchUserInfo());
-  }, [dispatch, editMode, dataUser]);
+  }, [dispatch, editMode]);
 
   const handleUserDataChange = (event) => {
     const { name, value } = event.target;
