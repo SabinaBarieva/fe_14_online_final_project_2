@@ -4,7 +4,6 @@ import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 // import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import {
   DataBoxes,
   BoxUserData,
@@ -14,35 +13,14 @@ import {
 import { logout } from '../../redux/slices/loginSlice';
 import { updateCustomer } from '../../api/customer';
 import { fetchUserInfo } from '../../redux/slices/userSlice';
+import validationSchema from './validation';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user.user);
 
-  const [
-    { login, telephone, email, firstName, lastName },
-    setCachedDataOfUser,
-  ] = useState(dataUser);
-
   const [editMode, setEditMode] = useState(false);
-
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo());
-  // }, [dispatch, editMode, dataUser]);
-
-  // const handleUserDataChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setCachedDataOfUser((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleSave = () => {
-  //   updateCustomer({ login, telephone, email, firstName, lastName });
-  //   setEditMode(false);
-  // };
 
   const handleCancel = () => {
     setEditMode(false);
@@ -52,45 +30,17 @@ function UserProfileInfo() {
     setEditMode(true);
   };
   const initialValues = {
-    firstName,
-    lastName,
-    email,
-    telephone,
-    login,
+    firstName: dataUser.firstName,
+    lastName: dataUser.lastName,
+    email: dataUser.email,
+    telephone: dataUser.telephone,
+    login: dataUser.login,
   };
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, 'Min 2 letters required')
-      .max(25, 'Max 25 letters allowed')
-      .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
-      .required('This field is required!'),
-    lastName: Yup.string()
-      .min(2, 'Min 2 letters required')
-      .max(25, 'Max 25 letters allowed')
-      .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
-      .required('This field is required!'),
-    login: Yup.string()
-      .min(4, 'Min 4 letters required')
-      .max(10, 'Max 10 letters allowed')
-      .matches(
-        /^[a-zA-Z0-9]*$/,
-        'Login must contain Latin letters and numbers only, without spaces'
-      )
-      .required('This field is required!'),
-    email: Yup.string()
-      .email('Invalid email address')
-      .min(6, 'Min 6 letters required')
-      .max(30, 'Max 30 letters required')
-      .required('This field is required!'),
-    telephone: Yup.string()
-      .matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, 'Invalid phone number')
-      .required('This field is required!'),
-  });
 
   const onSubmit = (values) => {
     updateCustomer(values);
-    dispatch(fetchUserInfo());
     setEditMode(false);
+    dispatch(fetchUserInfo());
   };
 
   const formik = useFormik({
@@ -118,23 +68,23 @@ function UserProfileInfo() {
             }}>
             <DataBoxes>
               <BoxTitle>Name:</BoxTitle>
-              <BoxUserData>{firstName}</BoxUserData>
+              <BoxUserData>{formik.values.firstName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Surname:</BoxTitle>
-              <BoxUserData>{lastName}</BoxUserData>
+              <BoxUserData>{formik.values.lastName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>E-mail:</BoxTitle>
-              <BoxUserData>{email}</BoxUserData>
+              <BoxUserData>{formik.values.email}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Phone number:</BoxTitle>
-              <BoxUserData>{telephone}</BoxUserData>
+              <BoxUserData>{formik.values.telephone}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Login:</BoxTitle>
-              <BoxUserData>{login}</BoxUserData>
+              <BoxUserData>{formik.values.login}</BoxUserData>
             </DataBoxes>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -236,71 +186,3 @@ function UserProfileInfo() {
 }
 
 export default UserProfileInfo;
-
-// <Formik
-//   initialValues={initialValues}
-//   validationSchema={validationSchema}
-//   onSubmit={() => {
-//     console.log('submit');
-//   }}>
-//   <Form>
-//     <Field
-//       as={TextField}
-//       type="text"
-//       name="firstName"
-//       label="First name"
-//       fullWidth
-//       margin="normal"
-//     />
-//     <ErrorMessage name="firstName" component="div" />
-//     <Field
-//       as={TextField}
-//       type="text"
-//       name="lastName"
-//       label="Last name"
-//       fullWidth
-//       margin="normal"
-//     />
-//     <ErrorMessage name="lastName" component="div" />
-//     <Field
-//       as={TextField}
-//       type="text"
-//       name="email"
-//       label="Email"
-//       fullWidth
-//       margin="normal"
-//     />
-//     <ErrorMessage name="email" component="div" />
-//     <Field
-//       as={TextField}
-//       type="text"
-//       name="telephone"
-//       label="Phone"
-//       fullWidth
-//       margin="normal"
-//     />
-//     <ErrorMessage name="telephone" component="div" />
-//     <Field
-//       as={TextField}
-//       type="text"
-//       name="login"
-//       label="Login"
-//       fullWidth
-//       margin="normal"
-//     />
-//     <ErrorMessage name="login" component="div" />
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         justifyContent: 'space-evenly',
-//       }}>
-//       <Buttons type="submit">Save</Buttons>
-//       <Button
-//         variant="outlined"
-//         color="secondary"
-//         onClick={handleCancel}>
-//         Cancel
-//       </Button>
-//     </Box>
-//   </Form>
-// </Formik>
