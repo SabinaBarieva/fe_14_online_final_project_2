@@ -2,27 +2,26 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getToken } from '../../../localstorage/localstorage';
 import { updateWishList } from '../../../api/wishlist';
 import clone from '../../../helpers/clone';
+import isProductInWishlist from './isProductInWishlist';
 
 const toggleProductInWishlist = createAsyncThunk(
   'wishlost/toggle-product',
-  async ({ productId }, { getState }) => {
-    console.log(productId);
+  async ({ product }, { getState }) => {
+    const idKey = '_id';
     const isLoggedIn = getToken() && true;
-    const a = getState().wishlist;
-    let { wishlist } = clone(a);
-    const isProductInWishList = wishlist.includes(productId);
-    if (isProductInWishList)
+    let { wishlist } = clone(getState().wishlist);
+    if (isProductInWishlist(wishlist, product))
       wishlist = wishlist.filter(
-        (wishlistProductId) => wishlistProductId !== productId
+        ({ _id: productId }) => productId !== product[idKey]
       );
-    else wishlist.push(productId);
+    else wishlist.push(product);
     if (isLoggedIn) {
-      const { product: remoteWishList } = await updateWishList(wishlist);
+      const { products: remoteWishList } = await updateWishList(wishlist);
       return remoteWishList;
     }
     return wishlist;
   }
 );
-export const toggleProductInWishlistActionCreator = ({ productId }) =>
-  toggleProductInWishlist({ productId });
+export const toggleProductInWishlistActionCreator = (product) =>
+  toggleProductInWishlist({ product });
 export default toggleProductInWishlist;
