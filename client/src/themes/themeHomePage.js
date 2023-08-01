@@ -22,7 +22,7 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
   },
   [theme.breakpoints.up('lg')]: {
     fontSize: '3.2rem',
-    margin: '2.5% auto',
+    margin: '1.5% auto 1%',
   },
 }));
 export const AllProductsBtn = styled(RadiusButton)(({ theme }) => ({
