@@ -9,7 +9,7 @@ function UserPage() {
       container
       sx={{
         maxWidth: '1440px',
-        margin: '0 auto',
+        margin: '0 auto 20px',
         display: 'flex',
         justifyContent: 'space-evenly',
       }}>
