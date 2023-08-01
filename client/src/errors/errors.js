@@ -3,6 +3,8 @@ export const connectionErrorMessage = 'Connection Error';
 export const notAuthorizedErrorMessage =
   'You are not authorized to get this page';
 export const requestErrorMessage = 'Error in request';
+export const wrongPasswordMessage = 'Wrong password';
+export const wrongLoginMessage = 'Wrong Login or password';
 export class AppError extends Error {
   constructor(message, context = { rawError: undefined, context: {} }) {
     super(message);
