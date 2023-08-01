@@ -1,3 +1,5 @@
+import { setErrorMessage } from '../redux/slices/errorsSlice';
+
 export const notFoundErrorMessage = 'Item Not Found';
 export const connectionErrorMessage = 'Connection Error';
 export const notAuthorizedErrorMessage =
@@ -15,3 +17,9 @@ export class AppError extends Error {
     this.stack = rawErrorStack;
   }
 }
+
+export const showError = (dispatch) => (error) => {
+  if (error instanceof AppError) {
+    dispatch(setErrorMessage(error.message));
+  }
+};
