@@ -21,7 +21,6 @@ function UserProfileInfo() {
   const dataUser = useSelector((state) => state.user.user);
 
   const [editMode, setEditMode] = useState(false);
-  
   const handleCancel = () => {
     setEditMode(false);
   };
