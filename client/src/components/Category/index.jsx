@@ -21,7 +21,7 @@ function Category() {
       <Box
         sx={{
           width: '90%',
-          margin: { xs: '0 auto', lg: '45px auto' },
+          margin: { xs: '-10px auto 0', lg: '45px auto 0px' },
         }}>
         <Grid
           container

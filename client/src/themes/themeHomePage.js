@@ -7,18 +7,22 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
   fontWeight: theme.typography.const.fontWeight.bold,
   letterSpacing: '0rem',
   color: theme.palette.primary,
-  margin: '5% auto',
+  // margin: '2.5% auto',
   [theme.breakpoints.between('xs', 'sm')]: {
     fontSize: '1.3rem',
+    margin: '7% auto',
   },
   [theme.breakpoints.between('sm', 'md')]: {
     fontSize: '1.5rem',
+    margin: '4% auto',
   },
   [theme.breakpoints.between('md', 'lg')]: {
     fontSize: '2rem',
+    margin: '2.5% auto',
   },
   [theme.breakpoints.up('lg')]: {
     fontSize: '3.2rem',
+    margin: '2.5% auto',
   },
 }));
 export const AllProductsBtn = styled(RadiusButton)(({ theme }) => ({
