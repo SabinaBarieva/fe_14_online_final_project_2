@@ -14,6 +14,7 @@ import {
   TableBody,
   TableFooter,
   Paper,
+  Container,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -33,13 +34,36 @@ function OrdersList() {
     return `${day}.${month}.${year}`;
   };
 
-  if (!orders) {
+  if (orders.length === 0) {
     return (
-      <Typography
-        gutterBottom
-        sx={{ textAlign: { xs: 'center', md: 'right' } }}>
-        You do not have orders.
-      </Typography>
+      <Box sx={{ marginTop: { xs: '35px', md: 0 } }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ textAlign: { xs: 'center', md: 'right' } }}>
+          Your Orders
+        </Typography>
+        <Divider />
+        <Typography
+          gutterBottom
+          sx={{ textAlign: { xs: 'center', md: 'right' } }}>
+          You do not have orders.
+        </Typography>
+        <Container
+          style={{ padding: '0' }}
+          sx={{ textAlign: { xs: 'center', md: 'end' } }}>
+          <Link
+            style={{ textDecoration: 'none', color: '#000000' }}
+            to="/product">
+            <AdvancedImage
+              key={Math.random()}
+              cldImg={cld.image('ordernow/ukx5s9tp95uujfegybz2.jpg')}
+              width="85%"
+              height="70%"
+            />
+          </Link>
+        </Container>
+      </Box>
     );
   }
   return (
