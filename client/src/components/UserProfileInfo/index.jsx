@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Typography, Box, Divider, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 // import { userData } from '../../redux/selectors'; ??? useSelector не читає userData
+import { useFormik } from 'formik';
 import {
   DataBoxes,
   BoxUserData,
@@ -12,35 +13,14 @@ import {
 import { logout } from '../../redux/slices/loginSlice';
 import { updateCustomer } from '../../api/customer';
 import { fetchUserInfo } from '../../redux/slices/userSlice';
+import validationSchema from './validation';
 
 function UserProfileInfo() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user.user);
 
-  const [
-    { login, telephone, email, firstName, lastName },
-    setCachedDataOfUser,
-  ] = useState(dataUser);
-
   const [editMode, setEditMode] = useState(false);
-
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo());
-  // }, [dispatch, editMode, dataUser]);
-
-  const handleUserDataChange = (event) => {
-    const { name, value } = event.target;
-    setCachedDataOfUser((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSave = () => {
-    updateCustomer({ login, telephone, email, firstName, lastName });
-    setEditMode(false);
-  };
 
   const handleCancel = () => {
     setEditMode(false);
@@ -49,6 +29,25 @@ function UserProfileInfo() {
   const handleEdit = () => {
     setEditMode(true);
   };
+  const initialValues = {
+    firstName: dataUser.firstName,
+    lastName: dataUser.lastName,
+    email: dataUser.email,
+    telephone: dataUser.telephone,
+    login: dataUser.login,
+  };
+
+  const onSubmit = (values) => {
+    updateCustomer(values);
+    setEditMode(false);
+    dispatch(fetchUserInfo());
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
 
   return (
     <Box>
@@ -69,23 +68,23 @@ function UserProfileInfo() {
             }}>
             <DataBoxes>
               <BoxTitle>Name:</BoxTitle>
-              <BoxUserData>{firstName}</BoxUserData>
+              <BoxUserData>{formik.values.firstName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Surname:</BoxTitle>
-              <BoxUserData>{lastName}</BoxUserData>
+              <BoxUserData>{formik.values.lastName}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>E-mail:</BoxTitle>
-              <BoxUserData>{email}</BoxUserData>
+              <BoxUserData>{formik.values.email}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Phone number:</BoxTitle>
-              <BoxUserData>{telephone}</BoxUserData>
+              <BoxUserData>{formik.values.telephone}</BoxUserData>
             </DataBoxes>
             <DataBoxes>
               <BoxTitle>Login:</BoxTitle>
-              <BoxUserData>{login}</BoxUserData>
+              <BoxUserData>{formik.values.login}</BoxUserData>
             </DataBoxes>
           </Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -105,68 +104,82 @@ function UserProfileInfo() {
         </>
       )}
       {editMode && dataUser && (
-        <>
-          <Box
-            sx={{
-              margin: '10px 20px',
-            }}>
+        <form onSubmit={formik.handleSubmit}>
+          <Box sx={{ margin: '10px 20px' }}>
             <TextField
               label="First name"
               name="firstName"
-              value={firstName}
-              onChange={handleUserDataChange}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               fullWidth
               margin="normal"
               variant="outlined"
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              helperText={formik.touched.firstName && formik.errors.firstName}
             />
             <TextField
               label="Last name"
               name="lastName"
-              value={lastName}
-              onChange={handleUserDataChange}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               fullWidth
               margin="normal"
               variant="outlined"
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
             />
             <TextField
-              label="Email"
+              label="E-mail"
               name="email"
-              value={email}
-              onChange={handleUserDataChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               fullWidth
               margin="normal"
               variant="outlined"
+              error={formik.touched.lastName && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
             />
             <TextField
               label="Phone"
               name="telephone"
-              value={telephone}
-              onChange={handleUserDataChange}
+              value={formik.values.telephone}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               fullWidth
               margin="normal"
               variant="outlined"
+              error={
+                formik.touched.telephone && Boolean(formik.errors.telephone)
+              }
+              helperText={formik.touched.telephone && formik.errors.telephone}
             />
             <TextField
               label="Login"
               name="login"
-              value={login}
-              onChange={handleUserDataChange}
+              value={formik.values.login}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               fullWidth
               margin="normal"
               variant="outlined"
+              error={formik.touched.login && Boolean(formik.errors.login)}
+              helperText={formik.touched.login && formik.errors.login}
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-            }}>
-            <Buttons onClick={handleSave}>Save</Buttons>
+          <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <Button type="submit" variant="contained" color="primary">
+              Save
+            </Button>
             <Button variant="outlined" color="secondary" onClick={handleCancel}>
               Cancel
             </Button>
           </Box>
-        </>
+        </form>
       )}
     </Box>
   );
