@@ -32,6 +32,7 @@ function OrdersList() {
 
     return `${day}.${month}.${year}`;
   };
+
   if (!orders) {
     return (
       <Typography
@@ -62,44 +63,53 @@ function OrdersList() {
               overflowY: 'auto',
             }}>
             <TableContainer component={Paper}>
-              <Table
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                }}>
+              <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell colSpan={3}>
-                      order &#8470;: <b>{order.orderNo}</b>
+                    <TableCell
+                      sx={{ padding: '10px', fontSize: '0.6rem' }}
+                      colSpan={3}>
+                      order &#8470;:{' '}
+                      <b style={{ fontSize: '0.7rem' }}>{order.orderNo}</b>
                     </TableCell>
-                    <TableCell>{getDate(order.date)}</TableCell>
+                    <TableCell sx={{ padding: '10px', fontSize: '0.57rem' }}>
+                      {getDate(order.date)}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {order.products.map((prod) => (
                     <TableRow key={prod._id}>
-                      <TableCell>
+                      <TableCell
+                        sx={{
+                          padding: '5px',
+                          minWidth: '60px',
+                          maxWidth: '100px',
+                        }}>
                         <Link
                           style={{ textDecoration: 'none', color: '#000000' }}
                           to={`/product/${prod.product.itemNo}`}>
                           <AdvancedImage
                             key={Math.random()}
                             cldImg={cld.image(prod.product.imageUrls[0])}
-                            width="65%"
-                            height="60%"
+                            width="85%"
+                            height="70%"
                           />
                         </Link>
                       </TableCell>
-                      <TableCell>
+                      <TableCell sx={{ padding: '10px', fontSize: '0.75rem' }}>
                         <Link
                           style={{ textDecoration: 'none', color: '#000000' }}
                           to={`/product/${prod.product.itemNo}`}>
                           {prod.product.name} {prod.product.color}
                         </Link>
                       </TableCell>
-                      <TableCell>{prod.cartQuantity}</TableCell>
-                      <TableCell>
+                      <TableCell sx={{ padding: '10px', fontSize: '0.75rem' }}>
+                        {prod.cartQuantity}
+                      </TableCell>
+                      <TableCell
+                        sx={{ padding: '10px', fontSize: '0.75rem' }}
+                        align="right">
                         {prod.product.currentPrice * prod.cartQuantity}&#36;
                       </TableCell>
                     </TableRow>
@@ -107,8 +117,13 @@ function OrdersList() {
                 </TableBody>
                 <TableFooter>
                   <TableRow>
-                    <TableCell colSpan={2}>Total:</TableCell>
-                    <TableCell colSpan={2}>
+                    <TableCell sx={{ padding: '10px' }} colSpan={3}>
+                      Total:
+                    </TableCell>
+                    <TableCell
+                      sx={{ padding: '10px' }}
+                      align="right"
+                      colSpan={1}>
                       <b>{order.totalSum}&#36;</b>
                     </TableCell>
                   </TableRow>
