@@ -20,6 +20,6 @@ export class AppError extends Error {
 
 export const showError = (dispatch) => (error) => {
   if (error instanceof AppError) {
-    dispatch(setErrorMessage(error.message));
+    dispatch(setErrorMessage({ error: error.message }));
   }
 };
