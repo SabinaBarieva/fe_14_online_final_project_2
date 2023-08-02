@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import fetchApi from '../../api/fetchApi';
 import { productsEP } from '../../api/constants';
-import { setErrorMessage } from './errorsSlice';
+import { handleAppError2 } from '../../errors/errors';
 
 const allProdsSlice = createSlice({
   name: 'allProducts',
@@ -29,25 +29,42 @@ export default allProdsSlice.reducer;
 export const { startGetArray, finishGetArray, errorGetArray } =
   allProdsSlice.actions;
 
-export const getAllSaleProducts = () => async (dispatch) => {
-  dispatch(startGetArray());
-  try {
-    const resultArray = await fetchApi(productsEP);
-    const saleArray = resultArray.filter((product) => product.saleImg);
-    dispatch(finishGetArray(saleArray));
-  } catch (error) {
-    dispatch(
-      errorGetArray({
-        error: error.message,
-      })
-    );
-    dispatch(
-      setErrorMessage({
-        error: error.message,
-      })
-    );
-  }
-};
+export const getAllSaleProducts = () => async (dispatch) =>
+  handleAppError2(dispatch)(async () => {
+    dispatch(startGetArray());
+    try {
+      const resultArray = await fetchApi(productsEP);
+      const saleArray = resultArray.filter((product) => product.saleImg);
+      dispatch(finishGetArray(saleArray));
+    } catch (error) {
+      dispatch(
+        errorGetArray({
+          error: error.message,
+        })
+      );
+    }
+  });
+
+//   dispatch(startGetArray());
+//   try {
+//     const resultArray = await fetchApi(productsEP);
+//     const saleArray = resultArray.filter((product) => product.saleImg);
+//     dispatch(finishGetArray(saleArray));
+//   } catch (error) {
+//     dispatch(
+//       errorGetArray({
+//         error: error.message,
+//       })
+//     );
+//     handleAppError(dispatch)(error);
+
+// dispatch(
+//   setErrorMessage({
+//     error: error.message,
+//   })
+// );
+//   }
+// };
 
 // import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import getProductApi from '../../api/getProduct';
