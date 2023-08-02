@@ -21,7 +21,11 @@ function Category() {
       <Box
         sx={{
           width: '90%',
-          margin: { xs: '0 auto', lg: '45px auto' },
+          margin: {
+            xs: '-10px auto 0',
+            md: '0 auto',
+            lg: '45px auto 0px',
+          },
         }}>
         <Grid
           container
@@ -30,6 +34,7 @@ function Category() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'space-between',
+            rowGap: { xs: '10px', lg: '0' },
           }}>
           {[...categories]
             .sort((firstCategory, secondCategory) =>
@@ -44,7 +49,7 @@ function Category() {
                 xs={4}>
                 <Link
                   onClick={() => dispatch(addCategory(id))}
-                  to="./product"
+                  to={`./product?categories=${id}`}
                   style={{
                     display: 'flex',
                     textDecoration: 'none',

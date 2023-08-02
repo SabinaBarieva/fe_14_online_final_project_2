@@ -3,11 +3,13 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object({
   firstName: Yup.string()
     .min(2, 'Min 2 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .max(25, 'Max 25 letters allowed')
+    .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
     .required('This field is required!'),
   lastName: Yup.string()
     .min(2, 'Min 2 letters required')
-    .max(15, 'Max 15 letters allowed')
+    .max(25, 'Max 25 letters allowed')
+    .matches(/^[a-zA-Zа-яА-Я]*$/, 'The name must contain only letters')
     .required('This field is required!'),
   email: Yup.string()
     .email('Invalid email address')
@@ -18,7 +20,7 @@ const validationSchema = Yup.object({
     .min(2, 'Min 2 letters required')
     .max(100, 'Max 100 letters allowed')
     .required('This field is required!'),
-  phone: Yup.string()
+  telephone: Yup.string()
     .matches(
       /^\+380\s?\(\d{2}\)\s?\d{2}\s?\d{2}\s?\d{3}$/,
       'Invalid phone number'

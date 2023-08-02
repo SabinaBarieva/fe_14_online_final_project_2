@@ -5,8 +5,15 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setToken } from '../../localstorage/localstorage';
+import {
+  AppError,
+  wrongLoginMessage,
+  wrongPasswordMessage,
+} from '../../errors/errors';
+// import clearBasket from './basketSlice/clearBasket';
 
 const stateName = 'login';
+const initialState = initialStateCreator(stateName);
 export const login = createAsyncThunk(
   `${stateName}/fetch`,
   async ({ loginOrEmail, password }, { dispatch }) => {
@@ -15,24 +22,32 @@ export const login = createAsyncThunk(
       setToken(token);
       return true;
     } catch (error) {
-      dispatch(setErrorMessage({ error: error.message }));
+      if (error instanceof AppError) {
+        switch (error.message) {
+          case wrongLoginMessage:
+          case wrongPasswordMessage:
+            throw error.message;
+          default:
+            dispatch(setErrorMessage({ error: error.message }));
+        }
+      }
       throw error;
     }
   }
 );
-
+export const logout = createAsyncThunk(
+  `${stateName}/logout`,
+  (_, { getState }) => {
+    setToken(null);
+    let state = getState()[stateName];
+    state = initialState;
+  }
+);
 const loginSlice = createSlice({
   name: stateName,
-  initialState: initialStateCreator(stateName),
-  reducers: {
-    logout: (state) => {
-      state.login = null;
-      setToken(null);
-    },
-  },
+  initialState,
   extraReducers: (builder) => {
     extraReducerCreator(builder)(login, stateName);
   },
 });
-export const { logout } = loginSlice.actions;
 export default loginSlice.reducer;

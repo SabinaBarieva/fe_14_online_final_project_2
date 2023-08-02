@@ -20,3 +20,5 @@ export const updateCart = async (remoteCart) => {
   });
   return products;
 };
+
+export const deleteCart = () => fetchApi(cartEP(), { method: 'DELETE' });

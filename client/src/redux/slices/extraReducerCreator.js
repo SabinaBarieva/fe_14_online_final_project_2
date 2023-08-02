@@ -11,12 +11,15 @@ const extraReducerCreator =
     });
     builder.addCase(thunk.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error = error.message || error;
     });
   };
-export const initialStateCreator = (resultKeyName = 'result') => ({
+export const initialStateCreator = (
+  resultKeyName = 'result',
+  defaultValue = null
+) => ({
   isLoading: false,
-  [resultKeyName]: null,
+  [resultKeyName]: defaultValue,
   error: null,
 });
 export default extraReducerCreator;

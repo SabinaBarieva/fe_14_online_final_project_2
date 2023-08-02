@@ -4,9 +4,10 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setErrorMessage } from './errorsSlice';
-import { login } from './loginSlice';
+import { login, logout } from './loginSlice';
 
 const sliceName = 'orders';
+const initialState = initialStateCreator(sliceName, []);
 export const fetchOrders = createAsyncThunk(`${sliceName}/fetch`, () => {
   try {
     return getOrders();
@@ -18,12 +19,13 @@ export const fetchOrders = createAsyncThunk(`${sliceName}/fetch`, () => {
 
 const ordersSlice = createSlice({
   name: sliceName,
-  initialState: initialStateCreator(sliceName),
+  initialState,
   extraReducers: (builder) => {
     extraReducerCreator(builder)(fetchOrders, sliceName);
     builder.addCase(login.fulfilled, (_, action) => {
       action.asyncDispatch(fetchOrders());
     });
+    builder.addCase(logout.fulfilled, () => initialState);
   },
 });
 export default ordersSlice.reducer;
