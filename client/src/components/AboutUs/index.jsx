@@ -77,7 +77,7 @@ function About() {
               <Links href="tel:+380671112233"> +38 (067) 111-22-33</Links>
             </Phone>
             <Telegram>
-              Text us <Links href="https://t.me/flschat">Telegram</Links>
+              Text us <Links href="https://t.me/Your_AppleShop">Telegram</Links>
             </Telegram>
             <Email>
               Mail to us

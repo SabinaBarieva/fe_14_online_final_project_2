@@ -9,6 +9,8 @@ export const requestErrorMessage = 'Error in request';
 export const serverErrorMessage = 'Error happened on server';
 export const passwordErrorMessage = 'Wrong password';
 export const loginOrPasswordErrorMessage = 'Wrong Login or password';
+export const wrongPasswordMessage = 'Wrong password';
+export const wrongLoginMessage = 'Wrong Login or password';
 export class AppError extends Error {
   constructor(message, context = { rawError: undefined, context: {} }) {
     super(message);
