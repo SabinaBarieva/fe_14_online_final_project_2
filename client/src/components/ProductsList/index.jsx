@@ -44,6 +44,7 @@ function ProductsList({ urlFilter }) {
   useEffect(() => {
     dispatch(getAllHomeProducts());
   }, [dispatch]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [urlFilter, sortBy]);

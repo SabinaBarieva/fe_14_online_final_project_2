@@ -35,10 +35,10 @@ const mergeBasket = createAsyncThunk(
       );
       await updateCart(cartToUpdate);
       const cart = await getCart();
-      //   console.log(cart);
+      // console.log(cart);
       return cart;
     } catch (error) {
-      console.log(error);
+      console.log(`Помилка ${error}`);
       throw error;
     }
   }
