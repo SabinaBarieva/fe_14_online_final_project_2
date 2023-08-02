@@ -13,7 +13,7 @@ import {
   setMaxPrice,
 } from '../../redux/slices/filtersSlice';
 import ModalAdd from '../../components/ModalAdd';
-import { sortBy, clearProduct } from '../../redux/slices/productsSlice';
+import { sortBy } from '../../redux/slices/productsSlice';
 
 function ProductsContent() {
   const dispatch = useDispatch();
