@@ -1,4 +1,8 @@
-import { AppError } from '../errors/errors';
+import {
+  AppError,
+  loginOrPasswordErrorMessage,
+  passwordErrorMessage,
+} from '../errors/errors';
 import { loginEP } from './constants';
 import fetchApi from './fetchApi';
 
@@ -13,10 +17,10 @@ const getToken = async (loginOrEmail, password) => {
       const { password: passwordContextError, loginOrEmail: loginContext } =
         error.context;
       if (passwordContextError) {
-        throw new AppError('Wrong password', { context: error });
+        throw new AppError(passwordErrorMessage, { context: error });
       }
       if (loginContext)
-        throw new AppError('Wrong Login or password', { context: error });
+        throw new AppError(loginOrPasswordErrorMessage, { context: error });
     }
     throw error;
   }
