@@ -11,7 +11,7 @@ const extraReducerCreator =
     });
     builder.addCase(thunk.rejected, (state, { error }) => {
       state.isLoading = false;
-      state.error = error;
+      state.error = error.message || error;
     });
   };
 export const initialStateCreator = (
