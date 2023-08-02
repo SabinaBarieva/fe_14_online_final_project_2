@@ -6,17 +6,20 @@ import { login } from '../loginSlice';
 import mergeWishlist from './mergeWishlist';
 import toggleProductInWishlist from './toggleProductInWishlist';
 
-const sliceName = 'wishlist';
-const initialState = initialStateCreator(sliceName, []);
+const initialState = {
+  itemsWishlist: [],
+};
 const wishlistSlice = createSlice({
-  name: sliceName,
+  name: 'wishlist',
   initialState,
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       action.asyncDispatch(mergeWishlist());
     });
-    extraReducerCreator(builder)(mergeWishlist, sliceName);
-    extraReducerCreator(builder)(toggleProductInWishlist, sliceName);
+    builder.addCase(mergeWishlist.fulfilled, (state, { payload: wishlist }) => {
+      state.itemsWishlist = wishlist;
+    });
+    // extraReducerCreator(builder)(toggleProductInWishlist, sliceName);
   },
 });
 

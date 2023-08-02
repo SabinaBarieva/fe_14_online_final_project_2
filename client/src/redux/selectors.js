@@ -5,7 +5,7 @@ export const currentProductIsLoading = (state) => state.product.isLoading;
 //
 export const selectCart = (state) => state.basket;
 export const modaInProductSlice = (state) => state.modalInProduct;
-export const wishlist = (state) => state.wishlist;
+export const selectWishlist = (state) => state.wishlist;
 // All Products in Base
 export const allProductsInBase = (state) => state.allProducts.allProds;
 export const allProductsIsFetching = (state) => state.allProducts.isFetching;

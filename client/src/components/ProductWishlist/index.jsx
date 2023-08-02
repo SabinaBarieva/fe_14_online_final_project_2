@@ -5,11 +5,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { toggleProductInWishlistActionCreator } from '../../redux/slices/wishlistSlice/toggleProductInWishlist';
 import isProductInWishlist from '../../redux/slices/wishlistSlice/isProductInWishlist';
+import { selectWishlist } from '../../redux/selectors';
 
 function ProductWishlist({ product }) {
-  const wishlist = useSelector(
-    ({ wishlist: stateWishlist }) => stateWishlist.wishlist
-  );
+  const { wishlist } = useSelector(selectWishlist);
+  console.log('wishlist', wishlist);
   // const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const toggleProductInWishListCallBack = () => {

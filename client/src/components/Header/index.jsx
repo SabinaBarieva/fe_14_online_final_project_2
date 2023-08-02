@@ -31,11 +31,11 @@ import getImg from '../../cloudinary';
 import Footer from '../Footer';
 import BreadCrumbs from '../Breadcrumbs';
 import Search from '../Search';
-import { selectCart, wishlist } from '../../redux/selectors';
+import { selectCart, selectWishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-import Wishlist from '../ProductWishlist';
+// import ProductWishlist from '../ProductWishlist';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -73,7 +73,7 @@ function Header() {
   const { itemsBasket } = useSelector(selectCart);
   const dispatch = useDispatch();
   const location = useLocation();
-  const { itemsWishlist } = useSelector(wishlist);
+  // const { itemsWishlist } = useSelector(wishlist);
 
   const locationDispatch = () => {
     if (location.pathname !== '/product') {
