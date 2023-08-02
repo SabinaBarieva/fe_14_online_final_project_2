@@ -5,6 +5,11 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setToken } from '../../localstorage/localstorage';
+import {
+  AppError,
+  wrongLoginMessage,
+  wrongPasswordMessage,
+} from '../../errors/errors';
 // import clearBasket from './basketSlice/clearBasket';
 
 const stateName = 'login';
@@ -17,7 +22,15 @@ export const login = createAsyncThunk(
       setToken(token);
       return true;
     } catch (error) {
-      dispatch(setErrorMessage({ error: error.message }));
+      if (error instanceof AppError) {
+        switch (error.message) {
+          case wrongLoginMessage:
+          case wrongPasswordMessage:
+            throw error.message;
+          default:
+            dispatch(setErrorMessage({ error: error.message }));
+        }
+      }
       throw error;
     }
   }
