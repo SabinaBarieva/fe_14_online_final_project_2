@@ -5,8 +5,6 @@ import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { login, logout } from './loginSlice';
-import { getToken } from '../../localstorage/localstorage';
-import { updateCustomer } from '../../api/customer';
 
 const stateName = 'user';
 const initialState = initialStateCreator(stateName);
