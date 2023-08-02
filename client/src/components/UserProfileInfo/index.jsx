@@ -12,7 +12,7 @@ import {
 } from '../../themes/themeUserProfileInfo';
 import { logout } from '../../redux/slices/loginSlice';
 import { updateCustomer } from '../../api/customer';
-import { clearUser, mergeUser } from '../../redux/slices/userSlice';
+import { clearUser, reLoadUser } from '../../redux/slices/userSlice';
 import validationSchema from './validation';
 
 function UserProfileInfo() {
@@ -39,7 +39,7 @@ function UserProfileInfo() {
   const onSubmit = (values) => {
     updateCustomer(values);
     setEditMode(false);
-    dispatch(mergeUser());
+    dispatch(reLoadUser(values));
   };
 
   const formik = useFormik({

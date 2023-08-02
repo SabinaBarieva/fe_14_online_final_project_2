@@ -8,28 +8,9 @@ import { login, logout } from './loginSlice';
 import { getToken } from '../../localstorage/localstorage';
 import { updateCustomer } from '../../api/customer';
 
-export const mergeUser = createAsyncThunk(
-  'user/merge',
-  async (_, { getState }) => {
-    // const isLoggedIn = getToken() && true;
-    console.log('mergeUser func');
-    try {
-      // const userData = getState().user.user;
-      // const remoteUser = isLoggedIn ? await getUserInformation() : [];
-      //
-      await updateCustomer();
-      const user = await getUserInformation();
-      console.log(user);
-      return user;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
-);
-
 const stateName = 'user';
 const initialState = initialStateCreator(stateName);
+
 export const fetchUserInfo = createAsyncThunk(
   'user-info/fetch',
   async (_, { dispatch }) => {
@@ -51,6 +32,11 @@ const userSlice = createSlice({
       state.user = null;
       state.error = null;
     },
+    updateUser: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     extraReducerCreator(builder)(fetchUserInfo, stateName);
@@ -60,5 +46,17 @@ const userSlice = createSlice({
     builder.addCase(logout.fulfilled, () => initialState);
   },
 });
-export const { clearUser } = userSlice.actions;
+export const { clearUser, updateUser } = userSlice.actions;
 export default userSlice.reducer;
+
+export const reLoadUser = createAsyncThunk(
+  'user/update',
+  async (values, { dispatch }) => {
+    try {
+      dispatch(updateUser(values));
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+);
