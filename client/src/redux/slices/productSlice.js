@@ -1,10 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProductApi from '../../api/getProduct';
 import extraReducerCreator from './extraReducerCreator';
+import { handleAppError2 } from '../../errors/errors';
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
-  async (itemNo) => getProductApi(itemNo)
+  async (itemNo, { dispatch }) =>
+    handleAppError2(dispatch)(() => getProductApi(itemNo))
+  // try {
+  //   const product = await getProductApi(itemNo);
+  //   return product;
+  // } catch (error) {
+  //   handleAppError(dispatch)(error);
+  //   throw error;
+  // }
 );
 
 export const productSlice = createSlice({

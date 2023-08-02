@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getCategories from '../../api/getCategories';
-import { setErrorMessage } from './errorsSlice';
+import { handleAppError2 } from '../../errors/errors';
 
 const initialState = {
   isFetching: false,
@@ -34,21 +34,36 @@ export const {
 } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
 
-export const fetchCategories = () => async (dispatch) => {
-  dispatch(startFetchingCategories());
-  try {
-    const categories = await getCategories();
-    dispatch(
-      finishFetchingCategories({
-        categories,
-      })
-    );
-  } catch (error) {
-    dispatch(errorFetchingCategories());
-    dispatch(
-      setErrorMessage({
-        error: error.message,
-      })
-    );
-  }
-};
+export const fetchCategories = () => async (dispatch) =>
+  handleAppError2(dispatch)(async () => {
+    dispatch(startFetchingCategories());
+    try {
+      const categories = await getCategories();
+      dispatch(
+        finishFetchingCategories({
+          categories,
+        })
+      );
+    } catch (error) {
+      dispatch(errorFetchingCategories());
+    }
+  });
+//   dispatch(startFetchingCategories());
+//   try {
+//     const categories = await getCategories();
+//     dispatch(
+//       finishFetchingCategories({
+//         categories,
+//       })
+//     );
+//   } catch (error) {
+//     dispatch(errorFetchingCategories());
+// handleAppError(dispatch)(error);
+
+// dispatch(
+//   setErrorMessage({
+//     error: error.message,
+//   })
+// );
+//   }
+// };

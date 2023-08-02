@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import getProductsFilters from '../../api/getProductsFilters';
-import { setErrorMessage } from './errorsSlice';
+import { handleAppError2 } from '../../errors/errors';
 
 const initialState = {
   categories: [],
@@ -13,15 +13,19 @@ const initialState = {
 
 export const fetchFilters = createAsyncThunk(
   'filters/fetch',
-  async (_, { dispatch }) => {
-    try {
-      const filters = await getProductsFilters();
-      return filters;
-    } catch (error) {
-      dispatch(setErrorMessage({ error: error.message }));
-      throw error;
-    }
-  }
+  async (_, { dispatch }) =>
+    handleAppError2(dispatch)(() => getProductsFilters())
+  // return filters;
+  // try {
+  //   const filters = await getProductsFilters();
+  //   return filters;
+  // } catch (error) {
+  //   handleAppError(dispatch)(error);
+
+  //   //   dispatch(setErrorMessage({ error: error.message }));
+  //   throw error;
+  // }
+  //   }
 );
 const filtersSlice = createSlice({
   name: 'filters',

@@ -1,26 +1,35 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import getToken from '../../api/getToken';
-import { setErrorMessage } from './errorsSlice';
 import extraReducerCreator, {
   initialStateCreator,
 } from './extraReducerCreator';
 import { setToken } from '../../localstorage/localstorage';
+import { handleAppError2 } from '../../errors/errors';
 // import clearBasket from './basketSlice/clearBasket';
 
 const stateName = 'login';
 const initialState = initialStateCreator(stateName);
 export const login = createAsyncThunk(
   `${stateName}/fetch`,
-  async ({ loginOrEmail, password }, { dispatch }) => {
-    try {
+  async ({ loginOrEmail, password }, { dispatch }) =>
+    handleAppError2(dispatch)(async () => {
       const { token } = await getToken(loginOrEmail, password);
       setToken(token);
       return true;
-    } catch (error) {
-      dispatch(setErrorMessage({ error: error.message }));
-      throw error;
-    }
-  }
+    })
+
+  // try {
+  //   const { token } = await getToken(loginOrEmail, password);
+  //   setToken(token);
+  //   return true;
+  // } catch (error) {
+  //   handleAppError(dispatch)(error);
+
+  //   //   dispatch(setErrorMessage({ error: error.message }));
+  //   //   handleLoginError(dispatch)(error);
+  //   //   handleAppError(dispatch)(error);
+  //   throw error;
+  // }
 );
 export const logout = createAsyncThunk(
   `${stateName}/logout`,

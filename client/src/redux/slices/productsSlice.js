@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import getProducts from '../../api/getProducts';
-import { setErrorMessage } from './errorsSlice';
+import { handleAppError2 } from '../../errors/errors';
 
 const initialState = {
   products: [],
@@ -11,21 +11,13 @@ const initialState = {
 };
 export const fetchProducts = createAsyncThunk(
   'products/fetch',
-  async ({ startPage, urlFilter }, { dispatch }) => {
-    try {
-      return await getProducts({
+  async ({ startPage, urlFilter }, { dispatch }) =>
+    handleAppError2(dispatch)(() =>
+      getProducts({
         startPage,
         urlFilter,
-      });
-    } catch (error) {
-      dispatch(
-        setErrorMessage({
-          error: error.message,
-        })
-      );
-      throw error;
-    }
-  }
+      })
+    )
 );
 const productsSlice = createSlice({
   name: 'products',

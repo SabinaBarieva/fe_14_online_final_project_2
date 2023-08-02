@@ -2,11 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import postOrder from '../../api/postOrder';
 import { getToken } from '../../localstorage/localstorage';
 import extraReducerCreator from './extraReducerCreator';
+import { handleAppError2 } from '../../errors/errors';
 
 export const sendOrder = createAsyncThunk(
   'order/createOrder',
   async (customerInformation, { dispatch, getState }) => {
-    const { user, basket } = getState();
+    const { user, basket } = handleAppError2(dispatch)(() => getState());
+    // const { user, basket } = getState();
 
     const isLoggedIn = getToken() && true;
     const orderInformation = {
