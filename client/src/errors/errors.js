@@ -30,33 +30,9 @@ export const handleAppError2 = (dispatch) => async (fn) => {
     const result = await fn();
     return result;
   } catch (error) {
-    // if (
-    //   error instanceof AppError &&
-    //   (error.message === passwordErrorMessage ||
-    //     error.message === loginOrPasswordErrorMessage)
-    // )
-    //   throw error;
     if (error instanceof AppError) {
       dispatch(setErrorMessage({ error: error.message }));
     }
     throw error;
   }
-};
-// export const handleLoginError = (dispatch) => (error) => {
-//   if (
-//     (error instanceof AppError && error.message === passwordErrorMessage) ||
-//     error.message === loginOrPasswordErrorMessage
-//   )
-//     throw error;
-// };
-export const handleAppError = (dispatch) => (error) => {
-  if (
-    error instanceof AppError &&
-    (error.message === passwordErrorMessage ||
-      error.message === loginOrPasswordErrorMessage)
-  )
-    throw error;
-  else if (error instanceof AppError) {
-    dispatch(setErrorMessage({ error: error.message }));
-  } else throw error;
 };
