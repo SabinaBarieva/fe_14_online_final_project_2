@@ -11,8 +11,9 @@ const mergeBasket = createAsyncThunk(
 
     const idKey = '_id';
     const localBasket = getState().basket.itemsBasket;
-
-    const remoteBasket = isLoggedIn ? await getCart() : [];
+    const remoteBasket = isLoggedIn
+      ? await handleAppError2(dispatch)(async () => getCart())
+      : [];
     const cartToUpdate = remoteBasket.map(({ product, cartQuantity }) =>
       createRemoteCartProduct(product, cartQuantity)
     );
@@ -37,13 +38,8 @@ const mergeBasket = createAsyncThunk(
     return handleAppError2(dispatch)(async () => {
       await updateCart(cartToUpdate);
       const cart = await getCart();
-      //   console.log(cart);
       return cart;
     });
-    // await updateCart(cartToUpdate);
-    // const cart = await getCart();
-    // //   console.log(cart);
-    // return cart;
   }
 );
 export default mergeBasket;
