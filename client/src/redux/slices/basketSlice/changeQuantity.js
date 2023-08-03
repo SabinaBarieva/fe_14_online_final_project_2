@@ -38,11 +38,7 @@ const changeQuantityInBasket = createAsyncThunk(
       const remoteCart = cart.map(({ product: currentProduct, cartQuantity }) =>
         createRemoteCartProduct(currentProduct, cartQuantity)
       );
-      //   console.log(remoteCart);
       return handleAppError2(dispatch)(() => updateCart(remoteCart));
-      //   const newCart = await updateCart(remoteCart);
-      //   console.log(newCart);
-      //   return newCart;
     }
     return cart;
   }
