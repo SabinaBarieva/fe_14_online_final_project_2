@@ -7,8 +7,7 @@ import { handleAppError2 } from '../../errors/errors';
 export const sendOrder = createAsyncThunk(
   'order/createOrder',
   async (customerInformation, { dispatch, getState }) => {
-    const { user, basket } = handleAppError2(dispatch)(() => getState());
-    // const { user, basket } = getState();
+    const { user, basket } = getState();
 
     const isLoggedIn = getToken() && true;
     const orderInformation = {
@@ -21,8 +20,7 @@ export const sendOrder = createAsyncThunk(
     const idKey = '_id';
     if (isLoggedIn) orderInformation.customerId = user.user[idKey];
     else orderInformation.products = basket.itemsBasket;
-
-    await postOrder(orderInformation);
+    return handleAppError2(dispatch)(() => postOrder(orderInformation));
   }
 );
 

@@ -10,7 +10,7 @@ const deleteFromBasket = createAsyncThunk(
     const cart = JSON.parse(JSON.stringify(getState().basket.itemsBasket));
     const isLoggedIn = getToken() && true;
     if (isLoggedIn) {
-      const remoteBasket = handleAppError2(dispatch)(() =>
+      const remoteBasket = await handleAppError2(dispatch)(() =>
         deleteFromCart(productToDelete[idKey])
       );
       return remoteBasket.products;
