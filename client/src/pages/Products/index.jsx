@@ -46,7 +46,11 @@ function ProductsContent() {
     } else sortOrder = '';
     // full link
     const fullFilterURL = categoryFilter + priceFilter + sortOrder;
-    setSearchParams(fullFilterURL);
+    if (fullFilterURL.size !== 0) {
+      setSearchParams(fullFilterURL);
+    } else {
+      setSearchParams({});
+    }
   };
 
   const setFiltersByUrl = () => {

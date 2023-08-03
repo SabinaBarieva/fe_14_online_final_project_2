@@ -158,7 +158,8 @@ function ProductsList({ urlFilter }) {
 }
 
 ProductsList.propTypes = {
-  urlFilter: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  urlFilter: PropTypes.object.isRequired,
 };
 
 export default ProductsList;
