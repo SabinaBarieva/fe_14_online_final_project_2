@@ -75,6 +75,7 @@ function ProductsContent() {
   };
 
   useEffect(() => {
+    // dispatch(clearProduct());
     setFiltersByUrl();
   }, []);
 

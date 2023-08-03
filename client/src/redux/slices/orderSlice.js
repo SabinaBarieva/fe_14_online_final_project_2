@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import postOrder from '../../api/postOrder';
 import { getToken } from '../../localstorage/localstorage';
 import extraReducerCreator from './extraReducerCreator';
+import { handleAppError2 } from '../../errors/errors';
 
 export const sendOrder = createAsyncThunk(
   'order/createOrder',
@@ -19,8 +20,7 @@ export const sendOrder = createAsyncThunk(
     const idKey = '_id';
     if (isLoggedIn) orderInformation.customerId = user.user[idKey];
     else orderInformation.products = basket.itemsBasket;
-
-    await postOrder(orderInformation);
+    return handleAppError2(dispatch)(() => postOrder(orderInformation));
   }
 );
 

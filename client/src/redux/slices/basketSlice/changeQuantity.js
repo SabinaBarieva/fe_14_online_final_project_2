@@ -1,14 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getToken } from '../../../localstorage/localstorage';
 import findProductInBasket from './findProductInBasket';
-import { AppError } from '../../../errors/errors';
+import { AppError, handleAppError2 } from '../../../errors/errors';
 import { deleteFromCart, updateCart } from '../../../api/cart';
 import createRemoteCartProduct from './createRemoteCartProduct';
 import basketProductCreator from './basketProductCreator';
 
 const changeQuantityInBasket = createAsyncThunk(
   'change-quantity-in-basket',
-  async ({ product, addToBasketQuantity }, { getState, rejectWithValue }) => {
+  async (
+    { product, addToBasketQuantity },
+    { getState, rejectWithValue, dispatch }
+  ) => {
     const idKey = '_id';
     const isLoggedIn = getToken() && true;
     const cart = JSON.parse(JSON.stringify(getState().basket.itemsBasket));
@@ -35,10 +38,7 @@ const changeQuantityInBasket = createAsyncThunk(
       const remoteCart = cart.map(({ product: currentProduct, cartQuantity }) =>
         createRemoteCartProduct(currentProduct, cartQuantity)
       );
-      //   console.log(remoteCart);
-      const newCart = await updateCart(remoteCart);
-      //   console.log(newCart);
-      return newCart;
+      return handleAppError2(dispatch)(() => updateCart(remoteCart));
     }
     return cart;
   }

@@ -1,8 +1,14 @@
+import { setErrorMessage } from '../redux/slices/errorsSlice';
+
 export const notFoundErrorMessage = 'Item Not Found';
+export const productNotFoundErrorMessage = 'Product not found';
 export const connectionErrorMessage = 'Connection Error';
 export const notAuthorizedErrorMessage =
   'You are not authorized to get this page';
 export const requestErrorMessage = 'Error in request';
+export const serverErrorMessage = 'Error happened on server';
+export const passwordErrorMessage = 'Wrong password';
+export const loginOrPasswordErrorMessage = 'Wrong Login or password';
 export const wrongPasswordMessage = 'Wrong password';
 export const wrongLoginMessage = 'Wrong Login or password';
 export class AppError extends Error {
@@ -17,3 +23,16 @@ export class AppError extends Error {
     this.stack = rawErrorStack;
   }
 }
+
+// eslint-disable-next-line consistent-return
+export const handleAppError2 = (dispatch) => async (fn) => {
+  try {
+    const result = await fn();
+    return result;
+  } catch (error) {
+    if (error instanceof AppError) {
+      dispatch(setErrorMessage({ error: error.message }));
+    }
+    throw error;
+  }
+};

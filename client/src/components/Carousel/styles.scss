@@ -1,4 +1,8 @@
 .swiper {
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
   width: 97%;
   padding-bottom: 30px;
 }

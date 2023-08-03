@@ -1,22 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import fetchApi from '../../api/fetchApi';
 import { productsEP } from '../../api/constants';
-import { setErrorMessage } from './errorsSlice';
+import { handleAppError2 } from '../../errors/errors';
 
 export const fetchArrayProducts = createAsyncThunk(
   'searchList/fetchArrayProducts',
   async (_, { dispatch }) => {
-    try {
-      const resultArray = await fetchApi(productsEP);
-      return resultArray;
-    } catch (error) {
-      dispatch(
-        setErrorMessage({
-          error: error.message,
-        })
-      );
-      throw error;
-    }
+    handleAppError2(dispatch)(() => fetchApi(productsEP));
   }
 );
 

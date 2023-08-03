@@ -49,7 +49,7 @@ function Category() {
                 xs={4}>
                 <Link
                   onClick={() => dispatch(addCategory(id))}
-                  to="./product"
+                  to={`./product?categories=${id}`}
                   style={{
                     display: 'flex',
                     textDecoration: 'none',

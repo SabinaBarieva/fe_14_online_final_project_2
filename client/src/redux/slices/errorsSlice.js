@@ -8,15 +8,13 @@ const errorsSlice = createSlice({
   name: 'errors',
   initialState,
   reducers: {
-    setErrorMessage: (state, action) => {
-      state.errors.push(action.payload.error);
+    setErrorMessage: (state, { payload: { error } }) => {
+      if (!state.errors.includes(error)) state.errors.push(error);
     },
-    removeErrorMessage: (state, action) => {
-      state.errors.splice(action.payload, 1);
+    removeErrorMessage: (state) => {
+      if (state.errors.length > 0) state.errors.shift();
     },
-    clearErrors: (state) => {
-      state.errors = [];
-    },
+    clearErrors: () => initialState,
   },
 });
 
