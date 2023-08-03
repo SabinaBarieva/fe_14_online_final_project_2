@@ -5,9 +5,8 @@ import { handleAppError2 } from '../../errors/errors';
 
 export const fetchArrayProducts = createAsyncThunk(
   'searchList/fetchArrayProducts',
-  async (_, { dispatch }) => 
+  async (_, { dispatch }) =>
     handleAppError2(dispatch)(() => fetchApi(productsEP))
-  
 );
 
 const searchListSlice = createSlice({
