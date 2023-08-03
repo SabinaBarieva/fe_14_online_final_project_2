@@ -38,7 +38,7 @@ function HomeContent() {
         }}>
         <SectionTitle variant="h2">Products</SectionTitle>
         <Box sx={{ width: '90%', margin: '0 auto' }}>
-          <ProductsList />
+          <ProductsList urlFilter={{}} />
         </Box>
         <Box sx={{ margin: '10% auto 5%' }}>
           <Link to="/product">
