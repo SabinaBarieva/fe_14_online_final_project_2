@@ -5,7 +5,6 @@ import extraReducerCreator, {
 } from './extraReducerCreator';
 import { setToken } from '../../localstorage/localstorage';
 import { handleAppError2 } from '../../errors/errors';
-// import clearBasket from './basketSlice/clearBasket';
 
 const stateName = 'login';
 const initialState = initialStateCreator(stateName);
