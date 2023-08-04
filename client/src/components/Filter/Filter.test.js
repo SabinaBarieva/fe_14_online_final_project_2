@@ -4,7 +4,7 @@ import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
-
+import renderer from 'react-test-renderer';
 import '@testing-library/jest-dom';
 import store from '../../redux/store';
 import Filter from '.';
@@ -56,6 +56,11 @@ function Component() {
   );
 }
 describe('Filter component and filterSlice', () => {
+  test('snapshot renders correctly', async () => {
+    await init();
+    const tree = renderer.create(<Component />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   test('Component renders', async () => {
     await init();
     expect(screen.getByText('Filter')).toBeInTheDocument();
