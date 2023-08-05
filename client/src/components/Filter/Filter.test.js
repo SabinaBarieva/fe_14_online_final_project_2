@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import renderer from 'react-test-renderer';
-import { createGenerateClassName, jssPreset } from '@mui/styles';
 import '@testing-library/jest-dom';
 import store from '../../redux/store';
 import Filter from '.';
