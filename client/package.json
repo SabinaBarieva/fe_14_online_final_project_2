@@ -60,9 +60,10 @@
   "scripts": {
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-styles-sass start-js",
-    "build": "npm run eslint && npm run stylelint-build && react-scripts build",
+    "build": "npm run eslint && npm run stylelint-build &&  npm run test-pre-build && react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
+	"test-pre-build":"npm test -- --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "stylelint-dev": "stylelint 'src/**/*.scss' --cache --cache-location './.stylelintcache'; exit 0",
     "stylelint-build": "stylelint 'src/**/*.scss'",
