@@ -6,6 +6,7 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import renderer from 'react-test-renderer';
 import '@testing-library/jest-dom';
+import 'jest-styled-components';
 import store from '../../redux/store';
 import Filter from '.';
 import { fetchFilters, resetFilters } from '../../redux/slices/filtersSlice';
@@ -56,7 +57,7 @@ function Component() {
   );
 }
 describe('Filter component and filterSlice', () => {
-  test.skip('snapshot renders correctly', async () => {
+  test('snapshot renders correctly', async () => {
     await init();
     const tree = renderer.create(<Component />).toJSON();
     expect(tree).toMatchSnapshot();
