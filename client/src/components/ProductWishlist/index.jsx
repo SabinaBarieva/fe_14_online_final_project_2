@@ -3,40 +3,22 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { toggleProductInWishlistActionCreator } from '../../redux/slices/wishlistSlice/toggleProductInWishlist';
-import isProductInWishlist from '../../redux/slices/wishlistSlice/isProductInWishlist';
 import { selectWishlist } from '../../redux/selectors';
+import { changeWishlistActionCreator } from '../../redux/slices/wishlistSlice/changeWishlist';
+import findProductInWishlist from '../../redux/slices/wishlistSlice/findProductInWishlist';
 
 function ProductWishlist({ product }) {
-  const { wishlist } = useSelector(selectWishlist);
-  console.log('wishlist', wishlist);
-  // const wishlist = useSelector((state) => state.wishlist);
+  const wishlist = useSelector(selectWishlist);
   const dispatch = useDispatch();
-  const toggleProductInWishListCallBack = () => {
-    dispatch(toggleProductInWishlistActionCreator(product));
+
+  const handleProductInWishlist = () => {
+    dispatch(changeWishlistActionCreator(product));
   };
-  return isProductInWishlist(wishlist, product) ? (
-    <FavoriteIcon
-      onClick={toggleProductInWishListCallBack}
-      sx={{
-        position: 'absolute',
-        top: '10px',
-        left: '10px',
-        color: 'red',
-        cursor: 'pointer',
-      }}
-    />
+
+  return findProductInWishlist(product, wishlist.itemsWishlist) ? (
+    <FavoriteIcon onClick={handleProductInWishlist} />
   ) : (
-    <FavoriteBorderIcon
-      onClick={toggleProductInWishListCallBack}
-      sx={{
-        position: 'absolute',
-        top: '10px',
-        left: '10px',
-        color: 'red',
-        cursor: 'pointer',
-      }}
-    />
+    <FavoriteBorderIcon onClick={handleProductInWishlist} />
   );
 }
 

@@ -12,6 +12,7 @@ import {
   StyledModal,
   StyledModalContainer,
 } from '../../themes/themeOrder';
+import { fetchOrders } from '../../redux/slices/ordersSlice';
 
 export default function ModalOrdered() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function ModalOrdered() {
   const closed = () => {
     dispatch(closeModal());
     dispatch(clearBasket());
+    dispatch(fetchOrders());
   };
 
   const handleClickOutside = (event) => {

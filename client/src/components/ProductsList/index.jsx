@@ -109,7 +109,9 @@ function ProductsList({ urlFilter }) {
                   <ProductCard product={product} />
                 </StyledGrid>
               ))}
-            {productsSliced.length === 0 && itemsNotFound}
+            {productsSliced.length === 0 &&
+              currentPath === '/product' &&
+              itemsNotFound}
             {currentPath === '/product' &&
               productsSliced.map((product) => (
                 <Grid
@@ -158,7 +160,8 @@ function ProductsList({ urlFilter }) {
 }
 
 ProductsList.propTypes = {
-  urlFilter: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  urlFilter: PropTypes.object.isRequired,
 };
 
 export default ProductsList;

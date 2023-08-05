@@ -35,7 +35,7 @@ import { selectCart, selectWishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-// import ProductWishlist from '../ProductWishlist';
+import ProductWishlist from '../ProductWishlist';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -71,9 +71,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function Header() {
   const [totalInBasket, setTotalInBasket] = useState('0');
   const { itemsBasket } = useSelector(selectCart);
+  const [totalInWishlist, setTotalInWishlist] = useState('0');
+  const { itemsWishlist } = useSelector(selectWishlist);
   const dispatch = useDispatch();
   const location = useLocation();
-  // const { itemsWishlist } = useSelector(wishlist);
 
   const locationDispatch = () => {
     if (location.pathname !== '/product') {
@@ -93,6 +94,11 @@ function Header() {
   const totalBasketItems = () => {
     const total = itemsBasket.reduce((sum, item) => item.cartQuantity + sum, 0);
     setTotalInBasket(total);
+  };
+
+  const totalWishlistItems = () => {
+    const total = itemsWishlist.length;
+    setTotalInWishlist(total);
   };
 
   const burgerState = useSelector((state) => state.burgerMenu.openBurger);
@@ -145,9 +151,10 @@ function Header() {
 
   useEffect(() => {
     totalBasketItems();
+    totalWishlistItems();
     locationDispatch();
     getToken();
-  }, [itemsBasket, location, token]);
+  }, [itemsBasket, itemsWishlist, location, token]);
 
   return (
     <AllContent>
@@ -256,28 +263,28 @@ function Header() {
               }}>
               <Search />
             </Container>
-            {totalInBasket > 0 ? (
+            <IconButton sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
               <StyledBadge
-                badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-                <FavoriteIcon
-                  sx={{
-                    color: 'red',
-                  }}
-                />
+                badgeContent={totalInWishlist > 0 ? totalInWishlist : '0'}>
+                {totalInWishlist > 0 ? (
+                  <FavoriteIcon
+                    sx={{
+                      color: '#616467',
+                      width: '28.7px',
+                      height: '32px ',
+                    }}
+                  />
+                ) : (
+                  <FavoriteBorderIcon
+                    sx={{
+                      color: '#616467',
+                      width: '28.7px',
+                      height: '32px ',
+                    }}
+                  />
+                )}
               </StyledBadge>
-            ) : (
-              <StyledBadge badgeContent={totalInBasket === 0}>
-                <FavoriteBorderIcon
-                  sx={{
-                    color: 'red',
-                  }}
-                />
-              </StyledBadge>
-            )}
-            {/* <StyledBadge
-              badgeContent={totalInBasket === 0 ? '0' : totalInBasket}>
-              <Wishlist />
-            </StyledBadge> */}
+            </IconButton>
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>

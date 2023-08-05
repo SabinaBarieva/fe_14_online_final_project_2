@@ -1,16 +1,25 @@
 import { wishlistEP } from './constants';
 import fetchApi from './fetchApi';
 
-export const getWishList = () => fetchApi(wishlistEP());
+export const getWishlist = async () => {
+  const wishlist = await fetchApi(wishlistEP());
+  if (wishlist === null) return [];
+  //   wishlist = await fetchApi(wishlistEP(), { method: 'POST' });
+  return wishlist.products;
+};
 
-export const addToWishList = (id) =>
-  fetchApi(wishlistEP(id), { method: 'PUT' });
+export const deleteFromWishlist = async (id) => {
+  const wishlist = await fetchApi(wishlistEP(id), { method: 'DELETE' });
+  return wishlist;
+};
 
-export const deleteFromWishList = (id) =>
-  fetchApi(wishlistEP(id), { method: 'DELETE' });
-
-export const updateWishList = (wishlist) =>
-  fetchApi(wishlistEP(), {
+export const updateWishlist = async (remoteWishlist) => {
+  const { products } = await fetchApi(wishlistEP(), {
     method: 'PUT',
-    body: JSON.stringify({ products: wishlist }),
+    body: JSON.stringify({ products: remoteWishlist }),
   });
+  return products;
+};
+
+export const deleteWishlist = () =>
+  fetchApi(wishlistEP(), { method: 'DELETE' });

@@ -93,8 +93,8 @@ const StyledListItemText = styled('span')({
   display: '-webkit-box',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
-  '-webkit-box-orient': 'vertical',
-  '-webkit-line-clamp': '2',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: '2',
 });
 
 export {

@@ -2,7 +2,13 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Box, SvgIcon, Tooltip, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  SvgIcon,
+  Tooltip,
+  useMediaQuery,
+} from '@mui/material';
 import { useTheme } from '@mui/system';
 import { useSpring, animated } from '@react-spring/web';
 import { setProduct } from '../../redux/slices/productSlice';
@@ -136,7 +142,16 @@ function ProductCard({ product }) {
           alt={product.name + product.color}
           size={backgroundSize}
           sale={saleProduct}>
-          <ProductWishlist product={product} />
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '10px',
+              left: '10px',
+              color: 'red',
+              cursor: 'pointer',
+            }}>
+            <ProductWishlist product={product} />
+          </IconButton>
           <Box
             width={getImageSize().width}
             sx={{

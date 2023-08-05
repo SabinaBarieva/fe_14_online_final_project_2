@@ -21,6 +21,7 @@ import productSlice from './slices/productSlice';
 import allProductSlice from './slices/allProdsSlice';
 import filtersSlice from './slices/filtersSlice';
 import basketSlice from './slices/basketSlice/basketSlice';
+import wishlistSlice from './slices/wishlistSlice/wishlistSlice';
 import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
@@ -31,7 +32,6 @@ import ordersSlice from './slices/ordersSlice';
 import allProdsHomeSlice from './slices/allProdsHomeSlice';
 import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 import modalAddToBasketSlice from './slices/modalAddToBasket';
-import wishlistSlice from './slices/wishlistSlice/wishlistSlice';
 
 const rootReducer = combineReducers({
   products: productsSlice,
@@ -43,6 +43,7 @@ const rootReducer = combineReducers({
   allProducts: allProductSlice,
   filters: filtersSlice,
   basket: basketSlice,
+  wishlist: wishlistSlice,
   search: searchSlice,
   searchList: searchResultsSlice,
   order: orderSlice,
@@ -53,7 +54,6 @@ const rootReducer = combineReducers({
   devTools: process.env.NODE_ENV !== 'production',
   allProdsHomePage: allProdsHomeSlice,
   modalBasket: modalAddToBasketSlice,
-  wishlist: wishlistSlice,
 });
 
 const persistConfig = {

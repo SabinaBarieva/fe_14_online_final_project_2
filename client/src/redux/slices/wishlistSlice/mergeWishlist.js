@@ -1,23 +1,34 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getWishList, updateWishList } from '../../../api/wishlist';
-import { isLoggedIn } from '../../selectors';
-import isProductInWishlist from './isProductInWishlist';
+import { getWishlist, updateWishlist } from '../../../api/wishlist';
+import { getToken } from '../../../localstorage/localstorage';
 
 const mergeWishlist = createAsyncThunk(
   'wishlist/merge',
   async (_, { getState }) => {
-    const wishlist = JSON.parse(JSON.stringify(getState().wishlist.wishlist));
-    let remoteWishList = [];
-    if (isLoggedIn) {
-      const { products: remoteWishlistProducts } = await getWishList();
-      remoteWishList = remoteWishlistProducts;
+    const isLoggedIn = getToken() && true;
+    try {
+      const localWishlist = getState().wishlist.itemsWishlist;
+
+      const remoteWishlist = isLoggedIn ? await getWishlist() : [];
+      localWishlist.forEach((product) => {
+        const foundedProduct = remoteWishlist.find(
+          ({ itemNo }) => itemNo === product.itemNo
+        );
+        if (foundedProduct) {
+          remoteWishlist.filter(
+            ({ itemNo }) => itemNo !== foundedProduct.itemNo
+          );
+        } else {
+          remoteWishlist.push(product);
+        }
+      });
+      await updateWishlist(remoteWishlist);
+      const wishlist = await getWishlist();
+      return wishlist;
+    } catch (error) {
+      console.log(`Error ${error}`);
+      throw error;
     }
-    wishlist.forEach((product) => {
-      if (!isProductInWishlist(remoteWishList, product))
-        remoteWishList.push(product);
-    });
-    const { products: resultWishList } = await updateWishList(remoteWishList);
-    return resultWishList;
   }
 );
 export default mergeWishlist;
