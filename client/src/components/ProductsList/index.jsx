@@ -18,6 +18,8 @@ import {
   totalNumberProducts,
   productsSort,
 } from '../../redux/selectors';
+import filterProdsNewArrival from '../Functions/filterNewArrivals/filterNewArrival';
+import shuffleArray from '../Functions/ShuffleArray/shuffleArray';
 
 function ProductsList({ urlFilter }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,21 +58,7 @@ function ProductsList({ urlFilter }) {
   // Products page
   const productsSliced = filteredProds.slice(startIndex, endIndex);
   // Home page
-  function shuffleArray(array) {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = shuffledArray[i];
-      shuffledArray[i] = shuffledArray[j];
-      shuffledArray[j] = temp;
-    }
-    return shuffledArray;
-  }
 
-  const filterProdsNewArrival = (productsForFilter) =>
-    productsForFilter.filter(
-      (product) => product.newArrival === true && product.quantity !== 0
-    );
   const shuffledNewArrivals = shuffleArray(
     filterProdsNewArrival(prodsForHomePage)
   );
