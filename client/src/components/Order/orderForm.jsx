@@ -40,10 +40,10 @@ export default function OrderForm() {
         shipped, along with tracking details.
       </div>`;
     const addressString = values.address;
-    const [street = '', number = '', rest = ''] = addressString.split(', ');
+    const [city = '', street = '', rest = ''] = addressString.split(', ');
     const addressObj = {
-      firstAdress: street,
-      secondAdress: number,
+      firstAdress: city,
+      secondAdress: street,
       restAdress: rest,
     };
     dispatch(

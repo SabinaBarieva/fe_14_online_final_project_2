@@ -64,7 +64,7 @@ export default function ModalOrdered() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <StyledTypography component="h5" role="heading" variant="h5">
+          <StyledTypography component="h5" variant="h5">
             Ordered
           </StyledTypography>
           <StyledIconButton onClick={closed}>

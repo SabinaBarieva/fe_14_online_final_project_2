@@ -21,6 +21,7 @@ test('Test Form', () => {
       </ThemeProvider>
     </Provider>
   );
+
   expect(screen.getAllByRole('button')).toHaveLength(2);
   const buttons = screen.getAllByRole('button');
   const svgInsideFirstButton = buttons[0].querySelector('svg');
@@ -28,7 +29,8 @@ test('Test Form', () => {
   expect(buttons[1]).toHaveTextContent('Order');
   expect(screen.getAllByRole('textbox')).toHaveLength(9);
   fireEvent.click(buttons[0]);
-  fireEvent.click(buttons[1]);
+  const form = screen.queryByRole('dialog');
+  expect(form).not.toBeInTheDocument();
 });
 
 const values = {
@@ -43,7 +45,7 @@ const values = {
   cvv: '444',
 };
 
-test('Test ModalOrder', () => {
+test('Test OpenModalOrder', () => {
   store.dispatch(orderBasket(values));
   store.dispatch(openApp());
   store.dispatch({ type: 'order/setLoading', payload: false });
@@ -54,14 +56,19 @@ test('Test ModalOrder', () => {
       </ThemeProvider>
     </Provider>
   );
+
   expect(screen.getAllByRole('button')).toHaveLength(2);
   const buttons = screen.getAllByRole('button');
   const svgCloseButton = buttons[0].querySelector('svg');
   expect(buttons[0]).toContainElement(svgCloseButton);
   expect(buttons[1]).toHaveTextContent('Ok');
-  fireEvent.click(buttons[0]);
+  expect(screen.getByText('Ordered')).toBeInTheDocument();
+  expect(
+    screen.getByText(
+      'Dear, firstName lastName. Thank you for your purchase. The parcel number will be sent to the email@gmail.com.'
+    )
+  ).toBeInTheDocument();
   fireEvent.click(buttons[1]);
-//   expect(screen.getByRole('heading')).toBeInTheDocument();
-//   expect(screen.getByText('Ordered')).toBeInTheDocument();
-//   expect(screen.getByRole('p')).toBeInTheDocument();
+  const modal = screen.queryByRole('dialog');
+  expect(modal).not.toBeInTheDocument();
 });
