@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getToken } from '../../../localstorage/localstorage';
 import findProductInWishlist from './findProductInWishlist';
-import { updateWishlist } from '../../../api/wishlist';
+import { updateWishlist, deleteWishlist } from '../../../api/wishlist';
 import wishlistProductCreator from './wishlistProductCreator';
 
 const changeWishlist = createAsyncThunk(
@@ -21,22 +21,29 @@ const changeWishlist = createAsyncThunk(
     }
 
     if (isLoggedIn) {
-      const newWishlist = await updateWishlist(wishlist);
-      // console.log(newWishlist);
+      let newWishlist = [];
+      if (wishlist.length) {
+        newWishlist = await updateWishlist(wishlist);
+      } else {
+        await deleteWishlist();
+      }
       return newWishlist;
     }
 
-    if (isLoggedIn) {
-      const { products: remoteWishlist } = await updateWishlist(wishlist);
-      return remoteWishlist;
-    }
     return wishlist;
   }
 );
 
-export const changeWishlistActionCreator = (product) =>
-  changeWishlist({
-    ...wishlistProductCreator({ product }),
-  });
+export const changeWishlistActionCreator = (product) => async (dispatch) => {
+  try {
+    await dispatch(
+      changeWishlist({
+        ...wishlistProductCreator({ product }),
+      })
+    );
+  } catch (error) {
+    console.error('Error while changing wishlist:', error);
+  }
+};
 
 export default changeWishlist;
