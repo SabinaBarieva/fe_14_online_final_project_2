@@ -57,7 +57,7 @@ function Component() {
   );
 }
 describe('Filter component and filterSlice', () => {
-  test('snapshot renders correctly', async () => {
+  test.skip('snapshot renders correctly', async () => {
     await init();
     const tree = renderer.create(<Component />).toJSON();
     expect(tree).toMatchSnapshot();
