@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
 import { AdvancedImage } from '@cloudinary/react';
 import { getAllSaleProducts } from '../../redux/slices/allProdsSlice';
 import getImg from '../../cloudinary';
@@ -17,6 +16,7 @@ import 'swiper/scss/autoplay';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import './styles.scss';
+import LoadingAnimation from '../Loading';
 
 function Carousel() {
   const products = useSelector(allProductsInBase);
@@ -28,7 +28,7 @@ function Carousel() {
   return (
     <div>
       {isFetching ? (
-        <CircularProgress color="success" style={{ marginLeft: '50%' }} />
+        <LoadingAnimation />
       ) : (
         <Swiper
           slidesPerView={1}

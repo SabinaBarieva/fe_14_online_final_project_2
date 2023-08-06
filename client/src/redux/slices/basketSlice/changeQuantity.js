@@ -32,6 +32,7 @@ const changeQuantityInBasket = createAsyncThunk(
         basketProductCreator({ product, cartQuantity: newQuantityInBasket })
       );
     if (isLoggedIn) {
+      console.log('cart', cart);
       const remoteCart = cart.map(({ product: currentProduct, cartQuantity }) =>
         createRemoteCartProduct(currentProduct, cartQuantity)
       );
