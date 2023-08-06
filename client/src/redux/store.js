@@ -32,7 +32,7 @@ import allProdsHomeSlice from './slices/allProdsHomeSlice';
 import asyncDispatchMiddleware from './middleware/asyncDispatchMiddleware';
 import modalAddToBasketSlice from './slices/modalAddToBasket';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   products: productsSlice,
   categories: categoriesSlice,
   errors: errorsSlice,

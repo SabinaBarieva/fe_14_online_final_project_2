@@ -1,4 +1,4 @@
-const filterProdsNewArrival = require('../components/Functions/filterNewArrivals/filterNewArrival');
+const filterProdsNewArrival = require('./filterNewArrival');
 
 describe('filterProdsNewArrival', () => {
   it('should return an empty array for an empty input', () => {

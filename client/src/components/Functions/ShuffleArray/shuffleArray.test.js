@@ -1,4 +1,4 @@
-const shuffleArray = require('../components/Functions/ShuffleArray/shuffleArray');
+const shuffleArray = require('./shuffleArray');
 describe('shuffleArray', () => {
   it('should not change the length of the array', () => {
     const originalArray = [1, 2, 3, 4, 5];
@@ -23,4 +23,3 @@ describe('shuffleArray', () => {
     expect(shuffledArray).not.toBe(originalArray);
   });
 });
-

@@ -118,7 +118,7 @@ function ProductCard({ product }) {
   };
 
   return (
-    <Box width={getImageSize().width}>
+    <Box width={getImageSize().width} data-testid="product-card">
       <animated.div
         onMouseEnter={handleFocus}
         onMouseLeave={handleMouseEnter}

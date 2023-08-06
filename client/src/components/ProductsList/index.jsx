@@ -74,7 +74,7 @@ function ProductsList({ urlFilter }) {
     />
   );
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%' }} data-testid="products-list">
       {isFetching ? (
         <LoadingAnimation />
       ) : (
@@ -130,6 +130,7 @@ function ProductsList({ urlFilter }) {
               }}>
               <Box>
                 <Pagination
+                  data-testid="pagination"
                   sx={{ margin: '25% auto 10%' }}
                   count={countPagination}
                   color="primary"
