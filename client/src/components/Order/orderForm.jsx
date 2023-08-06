@@ -455,7 +455,11 @@ export default function OrderForm() {
                 )}
               </StyledForm>
             </Container>
-            <StyledButton variant="contained" color="primary" type="submit">
+            <StyledButton
+              variant="contained"
+              color="primary"
+              type="submit"
+              role="button">
               Order
             </StyledButton>
           </Container>

@@ -23,6 +23,8 @@ export const productsSort = (state) => state.products.sort;
 export const isBurgerOpen = (state) => state.burgerMenu.openBurger;
 export const isFetchingAllProducts = (state) =>
   state.allProdsHomePage.isFetching;
+export const isFetchedAllProducts = (state) =>
+  state.allProdsHomePage.isFetching;
 //
 export const homePageProducts = (state) => state.allProdsHomePage.allProds;
 // User

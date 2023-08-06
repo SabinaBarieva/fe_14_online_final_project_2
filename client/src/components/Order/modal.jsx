@@ -18,7 +18,6 @@ export default function ModalOrdered() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.statusModal);
   const textModal = useSelector((state) => state.modal.text);
-  const textHeader = useSelector((state) => state.modal.statusOrder);
   const modalRef = useRef(null);
   const isLoading = useSelector((state) => state.order.isLoading);
 
@@ -65,8 +64,8 @@ export default function ModalOrdered() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <StyledTypography component="h5" variant="h5">
-            {textHeader}
+          <StyledTypography component="h5" role="heading" variant="h5">
+            Ordered
           </StyledTypography>
           <StyledIconButton onClick={closed}>
             <Close />
@@ -78,6 +77,7 @@ export default function ModalOrdered() {
         <StyledButton
           variant="contained"
           color="primary"
+          role="button"
           disableElevation
           style={{ width: '80' }}
           onClick={closed}>
