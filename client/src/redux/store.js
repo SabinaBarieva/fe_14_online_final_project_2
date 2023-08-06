@@ -21,6 +21,7 @@ import productSlice from './slices/productSlice';
 import allProductSlice from './slices/allProdsSlice';
 import filtersSlice from './slices/filtersSlice';
 import basketSlice from './slices/basketSlice/basketSlice';
+import wishlistSlice from './slices/wishlistSlice/wishlistSlice';
 import searchSlice from './slices/searchSlice';
 import searchResultsSlice from './slices/searchResultsSlice';
 import orderSlice from './slices/orderSlice';
@@ -42,6 +43,7 @@ export const rootReducer = combineReducers({
   allProducts: allProductSlice,
   filters: filtersSlice,
   basket: basketSlice,
+  wishlist: wishlistSlice,
   search: searchSlice,
   searchList: searchResultsSlice,
   order: orderSlice,
@@ -57,7 +59,7 @@ export const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['basket', 'login', 'user'],
+  whitelist: ['basket', 'login', 'user', 'wishlist'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

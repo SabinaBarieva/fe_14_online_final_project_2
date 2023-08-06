@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button, LinearProgress, Box } from '@mui/material';
+import { Button, LinearProgress, Box, IconButton } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { AdvancedImage } from '@cloudinary/react';
 import { useTheme } from '@emotion/react';
@@ -27,6 +27,7 @@ import {
 } from '../../themes/themeProduct';
 import ModalBasket from '../ModalForBasket';
 import PageNotFound from '../NotFoundPage';
+import ProductWishlist from '../ProductWishlist';
 
 // eslint-disable-next-line import/no-duplicates
 
@@ -255,6 +256,14 @@ function ProductDescription() {
                     }}>
                     Add to cart
                   </Button>
+                  <IconButton
+                    sx={{
+                      margin: '0 10px',
+                      color: 'red',
+                      cursor: 'pointer',
+                    }}>
+                    <ProductWishlist product={product} />
+                  </IconButton>
                 </Grid>
               </Grid>
             </Grid>
