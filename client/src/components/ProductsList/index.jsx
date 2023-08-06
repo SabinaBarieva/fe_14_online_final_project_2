@@ -109,7 +109,9 @@ function ProductsList({ urlFilter }) {
                   <ProductCard product={product} />
                 </StyledGrid>
               ))}
-            {productsSliced.length === 0 && itemsNotFound}
+            {productsSliced.length === 0 &&
+              currentPath === '/product' &&
+              itemsNotFound}
             {currentPath === '/product' &&
               productsSliced.map((product) => (
                 <Grid

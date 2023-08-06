@@ -62,6 +62,7 @@ describe('Filter component and filterSlice', () => {
     const tree = renderer.create(<Component />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  
   test('Component renders', async () => {
     await init();
     expect(screen.getByText('Filter')).toBeInTheDocument();
