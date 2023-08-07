@@ -144,11 +144,7 @@ function ProductCard({ product }) {
           sale={saleProduct}>
           <IconButton
             sx={{
-              position: 'absolute',
-              top: '10px',
-              left: '10px',
               color: 'red',
-              cursor: 'pointer',
             }}>
             <ProductWishlist product={product} />
           </IconButton>
