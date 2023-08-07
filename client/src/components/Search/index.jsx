@@ -49,7 +49,8 @@ export default function Search() {
     setTypingTimeout(
       setTimeout(() => {
         dispatch(fetchArrayProducts());
-      }, 1000)
+        dispatch(setSelect(true));
+      }, 1500)
     );
   };
 
@@ -57,7 +58,6 @@ export default function Search() {
     const inputValue = event.target.value;
     dispatch(setValue(inputValue));
     if (inputValue.length >= 3) {
-      dispatch(setSelect(true));
       handleInputChange();
     } else {
       dispatch(setSelect(false));
