@@ -207,7 +207,7 @@ function Header() {
                         md: '30px',
                       },
                     }}>
-                    Apple Shop
+                    Apple Store
                   </Typography>
                 </Hidden>
               </Grid>
