@@ -12,7 +12,6 @@ import {
   IconButton,
   TableBody,
   Button,
-  Box,
 } from '@mui/material';
 import { AdvancedImage } from '@cloudinary/react';
 import { Link } from 'react-router-dom';
@@ -166,7 +165,6 @@ function WishListPage() {
               <TableCell
                 key={Math.random()}
                 sx={{
-                  // fontFamily: theme.typography.const.fontFamily.primary,
                   fontWeight: theme.typography.const.fontWeight.semibold,
                   padding: {
                     xs: '0.5rem',
