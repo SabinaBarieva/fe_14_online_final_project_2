@@ -24,6 +24,8 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const auth = useSelector((state) => state.user.user);
   const fromPage = location.state?.from?.pathname;
+  const loginError = useSelector((state) => state.login.error);
+  const isLoading = useSelector((state) => state.login.isLoading);
 
   useEffect(() => {
     if (auth && fromPage === '/user') {
@@ -140,6 +142,10 @@ function Login() {
                 ),
               }}
             />
+            <Container sx={{ display: 'flex', justifyContent: 'center' }}>
+              {loginError && <div style={{ color: 'red' }}>{loginError}</div>}
+              {isLoading && <div style={{ color: 'red' }}>...LOADING...</div>}
+            </Container>
             {formik.touched.password && formik.errors.password ? (
               <StyledTypography variant="paragraph" component="p">
                 {formik.errors.password}
