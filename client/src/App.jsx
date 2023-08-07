@@ -18,6 +18,7 @@ import About from './components/AboutUs';
 import UserPage from './pages/UserPage';
 import Init from './components/Init';
 import RequireAuth from './private/RequireAuth';
+import WishListPage from './pages/WishListPage';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                 <Route index element={<HomeContent />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/wishlist" element={<WishListPage />} />
                 <Route path="/basket" element={<Basket />} />
                 <Route path="/product" element={<ProductsContent />} />
                 <Route path="/product/:id" element={<ProductDescription />} />
