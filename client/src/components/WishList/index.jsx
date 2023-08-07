@@ -19,7 +19,6 @@ import cld from '../../cloudinary';
 import ProductWishlist from '../ProductWishlist';
 import { changeQuantityInBasketActionCreator } from '../../redux/slices/basketSlice/changeQuantity';
 import { modalAddBasket } from '../../redux/slices/modalAddToBasket';
-import PulseAnimation from '../Animations';
 import ModalAdd from '../ModalAdd';
 import ModalBasket from '../ModalForBasket';
 
@@ -64,6 +63,7 @@ function WishList() {
                   minWidth: '60px',
                   maxWidth: '100px',
                   borderBottom: '0',
+                  width: '30%',
                 }}>
                 <Link
                   style={{ textDecoration: 'none', color: '#000000' }}
@@ -81,6 +81,7 @@ function WishList() {
                   padding: { xs: '5px', sm: '10px', md: '15px' },
                   fontSize: { xs: '0.6rem', sm: '0.75rem', md: '1rem' },
                   borderBottom: '0',
+                  width: '30%',
                 }}>
                 <Link
                   style={{ textDecoration: 'none', color: '#000000' }}
@@ -92,47 +93,49 @@ function WishList() {
                 sx={{
                   padding: '5px',
                   fontSize: { xs: '0.6rem', sm: '0.7rem', md: '0.8rem' },
+                  width: '10%',
                 }}
-                align="right">
+                align="center">
                 {product.currentPrice}&#36;
               </TableCell>
               <TableCell
                 sx={{
                   padding: { xs: '5px', sm: '10px', md: '15px' },
                   borderBottom: '0',
+                  textAlign: 'center',
+                  width: '20%',
                 }}>
-                <PulseAnimation scaleTo={1.1} config={{ duration: 1000 }} loop>
-                  <Button
-                    disabled={product.quantity === 0}
-                    sx={{
-                      fontSize: { xs: '0.44rem', sm: '0.5rem', md: '1rem' },
-                      padding: '3px',
-                      backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
-                      color: { xs: '#616467', md: '#fff' },
-                      borderRadius: '7px',
-                      border: '1px solid #211F1C',
-                      minWidth: { xs: '55px', sm: '60px', md: '120px' },
-                      '&:hover': {
-                        backgroundColor: { xs: '#211F1C', md: '#fff' },
-                        color: { xs: '#F5F7FB', md: '#211F1C' },
-                        border: {
-                          xs: '1px solid #211F1C',
-                          md: '1px solid #211F1C',
-                        },
+                <Button
+                  disabled={product.quantity === 0}
+                  sx={{
+                    fontSize: { xs: '0.44rem', sm: '0.5rem', md: '1rem' },
+                    padding: '3px',
+                    backgroundColor: { xs: '#F5F7FB', md: '#211F1C' },
+                    color: { xs: '#616467', md: '#fff' },
+                    borderRadius: '7px',
+                    border: '1px solid #211F1C',
+                    minWidth: { xs: '55px', sm: '60px', md: '120px' },
+                    '&:hover': {
+                      backgroundColor: { xs: '#211F1C', md: '#fff' },
+                      color: { xs: '#F5F7FB', md: '#211F1C' },
+                      border: {
+                        xs: '1px solid #211F1C',
+                        md: '1px solid #211F1C',
                       },
-                    }}
-                    variant="contained"
-                    onClick={() => {
-                      onClickAdd(product);
-                    }}>
-                    Add to cart
-                  </Button>
-                </PulseAnimation>
+                    },
+                  }}
+                  variant="contained"
+                  onClick={() => {
+                    onClickAdd(product);
+                  }}>
+                  Add to cart
+                </Button>
               </TableCell>
               <TableCell
                 sx={{
                   padding: '5px',
                   borderBottom: '0',
+                  width: '10%',
                 }}>
                 <Tooltip title="Delete">
                   <IconButton
