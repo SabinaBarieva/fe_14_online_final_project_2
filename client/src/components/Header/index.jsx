@@ -35,7 +35,6 @@ import { selectCart, selectWishlist } from '../../redux/selectors';
 import AllContent from '../../themes/themeMain';
 import { resetFilters } from '../../redux/slices/filtersSlice';
 import { burgerOpen, burgerClose } from '../../redux/slices/headerSlice';
-import ProductWishlist from '../ProductWishlist';
 
 const activeLinkDecoration = ({ isActive }) => ({
   color: '#5E5E5E',
@@ -263,28 +262,31 @@ function Header() {
               }}>
               <Search />
             </Container>
-            <IconButton sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
-              <StyledBadge
-                badgeContent={totalInWishlist > 0 ? totalInWishlist : '0'}>
-                {totalInWishlist > 0 ? (
-                  <FavoriteIcon
-                    sx={{
-                      color: '#616467',
-                      width: '28.7px',
-                      height: '32px ',
-                    }}
-                  />
-                ) : (
-                  <FavoriteBorderIcon
-                    sx={{
-                      color: '#616467',
-                      width: '28.7px',
-                      height: '32px ',
-                    }}
-                  />
-                )}
-              </StyledBadge>
-            </IconButton>
+            <NavLink to="/wishlist">
+              <IconButton
+                sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
+                <StyledBadge
+                  badgeContent={totalInWishlist > 0 ? totalInWishlist : '0'}>
+                  {totalInWishlist > 0 ? (
+                    <FavoriteIcon
+                      sx={{
+                        color: '#616467',
+                        width: '28.7px',
+                        height: '32px ',
+                      }}
+                    />
+                  ) : (
+                    <FavoriteBorderIcon
+                      sx={{
+                        color: '#616467',
+                        width: '28.7px',
+                        height: '32px ',
+                      }}
+                    />
+                  )}
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
             <NavLink to="/basket">
               <IconButton
                 sx={{ padding: '0', margin: { xs: '0 5px', sm: '0' } }}>
