@@ -166,17 +166,19 @@ function Header() {
           padding: '0',
           margin: '0',
         }}>
-        <Container maxWidth="100%" style={{ padding: '0' }}>
+        <Container maxWidth="100%" style={{ padding: '0', width: '90%' }}>
           <Toolbar
             sx={{
               justifyContent: 'space-between',
               padding: {
-                xs: '0 0 0 1.25rem',
-                md: '0 0 0 3.44rem',
-                lg: '2rem',
+                xs: '0 0 0 0rem',
+                md: '0 0 0 0rem',
+                lg: '2rem 0 2rem 0',
               },
             }}>
-            <NavLink to="/" style={{ textDecoration: 'none' }}>
+            <NavLink
+              to="/"
+              style={{ textDecoration: 'none', paddingRight: '2%' }}>
               <Grid container direction="row">
                 <Stack
                   sx={{
