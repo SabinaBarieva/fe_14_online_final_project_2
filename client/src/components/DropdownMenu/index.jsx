@@ -11,7 +11,7 @@ function DropdownMenu() {
   const sortOption = useSelector(productsSort);
   const dispatch = useDispatch();
   return (
-    <FormControl sx={{ width: '150px', marginBottom: '15px' }}>
+    <FormControl sx={{ width: '150px', margin: '0 0 15px 7%' }}>
       <InputLabel>Sort By</InputLabel>
       <Select
         value={sortOption}
