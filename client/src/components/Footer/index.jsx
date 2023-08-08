@@ -49,7 +49,7 @@ function Footer() {
                   lg: '30px',
                 },
               }}>
-              Apple Shop
+              Apple Store
             </Typography>
             <Typography
               variant="subtitle1"
