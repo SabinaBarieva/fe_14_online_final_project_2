@@ -110,10 +110,10 @@ function ProductsContent() {
           priceMinBoundary={priceMinBoundary}
           priceMaxBoundary={priceMaxBoundary}
         />
-        <Container>
+        <Box sx={{ width: '100%' }}>
           <DropdownMenu />
           <ProductsList urlFilter={searchParams} />
-        </Container>
+        </Box>
       </Stack>
     </Box>
   );
