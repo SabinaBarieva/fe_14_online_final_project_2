@@ -1,4 +1,4 @@
-export const productsForProducts = [
+export const mockProductsForProducts = [
   {
     _id: {
       testId: '648dfd1ee01e091d8de693a0',
@@ -337,7 +337,7 @@ export const productsForProducts = [
   },
 ];
 
-export const productsForHome = [
+export const mockProductsForHome = [
   {
     _id: {
       testId: '648dfd1ee01e091d8de69397',

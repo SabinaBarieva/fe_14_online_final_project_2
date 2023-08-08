@@ -32,7 +32,7 @@ function ProductsList({ urlFilter }) {
   const location = useLocation();
   const currentPath = location.pathname;
   const dispatch = useDispatch();
-
+  console.log(urlFilter);
   // Fetching products
   useEffect(() => {
     dispatch(

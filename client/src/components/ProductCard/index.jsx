@@ -166,12 +166,12 @@ function ProductCard({ product }) {
             <Link
               to={`/product/${product.itemNo}`}
               style={{ marginRight: '7%' }}>
-              <DetailButton onClick={handleDetailClick}>Detail</DetailButton>
+              <DetailButton onClick={handleDetailClick} data-testid="detail-btn">Detail</DetailButton>
             </Link>
 
             {product.quantity !== 0 && (
               <PulseAnimation scaleTo={1.1} config={{ duration: 1000 }} loop>
-                <AddToCartBtn onClick={onClickAdd} variant="solid">
+                <AddToCartBtn onClick={onClickAdd} variant="solid" data-testid="add-to-cart">
                   <SvgIcon
                     sx={{
                       position: 'absolute',
@@ -185,7 +185,7 @@ function ProductCard({ product }) {
               </PulseAnimation>
             )}
             {product.quantity === 0 && (
-              <Tooltip title="Out of stock">
+              <Tooltip title="Out of stock" data-testid={'label-out-of-stock'}>
                 <span>
                   <AddToCartBtn
                     onClick={onClickAdd}
@@ -212,7 +212,7 @@ function ProductCard({ product }) {
         </CardContainer>
       </animated.div>
       {currentPath !== '/' && (
-        <CardInfo>
+        <CardInfo data-testid="product-info">
           <ProductInfo
             variant="h2"
             sx={{
