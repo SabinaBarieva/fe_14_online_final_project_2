@@ -3,13 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const modalSlice = createSlice({
   name: 'modal',
   initialState: {
-    statusOrder: '',
     statusModal: false,
     text: '',
   },
   reducers: {
     orderBasket(state, action) {
-      state.statusOrder = 'Ordered';
       state.statusModal = true;
       state.text = `Dear, ${action.payload.firstName} ${action.payload.lastName}. 
                 Thank you for your purchase.
