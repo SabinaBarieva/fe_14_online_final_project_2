@@ -28,7 +28,7 @@
     "http-proxy-middleware": "^2.0.6",
     "jest-styled-components": "^7.1.1",
     "mongodb": "^5.6.0",
-    "msw": "^1.2.3",
+    "msw": "^2.0.0",
     "npm-run-all": "^4.1.1",
     "npm-watch": "^0.3.0",
     "prettier": "^2.8.8",
