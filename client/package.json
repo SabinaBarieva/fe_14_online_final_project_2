@@ -51,7 +51,7 @@
     "redux-thunk": "^2.4.2",
     "sass": "^1.58.3",
     "styled-components": "^6.0.4",
-    "stylelint": "^8.2.0",
+    "stylelint": "^13.7.0",
     "stylelint-config-standard": "^17.0.0",
     "stylelint-order": "^0.7.0",
     "swiper": "^10.0.4",
